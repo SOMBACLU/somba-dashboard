@@ -6,7 +6,7 @@ data/stats.json and saves a dated snapshot. It never asks a question:
 if a platform can't be read, it quietly reuses that platform's last
 known number (flagged so the dashboard can show a small "reused" note).
 
-Runs unattended every week in GitHub Actions, and can also be run by
+Runs unattended every hour in GitHub Actions, and can also be run by
 hand:  python3 update_stats.py
 
 Uses only Python's standard library — nothing to install.
@@ -19,7 +19,7 @@ import re
 import sys
 import time
 import urllib.request
-from datetime import date
+from datetime import date, datetime, timezone
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(REPO_DIR, "data", "stats.json")
@@ -522,6 +522,12 @@ def print_summary(snap, prev_snap, platforms):
 
 def main():
     data = load_data()
+    # Remember what the data looked like before this run, so we only stamp a
+    # new "generated_at" time when something actually changed. An unchanged
+    # file stays byte-identical -> no git commit -> no pointless redeploy.
+    baseline = json.dumps(
+        {k: v for k, v in data.items() if k != "generated_at"}, sort_keys=True
+    )
     platforms = [p for p in data["config"]["platforms"] if p.get("enabled")]
     today = date.today().isoformat()
     prev_snap = previous_snapshot(data, today)
@@ -556,25 +562,37 @@ def main():
         except Exception as e:
             print("could not read (%s) — reused last list" % e)
 
-        sys.stdout.write("  All-time top videos... ")
-        sys.stdout.flush()
-        try:
-            top, scanned = fetch_youtube_top_videos(yt["channel_id"])
+        # The all-time crawl walks dozens of YouTube pages, so with hourly
+        # runs we only do it once per day. If today's attempt fails, the
+        # "fetched" date stays on yesterday and the next hourly run retries.
+        # Set FETCH_TOP_VIDEOS=1 to force a fresh crawl right now.
+        already_today = data.get("top_videos", {}).get("fetched") == today
+        if already_today and os.environ.get("FETCH_TOP_VIDEOS") != "1":
+            print("  All-time top videos... already fetched today, skipping")
+        else:
+            sys.stdout.write("  All-time top videos... ")
+            sys.stdout.flush()
             try:
-                enrich_videos_via_api(top)
-            except Exception:
-                pass  # keep the watch-page numbers if the enrichment call fails
-            data["top_videos"] = {
-                "fetched": today,
-                "source": "youtube-innertube",
-                "total_scanned": scanned,
-                "videos": top,
-            }
-            print("ok (top %d of %d uploads)" % (len(top), scanned))
-        except Exception as e:
-            print("could not read (%s) — reused last list" % e)
+                top, scanned = fetch_youtube_top_videos(yt["channel_id"])
+                try:
+                    enrich_videos_via_api(top)
+                except Exception:
+                    pass  # keep the watch-page numbers if the enrichment call fails
+                data["top_videos"] = {
+                    "fetched": today,
+                    "source": "youtube-innertube",
+                    "total_scanned": scanned,
+                    "videos": top,
+                }
+                print("ok (top %d of %d uploads)" % (len(top), scanned))
+            except Exception as e:
+                print("could not read (%s) — reused last list" % e)
 
     upsert_snapshot(data, snap)
+    if json.dumps(
+        {k: v for k, v in data.items() if k != "generated_at"}, sort_keys=True
+    ) != baseline:
+        data["generated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     save_data(data)
     print_summary(snap, prev_snap, platforms)
 

@@ -4,21 +4,23 @@ A one-page website showing follower growth for the Cal Lutheran School of
 Management Brand Ambassador program (SOMBA) across Instagram, TikTok,
 YouTube, and LinkedIn (Facebook slot ready for later).
 
-**It runs itself.** Every Monday a free automation reads the latest follower
-counts and publishes them. No API keys, no logins, no numbers to type,
-nothing to run. You never have to touch it.
+**It runs itself.** Every hour a free automation reads the latest follower
+counts and publishes any changes. No logins, no numbers to type, nothing to
+run. You never have to touch it.
 
 ---
 
 ## How it works (so you know, not because you need to do anything)
 
-1. A scheduled job on GitHub (called a "GitHub Action") wakes up every Monday.
-2. It reads the public follower counts from each platform's page.
-3. It saves them into `data/stats.json` and commits that change.
+1. A scheduled job on GitHub (called a "GitHub Action") wakes up every hour.
+2. It reads the public follower counts from each platform's page (YouTube
+   uses Google's official API).
+3. If any number changed, it saves them into `data/stats.json` and commits
+   that change. Quiet hours change nothing and publish nothing.
 4. Render sees the change and republishes the live site automatically.
 
-If a platform can't be read one week (they occasionally block automated
-visitors — LinkedIn most often), that platform simply keeps last week's
+If a platform can't be read one hour (they occasionally block automated
+visitors — LinkedIn most often), that platform simply keeps its last known
 number and the card shows a small "reused" note. The dashboard never breaks.
 
 ---
@@ -39,7 +41,7 @@ From then on it updates on its own.
 
 ---
 
-## Want to refresh it right now instead of waiting for Monday?
+## Want to refresh it right now instead of waiting for the next hour?
 
 Two easy ways, both optional:
 
@@ -50,7 +52,7 @@ Two easy ways, both optional:
 ## What the dashboard shows
 
 - **Total audience** — everyone following SOMBA anywhere, added together
-- **Platform cards** — followers per platform with week-over-week change
+- **Platform cards** — followers per platform with change since the previous day
 - **Follower growth charts** — one per platform (appear after two weeks of data)
 - **Growth pace** — new followers per week, fastest-growing platform, and a
   milestone projection ("Instagram passes 1,000 followers by ~…")
@@ -94,7 +96,7 @@ you can update `data/stats.json` by hand whenever you like.
 
 ## If a number ever looks stuck
 
-A platform showing a "reused" note for several weeks means its page stopped
+A platform showing a "reused" note for several days means its page stopped
 letting the automation read it. Ask Claude Code to update that platform's
 reader — it's a small fix in `update_stats.py`.
 
@@ -103,7 +105,7 @@ reader — it's a small fix in `update_stats.py`.
 | File | What it is |
 |---|---|
 | `index.html` | The dashboard page people see |
-| `data/stats.json` | The numbers — every weekly snapshot lives here |
+| `data/stats.json` | The numbers — one snapshot per day lives here |
 | `update_stats.py` | The scraper that collects the numbers |
-| `.github/workflows/update-stats.yml` | The Monday automation |
+| `.github/workflows/update-stats.yml` | The hourly automation |
 | `weekly-update.command` | Optional double-click "refresh now" button |

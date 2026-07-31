@@ -1,15 +1,20 @@
 name: Update SOMBA stats
 
-# Runs itself every Monday and refreshes the follower numbers.
+# Runs itself every hour and refreshes the numbers.
 # Also runnable on demand from the Actions tab ("Run workflow").
 on:
   schedule:
-    - cron: "0 14 * * 1"   # Mondays at 14:00 UTC (~7am Pacific)
+    - cron: "17 * * * *"   # hourly at :17 past (top-of-hour is GitHub's busiest slot, so :00 runs get skipped more often)
   workflow_dispatch:
 
 # Let the built-in token commit the updated data back to the repo.
 permissions:
   contents: write
+
+# Never let two runs overlap (e.g. a slow run colliding with the next hour's).
+concurrency:
+  group: update-stats
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -23,13 +28,22 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Scrape the latest numbers
-        run: python3 update_stats.py
+      - name: Fetch the latest numbers
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          if [ -n "$YOUTUBE_API_KEY" ]; then echo "YouTube API key: present"; else echo "YouTube API key: MISSING - will fall back to scraping"; fi
+          python3 update_stats.py
 
       - name: Commit the update (only if something changed)
         run: |
           git config user.name  "somba-bot"
           git config user.email "actions@github.com"
           git add data/stats.json
-          git diff --staged --quiet || git commit -m "Auto stats update $(date +%F)"
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes this hour."
+          else
+            git commit -m "Auto stats update $(date -u +'%F %H:%M UTC')"
+            git pull --rebase
+            git push
+          fi

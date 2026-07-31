@@ -357,12 +357,12 @@
 <div class="wrap" id="top">
   <div class="eyebrow">SOMBA · Social Media</div>
   <h1 class="serif">Brand Ambassadors, <em>by the numbers</em></h1>
-  <p class="sub" id="links">Follower growth across every SOMBA channel, updated weekly.</p>
+  <p class="sub" id="links">Follower growth across every SOMBA channel, updated hourly.</p>
   <div id="gen" class="gen"></div>
 
-  <!-- shown until the first weekly update exists -->
+  <!-- shown until the first update exists -->
   <div id="empty" class="empty hidden">
-    <span class="badge">● Awaiting the first weekly update</span>
+    <span class="badge">● Awaiting the first update</span>
     <h2 class="serif">No numbers yet</h2>
     <p>Run the update script once on the program Mac and this page fills in:</p>
     <p><code>python3 update_stats.py</code></p>
@@ -414,9 +414,9 @@
 
       <div id="charts-soon" class="empty hidden">
         <span class="badge">● Charts coming soon</span>
-        <h2 class="serif">Growth charts appear after next week's update</h2>
+        <h2 class="serif">Growth charts appear after tomorrow's snapshot</h2>
         <p>One data point makes a dot, two make a line. The numbers refresh
-           automatically every Monday, and the growth charts — and milestone
+           automatically every hour, and the growth charts — and milestone
            projections — will draw themselves.</p>
       </div>
 
@@ -542,7 +542,7 @@
   <footer>
     <div><span class="fmono">S</span></div>
     Cal Lutheran School of Management · <b>SOMBA</b> Brand Ambassador Program<br>
-    <span style="font-size:13px">Updates automatically every Monday</span>
+    <span style="font-size:13px">Updates automatically every hour</span>
   </footer>
 </div>
 
@@ -607,11 +607,15 @@ function render(d){
   }
   document.getElementById('report').classList.remove('hidden');
   const latestSnap = snaps[snaps.length-1];
-  document.getElementById('gen').textContent = 'Last updated ' + prettyDate(latestSnap.date);
+  // Prefer the exact "generated_at" clock time; older data files only have a date.
+  document.getElementById('gen').textContent = 'Last updated ' + (d.generated_at
+    ? new Date(d.generated_at).toLocaleString('en-US',
+        {month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit'})
+    : prettyDate(latestSnap.date));
 
   // profile links in the intro line
   document.getElementById('links').innerHTML =
-    'Follower growth across every SOMBA channel, updated weekly · ' +
+    'Follower growth across every SOMBA channel, updated hourly · ' +
     platforms.filter(p => p.url).map(p => `<a href="${p.url}" target="_blank" rel="noopener">${p.name}</a>`).join(' · ');
 
   // --- hero total: latest vs previous snapshot, summed over platforms ---
@@ -856,7 +860,7 @@ function initTimeControls(snaps){
     // a unit needs ≥2 buckets to draw a line; coarser ones unlock as history builds
     const enough = unitBucketCount(dates, unit) >= 2;
     btn.disabled = !enough;
-    if(!enough) btn.title = 'Needs more history — unlocks as weekly updates build up';
+    if(!enough) btn.title = 'Needs more history — unlocks as daily snapshots build up';
     btn.classList.toggle('on', unit === CURRENT_UNIT);
     btn.addEventListener('click', () => {
       ctl.querySelectorAll('.range-btn').forEach(b => b.classList.toggle('on', b === btn));

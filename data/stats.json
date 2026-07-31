@@ -253,10 +253,37 @@
           "source": "scrape"
         }
       }
+    },
+    {
+      "date": "2026-07-31",
+      "platforms": {
+        "instagram": {
+          "followers": 754,
+          "following": 285,
+          "posts": 516,
+          "source": "scrape"
+        },
+        "tiktok": {
+          "followers": 156,
+          "likes": 14000,
+          "videos": 444,
+          "source": "scrape"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 421956,
+          "source": "scrape"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-07-27",
+    "fetched": "2026-07-31",
     "source": "youtube-rss",
     "videos": [
       {
@@ -270,7 +297,7 @@
         "id": "mtbnjLbYoKI",
         "title": "POV: Class of 2027 #classof2027 #senior #junior #realitycheck #collegehumor #studentlife",
         "published": "2026-05-01",
-        "views": 1865,
+        "views": 1878,
         "likes": 8
       },
       {
@@ -313,7 +340,7 @@
         "title": "Study abroad students every Friday #studyabroad #travel #weekendtrip",
         "published": "2026-04-16",
         "views": 6084,
-        "likes": 83
+        "likes": 82
       },
       {
         "id": "PfVOtJaHLSA",
@@ -333,7 +360,7 @@
         "id": "mvoIm97doQE",
         "title": "Shut up mom 67.67% accuracy - college apps edition #funny #viral #college #fyp #accurate",
         "published": "2026-04-11",
-        "views": 2573,
+        "views": 2574,
         "likes": 57
       },
       {
@@ -430,105 +457,105 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-07-27",
+    "fetched": "2026-07-31",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
         "title": "Thank you sharks for taking my business opportunity #college #business #sharktank",
-        "views": 65000,
+        "views": 65896,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 333,
+        "published": "2024-03-31"
       },
       {
         "id": "hMJM7bv4bGM",
         "title": "Dog in da College House! #dog #college #house #ytshorts #explore",
-        "views": 26000,
+        "views": 26006,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 92,
+        "published": "2025-11-01"
       },
       {
         "id": "CS6dNGU9Evc",
         "title": "When my friend makes a jokes #businessstudent #businessmajor #businesscasual #college #student",
-        "views": 25000,
+        "views": 25924,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 357,
+        "published": "2026-04-03"
       },
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23000,
+        "views": 23023,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 445,
+        "published": "2025-03-23"
       },
       {
         "id": "UD45ksQvtmc",
         "title": "99.99% accuracy #fyp #pizza #ytshorts",
-        "views": 22000,
+        "views": 22769,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 71,
+        "published": "2026-03-31"
       },
       {
         "id": "-iPsWtoqSjQ",
         "title": "Sigma Boy #sigmaboy",
-        "views": 14000,
+        "views": 14526,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 125,
+        "published": "2025-03-22"
       },
       {
         "id": "HF8-oqSGewQ",
         "title": "Spending time with family during Thanksgiving has us like…”We’re sisters!” #college #weresisters",
-        "views": 13000,
+        "views": 13762,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 458,
+        "published": "2023-12-01"
       },
       {
         "id": "fH3i3zeNbqk",
         "title": "When the Dean is reading brain rot words #brainrot",
-        "views": 10000,
+        "views": 10139,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 202,
+        "published": "2025-03-19"
       },
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7500,
+        "views": 7551,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 58,
+        "published": "2026-04-01"
       },
       {
         "id": "2XzUKmCBwTY",
         "title": "POV: You're trying to hang on during midterms #college #studentlife #midterms #ytshorts #explore",
-        "views": 7300,
+        "views": 7374,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 28,
+        "published": "2025-10-27"
       },
       {
         "id": "zArZjKlR8lI",
         "title": "We’re students finals week struggles #college #relatable #shorts #werestudents #weresisters",
-        "views": 7300,
+        "views": 7320,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 233,
+        "published": "2023-12-10"
       },
       {
         "id": "WCof1cj2xeo",
         "title": "That's my man!!! #fyp #basketball #funny #fbla #myman",
-        "views": 6200,
+        "views": 6279,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 27,
+        "published": "2026-04-05"
       }
     ]
   },
@@ -571,5 +598,6 @@
         "saves": 0
       }
     }
-  }
+  },
+  "generated_at": "2026-07-31T19:46:32Z"
 }
