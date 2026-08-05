@@ -424,7 +424,7 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-04",
+    "fetched": "2026-08-05",
     "source": "youtube-rss",
     "videos": [
       {
@@ -438,7 +438,7 @@
         "id": "mtbnjLbYoKI",
         "title": "POV: Class of 2027 #classof2027 #senior #junior #realitycheck #collegehumor #studentlife",
         "published": "2026-05-01",
-        "views": 1892,
+        "views": 1897,
         "likes": 8
       },
       {
@@ -740,5 +740,5 @@
       }
     }
   },
-  "generated_at": "2026-08-05T03:37:05Z"
+  "generated_at": "2026-08-05T09:58:58Z"
 }
