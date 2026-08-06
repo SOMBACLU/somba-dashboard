@@ -421,10 +421,38 @@
           "source": "scrape"
         }
       }
+    },
+    {
+      "date": "2026-08-06",
+      "platforms": {
+        "instagram": {
+          "followers": 754,
+          "following": 285,
+          "posts": 516,
+          "source": "carried",
+          "carried_from": "2026-07-31"
+        },
+        "tiktok": {
+          "followers": 156,
+          "likes": 14000,
+          "videos": 444,
+          "source": "scrape"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 422098,
+          "source": "scrape"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-05",
+    "fetched": "2026-08-06",
     "source": "youtube-rss",
     "videos": [
       {
@@ -438,7 +466,7 @@
         "id": "mtbnjLbYoKI",
         "title": "POV: Class of 2027 #classof2027 #senior #junior #realitycheck #collegehumor #studentlife",
         "published": "2026-05-01",
-        "views": 1897,
+        "views": 1898,
         "likes": 8
       },
       {
@@ -598,7 +626,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-08-05",
+    "fetched": "2026-08-06",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
@@ -740,5 +768,5 @@
       }
     }
   },
-  "generated_at": "2026-08-05T23:19:27Z"
+  "generated_at": "2026-08-06T03:43:17Z"
 }
