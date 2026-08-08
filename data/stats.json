@@ -497,7 +497,7 @@
         "youtube": {
           "followers": 245,
           "videos": 222,
-          "views": 422157,
+          "views": 422166,
           "source": "scrape"
         },
         "linkedin": {
@@ -824,5 +824,5 @@
       }
     }
   },
-  "generated_at": "2026-08-08T09:56:34Z"
+  "generated_at": "2026-08-08T14:51:32Z"
 }
