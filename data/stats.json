@@ -518,14 +518,14 @@
         },
         "tiktok": {
           "followers": 155,
-          "likes": 14100,
+          "likes": 14000,
           "videos": 446,
           "source": "scrape"
         },
         "youtube": {
           "followers": 245,
           "videos": 222,
-          "views": 422180,
+          "views": 422197,
           "source": "scrape"
         },
         "linkedin": {
@@ -852,5 +852,5 @@
       }
     }
   },
-  "generated_at": "2026-08-09T15:49:36Z"
+  "generated_at": "2026-08-09T16:57:07Z"
 }
