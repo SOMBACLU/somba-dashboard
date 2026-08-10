@@ -558,7 +558,8 @@
         },
         "linkedin": {
           "followers": 3,
-          "source": "scrape"
+          "source": "carried",
+          "carried_from": "2026-08-10"
         }
       }
     }
@@ -880,5 +881,5 @@
       }
     }
   },
-  "generated_at": "2026-08-10T08:52:43Z"
+  "generated_at": "2026-08-10T12:01:40Z"
 }
