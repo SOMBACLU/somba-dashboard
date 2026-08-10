@@ -558,8 +558,7 @@
         },
         "linkedin": {
           "followers": 3,
-          "source": "carried",
-          "carried_from": "2026-08-10"
+          "source": "scrape"
         }
       }
     }
@@ -579,7 +578,7 @@
         "id": "mtbnjLbYoKI",
         "title": "POV: Class of 2027 #classof2027 #senior #junior #realitycheck #collegehumor #studentlife",
         "published": "2026-05-01",
-        "views": 1908,
+        "views": 1909,
         "likes": 8
       },
       {
@@ -881,5 +880,5 @@
       }
     }
   },
-  "generated_at": "2026-08-10T15:19:00Z"
+  "generated_at": "2026-08-10T17:11:43Z"
 }
