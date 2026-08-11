@@ -566,11 +566,10 @@
       "date": "2026-08-11",
       "platforms": {
         "instagram": {
-          "followers": 754,
+          "followers": 752,
           "following": 285,
-          "posts": 516,
-          "source": "carried",
-          "carried_from": "2026-07-31"
+          "posts": 519,
+          "source": "scrape"
         },
         "tiktok": {
           "followers": 154,
@@ -908,5 +907,5 @@
       }
     }
   },
-  "generated_at": "2026-08-11T18:09:56Z"
+  "generated_at": "2026-08-11T23:05:41Z"
 }
