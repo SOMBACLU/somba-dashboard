@@ -600,9 +600,9 @@
           "carried_from": "2026-08-11"
         },
         "tiktok": {
-          "followers": 154,
+          "followers": 155,
           "likes": 14100,
-          "videos": 447,
+          "videos": 448,
           "source": "scrape"
         },
         "youtube": {
@@ -634,7 +634,7 @@
         "title": "POV: Class of 2027 #classof2027 #senior #junior #realitycheck #collegehumor #studentlife",
         "published": "2026-05-01",
         "views": 1916,
-        "likes": 8
+        "likes": 9
       },
       {
         "id": "tAgIxdUgU4M",
@@ -935,5 +935,5 @@
       }
     }
   },
-  "generated_at": "2026-08-12T00:02:40Z"
+  "generated_at": "2026-08-12T02:47:48Z"
 }
