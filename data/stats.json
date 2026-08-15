@@ -685,7 +685,7 @@
         },
         "tiktok": {
           "followers": 156,
-          "likes": 14200,
+          "likes": 14100,
           "videos": 449,
           "source": "scrape"
         },
@@ -1019,5 +1019,5 @@
       }
     }
   },
-  "generated_at": "2026-08-15T21:37:22Z"
+  "generated_at": "2026-08-15T22:40:48Z"
 }
