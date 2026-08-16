@@ -700,10 +700,38 @@
           "source": "scrape"
         }
       }
+    },
+    {
+      "date": "2026-08-16",
+      "platforms": {
+        "instagram": {
+          "followers": 752,
+          "following": 285,
+          "posts": 519,
+          "source": "carried",
+          "carried_from": "2026-08-11"
+        },
+        "tiktok": {
+          "followers": 156,
+          "likes": 14200,
+          "videos": 449,
+          "source": "scrape"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 422588,
+          "source": "scrape"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-15",
+    "fetched": "2026-08-16",
     "source": "youtube-rss",
     "videos": [
       {
@@ -877,7 +905,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-08-15",
+    "fetched": "2026-08-16",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
@@ -948,7 +976,7 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7500,
+        "views": 7600,
         "kind": "short",
         "likes": null,
         "published": null
@@ -1019,5 +1047,5 @@
       }
     }
   },
-  "generated_at": "2026-08-15T22:40:48Z"
+  "generated_at": "2026-08-16T01:59:21Z"
 }
