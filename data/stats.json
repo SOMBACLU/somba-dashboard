@@ -733,11 +733,10 @@
       "date": "2026-08-17",
       "platforms": {
         "instagram": {
-          "followers": 752,
+          "followers": 750,
           "following": 285,
-          "posts": 519,
-          "source": "carried",
-          "carried_from": "2026-08-11"
+          "posts": 522,
+          "source": "scrape"
         },
         "tiktok": {
           "followers": 156,
@@ -748,7 +747,7 @@
         "youtube": {
           "followers": 245,
           "videos": 222,
-          "views": 422627,
+          "views": 422613,
           "source": "scrape"
         },
         "linkedin": {
@@ -1075,5 +1074,5 @@
       }
     }
   },
-  "generated_at": "2026-08-17T04:06:42Z"
+  "generated_at": "2026-08-17T05:00:10Z"
 }
