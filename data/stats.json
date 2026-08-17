@@ -736,7 +736,8 @@
           "followers": 750,
           "following": 285,
           "posts": 522,
-          "source": "scrape"
+          "source": "carried",
+          "carried_from": "2026-08-17"
         },
         "tiktok": {
           "followers": 156,
@@ -1074,5 +1075,5 @@
       }
     }
   },
-  "generated_at": "2026-08-17T10:49:33Z"
+  "generated_at": "2026-08-17T11:43:49Z"
 }
