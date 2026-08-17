@@ -728,10 +728,38 @@
           "source": "scrape"
         }
       }
+    },
+    {
+      "date": "2026-08-17",
+      "platforms": {
+        "instagram": {
+          "followers": 752,
+          "following": 285,
+          "posts": 519,
+          "source": "carried",
+          "carried_from": "2026-08-11"
+        },
+        "tiktok": {
+          "followers": 156,
+          "likes": 14200,
+          "videos": 450,
+          "source": "scrape"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 422613,
+          "source": "scrape"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-16",
+    "fetched": "2026-08-17",
     "source": "youtube-rss",
     "videos": [
       {
@@ -905,7 +933,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-08-16",
+    "fetched": "2026-08-17",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
@@ -1047,5 +1075,5 @@
       }
     }
   },
-  "generated_at": "2026-08-16T18:48:48Z"
+  "generated_at": "2026-08-17T01:57:27Z"
 }
