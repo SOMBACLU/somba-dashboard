@@ -756,10 +756,38 @@
           "source": "scrape"
         }
       }
+    },
+    {
+      "date": "2026-08-18",
+      "platforms": {
+        "instagram": {
+          "followers": 750,
+          "following": 285,
+          "posts": 522,
+          "source": "carried",
+          "carried_from": "2026-08-17"
+        },
+        "tiktok": {
+          "followers": 156,
+          "likes": 14200,
+          "videos": 450,
+          "source": "scrape"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 422639,
+          "source": "scrape"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-17",
+    "fetched": "2026-08-18",
     "source": "youtube-rss",
     "videos": [
       {
@@ -933,7 +961,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-08-17",
+    "fetched": "2026-08-18",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
@@ -1012,10 +1040,10 @@
       {
         "id": "2XzUKmCBwTY",
         "title": "POV: You're trying to hang on during midterms #college #studentlife #midterms #ytshorts #explore",
-        "views": 7300,
+        "views": 7376,
         "kind": "short",
-        "likes": null,
-        "published": null
+        "likes": 28,
+        "published": "2025-10-27"
       },
       {
         "id": "zArZjKlR8lI",
@@ -1075,5 +1103,5 @@
       }
     }
   },
-  "generated_at": "2026-08-17T20:46:23Z"
+  "generated_at": "2026-08-18T01:53:26Z"
 }
