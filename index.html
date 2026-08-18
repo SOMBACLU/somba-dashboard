@@ -10,13 +10,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"
         integrity="sha384-JUh163oCRItcbPme8pYnROHQMC6fNKTBWtRG3I3I0erJkzNgL7uxKlNwcrcFKeqF"
         crossorigin="anonymous"></script>
-<!-- real calendar x-axis (day/month/year) + wheel/drag zoom; both self-register after Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"
-        integrity="sha384-cVMg8E3QFwTvGCDuK+ET4PD341jF3W8nO1auiXfuZNQkzbUUiBGLsIQUE+b1mxws"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.2.0/dist/chartjs-plugin-zoom.min.js"
-        integrity="sha384-dwwI6ICEN/0ZQlS5owhUa/6ZzvwUPmjH45bFVCAcjgjTulbHJvlE+TGU3g1k0N3R"
-        crossorigin="anonymous"></script>
 <style>
   :root{
     --bg:#f7f5fa; --card:#fff; --border:#e6e1ee; --ink:#241f2e;
@@ -64,36 +57,39 @@
   .topnav .links a.on{color:var(--purple);background:var(--purple-soft)}
 
   /* ---- header ---- */
-  .eyebrow{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--gold-deep);font-weight:700;margin:38px 0 10px}
-  h1{font-family:"Newsreader",serif;font-weight:600;font-size:54px;letter-spacing:-.02em;
-    margin:6px 0 6px;line-height:1.03}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:700;margin:30px 0 8px}
+  h1{font-family:"Newsreader",serif;font-weight:600;font-size:42px;letter-spacing:-.02em;
+    margin:4px 0 6px;line-height:1.05}
   h1 em{font-style:italic;color:var(--purple-mid)}
-  .sub{font-size:17px;color:#4c4557;max-width:720px}
+  .sub{font-size:15.5px;color:#4c4557;max-width:720px}
   .sub a{color:var(--purple-mid);font-weight:600;text-decoration:none;white-space:nowrap}
   .sub a:hover{text-decoration:underline}
   .gen{font-size:14px;color:var(--muted);margin-top:10px}
 
   /* ---- hero ---- */
-  .hero{position:relative;overflow:hidden;color:#fff;border-radius:22px;box-shadow:var(--shadow-2);
-    padding:36px 40px;margin-top:30px;display:flex;align-items:baseline;gap:26px;flex-wrap:wrap;
+  .hero{position:relative;overflow:hidden;color:#fff;border-radius:20px;box-shadow:var(--shadow-2);
+    padding:28px 32px 20px;margin-top:26px;
     background:linear-gradient(135deg,var(--purple) 0%,var(--purple-deep) 78%)}
   .hero::before{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
     background-image:radial-gradient(rgba(255,255,255,.13) 1px, transparent 1.4px);
     background-size:22px 22px}
-  .hero::after{content:"";position:absolute;right:-70px;top:-90px;width:280px;height:280px;
-    border-radius:50%;background:radial-gradient(circle, rgba(255,199,44,.22), transparent 68%);pointer-events:none}
-  .hero .k{position:relative;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
-    color:#cfc2e2;width:100%;margin-bottom:-8px}
-  .hero .v{position:relative;font-family:"Newsreader",serif;font-size:76px;font-weight:600;letter-spacing:-.02em;
-    line-height:1;border-bottom:5px solid var(--gold);padding-bottom:10px;font-variant-numeric:tabular-nums}
-  .hero .d{position:relative;font-size:16.5px;color:#e8e0f3}
+  .hero-row{position:relative;display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap}
+  .hero .k{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    color:#cfc2e2;margin-bottom:2px}
+  .hero .v{font-family:"Newsreader",serif;font-size:58px;font-weight:600;letter-spacing:-.02em;
+    line-height:1;font-variant-numeric:tabular-nums}
+  .hero .d{font-size:15px;color:#e8e0f3;padding-bottom:6px}
   .hero .d b{color:var(--gold)}
+  .hero-spark{position:relative;margin-top:14px}
+  .hero-spark svg{display:block;width:100%;height:64px}
+  .hero-spark .cap{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:700;color:#a798bd;margin-top:6px}
 
   /* ---- platform cards ---- */
   .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:22px 0 0}
   .pcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-    padding:22px 24px;box-shadow:var(--shadow-1);transition:transform .2s,box-shadow .2s}
+    padding:18px 20px 14px;box-shadow:var(--shadow-1);transition:transform .2s,box-shadow .2s}
   .pcard:hover{transform:translateY(-2px);box-shadow:var(--shadow-2)}
   .picon{display:inline-flex;flex:none}
   .picon svg{width:17px;height:17px;fill:currentColor;display:block}
@@ -103,8 +99,10 @@
   .pcard .name a{color:inherit;text-decoration:none;transition:color .2s}
   .pcard .name a:hover{color:var(--purple-mid)}
   .pcard .row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-  .pcard .v{font-family:"Newsreader",serif;font-size:44px;font-weight:600;letter-spacing:-.02em;margin-top:4px}
-  .pcard .v small{font-size:17px;color:var(--muted);font-weight:500;margin-left:6px;font-family:"Instrument Sans",sans-serif}
+  .pcard .v{font-family:"Newsreader",serif;font-size:36px;font-weight:600;letter-spacing:-.02em;margin-top:2px}
+  .pcard .v small{font-size:15px;color:var(--muted);font-weight:500;margin-left:6px;font-family:"Instrument Sans",sans-serif}
+  .pcard .spark{margin-top:10px}
+  .pcard .spark svg{display:block;width:100%;height:40px}
   .pill{display:inline-block;font-size:12.5px;font-weight:700;border-radius:999px;padding:3px 11px}
   .pill.up{background:#e9f4ee;color:var(--green)}
   .pill.down{background:#faefec;color:var(--red)}
@@ -114,80 +112,68 @@
 
   /* ---- sections ---- */
   section{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-    padding:32px 34px;box-shadow:var(--shadow-1);margin-top:24px}
-  .kicker{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--gold-deep);font-weight:700;margin:0 0 6px}
-  section h2{font-family:"Newsreader",serif;font-weight:600;font-size:31px;
+    padding:26px 28px;box-shadow:var(--shadow-1);margin-top:20px}
+  .kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:700;margin:0 0 4px}
+  section h2{font-family:"Newsreader",serif;font-weight:600;font-size:24px;
     letter-spacing:-.01em;margin:0 0 4px}
-  section .note{font-size:15px;color:var(--muted);margin:0 0 20px}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-  .chart-box{position:relative;height:260px}
-  .chart-box.tall{height:320px}
-  .chart-box.short{height:220px}
-  .chart-title{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;
+  section .note{font-size:13.5px;color:var(--muted);margin:0 0 16px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .chart-box{position:relative;height:170px}
+  .chart-box.short{height:150px}
+  .chart-title{font-size:12px;letter-spacing:.1em;text-transform:uppercase;
     color:var(--label);font-weight:700;margin:0 0 8px}
-  .chart-cap{font-size:12.5px;color:var(--label);margin:8px 0 0}
-
-  /* ---- timeline zoom control ---- */
-  .range-ctl{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 20px}
-  .range-ctl .lab{font-size:12px;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--label);font-weight:700;margin-right:2px}
-  .range-seg{display:inline-flex;border:1px solid var(--border);border-radius:999px;
-    background:#fff;padding:3px;gap:2px}
-  .range-btn{appearance:none;border:0;background:transparent;cursor:pointer;
-    font:inherit;font-size:13px;font-weight:600;color:var(--muted);
-    padding:5px 14px;border-radius:999px;transition:background .15s,color .15s}
-  .range-btn:hover:not(:disabled){color:var(--purple-mid)}
-  .range-btn.on{background:var(--purple);color:#fff}
-  .range-btn:disabled{opacity:.35;cursor:default}
-  .range-reset{appearance:none;background:#fff;border:1px solid var(--border);
-    border-radius:999px;cursor:pointer;font:inherit;font-size:13px;font-weight:600;
-    color:var(--muted);padding:6px 14px;transition:border-color .15s,color .15s}
-  .range-reset:hover{border-color:var(--purple-mid);color:var(--purple-mid)}
-  .range-hint{font-size:12px;color:var(--label);margin-left:auto}
-  @media(max-width:760px){ .range-hint{display:none} }
+  .chart-cap{font-size:12px;color:var(--label);margin:6px 0 0}
+  .trend-grid{margin-top:20px}
 
   /* ---- stat tiles ---- */
-  .statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .stile{border:1px solid var(--border);border-radius:14px;padding:18px 20px;background:#fcfbfd;
-    transition:transform .2s,box-shadow .2s}
-  .stile:hover{transform:translateY(-2px);box-shadow:var(--shadow-1)}
-  .stile .n{font-family:"Newsreader",serif;font-size:38px;font-weight:600;letter-spacing:-.02em}
-  .stile .k{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--label);font-weight:700;margin-top:2px}
-  .stile .c{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.45}
-  .stile.hi{border-top:4px solid var(--gold);background:var(--gold-soft)}
-  .milestone{font-family:"Newsreader",serif;font-size:22px;margin:18px 0 0;line-height:1.35}
+  .statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .stile{border:1px solid var(--border);border-radius:14px;padding:13px 16px;background:#fcfbfd}
+  .stile .n{font-family:"Newsreader",serif;font-size:27px;font-weight:600;letter-spacing:-.02em}
+  .stile .k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--label);font-weight:700;margin-top:2px}
+  .stile .c{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+  .milestone{font-family:"Newsreader",serif;font-size:16.5px;margin:14px 0 0;line-height:1.4}
   .milestone b{color:var(--purple-mid)}
 
   /* ---- engagement (holistic) ---- */
-  .er-hero{position:relative;overflow:hidden;display:flex;align-items:center;gap:30px;flex-wrap:wrap;
-    background:linear-gradient(135deg,var(--purple),var(--purple-deep));color:#fff;border-radius:16px;padding:26px 30px}
+  .er-hero{position:relative;overflow:hidden;display:flex;align-items:center;gap:28px;flex-wrap:wrap;
+    background:linear-gradient(135deg,var(--purple),var(--purple-deep));color:#fff;border-radius:16px;padding:18px 24px}
   .er-hero::before{content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;
     background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1.4px);background-size:20px 20px}
   .er-hero>div{position:relative}
   .er-hero .lab{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#cfc2e2;font-weight:700}
-  .er-hero .big{font-family:"Newsreader",serif;font-size:64px;font-weight:600;line-height:1;color:var(--gold);letter-spacing:-.02em}
-  .er-hero .say{font-size:15.5px;color:#e8e0f3;max-width:520px;line-height:1.5;margin-top:8px}
+  .er-hero .big{font-family:"Newsreader",serif;font-size:46px;font-weight:600;line-height:1;color:var(--gold);letter-spacing:-.02em}
+  .er-hero .say{font-size:13.5px;color:#e8e0f3;max-width:520px;line-height:1.5;margin-top:6px}
   .er-hero .say b{color:#fff}
   .er-badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 13px;font-size:12.5px;font-weight:700}
   .er-badge.above{background:var(--gold);color:var(--purple-deep)}
   .er-badge.at{background:rgba(255,255,255,.18);color:#fff}
   .er-badge.below{background:#f6d7cf;color:#7c2d1a}
-  .er-cbar{display:flex;height:26px;border-radius:8px;overflow:hidden;margin:6px 0 12px}
+  .er-cbar{display:flex;height:12px;border-radius:6px;overflow:hidden;margin:2px 0 8px}
   .er-cbar span{height:100%}
-  .er-clegend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px}
-  .er-clegend .it{display:flex;align-items:center;gap:7px;color:var(--muted)}
+  .er-clegend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px}
+  .er-clegend .it{display:flex;align-items:center;gap:6px;color:var(--muted)}
   .er-clegend .it b{color:var(--ink)}
-  .er-clegend .dot{width:11px;height:11px;border-radius:3px;flex:none}
-  .er-hint{font-size:13.5px;color:var(--muted);margin-top:12px}
+  .er-clegend .dot{width:9px;height:9px;border-radius:3px;flex:none}
+  .er-hint{font-size:12px;color:var(--muted);margin-top:8px}
   .er-hint b{color:var(--gold-deep)}
-  .er-reads{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}
-  .er-read{border:1px solid var(--border);border-radius:14px;padding:15px 18px;background:#fcfbfd}
-  .er-read .ph{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px}
+  .qtable{width:100%;border-collapse:collapse;margin-top:14px;font-size:12.5px}
+  .qtable th{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--label);
+    font-weight:700;text-align:right;padding:5px 4px;border-bottom:1px solid var(--border)}
+  .qtable th:first-child{text-align:left}
+  .qtable td{padding:6px 4px;border-bottom:1px solid var(--border);text-align:right;
+    font-variant-numeric:tabular-nums;color:var(--ink)}
+  .qtable tr:last-child td{border-bottom:0}
+  .qtable td:first-child{text-align:left;font-weight:600}
+  .qtable .picon{vertical-align:-2px;margin-right:6px}
+  .qtable .picon svg{width:12px;height:12px}
+  .er-reads{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
+  .er-read{border:1px solid var(--border);border-radius:14px;padding:13px 16px;background:#fcfbfd}
+  .er-read .ph{display:flex;align-items:center;gap:9px;font-weight:700;font-size:14px}
   .er-read .ph .picon{display:inline-flex}
-  .er-read .ph .picon svg{width:16px;height:16px}
-  .er-read .rt{margin-left:auto;font-family:"Newsreader",serif;font-size:26px;font-weight:600;color:var(--purple-mid)}
-  .er-read .rc{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5}
+  .er-read .ph .picon svg{width:15px;height:15px}
+  .er-read .rt{margin-left:auto;font-family:"Newsreader",serif;font-size:22px;font-weight:600;color:var(--purple-mid)}
+  .er-read .rc{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.5}
   .er-read .rc b{color:var(--ink)}
   .er-cap{font-size:12px;color:var(--label);margin-top:6px}
   .er-foot{font-size:12.5px;color:var(--label);margin:20px 0 0;line-height:1.5}
@@ -203,28 +189,28 @@
   .bench-src b{color:var(--muted)}
 
   /* ---- recent videos ---- */
-  .vidrow{display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:center;
-    padding:11px 10px;border-bottom:1px solid var(--border);border-radius:10px;transition:background .2s}
+  .vidrow{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:center;
+    padding:8px 8px;border-bottom:1px solid var(--border);border-radius:8px;transition:background .2s}
   .vidrow:last-child{border-bottom:0}
   .vidrow:hover{background:var(--purple-soft)}
   .vidrow.top{background:var(--gold-soft)}
-  .vidrow .rank{font-family:"Newsreader",serif;font-size:20px;color:var(--label);text-align:center}
-  .vidrow .t{font-size:15px;font-weight:600;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .vidrow .rank{font-family:"Newsreader",serif;font-size:15px;color:var(--label);text-align:center}
+  .vidrow .t{font-size:13px;font-weight:600;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .vidrow .t a{color:var(--ink);text-decoration:none;transition:color .2s}
   .vidrow .t a:hover{color:var(--purple-mid)}
-  .vidrow .meta{font-size:12.5px;color:var(--muted);margin-top:1px}
+  .vidrow .meta{font-size:11.5px;color:var(--muted);margin-top:1px}
   .vidrow .v{text-align:right;font-variant-numeric:tabular-nums}
-  .vidrow .v b{font-size:16px}
-  .vidrow .v small{display:block;font-size:12px;color:var(--muted)}
+  .vidrow .v b{font-size:13.5px}
+  .vidrow .v small{display:block;font-size:11px;color:var(--muted)}
 
   /* ---- audience mix ---- */
-  .donut-wrap{position:relative;height:300px}
+  .donut-wrap{position:relative;height:190px;margin-bottom:12px}
   .donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
-  .donut-center .n{font-family:"Newsreader",serif;font-size:40px;font-weight:600}
-  .donut-center .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--label);font-weight:700}
-  .mixrow{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--border);font-size:15px}
+  .donut-center .n{font-family:"Newsreader",serif;font-size:26px;font-weight:600}
+  .donut-center .k{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--label);font-weight:700}
+  .mixrow{display:flex;align-items:center;gap:9px;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px}
   .mixrow:last-child{border-bottom:0}
-  .mixrow .picon svg{width:15px;height:15px}
+  .mixrow .picon svg{width:13px;height:13px}
   .mixrow .nm{font-weight:600;flex:1}
   .mixrow .ct{color:var(--muted);font-variant-numeric:tabular-nums}
   .mixrow .pc{width:52px;text-align:right;font-weight:700;color:var(--purple-mid);font-variant-numeric:tabular-nums}
@@ -244,10 +230,16 @@
   .locrow .fill{height:100%;background:linear-gradient(90deg,var(--purple-mid),var(--purple));border-radius:5px}
 
   /* ---- playbook ---- */
-  .pb-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
-  .pb-total{margin-left:auto;font-size:13.5px;font-weight:700;color:var(--purple-mid);
-    background:var(--purple-soft);border-radius:999px;padding:6px 14px}
-  .thesis{font-family:"Newsreader",serif;font-size:21px;line-height:1.45;max-width:860px;margin:4px 0 18px}
+  .pbd summary{display:flex;align-items:center;gap:14px;flex-wrap:wrap;cursor:pointer;list-style:none}
+  .pbd summary::-webkit-details-marker{display:none}
+  .pbd summary::after{content:"▾";color:var(--label);font-size:15px;transition:transform .2s}
+  .pbd[open] summary::after{transform:rotate(180deg)}
+  .pbd[open] summary{margin-bottom:14px}
+  .pbd summary .kicker{display:block}
+  .pbd-title{display:block;font-size:24px;font-weight:600;letter-spacing:-.01em}
+  .pb-total{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--purple-mid);
+    background:var(--purple-soft);border-radius:999px;padding:5px 13px}
+  .thesis{font-family:"Newsreader",serif;font-size:17px;line-height:1.45;max-width:860px;margin:4px 0 16px}
   .thesis b{color:var(--purple-mid)}
   .pipeline{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--purple),var(--purple-deep));
     color:#fff;border-radius:16px;padding:22px 26px;margin:0 0 22px}
@@ -341,9 +333,9 @@
   @media(max-width:760px){
     .cards{grid-template-columns:1fr} .grid2{grid-template-columns:1fr}
     .statgrid{grid-template-columns:repeat(2,1fr)} .grid3{grid-template-columns:1fr}
-    .todo{grid-template-columns:1fr} .er-reads{grid-template-columns:1fr} .er-hero .big{font-size:52px}
-    h1{font-size:38px} .hero .v{font-size:56px} .hero{padding:28px 26px}
-    section{padding:24px 20px}
+    .todo{grid-template-columns:1fr} .er-reads{grid-template-columns:1fr} .er-hero .big{font-size:40px}
+    h1{font-size:32px} .hero .v{font-size:44px} .hero{padding:22px 20px 16px}
+    section{padding:20px 18px}
     .topnav{top:10px}
   }
 </style>
@@ -381,60 +373,32 @@
   <div id="report" class="hidden">
     <div id="overview">
       <div class="hero">
-        <div class="k">Total audience — all platforms</div>
-        <div class="v" id="hero-total"></div>
-        <div class="d" id="hero-delta"></div>
+        <div class="hero-row">
+          <div>
+            <div class="k">Total audience — all platforms</div>
+            <div class="v" id="hero-total"></div>
+          </div>
+          <div class="d" id="hero-delta"></div>
+        </div>
+        <div class="hero-spark" id="hero-spark"></div>
       </div>
       <div class="cards" id="cards"></div>
     </div>
 
     <div id="growth">
-      <section id="sec-charts" class="hidden">
-        <div class="kicker">Trajectory</div>
-        <h2 class="serif">Follower growth</h2>
-        <p class="note">Each platform on its own scale, so small accounts still show their trend.</p>
-        <div class="range-ctl" id="range-ctl" role="group" aria-label="Timeline zoom">
-          <span class="lab">Timeline</span>
-          <div class="range-seg">
-            <button type="button" class="range-btn" data-unit="day">Day</button>
-            <button type="button" class="range-btn" data-unit="week">Week</button>
-            <button type="button" class="range-btn" data-unit="month">Month</button>
-            <button type="button" class="range-btn" data-unit="year">Year</button>
-          </div>
-          <button type="button" class="range-reset" id="range-reset">Reset zoom</button>
-          <span class="range-hint">Drag across a chart to zoom in · Reset zoom to undo</span>
-        </div>
-        <div class="grid2" id="chartgrid"></div>
-      </section>
-
-      <section id="sec-total-chart" class="hidden">
-        <div class="kicker">Trajectory</div>
-        <h2 class="serif">Total audience over time</h2>
-        <p class="note">Everyone following SOMBA anywhere, added together.</p>
-        <div class="chart-box tall"><canvas id="c-total"></canvas></div>
-      </section>
-
-      <section id="sec-trends" class="hidden">
-        <div class="kicker">Beyond followers</div>
-        <h2 class="serif">Reach &amp; output over time</h2>
-        <p class="note">Not just how many follow — how far the content travels and how steadily it ships.</p>
-        <div class="grid2" id="trendgrid"></div>
-      </section>
-
       <div id="charts-soon" class="empty hidden">
         <span class="badge">● Charts coming soon</span>
         <h2 class="serif">Growth charts appear after tomorrow's snapshot</h2>
         <p>One data point makes a dot, two make a line. The numbers refresh
-           automatically every hour, and the growth charts — and milestone
-           projections — will draw themselves.</p>
+           automatically every hour, and the trend lines will draw themselves.</p>
       </div>
 
-      <section id="sec-pace" class="hidden">
+      <section id="sec-growth" class="hidden">
         <div class="kicker">Momentum</div>
-        <h2 class="serif">Growth pace</h2>
-        <p class="note">Average weekly change, measured across every snapshot.</p>
+        <h2 class="serif">Growth</h2>
         <div class="statgrid" id="pace-tiles"></div>
         <p class="milestone" id="milestone"></p>
+        <div class="grid2 trend-grid" id="trendgrid"></div>
       </section>
     </div>
 
@@ -444,25 +408,17 @@
         <h2 class="serif">Engagement</h2>
         <p class="note">Not how big the audience is — how much the content actually moves people.</p>
         <div class="er-hero" id="er-hero"></div>
-        <div class="grid2" style="margin-top:22px">
+        <div class="grid2" style="margin-top:20px">
           <div>
-            <div class="chart-title">What kind of engagement we earn</div>
-            <div id="er-composition"></div>
-          </div>
-          <div>
-            <div class="chart-title">Engagement rate by platform · by reach</div>
+            <div class="chart-title">Rate by platform · vs benchmark</div>
             <div class="chart-box short"><canvas id="er-bar"></canvas></div>
             <div class="er-cap" id="er-bar-cap">Dashed line = a solid ~3% rate. Bars above it are outperforming.</div>
           </div>
-        </div>
-
-        <div class="chart-title" style="margin-top:28px">The quality of engagement · by platform</div>
-        <p class="note" style="margin-top:2px">Four angles on <em>how</em> people respond — each measured against how many the content reached, not follower count.</p>
-        <div class="grid2" id="er-quality">
-          <div><div class="chart-title">Save rate</div><div class="chart-box short"><canvas id="er-q-save"></canvas></div><p class="chart-cap">Of everyone reached, how many bookmark it to return to — the strongest intent signal.</p></div>
-          <div><div class="chart-title">Share rate</div><div class="chart-box short"><canvas id="er-q-share"></canvas></div><p class="chart-cap">How often people pass it on — word-of-mouth that wins reach for free.</p></div>
-          <div><div class="chart-title">Comment rate</div><div class="chart-box short"><canvas id="er-q-comment"></canvas></div><p class="chart-cap">How much the content sparks conversation, not just a passive tap.</p></div>
-          <div><div class="chart-title">Reach per post</div><div class="chart-box short"><canvas id="er-q-reach"></canvas></div><p class="chart-cap">Average people reached with each post — how far a single piece travels.</p></div>
+          <div>
+            <div class="chart-title">What we earn, and how it lands</div>
+            <div id="er-composition"></div>
+            <div id="er-quality"></div>
+          </div>
         </div>
 
         <div class="er-reads" id="er-reads"></div>
@@ -477,50 +433,42 @@
     <div id="content">
       <section id="sec-videos" class="hidden">
         <div class="kicker">On screen</div>
-        <h2 class="serif">Recent content</h2>
-        <p class="note" id="vidnote">The most recent YouTube uploads, ranked by views. Hashtag titles are Shorts.</p>
-        <div id="vidlist"></div>
-      </section>
-
-      <section id="sec-topvideos" class="hidden">
-        <div class="kicker">On screen</div>
-        <h2 class="serif">All-time greats</h2>
-        <p class="note" id="topvidnote">The most-viewed uploads in the channel's history.</p>
-        <div id="topvidlist"></div>
+        <h2 class="serif">Content</h2>
+        <p class="note" id="vidnote">YouTube uploads ranked by views. Hashtag titles are Shorts.</p>
+        <div class="grid2">
+          <div>
+            <div class="chart-title">Latest uploads</div>
+            <div id="vidlist"></div>
+          </div>
+          <div>
+            <div class="chart-title" id="topvidnote">All-time greats</div>
+            <div id="topvidlist"></div>
+          </div>
+        </div>
       </section>
     </div>
 
     <div id="audience">
       <section id="sec-mix" class="hidden">
         <div class="kicker">Reach</div>
-        <h2 class="serif">Audience mix</h2>
-        <p class="note">Where the total audience lives.</p>
-        <div class="grid2">
-          <div class="donut-wrap"><canvas id="c-mix"></canvas><div class="donut-center" id="mix-center"></div></div>
-          <div>
-            <div id="mix-legend"></div>
-            <p class="milestone" id="mix-takeaway"></p>
-          </div>
-        </div>
-      </section>
-
-      <section id="sec-demo" class="hidden">
-        <div class="kicker">Reach</div>
-        <h2 class="serif">Who we reach</h2>
-        <p class="note" id="demo-note"></p>
+        <h2 class="serif">Audience</h2>
+        <p class="note">Where the audience lives, and who they are. <span id="demo-note"></span></p>
         <div class="grid3">
+          <div>
+            <div class="donut-wrap"><canvas id="c-mix"></canvas><div class="donut-center" id="mix-center"></div></div>
+            <div id="mix-legend"></div>
+          </div>
           <div>
             <div class="chart-title">Age</div>
             <div class="chart-box short"><canvas id="c-age"></canvas></div>
-          </div>
-          <div>
-            <div class="chart-title">Gender</div>
+            <div class="chart-title" style="margin-top:16px">Gender</div>
             <div class="splitbar" id="genderbar"></div>
             <div id="genderlegend"></div>
           </div>
           <div>
             <div class="chart-title">Top locations</div>
             <div id="loclist"></div>
+            <p class="milestone" id="mix-takeaway"></p>
           </div>
         </div>
       </section>
@@ -528,26 +476,28 @@
 
     <div id="playbook">
       <section id="sec-strategy">
-        <div class="pb-head">
-          <div>
-            <div class="kicker">Action plan</div>
-            <h2 class="serif">The growth playbook</h2>
+        <details class="pbd">
+          <summary>
+            <span>
+              <span class="kicker">Action plan</span>
+              <span class="serif pbd-title">The growth playbook</span>
+            </span>
+            <span class="pb-total" id="pb-total"></span>
+          </summary>
+          <p class="thesis"><b>Instagram is the anchor</b>, <b>TikTok is the reach engine</b>,
+            <b>YouTube is the search asset</b>, and <b>LinkedIn is wide-open ground</b> for a school
+            of management. The job: convert reach into followers — without tripling the workload.</p>
+
+          <div class="pipeline">
+            <div class="k">The core workflow — one filming session feeds three platforms</div>
+            <div class="flowrow" id="flowrow"></div>
+            <p>Every vertical video SOMBA already makes is also a Reel and a Short.
+               Reach triples; effort doesn't. Tap the actions below to track what's live.</p>
           </div>
-          <span class="pb-total" id="pb-total"></span>
-        </div>
-        <p class="thesis"><b>Instagram is the anchor</b>, <b>TikTok is the reach engine</b>,
-          <b>YouTube is the search asset</b>, and <b>LinkedIn is wide-open ground</b> for a school
-          of management. The job: convert reach into followers — without tripling the workload.</p>
 
-        <div class="pipeline">
-          <div class="k">The core workflow — one filming session feeds three platforms</div>
-          <div class="flowrow" id="flowrow"></div>
-          <p>Every vertical video SOMBA already makes is also a Reel and a Short.
-             Reach triples; effort doesn't. Tap the actions below to track what's live.</p>
-        </div>
-
-        <div class="pb-tabs" id="pb-tabs" role="tablist" aria-label="Platforms"></div>
-        <div class="pb-panel" id="pb-panel"></div>
+          <div class="pb-tabs" id="pb-tabs" role="tablist" aria-label="Platforms"></div>
+          <div class="pb-panel" id="pb-panel"></div>
+        </details>
       </section>
     </div>
   </div>
@@ -663,14 +613,14 @@ function render(d){
         ${followers==null ? '' : deltaPill(latest, prev)} ${stale}
       </div>
       ${extras ? `<div class="extras">${extras}</div>` : ''}
+      ${snaps.length >= 2 ? `<div class="spark">${sparkSVG(series(snaps, p.id).map(pt => pt.val), p.color, {fill:true})}</div>` : ''}
     </div>`;
   }).join('');
 
   // --- history-dependent sections (need 2+ snapshots) ---
   if(snaps.length >= 2){
-    renderHistoryCharts(platforms, snaps);
+    try{ renderHeroSpark(platforms, snaps); }catch(e){}
     try{ renderTrends(platforms, snaps, d); }catch(e){}
-    try{ initTimeControls(snaps); }catch(e){}
     try{ renderPace(platforms, snaps, d); }catch(e){}
   } else {
     document.getElementById('charts-soon').classList.remove('hidden');
@@ -687,103 +637,30 @@ function render(d){
   initNav();
 }
 
-// The timeline granularity shared by every time-series chart. Auto-picked from the
-// data span on first render; the Day/Week/Month/Year toggle re-buckets every chart.
-let CURRENT_UNIT = 'day';
-const TIME_CHARTS = [];   // {chart, points} — raw points kept so the toggle can re-bucket
-const TOOLTIP_FMT = {day:'MMM d, yyyy', week:"'Week of' MMM d, yyyy", month:'MMM yyyy', year:'yyyy'};
-
-function mondayOf(iso){
-  const d = new Date(iso + 'T12:00:00');
-  d.setDate(d.getDate() - (d.getDay() + 6) % 7);
-  return d.toISOString().slice(0, 10);
+// Tiny inline-SVG line — no axes, no library. The shape is the message; exact
+// values live in the cards and charts around it. Needs 2+ non-null points.
+function sparkSVG(vals, color, opts){
+  opts = opts || {};
+  const w = 100, h = 30, pad = 2;
+  const v = vals.filter(x => x != null);
+  if(v.length < 2) return '';
+  const min = Math.min(...v), max = Math.max(...v);
+  const span = (max - min) || 1;
+  const pts = v.map((y,i) => [
+    pad + (w - 2*pad) * i / (v.length - 1),
+    h - pad - (h - 2*pad) * (y - min) / span
+  ]);
+  const line = pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ');
+  const area = `${pad},${h} ` + line + ` ${w-pad},${h}`;
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">` +
+    (opts.fill ? `<polygon points="${area}" fill="${color}" opacity=".1"/>` : '') +
+    `<polyline points="${line}" fill="none" stroke="${color}" stroke-width="${opts.width||1.5}" ` +
+    `stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>`;
 }
 
-// Collapse raw points to one per day/week/month/year. Every series here is a
-// cumulative level (followers, lifetime views), so each bucket keeps its LAST
-// reading, plotted at the bucket's start so the axis reads like a calendar series.
-function bucketPoints(points, unit){
-  const pts = points.filter(p => p.val != null);
-  if(unit === 'day') return pts.map(p => ({x: p.date, y: p.val}));
-  const keyOf = iso => unit === 'week'  ? mondayOf(iso)
-                     : unit === 'month' ? iso.slice(0, 7) + '-01'
-                     :                    iso.slice(0, 4) + '-01-01';
-  const buckets = new Map();                    // snapshots are date-sorted → last wins
-  pts.forEach(p => buckets.set(keyOf(p.date), p.val));
-  return [...buckets].map(([x, y]) => ({x, y}));
-}
-
-function unitBucketCount(dates, unit){
-  return new Set(dates.map(iso => unit === 'day' ? iso
-    : unit === 'week' ? mondayOf(iso)
-    : unit === 'month' ? iso.slice(0, 7) : iso.slice(0, 4))).size;
-}
-
-// Finest granularity that suits the data span — Day while history is short,
-// Month once months of snapshots exist, Year for multi-year archives.
-function pickUnit(dates){
-  const span = (new Date(dates[dates.length - 1] + 'T12:00:00') -
-                new Date(dates[0] + 'T12:00:00')) / 86400000;
-  const ideal = span <= 45 ? 'day' : span <= 200 ? 'week' : span <= 1100 ? 'month' : 'year';
-  return unitBucketCount(dates, ideal) >= 2 ? ideal : 'day';
-}
-
-// One place that builds every zoomable time-series line chart. `points` is an array
-// of {date, val}; nulls are dropped so gaps bridge honestly. `opt`: {label, color,
-// yZero, tip}. Registers the chart so the timeline toggle/reset can reach it.
-function timeChart(target, points, opt){
-  opt = opt || {};
-  const color = opt.color || '#5d4380';
-  const data = bucketPoints(points, CURRENT_UNIT);
-  const ptRadius = data.length < 8 ? 3 : 0;
-  const chart = new Chart(target, {
-    type:'line',
-    data:{datasets:[{label:opt.label||'', data, borderColor:color,
-      backgroundColor:color+'1a', fill:true, tension:.3, spanGaps:true,
-      pointRadius:ptRadius, borderWidth:2.5}]},
-    options:{responsive:true, maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{callbacks:{label: ctx => '  ' + (opt.tip ? opt.tip(ctx.parsed.y) : FULL(ctx.parsed.y))}},
-        zoom:{
-          zoom:{ drag:{enabled:true, backgroundColor:'rgba(93,67,128,.14)',
-                       borderColor:'#5d4380', borderWidth:1},
-                 pinch:{enabled:true}, mode:'x' },
-          pan:{enabled:false},
-          limits:{x:{min:'original', max:'original'}}
-        }
-      },
-      scales:{
-        x:{ type:'time', bounds:'data',
-            time:{ unit: CURRENT_UNIT, tooltipFormat: TOOLTIP_FMT[CURRENT_UNIT],
-                   displayFormats:{day:'MMM d', week:'MMM d', month:'MMM yyyy', year:'yyyy'} },
-            // ticks come FROM the data points so the axis always has labels —
-            // unit-boundary ticks can vanish entirely on short spans (lived bug)
-            ticks:{source:'data', autoSkip:true, maxTicksLimit:8, maxRotation:0},
-            grid:{display:false} },
-        y:{ beginAtZero: !!opt.yZero, grid:{color:'#efe9f6'},
-            ticks:{precision:0, callback: v => FMT(v)} }
-      }
-    }
-  });
-  TIME_CHARTS.push({chart, points});
-  return chart;
-}
-
-function renderHistoryCharts(platforms, snaps){
-  CURRENT_UNIT = pickUnit(snaps.map(s => s.date));
-  const grid = document.getElementById('chartgrid');
-  platforms.forEach(p => {
-    const pts = series(snaps, p.id);
-    if(!pts.some(pt => pt.val != null)) return;
-    const box = document.createElement('div');
-    box.innerHTML = `<div class="chart-title">${p.name}</div><div class="chart-box"><canvas id="c-${p.id}"></canvas></div>`;
-    grid.appendChild(box);
-    timeChart('c-'+p.id, pts, {label:'Followers', color:p.color});
-  });
-  document.getElementById('sec-charts').classList.remove('hidden');
-
-  // total audience: carry each platform's last-known count forward (matches hero total)
+// The gold line through the hero band: total audience over the whole history,
+// carrying each platform's last-known count forward (matches the hero total).
+function renderHeroSpark(platforms, snaps){
   const lastKnown = {};
   const totals = snaps.map(s => {
     let sum = 0;
@@ -792,42 +669,58 @@ function renderHistoryCharts(platforms, snaps){
       if(v != null) lastKnown[p.id] = v;
       sum += (lastKnown[p.id] ?? 0);
     });
-    return {date:s.date, val:sum};
+    return sum;
   });
-  timeChart('c-total', totals, {label:'Total audience', color:'#5d4380', yZero:true});
-  document.getElementById('sec-total-chart').classList.remove('hidden');
+  const svg = sparkSVG(totals, '#FFC72C', {fill:true, width:2});
+  if(!svg) return;
+  document.getElementById('hero-spark').innerHTML = svg +
+    `<div class="cap">Total audience since ${shortDate(snaps[0].date)}</div>`;
 }
 
-// ---------- reach & output trends (needs history) — the "beyond followers" story ----------
+// One compact line chart. Same quiet ink everywhere — the title says what it is.
+function miniLine(id, pts, opt){
+  opt = opt || {};
+  const data = pts.filter(p => p.val != null);
+  if(data.length < 2) return false;
+  new Chart(id, {
+    type:'line',
+    data:{labels: data.map(p => shortDate(p.date)),
+      datasets:[{data: data.map(p => p.val), borderColor:'#5d4380',
+        backgroundColor:'rgba(93,67,128,.06)', fill:true, tension:.3,
+        pointRadius:0, pointHitRadius:14, borderWidth:2}]},
+    options:{responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        tooltip:{callbacks:{label: c => '  ' + (opt.tip ? opt.tip(c.parsed.y) : FULL(c.parsed.y))}}},
+      scales:{x:{grid:{display:false}, ticks:{autoSkip:true, maxTicksLimit:5, maxRotation:0}},
+        y:{beginAtZero:!!opt.yZero, grid:{color:'#efe9f6'}, ticks:{precision:0, maxTicksLimit:4, callback:v=>FMT(v)}}}}
+  });
+  return true;
+}
+
+// ---------- reach & output trends (needs history) ----------
 function renderTrends(platforms, snaps, d){
   const grid = document.getElementById('trendgrid');
   if(!grid) return;
   const has = pts => pts.some(p => p.val != null);
-  const builders = [];
-  const add = (id, title, cap, pts, color, opt) => {
+  let drew = false;
+  const add = (id, title, cap, pts, opt) => {
     if(!has(pts)) return;
     grid.insertAdjacentHTML('beforeend',
       `<div><div class="chart-title">${title}</div>` +
       `<div class="chart-box"><canvas id="${id}"></canvas></div>` +
-      `<p class="chart-cap">${cap}</p></div>`);
-    builders.push(() => timeChart(id, pts, Object.assign({color}, opt||{})));
+      (cap ? `<p class="chart-cap">${cap}</p>` : '') + `</div>`);
+    if(miniLine(id, pts, opt)) drew = true;
   };
 
-  // YouTube total views — how much the library actually gets watched
-  add('t-yt-views', 'YouTube views',
-      'Total lifetime views on the channel — how much the content actually gets watched.',
-      series(snaps, 'youtube', 'views'), '#CC0000');
+  add('t-yt-views', 'YouTube views', '',
+      series(snaps, 'youtube', 'views'));
 
-  // Avg views per video — reach quality, not just volume
   const avgViews = snaps.map(s => {
     const y = s.platforms.youtube || {};
     return {date:s.date, val:(y.views != null && y.videos) ? Math.round(y.views / y.videos) : null};
   });
-  add('t-yt-avg', 'Avg views per video',
-      'Lifetime views ÷ uploads — are new videos landing, or just piling up?',
-      avgViews, '#e0611f');
+  add('t-yt-avg', 'Avg views per video', '', avgViews);
 
-  // Content published — the publishing engine across every channel
   const output = snaps.map(s => {
     const yv = (s.platforms.youtube||{}).videos,
           tv = (s.platforms.tiktok||{}).videos,
@@ -842,54 +735,12 @@ function renderTrends(platforms, snaps, d){
     if(b && b.value) paceBits.push(`${ER_META[id].name} ~${b.value}/wk`);
   });
   add('t-output', 'Content published',
-      'Every video and post across YouTube, TikTok &amp; Instagram — the publishing engine.' +
-      (paceBits.length ? ` Sector posting pace to match: ${paceBits.join(' · ')} (cited under Benchmark sources).` : ''),
-      output, '#5d4380', {yZero:true});
+      paceBits.length ? `Sector pace to match: ${paceBits.join(' · ')} — sources under Engagement.` : '',
+      output);
 
-  // TikTok likes — cumulative appreciation
-  add('t-tt-likes', 'TikTok likes',
-      'Total hearts the TikTok account has earned over time — cumulative appreciation.',
-      series(snaps, 'tiktok', 'likes'), '#00B4C5');
+  add('t-tt-likes', 'TikTok likes', '', series(snaps, 'tiktok', 'likes'));
 
-  if(!builders.length) return;
-  builders.forEach(fn => fn());
-  document.getElementById('sec-trends').classList.remove('hidden');
-}
-
-// ---------- timeline zoom controls (shared across every time chart) ----------
-// Re-bucket every chart's DATA to the new unit — the line visibly changes shape,
-// it doesn't just relabel the axis.
-function setTimelineUnit(unit){
-  CURRENT_UNIT = unit;
-  TIME_CHARTS.forEach(({chart, points}) => {
-    const data = bucketPoints(points, unit);
-    chart.data.datasets[0].data = data;
-    chart.data.datasets[0].pointRadius = data.length < 8 ? 3 : 0;
-    chart.options.scales.x.time.unit = unit;
-    chart.options.scales.x.time.tooltipFormat = TOOLTIP_FMT[unit];
-    if(chart.resetZoom) chart.resetZoom('none');
-    chart.update();
-  });
-}
-
-function initTimeControls(snaps){
-  const ctl = document.getElementById('range-ctl');
-  if(!ctl || !TIME_CHARTS.length) return;
-  const dates = snaps.map(s => s.date);
-  ctl.querySelectorAll('.range-btn').forEach(btn => {
-    const unit = btn.dataset.unit;
-    // a unit needs ≥2 buckets to draw a line; coarser ones unlock as history builds
-    const enough = unitBucketCount(dates, unit) >= 2;
-    btn.disabled = !enough;
-    if(!enough) btn.title = 'Needs more history — unlocks as daily snapshots build up';
-    btn.classList.toggle('on', unit === CURRENT_UNIT);
-    btn.addEventListener('click', () => {
-      ctl.querySelectorAll('.range-btn').forEach(b => b.classList.toggle('on', b === btn));
-      setTimelineUnit(unit);
-    });
-  });
-  const reset = document.getElementById('range-reset');
-  if(reset) reset.addEventListener('click', () => TIME_CHARTS.forEach(t => t.chart.resetZoom && t.chart.resetZoom()));
+  if(drew) show('sec-growth');
 }
 
 // ---------- insight helpers ----------
@@ -966,7 +817,7 @@ function renderPace(platforms, snaps, d){
     break;
   }
   document.getElementById('milestone').innerHTML = ms;
-  show('sec-pace');
+  show('sec-growth');
 }
 
 // ---------- engagement ----------
@@ -1039,7 +890,7 @@ function renderEngagement(d){
     `<div><span class="er-badge ${b.c}">${b.t}</span>` +
     `<div class="say">Of everyone who <b>sees</b> SOMBA content, about <b>${Math.round(overall)}%</b> like, comment, share, or save it — measured against <b>reach</b>, not follower count.</div></div>`;
 
-  // ---- interaction composition ----
+  // ---- interaction composition (one thin bar) + quality table ----
   const comp = [
     {k:'Likes', v:tL, col:'#7a5aa6'},
     {k:'Comments', v:tC, col:'#c4a5e0'},
@@ -1052,7 +903,22 @@ function renderEngagement(d){
   const hi = Math.round((tS+tV)/ct*100);
   document.getElementById('er-composition').innerHTML =
     `<div class="er-cbar">${barHtml}</div><div class="er-clegend">${legHtml}</div>` +
-    `<div class="er-hint"><b>${hi}% saves + shares</b> — the high-intent signals the 2026 algorithms reward most.</div>`;
+    `<div class="er-hint"><b>${hi}% saves + shares</b> — the high-intent signals algorithms reward most.</div>`;
+
+  const cell = (num) => {
+    const v = num == null ? null : num;
+    return v ? v.toFixed(1) + '%' : '—';
+  };
+  document.getElementById('er-quality').innerHTML = `<table class="qtable">
+    <tr><th>Platform</th><th>Save</th><th>Share</th><th>Comment</th><th>Reach/post</th></tr>
+    ${rows.map(r => `<tr>
+      <td><span class="picon" style="color:${(cfg[r.id] && cfg[r.id].color) || '#5d4380'}">${ICONS[r.id]||''}</span>${ER_META[r.id].name}</td>
+      <td>${cell(100*(r.e.saves||0)/r.e.reach)}</td>
+      <td>${cell(100*(r.e.shares||0)/r.e.reach)}</td>
+      <td>${cell(100*(r.e.comments||0)/r.e.reach)}</td>
+      <td>${r.e.posts ? FMT(Math.round(r.e.reach/r.e.posts)) : '—'}</td>
+    </tr>`).join('')}
+  </table><div class="chart-cap">Rates are the share of everyone reached who did each thing.</div>`;
 
   // ---- per-platform comparison chart ----
   // Gold ticks = published benchmarks, drawn ONLY where the benchmark is measured the
@@ -1091,30 +957,6 @@ function renderEngagement(d){
       'Gold tick = a published benchmark measured the same way as the bar. Platforms without a tick ' +
       'have a benchmark on a different basis (see the cards below) or none — details under Benchmark sources.';
   }
-
-  // ---- engagement quality: four rate angles, one small bar chart each ----
-  const qLabels = rows.map(r => ER_META[r.id].name);
-  const qColors = rows.map(r => (cfg[r.id] && cfg[r.id].color) || '#5d4380');
-  const qualBar = (canvasId, data, opt) => {
-    const el = document.getElementById(canvasId);
-    if(!el || !window.Chart) return;
-    new Chart(el, {
-      type:'bar',
-      data:{labels:qLabels, datasets:[{data, backgroundColor:qColors,
-        borderRadius:6, barPercentage:.62, categoryPercentage:.72}]},
-      options:{responsive:true, maintainAspectRatio:false,
-        plugins:{legend:{display:false},
-          tooltip:{callbacks:{label: c => '  ' + opt.fmt(c.parsed.y)}}},
-        scales:{x:{grid:{display:false}},
-          y:{beginAtZero:true, grid:{color:'#efe9f6'}, ticks:{callback: opt.tick}}}}
-    });
-  };
-  const rateOf = key => rows.map(r => +(((r.e[key]||0) / r.e.reach) * 100).toFixed(1));
-  qualBar('er-q-save',    rateOf('saves'),    {tick:v=>v+'%', fmt:v=>v+'% of those reached save it'});
-  qualBar('er-q-share',   rateOf('shares'),   {tick:v=>v+'%', fmt:v=>v+'% of those reached share it'});
-  qualBar('er-q-comment', rateOf('comments'), {tick:v=>v+'%', fmt:v=>v+'% of those reached comment'});
-  qualBar('er-q-reach',   rows.map(r => r.e.posts ? Math.round(r.e.reach / r.e.posts) : 0),
-                          {tick:v=>FMT(v), fmt:v=>FULL(v)+' reached per post'});
 
   // ---- per-platform reads ----
   document.getElementById('er-reads').innerHTML = rows.map(r => {
@@ -1198,15 +1040,7 @@ function vidRows(vids){
 function renderVideos(d){
   const rv = d.recent_videos;
   if(!rv || !rv.videos || !rv.videos.length) return;
-  const dates = rv.videos.map(v => v.published).filter(Boolean).sort();
-  if(dates.length){
-    const from = dates[0], to = dates[dates.length-1];
-    const range = from === to ? prettyDate(to)
-      : (from.slice(0,4) === to.slice(0,4) ? shortDate(from) : prettyDate(from)) + ' – ' + prettyDate(to);
-    document.getElementById('vidnote').textContent =
-      `The ${rv.videos.length} most recent uploads, published ${range} — ranked by views. Hashtag titles are Shorts.`;
-  }
-  const vids = rv.videos.slice().sort((a,b) => (b.views ?? -1) - (a.views ?? -1)).slice(0,8);
+  const vids = rv.videos.slice().sort((a,b) => (b.views ?? -1) - (a.views ?? -1)).slice(0,5);
   document.getElementById('vidlist').innerHTML = vidRows(vids);
   show('sec-videos');
 }
@@ -1215,13 +1049,9 @@ function renderVideos(d){
 function renderTopVideos(d){
   const tv = d.top_videos;
   if(!tv || !tv.videos || !tv.videos.length) return;
-  if(tv.total_scanned){
-    document.getElementById('topvidnote').textContent =
-      `The most-viewed uploads in the channel's history, across all ${FULL(tv.total_scanned)} videos and Shorts ever posted.`;
-  }
-  const vids = tv.videos.slice().sort((a,b) => (b.views ?? -1) - (a.views ?? -1)).slice(0,8);
+  const vids = tv.videos.slice().sort((a,b) => (b.views ?? -1) - (a.views ?? -1)).slice(0,5);
   document.getElementById('topvidlist').innerHTML = vidRows(vids);
-  show('sec-topvideos');
+  show('sec-videos');
 }
 
 // ---------- audience mix ----------
@@ -1259,9 +1089,8 @@ function renderDemographics(d){
   if(!dm || !dm.age || !dm.age.length) return;
   const est = !!dm.estimated;
   document.getElementById('demo-note').textContent = est
-    ? 'Illustrative estimates pending analytics export' +
-      (dm.as_of ? ' · as of ' + prettyDate(dm.as_of) : '')
-    : 'Audience profile' + (dm.as_of ? ' as of ' + prettyDate(dm.as_of) : '') + '.';
+    ? 'Age, gender & location are illustrative estimates for now.'
+    : (dm.as_of ? 'Demographics as of ' + prettyDate(dm.as_of) + '.' : '');
 
   const maxPct = Math.max(...dm.age.map(a => a.pct));
   new Chart('c-age', {
@@ -1293,7 +1122,7 @@ function renderDemographics(d){
         <div class="track"><div class="fill" style="width:${(100*l.pct/maxLoc).toFixed(0)}%"></div></div>
       </div>`).join('');
   }
-  show('sec-demo');
+  show('sec-mix');
 }
 
 // ---------- the growth playbook (interactive, tracked in this browser) ----------
