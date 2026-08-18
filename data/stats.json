@@ -1103,5 +1103,92 @@
       }
     }
   },
-  "generated_at": "2026-08-18T17:46:27Z"
+  "generated_at": "2026-08-18T17:46:27Z",
+  "benchmarks": {
+    "sector": "Higher education",
+    "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube is intentionally empty (no credible published higher-ed YouTube benchmark). See ENGAGEMENT-DATA.md.",
+    "overall": {
+      "engagement_rate_reach": {
+        "value": 3.0,
+        "basis": "reach",
+        "label": "Mid-point of Hootsuite's 'good engagement rate' range (1-5%, across formulas)",
+        "source": "Hootsuite",
+        "source_url": "https://blog.hootsuite.com/calculate-engagement-rate/",
+        "data_period": "Jun 2026",
+        "retrieved": "2026-08-18"
+      }
+    },
+    "platforms": {
+      "instagram": {
+        "engagement_rate": {
+          "value": 2.92,
+          "basis": "followers",
+          "label": "Higher-ed median engagement rate per follower, per post (all D1 & D2 schools)",
+          "source": "Rival IQ Higher Ed Social Media Engagement Report",
+          "source_url": "https://www.rivaliq.com/blog/higher-ed-social-media-engagement-report/",
+          "data_period": "Jun 2023 - May 2024",
+          "retrieved": "2026-08-18"
+        },
+        "posts_per_week": {
+          "value": 4,
+          "basis": "per_week",
+          "label": "Higher-ed median Instagram posts per week",
+          "source": "Rival IQ Higher Ed Social Media Engagement Report",
+          "source_url": "https://www.rivaliq.com/blog/higher-ed-social-media-engagement-report/",
+          "data_period": "Jun 2023 - May 2024",
+          "retrieved": "2026-08-18"
+        }
+      },
+      "tiktok": {
+        "engagement_rate": {
+          "value": 4.75,
+          "basis": "views",
+          "label": "Higher-ed median engagement rate by view (all D1 & D2 schools)",
+          "source": "Rival IQ Higher Ed Social Media Engagement Report",
+          "source_url": "https://www.rivaliq.com/blog/higher-ed-social-media-engagement-report/",
+          "data_period": "Jun 2023 - May 2024",
+          "retrieved": "2026-08-18"
+        },
+        "posts_per_week": {
+          "value": 1,
+          "basis": "per_week",
+          "label": "Higher-ed median TikTok videos per week",
+          "source": "Rival IQ Higher Ed Social Media Engagement Report",
+          "source_url": "https://www.rivaliq.com/blog/higher-ed-social-media-engagement-report/",
+          "data_period": "Jun 2023 - May 2024",
+          "retrieved": "2026-08-18"
+        },
+        "follower_growth_weekly_pct": {
+          "value": 2.28,
+          "basis": "weekly_pct",
+          "label": "Education-sector average TikTok follower growth per week",
+          "source": "Hootsuite Social Media Benchmarks",
+          "source_url": "https://blog.hootsuite.com/social-media-benchmarks/",
+          "data_period": "Apr 2026",
+          "retrieved": "2026-08-18"
+        }
+      },
+      "linkedin": {
+        "engagement_rate": {
+          "value": 5.2,
+          "basis": "impressions",
+          "label": "LinkedIn average engagement rate by impressions (cross-industry)",
+          "source": "Socialinsider LinkedIn Benchmarks",
+          "source_url": "https://www.socialinsider.io/blog/linkedin-benchmarks/",
+          "data_period": "2024-25",
+          "retrieved": "2026-08-18"
+        },
+        "posts_per_week": {
+          "value": 2.5,
+          "basis": "per_week",
+          "label": "2-3 LinkedIn posts per week — the education-sector pace with highest engagement",
+          "source": "Hootsuite Social Media Benchmarks",
+          "source_url": "https://blog.hootsuite.com/social-media-benchmarks/",
+          "data_period": "Apr 2026",
+          "retrieved": "2026-08-18"
+        }
+      },
+      "youtube": {}
+    }
+  }
 }

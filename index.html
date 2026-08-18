@@ -192,6 +192,15 @@
   .er-cap{font-size:12px;color:var(--label);margin-top:6px}
   .er-foot{font-size:12.5px;color:var(--label);margin:20px 0 0;line-height:1.5}
   .er-foot b{color:var(--gold-deep)}
+  .bm-badge{display:inline-flex;align-items:center;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:700}
+  .bm-badge.above{background:var(--gold);color:var(--purple-deep)}
+  .bm-badge.at{background:#ece5f5;color:var(--purple-mid)}
+  .bm-badge.below{background:#f6d7cf;color:#7c2d1a}
+  .bench-src{font-size:12.5px;color:var(--label);margin-top:14px}
+  .bench-src summary{cursor:pointer;font-weight:700}
+  .bench-src .row{margin-top:6px;line-height:1.5}
+  .bench-src a{color:var(--purple-mid)}
+  .bench-src b{color:var(--muted)}
 
   /* ---- recent videos ---- */
   .vidrow{display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:center;
@@ -443,7 +452,7 @@
           <div>
             <div class="chart-title">Engagement rate by platform · by reach</div>
             <div class="chart-box short"><canvas id="er-bar"></canvas></div>
-            <div class="er-cap">Dashed line = a solid ~3% rate. Bars above it are outperforming.</div>
+            <div class="er-cap" id="er-bar-cap">Dashed line = a solid ~3% rate. Bars above it are outperforming.</div>
           </div>
         </div>
 
@@ -458,6 +467,10 @@
 
         <div class="er-reads" id="er-reads"></div>
         <p class="er-foot" id="er-foot"></p>
+        <details class="bench-src hidden" id="bench-src">
+          <summary>Benchmark sources</summary>
+          <div id="bench-src-list"></div>
+        </details>
       </section>
     </div>
 
@@ -656,14 +669,15 @@ function render(d){
   // --- history-dependent sections (need 2+ snapshots) ---
   if(snaps.length >= 2){
     renderHistoryCharts(platforms, snaps);
-    try{ renderTrends(platforms, snaps); }catch(e){}
+    try{ renderTrends(platforms, snaps, d); }catch(e){}
     try{ initTimeControls(snaps); }catch(e){}
-    try{ renderPace(platforms, snaps); }catch(e){}
+    try{ renderPace(platforms, snaps, d); }catch(e){}
   } else {
     document.getElementById('charts-soon').classList.remove('hidden');
   }
   // --- always-on insight sections, each independently degradable ---
   try{ renderEngagement(d); }catch(e){}
+  try{ renderBenchmarkSources(d); }catch(e){}
   try{ renderVideos(d); }catch(e){}
   try{ renderTopVideos(d); }catch(e){}
   try{ renderMix(platforms, snaps); }catch(e){}
@@ -785,7 +799,7 @@ function renderHistoryCharts(platforms, snaps){
 }
 
 // ---------- reach & output trends (needs history) — the "beyond followers" story ----------
-function renderTrends(platforms, snaps){
+function renderTrends(platforms, snaps, d){
   const grid = document.getElementById('trendgrid');
   if(!grid) return;
   const has = pts => pts.some(p => p.val != null);
@@ -821,8 +835,15 @@ function renderTrends(platforms, snaps){
     const known = [yv, tv, ig].some(v => v != null);
     return {date:s.date, val: known ? [yv, tv, ig].reduce((a,b) => a + (b||0), 0) : null};
   });
+  const paceBits = [];
+  const BP = ((d && d.benchmarks) || {}).platforms || {};
+  ['instagram','tiktok','linkedin'].forEach(id => {
+    const b = BP[id] && BP[id].posts_per_week;
+    if(b && b.value) paceBits.push(`${ER_META[id].name} ~${b.value}/wk`);
+  });
   add('t-output', 'Content published',
-      'Every video and post across YouTube, TikTok &amp; Instagram — the publishing engine.',
+      'Every video and post across YouTube, TikTok &amp; Instagram — the publishing engine.' +
+      (paceBits.length ? ` Sector posting pace to match: ${paceBits.join(' · ')} (cited under Benchmark sources).` : ''),
       output, '#5d4380', {yZero:true});
 
   // TikTok likes — cumulative appreciation
@@ -902,7 +923,7 @@ function weeklyRate(snaps, pid){
 const MILESTONES = [50,100,250,500,1000,2500,5000,10000,25000,50000,100000,250000];
 
 // ---------- growth pace (needs history) ----------
-function renderPace(platforms, snaps){
+function renderPace(platforms, snaps, d){
   const rates = platforms.map(p => ({p, r: weeklyRate(snaps, p.id)})).filter(x => x.r);
   if(!rates.length) return;
   const totalRate = rates.reduce((s,x) => s + x.r.perWeek, 0);
@@ -917,6 +938,16 @@ function renderPace(platforms, snaps){
     n: fastest.p.name, k: 'Fastest-growing platform',
     c: (100*fastest.r.perWeek/fastest.r.current).toFixed(1) + '% growth per week'
   });
+  // growth vs published education-sector pace (same weekly basis)
+  const gBm = d && bench(d, 'tiktok', 'follower_growth_weekly_pct');
+  const tt = rates.find(x => x.p.id === 'tiktok' && x.r.current >= 50);
+  if(gBm && tt){
+    const wk = 100 * tt.r.perWeek / tt.r.current;
+    const v = benchVerdict(wk, gBm);
+    tiles.push({ n: (wk >= 0 ? '+' : '') + wk.toFixed(1) + '%/wk',
+      k: 'TikTok growth vs. education sector',
+      c: `sector pace ~+${gBm.value}%/wk — ${v.t.toLowerCase()} · cited under Benchmark sources` });
+  }
   document.getElementById('pace-tiles').innerHTML = tiles.map(t =>
     `<div class="stile"><div class="n">${t.n}</div><div class="k">${t.k}</div><div class="c">${t.c}</div></div>`).join('');
 
@@ -955,6 +986,23 @@ const ER_NOTE = {
   linkedin:'Wide-open ground for a business school — small base, real intent. Post consistently to own it.'
 };
 
+// ---------- published benchmarks (data/stats.json "benchmarks") ----------
+// A benchmark is only ever compared to a SOMBA rate measured on the SAME basis.
+// "reach-family" bases match our per-reach ER directly (TikTok's reach IS views,
+// LinkedIn's IS impressions); "followers" matches a per-follower-per-post rate.
+const REACH_BASES = new Set(['reach','views','impressions']);
+const BASIS_LABEL = {reach:'by reach', views:'by views', impressions:'by impressions',
+                     followers:'per follower, per post'};
+const bench = (d, pid, key) => (((d.benchmarks||{}).platforms||{})[pid]||{})[key] || null;
+const benchOverall = (d, key) => (((d.benchmarks||{}).overall||{})[key]) || null;
+// ±20% band around the benchmark → above / on par / below
+function benchVerdict(rate, bm){
+  if(rate == null || !bm || !bm.value) return null;
+  const cls = rate >= bm.value*1.2 ? 'above' : rate >= bm.value*0.8 ? 'at' : 'below';
+  return {cls, t: cls==='above' ? 'Above benchmark' : cls==='at' ? 'On par' : 'Below benchmark'};
+}
+const ER_PERIOD_DAYS = 30;   // the engagement block covers ~30 days (ENGAGEMENT-DATA.md)
+
 function renderEngagement(d){
   const E = d.engagement;
   if(!E || !E.platforms) return;
@@ -969,15 +1017,22 @@ function renderEngagement(d){
     const likes=e.likes||0, comments=e.comments||0, shares=e.shares||0, saves=e.saves||0;
     const inter = likes + comments + shares + saves;
     if(inter === 0) return;
-    rows.push({id, e, inter, er: inter / e.reach * 100});
+    const er = inter / e.reach * 100;
+    // per-follower-per-post rate, only when the follower base is big enough to mean something
+    const followers = ((latestAndPrev(d.snapshots||[], id).latest)||{}).val;
+    const erFollower = (e.posts && followers >= 50) ? (inter/e.posts)/followers*100 : null;
+    const bm = bench(d, id, 'engagement_rate');
+    const matched = bm ? (REACH_BASES.has(bm.basis) ? er : bm.basis==='followers' ? erFollower : null) : null;
+    rows.push({id, e, inter, er, erFollower, bm, matched});
     tL+=likes; tC+=comments; tS+=shares; tV+=saves; tReach+=e.reach; tInt+=inter;
   });
   if(!rows.length || !tReach) return;
   const overall = tInt / tReach * 100;
 
   // ---- headline True ER ----
-  const b = overall >= ER_TYPICAL*1.6 ? {c:'above', t:'Above typical'}
-          : overall >= ER_TYPICAL*0.7 ? {c:'at', t:'On par'}
+  const heroBench = (benchOverall(d,'engagement_rate_reach')||{}).value || ER_TYPICAL;
+  const b = overall >= heroBench*1.6 ? {c:'above', t:'Above typical'}
+          : overall >= heroBench*0.7 ? {c:'at', t:'On par'}
           : {c:'below', t:'Below typical'};
   document.getElementById('er-hero').innerHTML =
     `<div><div class="lab">True engagement rate · by reach</div><div class="big">${overall.toFixed(1)}%</div></div>` +
@@ -1000,6 +1055,10 @@ function renderEngagement(d){
     `<div class="er-hint"><b>${hi}% saves + shares</b> — the high-intent signals the 2026 algorithms reward most.</div>`;
 
   // ---- per-platform comparison chart ----
+  // Gold ticks = published benchmarks, drawn ONLY where the benchmark is measured the
+  // same way as the bar (reach-family). Per-follower benchmarks live on the cards below.
+  const benchTicks = rows.map(r => (r.bm && REACH_BASES.has(r.bm.basis)) ? r.bm.value : null);
+  const hasTicks = benchTicks.some(v => v != null);
   const bc = document.getElementById('er-bar');
   if(bc && window.Chart){
     new Chart(bc, {
@@ -1008,14 +1067,29 @@ function renderEngagement(d){
           {type:'bar', data: rows.map(r => +r.er.toFixed(1)),
             backgroundColor: rows.map(r => (cfg[r.id] && cfg[r.id].color) || '#5d4380'),
             borderRadius:6, barPercentage:.62, categoryPercentage:.72, order:2},
-          {type:'line', data: rows.map(() => ER_TYPICAL), borderColor:'#a87a08', borderDash:[5,4],
-            borderWidth:1.5, pointRadius:0, order:1}
+          hasTicks
+            ? {type:'line', showLine:false, data: benchTicks, pointStyle:'line', pointRadius:16,
+               pointBorderWidth:2.5, pointBorderColor:'#a87a08', pointHoverRadius:16,
+               pointHoverBorderWidth:2.5, pointHoverBorderColor:'#a87a08', order:1}
+            : {type:'line', data: rows.map(() => ER_TYPICAL), borderColor:'#a87a08', borderDash:[5,4],
+               borderWidth:1.5, pointRadius:0, order:1}
         ]},
       options:{ responsive:true, maintainAspectRatio:false,
         plugins:{legend:{display:false},
-          tooltip:{callbacks:{label: c => c.datasetIndex === 1 ? 'Typical ~'+ER_TYPICAL+'%' : c.parsed.y + '% of those reached engage'}}},
+          tooltip:{callbacks:{label: c => {
+            if(c.datasetIndex === 1){
+              const bm = hasTicks && rows[c.dataIndex] ? rows[c.dataIndex].bm : null;
+              return bm ? `Benchmark ~${bm.value}% (${BASIS_LABEL[bm.basis]||bm.basis})`
+                        : 'Typical ~'+ER_TYPICAL+'%';
+            }
+            return c.parsed.y + '% of those reached engage';
+          }}}},
         scales:{x:{grid:{display:false}}, y:{beginAtZero:true, grid:{color:'#efe9f6'}, ticks:{callback:v => v+'%'}}}}
     });
+    const capEl = document.getElementById('er-bar-cap');
+    if(capEl && hasTicks) capEl.textContent =
+      'Gold tick = a published benchmark measured the same way as the bar. Platforms without a tick ' +
+      'have a benchmark on a different basis (see the cards below) or none — details under Benchmark sources.';
   }
 
   // ---- engagement quality: four rate angles, one small bar chart each ----
@@ -1045,17 +1119,66 @@ function renderEngagement(d){
   // ---- per-platform reads ----
   document.getElementById('er-reads').innerHTML = rows.map(r => {
     const m = ER_META[r.id], col = (cfg[r.id] && cfg[r.id].color) || 'var(--purple-mid)';
+    const bits = [];
+    if(r.bm && r.matched != null){
+      const v = benchVerdict(r.matched, r.bm);
+      bits.push((r.bm.basis === 'followers'
+        ? `Per-follower rate <b>${r.erFollower.toFixed(1)}%</b> vs ${r.bm.value}% benchmark (${BASIS_LABEL.followers})`
+        : `<b>${r.er.toFixed(1)}%</b> vs ${r.bm.value}% benchmark (${BASIS_LABEL[r.bm.basis]||r.bm.basis})`)
+        + ` <span class="bm-badge ${v.cls}">${v.t}</span>`);
+    }
+    const pwBm = bench(d, r.id, 'posts_per_week');
+    if(pwBm && r.e.posts){
+      const pw = r.e.posts / (ER_PERIOD_DAYS/7);
+      const v = benchVerdict(pw, pwBm);
+      bits.push(`Pace: <b>${pw.toFixed(1)} posts/wk</b> vs ~${pwBm.value}/wk benchmark <span class="bm-badge ${v.cls}">${v.t}</span>`);
+    }
     return `<div class="er-read"><div class="ph"><span class="picon" style="color:${col}">${ICONS[r.id]||''}</span>${m.name}<span class="rt">${r.er.toFixed(1)}%</span></div>` +
-      `<div class="rc"><b>${FULL(Math.round(r.inter))}</b> interactions from <b>${FMT(r.e.reach)}</b> ${m.word} · ${ER_NOTE[r.id]||''}</div></div>`;
+      `<div class="rc"><b>${FULL(Math.round(r.inter))}</b> interactions from <b>${FMT(r.e.reach)}</b> ${m.word} · ${ER_NOTE[r.id]||''}</div>` +
+      (bits.length ? `<div class="rc">${bits.join('<br>')}</div>` : '') + `</div>`;
   }).join('');
 
   // ---- methodology footnote ----
+  const hasBenchBlock = !!(d.benchmarks && d.benchmarks.platforms);
   document.getElementById('er-foot').innerHTML =
+    (E.is_sample ? '<b>Sample engagement data</b> — replace with real numbers (see ENGAGEMENT-DATA.md). ' : '') +
     `Engagement rate = (likes + comments + shares + saves) ÷ ${(E.period||'recent').toLowerCase()} reach, per platform. ` +
-    `Benchmarks reflect typical small-account rates (TikTok ~4–5%, Instagram ~2–3%, LinkedIn ~4%). ` +
+    (hasBenchBlock
+      ? 'Benchmarks are published sector medians and averages — every number is cited under Benchmark sources below. Small accounts typically run hotter per-follower rates than sector medians, so read the direction, not the decimals. '
+      : 'Benchmarks reflect typical small-account rates (TikTok ~4–5%, Instagram ~2–3%, LinkedIn ~4%). ') +
     (E.updated ? ('Updated ' + E.updated + '.') : '');
 
   show('sec-engage');
+}
+
+// ---------- benchmark sources (cited under the engagement section) ----------
+function renderBenchmarkSources(d){
+  const B = d.benchmarks;
+  const list = document.getElementById('bench-src-list');
+  if(!B || !list) return;
+  const KEY_LABEL = {engagement_rate:'engagement rate', engagement_rate_reach:'engagement rate',
+                     posts_per_week:'posting pace', follower_growth_weekly_pct:'follower growth'};
+  const rowsH = [];
+  const entryRow = (scope, key, bm) => {
+    if(!bm || bm.value == null) return;
+    const basis = BASIS_LABEL[bm.basis] ? ` (${BASIS_LABEL[bm.basis]})` : '';
+    const unit = bm.basis === 'per_week' ? '/wk' : bm.basis === 'weekly_pct' ? '%/wk' : '%';
+    const src = bm.source_url && String(bm.source_url).startsWith('https://')
+      ? `<a href="${escapeHtml(bm.source_url)}" target="_blank" rel="noopener">${escapeHtml(bm.source||bm.source_url)}</a>`
+      : escapeHtml(bm.source||'');
+    rowsH.push(`<div class="row"><b>${escapeHtml(scope)}</b> · ${escapeHtml(KEY_LABEL[key]||key)}${basis}: ` +
+      `${bm.value}${unit}${bm.label ? ' — ' + escapeHtml(bm.label) : ''} — ${src}` +
+      (bm.data_period ? ` · data ${escapeHtml(bm.data_period)}` : '') +
+      (bm.retrieved ? ` · retrieved ${escapeHtml(bm.retrieved)}` : '') + `</div>`);
+  };
+  Object.entries(B.overall||{}).forEach(([k,bm]) => entryRow('Overall', k, bm));
+  Object.entries(B.platforms||{}).forEach(([pid,entries]) => {
+    const name = (ER_META[pid]||{}).name || pid;
+    Object.entries(entries||{}).forEach(([k,bm]) => entryRow(name, k, bm));
+  });
+  if(!rowsH.length) return;
+  list.innerHTML = rowsH.join('');
+  document.getElementById('bench-src').classList.remove('hidden');
 }
 
 // ---------- recent content ----------
@@ -1197,10 +1320,8 @@ const PLAYBOOK = [
     {t:'Every ambassador adds SOMBA to their profile', c:'And follows the page — that alone reaches hundreds of connections.', f:'once'},
     {t:'One professional post a week', c:'Event recaps, internship wins, alumni spotlights — consistency beats volume here.', f:'weekly'},
     {t:'Use the page’s free invite credits', c:'LinkedIn grants monthly invites — aim them at SOM students and alumni.', f:'monthly'},
-    {t:'Tag the SOM and CLU pages', c:'Their followers see SOMBA in the conversation.', f:'every post'},
-    {t:'Scale outreach with Gatherdly', c:'Have it find SOM students & alumni and draft personalized connection invites — you approve every send.', f:'weekly'}
-  ], tool:{name:'Gatherdly', url:'https://gatherdly.app',
-    blurb:'An AI teammate that finds the right SOM students and alumni, drafts personal invites to connect and follow the SOMBA page, and queues them for your approval — outreach at scale without losing the personal touch.'}},
+    {t:'Tag the SOM and CLU pages', c:'Their followers see SOMBA in the conversation.', f:'every post'}
+  ]},
   {id:'facebook', name:'Facebook', role:'Optional — decide deliberately', stat:'not launched', actions:[
     {t:'Launch only if parents & alumni matter', c:'Students aren’t there. A dead page looks worse than no page.', f:'decide'},
     {t:'Auto-crosspost from Instagram', c:'If launched, Meta Business Suite mirrors every IG post for free — zero extra effort.', f:'setup once'}

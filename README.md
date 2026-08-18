@@ -57,7 +57,12 @@ Two easy ways, both optional:
 - **Growth pace** — new followers per week, fastest-growing platform, and a
   milestone projection ("Instagram passes 1,000 followers by ~…")
 - **Engagement** — likes per follower, average views per video, total content
-  published
+  published. Key rates are compared against **published industry benchmarks**
+  (third-party averages for the higher-education sector, e.g. from Rival IQ and
+  Hootsuite) so you can tell whether a number is good, not just what it is.
+  Every benchmark is cited under "Benchmark sources" on the page; to update the
+  values (e.g. from a Hootsuite/Sprout export), see the Benchmarks section in
+  `ENGAGEMENT-DATA.md`.
 - **Recent content** — the latest YouTube uploads ranked by views (pulled from
   YouTube's official public feed)
 - **Audience mix** — a donut chart of which platform holds how much of the
