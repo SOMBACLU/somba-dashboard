@@ -784,10 +784,38 @@
           "source": "scrape"
         }
       }
+    },
+    {
+      "date": "2026-08-19",
+      "platforms": {
+        "instagram": {
+          "followers": 750,
+          "following": 285,
+          "posts": 522,
+          "source": "carried",
+          "carried_from": "2026-08-17"
+        },
+        "tiktok": {
+          "followers": 156,
+          "likes": 14200,
+          "videos": 451,
+          "source": "scrape"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 422670,
+          "source": "scrape"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-18",
+    "fetched": "2026-08-19",
     "source": "youtube-rss",
     "videos": [
       {
@@ -961,7 +989,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-08-18",
+    "fetched": "2026-08-19",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
@@ -1040,10 +1068,10 @@
       {
         "id": "2XzUKmCBwTY",
         "title": "POV: You're trying to hang on during midterms #college #studentlife #midterms #ytshorts #explore",
-        "views": 7376,
+        "views": 7300,
         "kind": "short",
-        "likes": 28,
-        "published": "2025-10-27"
+        "likes": null,
+        "published": null
       },
       {
         "id": "zArZjKlR8lI",
@@ -1103,7 +1131,7 @@
       }
     }
   },
-  "generated_at": "2026-08-18T17:46:27Z",
+  "generated_at": "2026-08-19T01:55:13Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube is intentionally empty (no credible published higher-ed YouTube benchmark). See ENGAGEMENT-DATA.md.",
