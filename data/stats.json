@@ -812,10 +812,38 @@
           "source": "scrape"
         }
       }
+    },
+    {
+      "date": "2026-08-20",
+      "platforms": {
+        "instagram": {
+          "followers": 750,
+          "following": 285,
+          "posts": 522,
+          "source": "carried",
+          "carried_from": "2026-08-17"
+        },
+        "tiktok": {
+          "followers": 156,
+          "likes": 14200,
+          "videos": 451,
+          "source": "scrape"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 422696,
+          "source": "scrape"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-19",
+    "fetched": "2026-08-20",
     "source": "youtube-rss",
     "videos": [
       {
@@ -989,7 +1017,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-08-19",
+    "fetched": "2026-08-20",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
@@ -1131,7 +1159,7 @@
       }
     }
   },
-  "generated_at": "2026-08-19T17:43:40Z",
+  "generated_at": "2026-08-20T01:54:18Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube is intentionally empty (no credible published higher-ed YouTube benchmark). See ENGAGEMENT-DATA.md.",
