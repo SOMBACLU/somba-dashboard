@@ -860,7 +860,7 @@
         "youtube": {
           "followers": 245,
           "videos": 222,
-          "views": 422739,
+          "views": 422761,
           "source": "scrape"
         },
         "linkedin": {
@@ -1187,7 +1187,7 @@
       }
     }
   },
-  "generated_at": "2026-08-21T05:50:06Z",
+  "generated_at": "2026-08-21T16:53:53Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube is intentionally empty (no credible published higher-ed YouTube benchmark). See ENGAGEMENT-DATA.md.",
