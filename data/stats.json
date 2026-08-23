@@ -896,10 +896,38 @@
           "source": "scrape"
         }
       }
+    },
+    {
+      "date": "2026-08-23",
+      "platforms": {
+        "instagram": {
+          "followers": 749,
+          "following": 285,
+          "posts": 523,
+          "source": "carried",
+          "carried_from": "2026-08-22"
+        },
+        "tiktok": {
+          "followers": 156,
+          "likes": 14300,
+          "videos": 452,
+          "source": "scrape"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 422791,
+          "source": "scrape"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-22",
+    "fetched": "2026-08-23",
     "source": "youtube-rss",
     "videos": [
       {
@@ -913,7 +941,7 @@
         "id": "mtbnjLbYoKI",
         "title": "POV: Class of 2027 #classof2027 #senior #junior #realitycheck #collegehumor #studentlife",
         "published": "2026-05-01",
-        "views": 1948,
+        "views": 1953,
         "likes": 9
       },
       {
@@ -1073,7 +1101,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-08-22",
+    "fetched": "2026-08-23",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
@@ -1215,7 +1243,7 @@
       }
     }
   },
-  "generated_at": "2026-08-22T15:38:39Z",
+  "generated_at": "2026-08-23T02:02:07Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube is intentionally empty (no credible published higher-ed YouTube benchmark). See ENGAGEMENT-DATA.md.",
