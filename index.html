@@ -222,7 +222,7 @@
   .prow .v{text-align:right;white-space:nowrap}
   .prow .v b{font-family:"Newsreader",serif;font-size:19px;font-weight:600}
   .prow .v small{display:block;font-size:11.5px;color:var(--muted)}
-  .prow.hero{background:var(--gold-soft);border-radius:10px;padding:10px 12px;border-top:0}
+  .prow.best{background:var(--gold-soft);border-radius:10px;padding:10px 12px;border-top:0;color:var(--ink)}
   .er-foot{font-size:12.5px;color:var(--label);margin:20px 0 0;line-height:1.5}
   .er-foot b{color:var(--gold-deep)}
   .bench-src{font-size:12.5px;color:var(--label);margin-top:14px}
@@ -1153,7 +1153,8 @@ function renderTiming(d){
      <span style="margin-left:auto">Gold outline = the single busiest slot</span></div>`;
 
   document.getElementById('timenote').innerHTML =
-    `How many of the ${FULL(Math.max(...all))} Instagram followers are awake and on the app, by day and time. ` +
+    `How many Instagram followers are on the app, by day and time — it peaks at ` +
+    `${FULL(best.v)} and bottoms out around ${FULL(Math.min(...all))}. ` +
     `<b>Busiest: ${best.day} around ${best.hour}.</b>`;
   document.getElementById('timefoot').innerHTML =
     `Post shortly <b>before</b> a peak, not during it — the algorithm needs a little time to circulate a
@@ -1172,7 +1173,7 @@ function renderTopPosts(d){
 
   document.getElementById('postlist').innerHTML = posts.map((p,i) => {
     const er = (p.views && p.interactions != null) ? (p.interactions / p.views * 100) : null;
-    return `<div class="prow${i === 0 ? ' hero' : ''}">
+    return `<div class="prow${i === 0 ? ' best' : ''}">
       <div class="rank">${i+1}</div>
       <div><div class="t">${escapeHtml(p.title)}</div>
         <div class="m">${p.date ? prettyDate(p.date) : ''}${p.format ? ' · ' + escapeHtml(p.format) : ''}${
