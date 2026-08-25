@@ -966,7 +966,7 @@
         "tiktok": {
           "followers": 156,
           "likes": 14300,
-          "videos": 452,
+          "videos": 453,
           "source": "scrape"
         },
         "youtube": {
@@ -1299,7 +1299,7 @@
       }
     }
   },
-  "generated_at": "2026-08-25T01:55:01Z",
+  "generated_at": "2026-08-25T04:04:14Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube is intentionally empty (no credible published higher-ed YouTube benchmark). See ENGAGEMENT-DATA.md.",
