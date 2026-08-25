@@ -47,6 +47,12 @@ CRAWLER_UAS = [
 # absent everything still works by scraping the public pages as before.
 YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY")
 
+# True when running inside GitHub Actions. Some platforms (Instagram) serve the
+# page to a laptop but block cloud runners outright, so there is nothing to be
+# gained by retrying them here — and a permanently-failing platform would jam
+# the alarm channel for every other failure.
+IN_CI = bool(os.environ.get("GITHUB_ACTIONS"))
+
 
 # ---------------------------------------------------------------- helpers
 
@@ -550,23 +556,46 @@ def main():
     today = date.today().isoformat()
     prev_snap = previous_snapshot(data, today)
 
+    # Today's entries as already saved by an earlier run this hour. A later
+    # failing run must never downgrade a number this morning actually read —
+    # doing so relabels good days as stale and inflates the "blocked" streak.
+    today_prev = {}
+    for snap_existing in data["snapshots"]:
+        if snap_existing["date"] == today:
+            today_prev = snap_existing.get("platforms") or {}
+            break
+
     print("Fetching stats for %d platforms..." % len(platforms))
     snap = {"date": today, "platforms": {}}
     failed = []
     for p in platforms:
         sys.stdout.write("  %s... " % p["name"])
         sys.stdout.flush()
+        prev_today = today_prev.get(p["id"]) or {}
+
+        if IN_CI and p.get("reads") == "local-only":
+            metrics = prev_today if prev_today.get("source") == "scrape" else carry_forward(p, data)
+            print("skipped — this platform only refreshes when run on the Mac")
+            snap["platforms"][p["id"]] = metrics
+            continue
+
         try:
             metrics = fetch_with_retries(FETCHERS[p["id"]], p)
             metrics["source"] = "scrape"
+            metrics["last_ok"] = today
             print("ok (%s followers)" % "{:,}".format(metrics["followers"]))
         except Exception as e:
-            metrics = carry_forward(p, data)
-            note = "reused last number" if metrics.get("followers") is not None else "no data yet"
-            print("could not read (%s) — %s" % (e, note))
-            failed.append(p["name"])
-            # Surfaces as a yellow annotation on the GitHub Actions run page.
-            print("::warning::%s could not be read this run (%s)" % (p["name"], e))
+            if prev_today.get("source") == "scrape":
+                # Already read successfully today — keep that, don't downgrade.
+                metrics = prev_today
+                print("could not read (%s) — keeping today's earlier reading" % e)
+            else:
+                metrics = carry_forward(p, data)
+                note = "reused last number" if metrics.get("followers") is not None else "no data yet"
+                print("could not read (%s) — %s" % (e, note))
+                failed.append(p["name"])
+                # Surfaces as a yellow annotation on the GitHub Actions run page.
+                print("::warning::%s could not be read this run (%s)" % (p["name"], e))
         snap["platforms"][p["id"]] = metrics
 
     yt = next((p for p in platforms if p["id"] == "youtube" and p.get("channel_id")), None)
@@ -626,46 +655,70 @@ def main():
         sys.exit(1)
 
 
-def carried_streak(data, platform_id):
-    """How many consecutive snapshots (newest first) reused an old number."""
-    streak = 0
+def days_since_ok(data, platform_id, today):
+    """Days since this platform last handed us a genuinely fresh number.
+
+    Counting consecutive "carried" snapshots was wrong: one good hour rewrote
+    the day's entry and reset the count, so a platform blocked for a fortnight
+    could still look fine. A last_ok date survives that.
+    """
     for snap in reversed(data["snapshots"]):
         entry = (snap.get("platforms") or {}).get(platform_id)
         if not entry:
-            break
-        if entry.get("source") != "carried":
-            break
-        streak += 1
-    return streak
+            continue
+        stamp = entry.get("last_ok")
+        if not stamp and entry.get("source") == "scrape":
+            stamp = snap["date"]  # older data predates last_ok
+        if stamp:
+            try:
+                return (date.fromisoformat(today) - date.fromisoformat(stamp)).days
+            except ValueError:
+                return None
+    return None
 
 
 def health_check():
     """`update_stats.py --check` — exits non-zero when the data has gone
-    quietly stale, so the workflow can raise an alarm a human will see."""
+    quietly stale, so the workflow can raise an alarm a human will see.
+
+    Also prints CAUSE: lines. The workflow builds the alert issue's title from
+    them, so each kind of breakage gets its own issue instead of the first one
+    open muting all the rest.
+    """
     data = load_data()
     platforms = [p for p in data["config"]["platforms"] if p.get("enabled")]
-    problems = []
+    today = date.today().isoformat()
+    problems = []   # (cause-slug, human sentence)
 
-    if data["snapshots"]:
+    if not data["snapshots"]:
+        problems.append(("no-data", "there are no snapshots at all — the data file has been emptied"))
+    else:
         newest = data["snapshots"][-1]["date"]
         age = (date.today() - date.fromisoformat(newest)).days
         if age >= 2:
-            problems.append(
-                "the newest snapshot is %d days old (%s) — updates have stopped landing"
-                % (age, newest)
-            )
+            problems.append(("updates-stopped",
+                             "the newest snapshot is %d days old (%s) — updates have stopped landing"
+                             % (age, newest)))
 
     for p in platforms:
-        streak = carried_streak(data, p["id"])
-        if streak >= 3:
-            problems.append(
-                "%s has reused an old number for %d days in a row — its reader "
-                "is probably blocked" % (p["name"], streak)
-            )
+        # A platform with no automatic reader, or one we deliberately skip in
+        # the cloud, is not "blocked" — alarming on it would never clear.
+        if p.get("reads") in ("manual", "local-only"):
+            continue
+        stale = days_since_ok(data, p["id"], today)
+        if stale is None:
+            problems.append(("%s-never-read" % p["id"],
+                             "%s has never been read successfully" % p["name"]))
+        elif stale >= 3:
+            problems.append(("%s-blocked" % p["id"],
+                             "%s has not returned a fresh number for %d days — its reader "
+                             "is probably blocked" % (p["name"], stale)))
 
     if problems:
-        for msg in problems:
+        for cause, msg in problems:
             print("::error::" + msg)
+        print("CAUSE:" + "+".join(c for c, _ in problems))
+        print("DETAIL:" + " | ".join(m for _, m in problems))
         return 1
     print("Data health: ok (%d platforms, newest snapshot %s)"
           % (len(platforms), data["snapshots"][-1]["date"] if data["snapshots"] else "none"))

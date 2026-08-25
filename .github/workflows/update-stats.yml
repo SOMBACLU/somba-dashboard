@@ -21,6 +21,9 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    # Without this a hung fetch runs to GitHub's 6-hour cap, then gets
+    # cancelled — and a cancelled job is not a "failure", so no alarm fires.
+    timeout-minutes: 15
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -57,30 +60,51 @@ jobs:
       - name: Check the data is still fresh
         id: health
         run: |
-          if python3 update_stats.py --check; then
+          if OUTPUT=$(python3 update_stats.py --check); then
+            echo "$OUTPUT"
             echo "healthy=yes" >> "$GITHUB_OUTPUT"
           else
+            echo "$OUTPUT"
             echo "healthy=no" >> "$GITHUB_OUTPUT"
+            echo "cause=$(printf '%s' "$OUTPUT" | sed -n 's/^CAUSE://p' | head -1)" >> "$GITHUB_OUTPUT"
+            {
+              echo "detail<<SOMBA_EOF"
+              printf '%s' "$OUTPUT" | sed -n 's/^DETAIL://p' | head -1 | tr '|' '\n'
+              echo "SOMBA_EOF"
+            } >> "$GITHUB_OUTPUT"
           fi
 
-      # The alarm: open one GitHub issue (which emails the owner). If the
-      # alert issue is already open, stay quiet — no hourly spam.
+      # The alarm: one GitHub issue per KIND of breakage, which emails the
+      # owner. Titling every alert the same way meant the first open issue
+      # muted every later failure — so the cause goes in the title.
       - name: Raise the alarm if anything above failed
-        if: failure() || steps.health.outputs.healthy == 'no'
+        if: always() && (failure() || cancelled() || steps.health.outputs.healthy == 'no')
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          CAUSE: ${{ steps.health.outputs.cause }}
+          DETAIL: ${{ steps.health.outputs.detail }}
+          JOB_STATUS: ${{ job.status }}
         run: |
-          TITLE="Dashboard updater needs attention"
-          OPEN_COUNT=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq 'length')
+          if [ -n "$CAUSE" ]; then
+            TITLE="Dashboard updater: $CAUSE"
+            WHAT="The hourly update ran, but the data is not healthy:
+
+          $DETAIL"
+          else
+            TITLE="Dashboard updater: run-$JOB_STATUS"
+            WHAT="The hourly update itself did not finish (job status: $JOB_STATUS)."
+          fi
+
+          OPEN_COUNT=$(gh issue list --state open --search "\"$TITLE\" in:title" --json title --jq "[.[] | select(.title == \"$TITLE\")] | length")
           if [ "$OPEN_COUNT" = "0" ]; then
-            gh issue create --title "$TITLE" --body "The hourly stats update hit a problem it could not fix by itself.
+            gh issue create --title "$TITLE" --body "$WHAT
 
           What to do: open a Claude Code chat in the somba-dashboard folder and paste this link — it can read the log and fix the reader.
 
-          Failed run: $RUN_URL
+          Run: $RUN_URL
 
-          (This issue was opened automatically. It will not be re-opened while it stays open, so close it once things are fixed.)"
+          (Opened automatically. Each kind of problem gets its own issue, so closing this one will not hide a different failure. Close it once fixed.)"
           else
-            echo "Alert issue already open — not creating another."
+            echo "An issue for '$TITLE' is already open — not creating another."
           fi

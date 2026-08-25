@@ -12,7 +12,9 @@
         "extras": [
           "posts",
           "following"
-        ]
+        ],
+        "reads": "local-only",
+        "reads_note": "Instagram serves the page to a laptop but blocks GitHub Actions runners outright, so the cloud job skips it. Refreshes when update_stats.py runs on the Mac. Replace with the Meta Graph API to make it hourly again."
       },
       {
         "id": "tiktok",
@@ -56,7 +58,8 @@
         "url": null,
         "color": "#1877F2",
         "extras": [],
-        "note": "Fill in url and set enabled to true when the Facebook page exists. Numbers will be typed in manually each week."
+        "note": "Fill in url and set enabled to true when the Facebook page exists. Numbers will be typed in manually each week.",
+        "reads": "manual"
       }
     ]
   },
@@ -960,24 +963,27 @@
           "followers": 747,
           "following": 285,
           "posts": 525,
-          "source": "carried",
-          "carried_from": "2026-08-25"
+          "source": "scrape",
+          "last_ok": "2026-08-25"
         },
         "tiktok": {
           "followers": 156,
           "likes": 14300,
           "videos": 453,
-          "source": "scrape"
+          "source": "scrape",
+          "last_ok": "2026-08-25"
         },
         "youtube": {
           "followers": 245,
           "videos": 222,
           "views": 422894,
-          "source": "scrape"
+          "source": "scrape",
+          "last_ok": "2026-08-25"
         },
         "linkedin": {
           "followers": 3,
-          "source": "scrape"
+          "source": "scrape",
+          "last_ok": "2026-08-25"
         }
       }
     }
@@ -1299,7 +1305,7 @@
       }
     }
   },
-  "generated_at": "2026-08-25T18:55:52Z",
+  "generated_at": "2026-08-25T19:31:13Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). See ENGAGEMENT-DATA.md.",
