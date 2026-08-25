@@ -59,6 +59,13 @@ measured it.
 Don't change `basis` unless the new source measures differently. Every entry is shown with
 its citation under "Benchmark sources" at the bottom of the Engagement section.
 
+**How it appears on the page.** The Engagement section draws one meter row per platform: a
+coloured bar for SOMBA and a gold line for the published benchmark. The gold line sits at the
+same spot in every row, so a bar reaching past it always means "above benchmark" — no reading
+required. Posting pace gets its own set of rows below, and the TikTok growth benchmark drives
+a mini meter on the Growth tile. Hovering a gold line shows the source; the full citations stay
+in the collapsed "Benchmark sources" list.
+
 **YouTube's benchmark is the closest citable match, not a higher-ed one** — no publisher
 states a higher-ed-specific YouTube engagement rate, so the entry uses SociaVault's
 "Education & How-to" category median (measured by views, same as ours). If a stronger

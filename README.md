@@ -60,13 +60,14 @@ Two easy ways, both optional:
   platform card (these appear once there are at least two days of data)
 - **Growth pace** — new followers per week, fastest-growing platform, and a
   milestone projection ("Instagram passes 1,000 followers by ~…")
-- **Engagement** — likes per follower, average views per video, total content
-  published. Key rates are compared against **published industry benchmarks**
-  (third-party averages for the higher-education sector, e.g. from Rival IQ and
-  Hootsuite) so you can tell whether a number is good, not just what it is.
-  Every benchmark is cited under "Benchmark sources" on the page; to update the
-  values (e.g. from a Hootsuite/Sprout export), see the Benchmarks section in
-  `ENGAGEMENT-DATA.md`.
+- **Engagement** — how much the content actually moves people, not just how
+  many follow. Each platform gets a **meter row**: a coloured bar for SOMBA and a
+  gold line for the **published industry benchmark** (a third-party average for the
+  higher-education sector, e.g. from Rival IQ or Hootsuite). The gold line sits at
+  the same spot in every row, so a bar past the line means "above benchmark" at a
+  glance. Posting pace gets its own rows. Every benchmark is cited under
+  "Benchmark sources" on the page; to update the values (e.g. from a
+  Hootsuite/Sprout export), see the Benchmarks section in `ENGAGEMENT-DATA.md`.
 - **Recent content** — the latest YouTube uploads ranked by views (pulled from
   YouTube's official public feed)
 - **Audience mix** — a donut chart of which platform holds how much of the
