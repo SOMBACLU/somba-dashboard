@@ -50,15 +50,23 @@ jobs:
             git push
           fi
 
-      # Fails when the data has gone quietly stale (updates not landing, or a
-      # platform reusing an old number for 3+ days) so the alarm below fires.
+      # Notices when the data has gone quietly stale (updates not landing, or
+      # a platform reusing an old number for 3+ days). Doesn't fail the run —
+      # that would email the owner every hour — it just arms the alarm below,
+      # which only ever opens one issue.
       - name: Check the data is still fresh
-        run: python3 update_stats.py --check
+        id: health
+        run: |
+          if python3 update_stats.py --check; then
+            echo "healthy=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "healthy=no" >> "$GITHUB_OUTPUT"
+          fi
 
       # The alarm: open one GitHub issue (which emails the owner). If the
       # alert issue is already open, stay quiet — no hourly spam.
       - name: Raise the alarm if anything above failed
-        if: failure()
+        if: failure() || steps.health.outputs.healthy == 'no'
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
