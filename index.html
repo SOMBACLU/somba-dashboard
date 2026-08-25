@@ -108,6 +108,9 @@
   .pill.down{background:#faefec;color:var(--red)}
   .pill.flat{background:#f0edf4;color:var(--muted)}
   .pill.stale{background:var(--gold-soft);color:var(--gold-deep)}
+  .pill.stale.old{background:#faefec;color:var(--red)}
+  .sample-banner{margin:14px 0 4px;padding:12px 16px;border-radius:10px;border:1.5px solid var(--gold-deep);
+    background:var(--gold-soft);color:var(--gold-deep);font-size:14.5px;line-height:1.5}
   .pcard .extras{font-size:14px;color:var(--muted);margin-top:8px}
 
   /* ---- sections ---- */
@@ -407,6 +410,7 @@
         <div class="kicker">Pulse</div>
         <h2 class="serif">Engagement</h2>
         <p class="note">Not how big the audience is — how much the content actually moves people.</p>
+        <div class="sample-banner hidden" id="er-sample">These are <b>sample numbers, not SOMBA's</b> — placeholders until someone enters the real figures from each platform's analytics (5&nbsp;min, see ENGAGEMENT-DATA.md). Don't make decisions from this section yet.</div>
         <div class="er-hero" id="er-hero"></div>
         <div class="grid2" style="margin-top:20px">
           <div>
@@ -600,8 +604,16 @@ function render(d){
     const entry = latestSnap.platforms[p.id] || {};
     const {latest, prev} = latestAndPrev(snaps, p.id);
     const followers = entry.followers;
-    const stale = entry.source === 'carried'
-      ? `<span class="pill stale">reused from ${shortDate(entry.carried_from)}</span>` : '';
+    // A number reused for a day or two is routine; 3+ days means the reader
+    // is blocked, so the pill turns red and counts the days out loud.
+    let stale = '';
+    if(entry.source === 'carried'){
+      const days = entry.carried_from
+        ? Math.round((new Date(latest.date) - new Date(entry.carried_from)) / 86400000) : 0;
+      stale = days >= 3
+        ? `<span class="pill stale old">stuck — no fresh number for ${days} days</span>`
+        : `<span class="pill stale">reused from ${shortDate(entry.carried_from)}</span>`;
+    }
     const extras = (p.extras||[])
       .filter(k => entry[k] != null)
       .map(k => `${FMT(entry[k])} ${EXTRA_LABELS[k]||k}`).join(' · ');
@@ -632,7 +644,7 @@ function render(d){
   try{ renderTopVideos(d); }catch(e){}
   try{ renderMix(platforms, snaps); }catch(e){}
   try{ renderDemographics(d); }catch(e){}
-  try{ initPlaybook(); }catch(e){}
+  try{ initPlaybook(d); }catch(e){}
   initMotion();
   initNav();
 }
@@ -878,6 +890,7 @@ function renderEngagement(d){
     tL+=likes; tC+=comments; tS+=shares; tV+=saves; tReach+=e.reach; tInt+=inter;
   });
   if(!rows.length || !tReach) return;
+  if(E.is_sample) document.getElementById('er-sample').classList.remove('hidden');
   const overall = tInt / tReach * 100;
 
   // ---- headline True ER ----
@@ -1040,7 +1053,8 @@ function vidRows(vids){
 function renderVideos(d){
   const rv = d.recent_videos;
   if(!rv || !rv.videos || !rv.videos.length) return;
-  const vids = rv.videos.slice().sort((a,b) => (b.views ?? -1) - (a.views ?? -1)).slice(0,5);
+  // Newest first — this list is labeled "Latest uploads", so date is the sort.
+  const vids = rv.videos.slice().sort((a,b) => String(b.published ?? '').localeCompare(String(a.published ?? ''))).slice(0,5);
   document.getElementById('vidlist').innerHTML = vidRows(vids);
   show('sec-videos');
 }
@@ -1164,7 +1178,36 @@ let pbActive = PLAYBOOK[0].id;
 function pbSave(){ try{ localStorage.setItem(PB_KEY, JSON.stringify(pbState)); }catch(e){} }
 function pbCount(pf){ return pf.actions.reduce((s,_,i) => s + (pbState[pf.id+':'+i] ? 1 : 0), 0); }
 
-function initPlaybook(){
+// The tab-header stats are recomputed from the live data on every load, so
+// they can never drift out of date the way hardcoded numbers would. The
+// strings in PLAYBOOK above are only fallbacks for when a number is missing.
+function pbLiveStats(d){
+  const latest = (d.snapshots && d.snapshots.length) ? d.snapshots[d.snapshots.length-1].platforms : {};
+  const get = id => latest[id] || {};
+  const followers = id => get(id).followers;
+  const enabledIds = d.config.platforms.filter(p => p.enabled).map(p => p.id);
+  const total = enabledIds.reduce((s,id) => s + (followers(id) || 0), 0);
+  const set = (id, stat) => { const pf = PLAYBOOK.find(x => x.id === id); if(pf && stat) pf.stat = stat; };
+
+  if(total && followers('instagram') != null)
+    set('instagram', `${Math.round(100*followers('instagram')/total)}% of total audience`);
+  const tk = get('tiktok');
+  if(tk.likes && tk.followers)
+    set('tiktok', `${Math.round(tk.likes/tk.followers)}× likes per follower`);
+  if(tk.videos){
+    const pf = PLAYBOOK.find(x => x.id === 'tiktok');
+    const trend = pf && pf.actions.find(a => a.c.includes('The volume is there'));
+    if(trend) trend.c = `The volume is there (${FULL(tk.videos)} videos) — timing is the lever.`;
+  }
+  const yt = get('youtube');
+  if(yt.views && yt.followers)
+    set('youtube', `~${FULL(Math.round(yt.views/yt.followers/100)*100)} views per subscriber`);
+  if(followers('linkedin') != null)
+    set('linkedin', `${FULL(followers('linkedin'))} follower${followers('linkedin') === 1 ? '' : 's'} ↔ a whole b-school network`);
+}
+
+function initPlaybook(d){
+  try{ if(d) pbLiveStats(d); }catch(e){}
   document.getElementById('flowrow').innerHTML =
     `<span class="fchip src">${CAMERA_ICON} Film once</span>
      <span class="farrow">${ARROW_ICON}</span>

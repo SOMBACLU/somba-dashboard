@@ -7,9 +7,11 @@ on:
     - cron: "17 * * * *"   # hourly at :17 past (top-of-hour is GitHub's busiest slot, so :00 runs get skipped more often)
   workflow_dispatch:
 
-# Let the built-in token commit the updated data back to the repo.
+# Let the built-in token commit the updated data back to the repo,
+# and open an alert issue when something breaks.
 permissions:
   contents: write
+  issues: write
 
 # Never let two runs overlap (e.g. a slow run colliding with the next hour's).
 concurrency:
@@ -46,4 +48,31 @@ jobs:
             git commit -m "Auto stats update $(date -u +'%F %H:%M UTC')"
             git pull --rebase
             git push
+          fi
+
+      # Fails when the data has gone quietly stale (updates not landing, or a
+      # platform reusing an old number for 3+ days) so the alarm below fires.
+      - name: Check the data is still fresh
+        run: python3 update_stats.py --check
+
+      # The alarm: open one GitHub issue (which emails the owner). If the
+      # alert issue is already open, stay quiet — no hourly spam.
+      - name: Raise the alarm if anything above failed
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TITLE="Dashboard updater needs attention"
+          OPEN_COUNT=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq 'length')
+          if [ "$OPEN_COUNT" = "0" ]; then
+            gh issue create --title "$TITLE" --body "The hourly stats update hit a problem it could not fix by itself.
+
+          What to do: open a Claude Code chat in the somba-dashboard folder and paste this link — it can read the log and fix the reader.
+
+          Failed run: $RUN_URL
+
+          (This issue was opened automatically. It will not be re-opened while it stays open, so close it once things are fixed.)"
+          else
+            echo "Alert issue already open — not creating another."
           fi

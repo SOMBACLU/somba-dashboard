@@ -20,8 +20,10 @@ run. You never have to touch it.
 4. Render sees the change and republishes the live site automatically.
 
 If a platform can't be read one hour (they occasionally block automated
-visitors — LinkedIn most often), that platform simply keeps its last known
-number and the card shows a small "reused" note. The dashboard never breaks.
+visitors — Instagram most often), that platform simply keeps its last known
+number and the card shows a small "reused" note. If that goes on for 3+ days
+the note turns red and a GitHub issue is opened automatically so someone
+actually finds out.
 
 ---
 
@@ -53,7 +55,9 @@ Two easy ways, both optional:
 
 - **Total audience** — everyone following SOMBA anywhere, added together
 - **Platform cards** — followers per platform with change since the previous day
-- **Follower growth charts** — one per platform (appear after two weeks of data)
+- **Growth trend charts** — YouTube views, average views per video, content
+  published, and TikTok likes over time, plus a mini growth line on every
+  platform card (these appear once there are at least two days of data)
 - **Growth pace** — new followers per week, fastest-growing platform, and a
   milestone projection ("Instagram passes 1,000 followers by ~…")
 - **Engagement** — likes per follower, average views per video, total content

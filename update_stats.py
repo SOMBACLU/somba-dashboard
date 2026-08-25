@@ -30,6 +30,17 @@ CHROME_UA = (
 )
 GOOGLEBOT_UA = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 
+# Instagram serves the full public page to known search-engine crawlers but
+# often walls off everyone else — and which crawlers it trusts varies by the
+# requesting network. Trying several in turn is what keeps GitHub's cloud
+# runners (the flakiest network we run from) able to read the page.
+CRAWLER_UAS = [
+    GOOGLEBOT_UA,
+    "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; "
+    "bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/126.0.0.0 Safari/537.36",
+    "DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)",
+]
+
 # Optional official-API credentials, read from the environment so nothing
 # secret ever lives in this file or the repo. When YOUTUBE_API_KEY is set the
 # script uses YouTube's official Data API for rock-solid numbers; when it is
@@ -82,18 +93,25 @@ def parse_abbrev(s):
 # or raises an exception (which triggers a silent carry-forward).
 
 def fetch_instagram(p):
-    html = http_get(p["url"], GOOGLEBOT_UA)
-    m = re.search(
-        r'([\d.,]+[KMB]?)\s+Followers,\s+([\d.,]+[KMB]?)\s+Following,\s+([\d.,]+[KMB]?)\s+Posts',
-        html,
-    )
-    if not m:
-        raise RuntimeError("follower count not found in the Instagram page")
-    return {
-        "followers": parse_abbrev(m.group(1)),
-        "following": parse_abbrev(m.group(2)),
-        "posts": parse_abbrev(m.group(3)),
-    }
+    last_err = None
+    for ua in CRAWLER_UAS:
+        try:
+            html = http_get(p["url"], ua)
+        except Exception as e:
+            last_err = e
+            continue
+        m = re.search(
+            r'([\d.,]+[KMB]?)\s+Followers,\s+([\d.,]+[KMB]?)\s+Following,\s+([\d.,]+[KMB]?)\s+Posts',
+            html,
+        )
+        if m:
+            return {
+                "followers": parse_abbrev(m.group(1)),
+                "following": parse_abbrev(m.group(2)),
+                "posts": parse_abbrev(m.group(3)),
+            }
+        last_err = RuntimeError("follower count not found in the Instagram page")
+    raise last_err
 
 
 def fetch_tiktok(p):
@@ -534,6 +552,7 @@ def main():
 
     print("Fetching stats for %d platforms..." % len(platforms))
     snap = {"date": today, "platforms": {}}
+    failed = []
     for p in platforms:
         sys.stdout.write("  %s... " % p["name"])
         sys.stdout.flush()
@@ -545,6 +564,9 @@ def main():
             metrics = carry_forward(p, data)
             note = "reused last number" if metrics.get("followers") is not None else "no data yet"
             print("could not read (%s) — %s" % (e, note))
+            failed.append(p["name"])
+            # Surfaces as a yellow annotation on the GitHub Actions run page.
+            print("::warning::%s could not be read this run (%s)" % (p["name"], e))
         snap["platforms"][p["id"]] = metrics
 
     yt = next((p for p in platforms if p["id"] == "youtube" and p.get("channel_id")), None)
@@ -596,6 +618,61 @@ def main():
     save_data(data)
     print_summary(snap, prev_snap, platforms)
 
+    if failed and len(failed) == len(platforms):
+        # Every platform failing at once means something is broken on our
+        # side (network, blocked runner, changed pages) — fail the run so
+        # the workflow's alarm step fires, instead of pretending all is well.
+        print("::error::No platform could be read this run: %s" % ", ".join(failed))
+        sys.exit(1)
+
+
+def carried_streak(data, platform_id):
+    """How many consecutive snapshots (newest first) reused an old number."""
+    streak = 0
+    for snap in reversed(data["snapshots"]):
+        entry = (snap.get("platforms") or {}).get(platform_id)
+        if not entry:
+            break
+        if entry.get("source") != "carried":
+            break
+        streak += 1
+    return streak
+
+
+def health_check():
+    """`update_stats.py --check` — exits non-zero when the data has gone
+    quietly stale, so the workflow can raise an alarm a human will see."""
+    data = load_data()
+    platforms = [p for p in data["config"]["platforms"] if p.get("enabled")]
+    problems = []
+
+    if data["snapshots"]:
+        newest = data["snapshots"][-1]["date"]
+        age = (date.today() - date.fromisoformat(newest)).days
+        if age >= 2:
+            problems.append(
+                "the newest snapshot is %d days old (%s) — updates have stopped landing"
+                % (age, newest)
+            )
+
+    for p in platforms:
+        streak = carried_streak(data, p["id"])
+        if streak >= 3:
+            problems.append(
+                "%s has reused an old number for %d days in a row — its reader "
+                "is probably blocked" % (p["name"], streak)
+            )
+
+    if problems:
+        for msg in problems:
+            print("::error::" + msg)
+        return 1
+    print("Data health: ok (%d platforms, newest snapshot %s)"
+          % (len(platforms), data["snapshots"][-1]["date"] if data["snapshots"] else "none"))
+    return 0
+
 
 if __name__ == "__main__":
+    if "--check" in sys.argv:
+        sys.exit(health_check())
     main()
