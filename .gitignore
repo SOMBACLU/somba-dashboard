@@ -1,6 +1,9 @@
 .DS_Store
 __pycache__/
 
+# The auto-updater's diary — useful on this Mac, meaningless in the repo.
+logs/
+
 # Local API keys / tokens — NEVER commit these.
 .secrets.local
 .env

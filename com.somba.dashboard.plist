@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  The instruction sheet for macOS's built-in scheduler ("launchd").
+
+  It tells your Mac: every 30 minutes, run the dashboard update script.
+  This is what keeps Instagram fresh, because Instagram blocks the cloud
+  robot but not your Mac.
+
+  You do not install this file by hand. Double-click somba-autoupdate.command
+  in this folder — it copies this file to the place macOS looks for it
+  (~/Library/LaunchAgents/) and switches the schedule on.
+
+  HEADS UP - the paths below are spelled out in full, and they say
+  /Users/dan/code/somba-dashboard. macOS requires full paths here; it will not
+  work out where the project lives. So if this project folder is ever moved or
+  renamed, or set up on a different Mac, edit the three paths below and
+  double-click somba-autoupdate.command twice (once to turn it off, once to
+  turn it back on with the new paths).
+-->
+<plist version="1.0">
+<dict>
+
+  <!-- The job's name. This is what you see in "launchctl list". -->
+  <key>Label</key>
+  <string>com.somba.dashboard</string>
+
+  <!--
+    What to run.
+
+    It goes through zsh (the Mac's shell) with -l -c rather than running the
+    script directly. -l means "login shell", which loads your normal settings
+    so python3 and git are found in the usual places; -c means "run this one
+    command". The script itself then reads .secrets.local - the file holding
+    lines like  export YOUTUBE_API_KEY="..."  - which only works inside a
+    shell, which is the other reason for going through zsh.
+  -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>-lc</string>
+    <string>/Users/dan/code/somba-dashboard/scripts/local-update.sh</string>
+  </array>
+
+  <!-- Start in the project folder, so git commands act on this project. -->
+  <key>WorkingDirectory</key>
+  <string>/Users/dan/code/somba-dashboard</string>
+
+  <!--
+    How often, in seconds. 1800 seconds = 30 minutes.
+
+    This is deliberately StartInterval and not StartCalendarInterval ("run at
+    :00 and :30"). On a laptop the calendar version silently skips any run
+    that fell due while the lid was shut. StartInterval catches up instead:
+    it fires once, straight away, when the Mac wakes.
+  -->
+  <key>StartInterval</key>
+  <integer>1800</integer>
+
+  <!--
+    false = do not fire the moment the schedule is switched on. Turning it on
+    should feel like nothing happened; the first run comes 30 minutes later.
+    (To update right now, double-click weekly-update.command.)
+  -->
+  <key>RunAtLoad</key>
+  <false/>
+
+  <!--
+    Where the job's diary goes. The first is the normal running commentary,
+    the second is anything that went wrong. Both live in logs/, which is not
+    part of the project's saved history (see .gitignore).
+  -->
+  <key>StandardOutPath</key>
+  <string>/Users/dan/code/somba-dashboard/logs/local-update.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/dan/code/somba-dashboard/logs/local-update.err</string>
+
+  <!-- Marks this as low-priority background work, so it never slows down
+       whatever you are actually doing. -->
+  <key>ProcessType</key>
+  <string>Background</string>
+  <key>LowPriorityIO</key>
+  <true/>
+
+</dict>
+</plist>
