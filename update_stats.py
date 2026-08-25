@@ -541,11 +541,28 @@ def fetch_youtube_engagement(token, start, end):
     if not rows:
         raise RuntimeError("YouTube Analytics returned no rows")
     got = dict(zip([c["name"] for c in resp.get("columnHeaders", [])], rows[0]))
+    # These are NET changes over the window, not counts, so a viewer removing a
+    # like can return a negative number. Seen live: likes = -1. Clamp, because a
+    # negative "count" would poison every total it feeds.
+    likes = max(0, int(got.get("likes") or 0))
+    comments = max(0, int(got.get("comments") or 0))
+    shares = max(0, int(got.get("shares") or 0))
+    views = int(got.get("views") or 0)
+    # Below ~10 events a single like moves the headline rate by more than a tenth
+    # of its own value, so the number carries no information — it just looks like
+    # a finding. Seen live: 1,016 views and exactly one share, which would have
+    # published "0.1%, far below benchmark" off the back of one person.
+    MIN_INTERACTIONS = 10
+    inter = likes + comments + shares
+    if views <= 0 or inter < MIN_INTERACTIONS:
+        raise RuntimeError(
+            "too little activity to compute a rate (%d views, %d interactions; need %d) — "
+            "leaving YouTube's engagement as it was" % (views, inter, MIN_INTERACTIONS))
     return {
-        "reach": int(got.get("views") or 0),
-        "likes": int(got.get("likes") or 0),
-        "comments": int(got.get("comments") or 0),
-        "shares": int(got.get("shares") or 0),
+        "reach": views,
+        "likes": likes,
+        "comments": comments,
+        "shares": shares,
         # YouTube Analytics has no "saves" metric at all. Writing 0 keeps the
         # rate honest against a benchmark measured the same way; folding in
         # playlist adds would quietly inflate it.
@@ -574,8 +591,19 @@ def fetch_youtube_demographics(token, start, end):
         if label:
             genders.append({"label": label, "pct": round(float(pct), 1)})
 
+    # Plausibility gate. The API hands back raw percentages with no sample size,
+    # so a channel with a handful of signed-in viewers reports things like
+    # "100% age13-17, 100% male" — which is exactly what this channel returned
+    # while YouTube Studio refused the same report as "not enough demographic
+    # data". A single bucket at 100% is a sample of roughly one person, and
+    # publishing it would be worse than showing nothing.
     if not ages and not genders:
         raise RuntimeError("YouTube Analytics returned no demographics")
+    if len(ages) < 3 or len(genders) < 2 or max(ages.values(), default=0) >= 95:
+        raise RuntimeError(
+            "demographics too thin to trust (%d age bands, %d genders, top band %.0f%%) — "
+            "YouTube Studio suppresses this report at these sample sizes and so do we"
+            % (len(ages), len(genders), max(ages.values(), default=0)))
     return {
         "age": [{"band": b, "pct": ages[b]} for b in AGE_ORDER if b in ages],
         "gender": genders,

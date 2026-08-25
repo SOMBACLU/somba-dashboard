@@ -201,6 +201,28 @@
     margin:9px 0 16px;max-width:230px}
   .stile .minitrack .fill{position:absolute;left:0;top:0;bottom:0;border-radius:2px 4px 4px 2px;min-width:5px}
   .stile .minitrack .bmark{top:-4px;bottom:-4px}
+  /* --- best time to post: a day x 3-hour-block heatmap --- */
+  .hm{display:grid;grid-template-columns:auto repeat(8,minmax(0,1fr));gap:3px;margin-top:12px}
+  .hm .hh{font-size:10.5px;color:var(--label);text-align:center;font-weight:600;padding-bottom:2px}
+  .hm .dl{font-size:11.5px;color:var(--muted);font-weight:700;padding-right:7px;text-align:right;
+    display:flex;align-items:center;justify-content:flex-end}
+  .hm .c{aspect-ratio:1.9/1;border-radius:5px;display:flex;align-items:center;justify-content:center;
+    font-size:10.5px;font-weight:700;color:#fff;min-height:24px}
+  .hm .c.peak{outline:2px solid var(--gold-deep);outline-offset:1px}
+  .hm-key{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:11.5px;color:var(--label)}
+  .hm-key .sw{width:52px;height:9px;border-radius:5px;
+    background:linear-gradient(90deg,#efeaf6,#7a5aa6)}
+  /* --- top posts --- */
+  .prow{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:12px;align-items:center;
+    padding:10px 0;border-top:1px solid var(--border)}
+  .prow:first-child{border-top:0}
+  .prow .rank{font-size:12px;color:var(--label);font-weight:700;text-align:center}
+  .prow .t{font-weight:700;font-size:14.5px;line-height:1.35}
+  .prow .m{font-size:12px;color:var(--muted);margin-top:2px}
+  .prow .v{text-align:right;white-space:nowrap}
+  .prow .v b{font-family:"Newsreader",serif;font-size:19px;font-weight:600}
+  .prow .v small{display:block;font-size:11.5px;color:var(--muted)}
+  .prow.hero{background:var(--gold-soft);border-radius:10px;padding:10px 12px;border-top:0}
   .er-foot{font-size:12.5px;color:var(--label);margin:20px 0 0;line-height:1.5}
   .er-foot b{color:var(--gold-deep)}
   .bench-src{font-size:12.5px;color:var(--label);margin-top:14px}
@@ -455,6 +477,22 @@
     </div>
 
     <div id="content">
+      <section id="sec-posts" class="hidden">
+        <div class="kicker">What worked</div>
+        <h2 class="serif">Top Instagram posts</h2>
+        <p class="note" id="postnote"></p>
+        <div id="postlist"></div>
+        <p class="er-foot" id="postfoot"></p>
+      </section>
+
+      <section id="sec-timing" class="hidden">
+        <div class="kicker">When to post</div>
+        <h2 class="serif">Best time to post</h2>
+        <p class="note" id="timenote"></p>
+        <div id="heatmap"></div>
+        <p class="er-foot" id="timefoot"></p>
+      </section>
+
       <section id="sec-videos" class="hidden">
         <div class="kicker">On screen</div>
         <h2 class="serif">Content</h2>
@@ -662,6 +700,8 @@ function render(d){
   try{ renderBenchmarkSources(d); }catch(e){ console.error('renderBenchmarkSources failed', e); }
   try{ renderVideos(d); }catch(e){ console.error('renderVideos failed', e); }
   try{ renderTopVideos(d); }catch(e){ console.error('renderTopVideos failed', e); }
+  try{ renderTopPosts(d); }catch(e){ console.error('renderTopPosts failed', e); }
+  try{ renderTiming(d); }catch(e){ console.error('renderTiming failed', e); }
   try{ renderMix(platforms, snaps); }catch(e){ console.error('renderMix failed', e); }
   try{ renderDemographics(d); }catch(e){ console.error('renderDemographics failed', e); }
   try{ initPlaybook(d); }catch(e){ console.error('initPlaybook failed', e); }
@@ -899,7 +939,12 @@ function renderEngagement(d){
     const e = P[id];
     if(!e || !e.reach) return;
     const likes=e.likes||0, comments=e.comments||0, shares=e.shares||0, saves=e.saves||0;
-    const inter = likes + comments + shares + saves;
+    // Instagram's Insights screen gives a single interactions total without the
+    // per-type split, so accept either. A total alone still yields a rate; it
+    // just cannot feed the likes/comments/shares/saves composition bar.
+    const split = likes + comments + shares + saves;
+    const hasSplit = split > 0;
+    const inter = (e.interactions != null) ? e.interactions : split;
     if(inter === 0) return;
     const er = inter / e.reach * 100;
     // per-follower-per-post rate, only when the follower base is big enough to mean something
@@ -907,7 +952,7 @@ function renderEngagement(d){
     const erFollower = (e.posts && followers >= 50) ? (inter/e.posts)/followers*100 : null;
     const bm = bench(d, id, 'engagement_rate');
     const matched = bm ? (REACH_BASES.has(bm.basis) ? er : bm.basis==='followers' ? erFollower : null) : null;
-    rows.push({id, e, inter, er, erFollower, bm, matched});
+    rows.push({id, e, inter, er, erFollower, bm, matched, hasSplit});
     tL+=likes; tC+=comments; tS+=shares; tV+=saves; tReach+=e.reach; tInt+=inter;
   });
   if(!rows.length || !tReach) return;
@@ -930,13 +975,21 @@ function renderEngagement(d){
     {k:'Shares', v:tS, col:'#FFC72C'},
     {k:'Saves', v:tV, col:'#35795a'}
   ];
-  const ct = tL+tC+tS+tV || 1;
-  const barHtml = comp.filter(c => c.v > 0).map(c => `<span style="width:${(c.v/ct*100).toFixed(1)}%;background:${c.col}"></span>`).join('');
-  const legHtml = comp.map(c => `<div class="it"><span class="dot" style="background:${c.col}"></span>${c.k} <b>${Math.round(c.v/ct*100)}%</b></div>`).join('');
-  const hi = Math.round((tS+tV)/ct*100);
-  document.getElementById('er-composition').innerHTML =
-    `<div class="er-cbar">${barHtml}</div><div class="er-clegend">${legHtml}</div>` +
-    `<div class="er-hint"><b>${hi}% saves + shares</b> — the high-intent signals algorithms reward most.</div>`;
+  const ct = tL+tC+tS+tV;
+  if(ct > 0){
+    const barHtml = comp.filter(c => c.v > 0).map(c => `<span style="width:${(c.v/ct*100).toFixed(1)}%;background:${c.col}"></span>`).join('');
+    const legHtml = comp.map(c => `<div class="it"><span class="dot" style="background:${c.col}"></span>${c.k} <b>${Math.round(c.v/ct*100)}%</b></div>`).join('');
+    const hi = Math.round((tS+tV)/ct*100);
+    document.getElementById('er-composition').innerHTML =
+      `<div class="er-cbar">${barHtml}</div><div class="er-clegend">${legHtml}</div>` +
+      `<div class="er-hint"><b>${hi}% saves + shares</b> — the high-intent signals algorithms reward most.</div>`;
+  } else {
+    // Without a per-type split every share would render as 0%, which reads as a
+    // finding ("0% saves + shares") rather than as missing data. Say so instead.
+    document.getElementById('er-composition').innerHTML =
+      `<div class="er-hint">The split between likes, comments, shares and saves isn't on Instagram's
+       summary screen, so it isn't shown here. The interaction total above is real.</div>`;
+  }
 
   const cell = (num) => {
     const v = num == null ? null : num;
@@ -1060,6 +1113,84 @@ function renderTopVideos(d){
   const vids = tv.videos.slice().sort((a,b) => (b.views ?? -1) - (a.views ?? -1)).slice(0,5);
   document.getElementById('topvidlist').innerHTML = vidRows(vids);
   show('sec-videos');
+}
+
+// ---------- best time to post ----------
+// Instagram reports how many followers are online per 3-hour block per weekday.
+// The absolute counts matter less than where the peaks sit, so the colour scale
+// is stretched between this account's own min and max rather than 0..max —
+// otherwise every cell lands in the same mid-purple and the pattern vanishes.
+function renderTiming(d){
+  const pt = d.posting_times;
+  if(!pt || !pt.days || !pt.hours) return;
+  const days = Object.keys(pt.days);
+  const all = days.flatMap(k => pt.days[k]).filter(v => typeof v === 'number');
+  if(all.length < 2) return;
+  const lo = Math.min(...all), hi = Math.max(...all);
+  const span = (hi - lo) || 1;
+
+  let best = {v: -1};
+  days.forEach(day => pt.days[day].forEach((v, i) => {
+    if(v > best.v) best = {v, day, hour: pt.hours[i]};
+  }));
+
+  const shade = v => {
+    const t = (v - lo) / span;                 // 0..1 within this account's range
+    const l = 94 - t * 52;                     // light lilac -> deep purple
+    return `hsl(268 34% ${l}%)`;
+  };
+  const head = '<div class="hh"></div>' + pt.hours.map(h => `<div class="hh">${h}</div>`).join('');
+  const body = days.map(day =>
+    `<div class="dl">${day}</div>` + pt.days[day].map((v, i) => {
+      const isPeak = day === best.day && pt.hours[i] === best.hour;
+      const t = (v - lo) / span;
+      return `<div class="c${isPeak ? ' peak' : ''}" style="background:${shade(v)};color:${t > 0.55 ? '#fff' : '#4a3a5e'}"
+                   title="${day} ${pt.hours[i]} — ${FULL(v)} followers online">${FULL(v)}</div>`;
+    }).join('')
+  ).join('');
+  document.getElementById('heatmap').innerHTML = `<div class="hm">${head}${body}</div>` +
+    `<div class="hm-key"><span>fewer online</span><span class="sw"></span><span>more online</span>
+     <span style="margin-left:auto">Gold outline = the single busiest slot</span></div>`;
+
+  document.getElementById('timenote').innerHTML =
+    `How many of the ${FULL(Math.max(...all))} Instagram followers are awake and on the app, by day and time. ` +
+    `<b>Busiest: ${best.day} around ${best.hour}.</b>`;
+  document.getElementById('timefoot').innerHTML =
+    `Post shortly <b>before</b> a peak, not during it — the algorithm needs a little time to circulate a
+     new post. Evenings (6p) run highest almost every day; 3a is the dead zone every day.
+     Instagram only reports this for ${escapeHtml(pt.platform || 'instagram')}. Read ${prettyDate(pt.as_of)}.`;
+  show('sec-timing');
+}
+
+// ---------- top Instagram posts ----------
+function renderTopPosts(d){
+  const tp = d.top_posts;
+  if(!tp || !tp.posts || !tp.posts.length) return;
+  const posts = tp.posts.slice().sort((a,b) => (b.views ?? -1) - (a.views ?? -1));
+  const totalViews = posts.reduce((s,p) => s + (p.views || 0), 0);
+  const top = posts[0];
+
+  document.getElementById('postlist').innerHTML = posts.map((p,i) => {
+    const er = (p.views && p.interactions != null) ? (p.interactions / p.views * 100) : null;
+    return `<div class="prow${i === 0 ? ' hero' : ''}">
+      <div class="rank">${i+1}</div>
+      <div><div class="t">${escapeHtml(p.title)}</div>
+        <div class="m">${p.date ? prettyDate(p.date) : ''}${p.format ? ' · ' + escapeHtml(p.format) : ''}${
+          er != null ? ' · ' + er.toFixed(1) + '% engaged' : ''}</div></div>
+      <div class="v"><b>${FULL(p.views)}</b><small>views${
+        p.interactions != null ? ' · ' + FULL(p.interactions) + ' interactions' : ''}</small></div>
+    </div>`;
+  }).join('');
+
+  const sharePct = totalViews ? Math.round(top.views / totalViews * 100) : 0;
+  document.getElementById('postnote').innerHTML =
+    `The ${posts.length} best-performing posts of the last ${tp.period_days || 30} days. ` +
+    `<b>“${escapeHtml(top.title)}” alone took ${sharePct}% of the views in this list.</b>`;
+  document.getElementById('postfoot').innerHTML =
+    `One post carrying this much of the total is normal on Reels, but it means the average is not the
+     story — the question worth asking is what that post did differently. Read ${prettyDate(tp.as_of)}
+     from Instagram Insights.`;
+  show('sec-posts');
 }
 
 // ---------- audience mix ----------
