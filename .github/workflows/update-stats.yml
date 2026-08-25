@@ -35,9 +35,17 @@ jobs:
 
       - name: Fetch the latest numbers
         env:
+          # Every one of these is optional. A missing secret means that source
+          # is skipped and the numbers already on file stand — never a failure.
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
         run: |
-          if [ -n "$YOUTUBE_API_KEY" ]; then echo "YouTube API key: present"; else echo "YouTube API key: MISSING - will fall back to scraping"; fi
+          for key in YOUTUBE_API_KEY YOUTUBE_CLIENT_ID YOUTUBE_CLIENT_SECRET YOUTUBE_REFRESH_TOKEN INSTAGRAM_TOKEN; do
+            if [ -n "${!key}" ]; then echo "$key: present"; else echo "$key: not set"; fi
+          done
           python3 update_stats.py
 
       - name: Commit the update (only if something changed)

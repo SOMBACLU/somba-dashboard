@@ -18,8 +18,9 @@ import os
 import re
 import sys
 import time
+import urllib.parse
 import urllib.request
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(REPO_DIR, "data", "stats.json")
@@ -46,6 +47,14 @@ CRAWLER_UAS = [
 # script uses YouTube's official Data API for rock-solid numbers; when it is
 # absent everything still works by scraping the public pages as before.
 YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY")
+
+# Private-analytics credentials. Every one of these is optional: when a value is
+# missing the matching fetch is skipped and the hand-entered numbers already in
+# data/stats.json are left exactly as they are. Nothing here ever breaks a run.
+YOUTUBE_CLIENT_ID = os.environ.get("YOUTUBE_CLIENT_ID")
+YOUTUBE_CLIENT_SECRET = os.environ.get("YOUTUBE_CLIENT_SECRET")
+YOUTUBE_REFRESH_TOKEN = os.environ.get("YOUTUBE_REFRESH_TOKEN")
+INSTAGRAM_TOKEN = os.environ.get("INSTAGRAM_TOKEN")
 
 # True when running inside GitHub Actions. Some platforms (Instagram) serve the
 # page to a laptop but block cloud runners outright, so there is nothing to be
@@ -81,6 +90,22 @@ def http_post_json(url, payload, user_agent, timeout=25):
         return json.loads(resp.read().decode("utf-8", errors="replace"))
 
 
+def http_post_form(url, fields, timeout=25):
+    """POST a form-encoded body and return the parsed JSON.
+
+    http_post_json sends Content-Type: application/json, which Google's token
+    endpoint rejects — hence this near-identical second helper.
+    """
+    req = urllib.request.Request(
+        url,
+        data=urllib.parse.urlencode(fields).encode(),
+        headers={"Content-Type": "application/x-www-form-urlencoded",
+                 "User-Agent": CHROME_UA},
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return json.loads(resp.read().decode("utf-8", errors="replace"))
+
+
 def parse_abbrev(s):
     """Turn '756', '13,800', '13.8K' or '1.2M' into a whole number."""
     s = s.strip().upper().replace(",", "")
@@ -98,7 +123,7 @@ def parse_abbrev(s):
 # Each fetcher returns a dict of metrics including "followers",
 # or raises an exception (which triggers a silent carry-forward).
 
-def fetch_instagram(p):
+def fetch_instagram_scrape(p):
     last_err = None
     for ua in CRAWLER_UAS:
         try:
@@ -118,6 +143,43 @@ def fetch_instagram(p):
             }
         last_err = RuntimeError("follower count not found in the Instagram page")
     raise last_err
+
+
+IG_API = "https://graph.instagram.com/v25.0"
+
+
+def ig_get(path, **params):
+    """One Instagram Graph API call. Raises if the token is missing/expired."""
+    params["access_token"] = INSTAGRAM_TOKEN
+    url = "%s/%s?%s" % (IG_API, path.lstrip("/"), urllib.parse.urlencode(params))
+    return json.loads(http_get(url, CHROME_UA))
+
+
+def fetch_instagram_api(p):
+    """Follower/post counts from Instagram's official Graph API.
+
+    Preferred over the scrape because it is the only method that works from
+    GitHub's runners — Instagram blocks their IPs outright, and an API call
+    carrying a token is not subject to that block.
+    """
+    me = ig_get("me", fields="followers_count,follows_count,media_count")
+    return {
+        "followers": int(me["followers_count"]),
+        "following": int(me.get("follows_count") or 0),
+        "posts": int(me.get("media_count") or 0),
+    }
+
+
+def fetch_instagram(p):
+    """Official API when a token is configured, public page otherwise."""
+    if INSTAGRAM_TOKEN:
+        try:
+            return fetch_instagram_api(p)
+        except Exception as e:
+            # A dead token should be loud — it is a 60-day chore that WILL
+            # lapse — but it must not take the whole run down with it.
+            print("(Instagram API failed: %s — falling back to the page) " % e, end="")
+    return fetch_instagram_scrape(p)
 
 
 def fetch_tiktok(p):
@@ -423,6 +485,138 @@ def fetch_youtube_top_videos(channel_id):
     return top, len(found)
 
 
+# ------------------------------------------------- private analytics (opt-in)
+# Everything below needs a token Dan grants once. With no token these are
+# skipped entirely and the hand-entered numbers in data/stats.json stand.
+
+YTA_URL = "https://youtubeanalytics.googleapis.com/v2/reports"
+YTA_LAG_DAYS = 3       # YouTube finishes counting a day ~2-3 days later
+YTA_WINDOW_DAYS = 28   # matches YouTube Studio's "Last 28 days"
+
+AGE_BAND = {"age13-17": "13–17", "age18-24": "18–24", "age25-34": "25–34",
+            "age35-44": "35–44", "age45-54": "45+", "age55-64": "45+",
+            "age65-": "45+"}
+AGE_ORDER = ["13–17", "18–24", "25–34", "35–44", "45+"]
+GENDER_LABEL = {"female": "Women", "male": "Men",
+                "user_specified": "Other / undisclosed"}
+
+
+def google_access_token():
+    """Trade the long-lived refresh token for a one-hour access token."""
+    data = http_post_form("https://oauth2.googleapis.com/token", {
+        "client_id": YOUTUBE_CLIENT_ID,
+        "client_secret": YOUTUBE_CLIENT_SECRET,
+        "refresh_token": YOUTUBE_REFRESH_TOKEN,
+        "grant_type": "refresh_token",
+    })
+    if "access_token" not in data:
+        raise RuntimeError("no access token returned — the grant may have been revoked")
+    return data["access_token"]
+
+
+def yta_window(today=None):
+    """The most recent 28 days YouTube has finished counting."""
+    today = today or date.today()
+    end = today - timedelta(days=YTA_LAG_DAYS)
+    start = end - timedelta(days=YTA_WINDOW_DAYS - 1)
+    return start.isoformat(), end.isoformat()
+
+
+def yta_query(token, **params):
+    url = YTA_URL + "?" + urllib.parse.urlencode(params)
+    return json.loads(http_get(url, CHROME_UA,
+                               headers={"Authorization": "Bearer " + token}))
+
+
+def yta_rows(resp):
+    """[(dimension_value, metric_value), ...] for a one-dimension report."""
+    return [(r[0], r[1]) for r in (resp.get("rows") or [])]
+
+
+def fetch_youtube_engagement(token, start, end):
+    """Last-28-day engagement straight from YouTube Analytics."""
+    resp = yta_query(token, ids="channel==MINE", startDate=start, endDate=end,
+                     metrics="views,likes,comments,shares")
+    rows = resp.get("rows") or []
+    if not rows:
+        raise RuntimeError("YouTube Analytics returned no rows")
+    got = dict(zip([c["name"] for c in resp.get("columnHeaders", [])], rows[0]))
+    return {
+        "reach": int(got.get("views") or 0),
+        "likes": int(got.get("likes") or 0),
+        "comments": int(got.get("comments") or 0),
+        "shares": int(got.get("shares") or 0),
+        # YouTube Analytics has no "saves" metric at all. Writing 0 keeps the
+        # rate honest against a benchmark measured the same way; folding in
+        # playlist adds would quietly inflate it.
+        "saves": 0,
+        "period_days": YTA_WINDOW_DAYS,
+        "source": "youtube-analytics-api",
+        "window": "%s..%s" % (start, end),
+    }
+
+
+def fetch_youtube_demographics(token, start, end):
+    """Age and gender splits of the channel's viewers."""
+    ages = {}
+    for key, pct in yta_rows(yta_query(
+            token, ids="channel==MINE", startDate=start, endDate=end,
+            metrics="viewerPercentage", dimensions="ageGroup")):
+        band = AGE_BAND.get(key)
+        if band:
+            ages[band] = round(ages.get(band, 0) + float(pct), 1)
+
+    genders = []
+    for key, pct in yta_rows(yta_query(
+            token, ids="channel==MINE", startDate=start, endDate=end,
+            metrics="viewerPercentage", dimensions="gender")):
+        label = GENDER_LABEL.get(key)
+        if label:
+            genders.append({"label": label, "pct": round(float(pct), 1)})
+
+    if not ages and not genders:
+        raise RuntimeError("YouTube Analytics returned no demographics")
+    return {
+        "age": [{"band": b, "pct": ages[b]} for b in AGE_ORDER if b in ages],
+        "gender": genders,
+        "estimated": False,
+        "as_of": date.today().isoformat(),
+        "source": "youtube-analytics-api",
+        "note": "Real YouTube viewer demographics, refreshed automatically.",
+    }
+
+
+def update_private_analytics(data):
+    """Fill in whatever the granted tokens allow. Never raises."""
+    if not (YOUTUBE_CLIENT_ID and YOUTUBE_CLIENT_SECRET and YOUTUBE_REFRESH_TOKEN):
+        return
+    sys.stdout.write("  YouTube private analytics... ")
+    sys.stdout.flush()
+    try:
+        token = google_access_token()
+        start, end = yta_window()
+    except Exception as e:
+        print("could not sign in (%s) — keeping the numbers already on file" % e)
+        print("::warning::YouTube Analytics sign-in failed (%s)" % e)
+        return
+
+    try:
+        eng = fetch_youtube_engagement(token, start, end)
+        block = data.setdefault("engagement", {})
+        block.setdefault("platforms", {})["youtube"] = eng
+        block["updated"] = date.today().isoformat()
+        print("ok (%s views, %s likes)" % ("{:,}".format(eng["reach"]),
+                                           "{:,}".format(eng["likes"])))
+    except Exception as e:
+        print("engagement unavailable (%s)" % e)
+
+    try:
+        data["demographics_youtube"] = fetch_youtube_demographics(token, start, end)
+        print("  YouTube demographics... ok")
+    except Exception as e:
+        print("  YouTube demographics... unavailable (%s)" % e)
+
+
 FETCHERS = {
     "instagram": fetch_instagram,
     "tiktok": fetch_tiktok,
@@ -573,7 +767,7 @@ def main():
         sys.stdout.flush()
         prev_today = today_prev.get(p["id"]) or {}
 
-        if IN_CI and p.get("reads") == "local-only":
+        if IN_CI and not ci_can_read(p):
             metrics = prev_today if prev_today.get("source") == "scrape" else carry_forward(p, data)
             print("skipped — this platform only refreshes when run on the Mac")
             snap["platforms"][p["id"]] = metrics
@@ -639,6 +833,8 @@ def main():
             except Exception as e:
                 print("could not read (%s) — reused last list" % e)
 
+    update_private_analytics(data)
+
     upsert_snapshot(data, snap)
     if json.dumps(
         {k: v for k, v in data.items() if k != "generated_at"}, sort_keys=True
@@ -653,6 +849,19 @@ def main():
         # the workflow's alarm step fires, instead of pretending all is well.
         print("::error::No platform could be read this run: %s" % ", ".join(failed))
         sys.exit(1)
+
+
+def ci_can_read(p):
+    """Can the cloud job read this platform?
+
+    Instagram blocks GitHub's IPs for scraping, so it is marked local-only —
+    but an API token lifts that restriction, because an authenticated call is
+    not subject to the block. So the exemption disappears the moment a token
+    exists, and the alarm starts watching Instagram again automatically.
+    """
+    if p["id"] == "instagram" and INSTAGRAM_TOKEN:
+        return True
+    return p.get("reads") not in ("manual", "local-only")
 
 
 def days_since_ok(data, platform_id, today):
@@ -703,7 +912,7 @@ def health_check():
     for p in platforms:
         # A platform with no automatic reader, or one we deliberately skip in
         # the cloud, is not "blocked" — alarming on it would never clear.
-        if p.get("reads") in ("manual", "local-only"):
+        if not ci_can_read(p):
             continue
         stale = days_since_ok(data, p["id"], today)
         if stale is None:
