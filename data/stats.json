@@ -1302,7 +1302,7 @@
   "generated_at": "2026-08-25T17:47:28Z",
   "benchmarks": {
     "sector": "Higher education",
-    "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube is intentionally empty (no credible published higher-ed YouTube benchmark). See ENGAGEMENT-DATA.md.",
+    "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). See ENGAGEMENT-DATA.md.",
     "overall": {
       "engagement_rate_reach": {
         "value": 3.0,
@@ -1384,7 +1384,17 @@
           "retrieved": "2026-08-18"
         }
       },
-      "youtube": {}
+      "youtube": {
+        "engagement_rate": {
+          "value": 4.62,
+          "basis": "views",
+          "label": "YouTube median engagement rate by views, Education & How-to category (75,000-channel study)",
+          "source": "SociaVault YouTube Engagement Benchmarks",
+          "source_url": "https://sociavault.com/blog/good-engagement-rate-youtube",
+          "data_period": "Apr 2026",
+          "retrieved": "2026-08-25"
+        }
+      }
     }
   }
 }

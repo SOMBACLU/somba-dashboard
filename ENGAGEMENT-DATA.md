@@ -59,8 +59,11 @@ measured it.
 Don't change `basis` unless the new source measures differently. Every entry is shown with
 its citation under "Benchmark sources" at the bottom of the Engagement section.
 
-**`"youtube": {}` is intentional** — no publisher we could cite states a higher-ed YouTube
-benchmark. Leave it empty rather than inventing one; the dashboard handles it gracefully.
+**YouTube's benchmark is the closest citable match, not a higher-ed one** — no publisher
+states a higher-ed-specific YouTube engagement rate, so the entry uses SociaVault's
+"Education & How-to" category median (measured by views, same as ours). If a stronger
+source appears (e.g., in Rosie's exports), swap it in. If a benchmark ever has to be
+removed, set the platform back to `{}` — the dashboard shows "no benchmark" gracefully.
 
 > Optional future automation: if the Instagram account is a Business/Creator account, the
 > Meta Graph API can pull IG (and Facebook) engagement automatically. TikTok/LinkedIn stay
