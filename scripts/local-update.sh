@@ -83,6 +83,29 @@ else
   say "No .secrets.local file — YouTube will fall back to reading the public page."
 fi
 
+# --- Step 0: start from whatever the cloud robot last published -------------
+# This MUST happen before we read numbers and commit. Committing first and
+# rebasing afterwards guaranteed a clash: every commit from either writer
+# touches the same "generated_at" line, so replaying ours onto theirs always
+# conflicted — and the old recovery (rebase --abort) put our commit back, so
+# the next run stacked another one onto it and the job wedged permanently.
+# Numbers are re-read from scratch every run, so discarding local work is free.
+if git rev-parse --verify --quiet origin/main >/dev/null 2>&1 || git fetch -q origin 2>/dev/null; then
+  git fetch -q origin 2>/dev/null || say "Could not reach GitHub — working from the local copy."
+fi
+if git diff --quiet && git diff --staged --quiet; then
+  if git rev-parse --verify --quiet origin/main >/dev/null 2>&1; then
+    BEHIND="$(git rev-list --count HEAD..origin/main 2>/dev/null || echo 0)"
+    AHEAD="$(git rev-list --count origin/main..HEAD 2>/dev/null || echo 0)"
+    if [[ "$AHEAD" != "0" || "$BEHIND" != "0" ]]; then
+      say "Syncing with the cloud robot (was $AHEAD ahead, $BEHIND behind)."
+      git reset -q --hard origin/main
+    fi
+  fi
+else
+  say "You have your own uncommitted edits — leaving them alone and not syncing."
+fi
+
 # --- Step 1: read the numbers -----------------------------------------------
 say "Reading the latest numbers..."
 python3 update_stats.py
@@ -131,11 +154,14 @@ fi
 # our commit on top of its commits instead of making a messy merge.
 say "Fetching the hourly robot's latest commits..."
 if ! git pull --rebase; then
-  # Something clashed. Unwind completely so the folder is exactly as it was.
+  # Still clashed despite syncing first (the robot pushed during our run).
+  # Throw OUR commit away rather than keep it: the numbers are re-read from
+  # scratch next run, and keeping it is what used to wedge the job forever.
   git rebase --abort 2>/dev/null
-  say "Could not combine our update with the robot's (a clash, or no internet)."
-  say "  Nothing was broken and nothing was forced — the folder was put back as it was."
-  say "  The saved numbers will go out on a later run, or run weekly-update.command yourself."
+  git reset -q --hard origin/main 2>/dev/null
+  say "The robot published while we were working, so this run was discarded."
+  say "  Nothing was broken and nothing was forced. The next run picks up fresh"
+  say "  numbers in 30 minutes — no action needed from you."
   exit 0
 fi
 

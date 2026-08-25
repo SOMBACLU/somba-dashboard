@@ -106,6 +106,18 @@ def http_post_form(url, fields, timeout=25):
         return json.loads(resp.read().decode("utf-8", errors="replace"))
 
 
+def utc_today():
+    """Today's date in UTC — the one clock both writers agree on.
+
+    The Mac scheduler runs in local time and GitHub Actions runs in UTC. Using
+    the local date meant that every evening between ~17:17 PDT and midnight the
+    two disagreed about the date, which appended duplicate snapshots, flipped
+    the "fetched" stamps back and forth (a pointless redeploy every run), and
+    defeated the once-per-day guard on the expensive YouTube crawl.
+    """
+    return datetime.now(timezone.utc).date()
+
+
 def parse_abbrev(s):
     """Turn '756', '13,800', '13.8K' or '1.2M' into a whole number."""
     s = s.strip().upper().replace(",", "")
@@ -516,7 +528,7 @@ def google_access_token():
 
 def yta_window(today=None):
     """The most recent 28 days YouTube has finished counting."""
-    today = today or date.today()
+    today = today or utc_today()
     end = today - timedelta(days=YTA_LAG_DAYS)
     start = end - timedelta(days=YTA_WINDOW_DAYS - 1)
     return start.isoformat(), end.isoformat()
@@ -608,7 +620,7 @@ def fetch_youtube_demographics(token, start, end):
         "age": [{"band": b, "pct": ages[b]} for b in AGE_ORDER if b in ages],
         "gender": genders,
         "estimated": False,
-        "as_of": date.today().isoformat(),
+        "as_of": utc_today().isoformat(),
         "source": "youtube-analytics-api",
         "note": "Real YouTube viewer demographics, refreshed automatically.",
     }
@@ -632,7 +644,7 @@ def update_private_analytics(data):
         eng = fetch_youtube_engagement(token, start, end)
         block = data.setdefault("engagement", {})
         block.setdefault("platforms", {})["youtube"] = eng
-        block["updated"] = date.today().isoformat()
+        block["updated"] = utc_today().isoformat()
         print("ok (%s views, %s likes)" % ("{:,}".format(eng["reach"]),
                                            "{:,}".format(eng["likes"])))
     except Exception as e:
@@ -722,13 +734,33 @@ def previous_snapshot(data, today):
 
 
 def upsert_snapshot(data, snap):
-    """Same-day rerun replaces that day's snapshot instead of duplicating it."""
+    """Same-day rerun replaces that day's snapshot instead of duplicating it.
+
+    Searches the whole list rather than only testing the newest entry. Two
+    writers with skewed clocks could otherwise append an unbounded number of
+    rows for the same date: once the other writer added a later-dated snapshot,
+    every later run here saw a non-matching last element and appended again.
+    """
     snaps = data["snapshots"]
-    if snaps and snaps[-1]["date"] == snap["date"]:
-        snaps[-1] = snap
+    for i, existing in enumerate(snaps):
+        if existing["date"] == snap["date"]:
+            snaps[i] = snap
+            break
     else:
         snaps.append(snap)
     snaps.sort(key=lambda s: s["date"])
+
+
+def dedupe_snapshots(data):
+    """Collapse any duplicate dates left behind by earlier runs. Keeps the last."""
+    seen, out = {}, []
+    for snap in data.get("snapshots", []):
+        seen[snap["date"]] = snap
+    if len(seen) != len(data.get("snapshots", [])):
+        out = [seen[d] for d in sorted(seen)]
+        removed = len(data["snapshots"]) - len(out)
+        data["snapshots"] = out
+        print("  (cleaned %d duplicate snapshot row%s)" % (removed, "" if removed == 1 else "s"))
 
 
 # ---------------------------------------------------------------- output
@@ -768,6 +800,7 @@ def print_summary(snap, prev_snap, platforms):
 
 def main():
     data = load_data()
+    dedupe_snapshots(data)
     # Remember what the data looked like before this run, so we only stamp a
     # new "generated_at" time when something actually changed. An unchanged
     # file stays byte-identical -> no git commit -> no pointless redeploy.
@@ -775,7 +808,7 @@ def main():
         {k: v for k, v in data.items() if k != "generated_at"}, sort_keys=True
     )
     platforms = [p for p in data["config"]["platforms"] if p.get("enabled")]
-    today = date.today().isoformat()
+    today = utc_today().isoformat()
     prev_snap = previous_snapshot(data, today)
 
     # Today's entries as already saved by an earlier run this hour. A later
@@ -924,14 +957,14 @@ def health_check():
     """
     data = load_data()
     platforms = [p for p in data["config"]["platforms"] if p.get("enabled")]
-    today = date.today().isoformat()
+    today = utc_today().isoformat()
     problems = []   # (cause-slug, human sentence)
 
     if not data["snapshots"]:
         problems.append(("no-data", "there are no snapshots at all — the data file has been emptied"))
     else:
         newest = data["snapshots"][-1]["date"]
-        age = (date.today() - date.fromisoformat(newest)).days
+        age = (utc_today() - date.fromisoformat(newest)).days
         if age >= 2:
             problems.append(("updates-stopped",
                              "the newest snapshot is %d days old (%s) — updates have stopped landing"

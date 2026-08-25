@@ -934,7 +934,7 @@ function renderEngagement(d){
   const cfg = {}; ((d.config && d.config.platforms) || []).forEach(p => cfg[p.id] = p);
 
   const rows = [];
-  let tL=0, tC=0, tS=0, tV=0, tReach=0, tInt=0;
+  let tL=0, tC=0, tS=0, tV=0, tReach=0, tInt=0, tEngaged=0, haveEngaged=false;
   ['instagram','tiktok','youtube','linkedin'].forEach(id => {
     const e = P[id];
     if(!e || !e.reach) return;
@@ -954,6 +954,7 @@ function renderEngagement(d){
     const matched = bm ? (REACH_BASES.has(bm.basis) ? er : bm.basis==='followers' ? erFollower : null) : null;
     rows.push({id, e, inter, er, erFollower, bm, matched, hasSplit});
     tL+=likes; tC+=comments; tS+=shares; tV+=saves; tReach+=e.reach; tInt+=inter;
+    if(e.accounts_engaged != null){ tEngaged += e.accounts_engaged; haveEngaged = true; }
   });
   if(!rows.length || !tReach) return;
   const overall = tInt / tReach * 100;
@@ -963,10 +964,22 @@ function renderEngagement(d){
   const b = overall >= heroBench*1.6 ? {c:'above', t:'Above typical'}
           : overall >= heroBench*0.7 ? {c:'at', t:'On par'}
           : {c:'below', t:'Below typical'};
+  // Two different questions, two different numbers. `overall` counts EVENTS per
+  // account reached, which is what the published benchmarks measure. The share
+  // of PEOPLE who did anything is accounts_engaged / reach, and it is roughly
+  // half as large — saying "12% of people" when one reel absorbed 720 of 1,320
+  // interactions would overstate it by more than 2x.
+  const peopleRate = (haveEngaged && tReach) ? tEngaged / tReach * 100 : null;
+  const say = peopleRate != null
+    ? `That's <b>${overall.toFixed(1)} interactions for every 100 accounts</b> we reached.
+       The people behind them: <b>${peopleRate.toFixed(1)}%</b> of everyone reached
+       (${FULL(tEngaged)} accounts) did at least one thing — the rest scrolled past.`
+    : `That's <b>${overall.toFixed(1)} interactions for every 100 accounts</b> reached —
+       measured against <b>reach</b>, not follower count. One account can interact more
+       than once, so this is not the share of people who engaged.`;
   document.getElementById('er-hero').innerHTML =
     `<div><div class="lab">True engagement rate · by reach</div><div class="big">${overall.toFixed(1)}%</div></div>` +
-    `<div><span class="er-badge ${b.c}">${b.t}</span>` +
-    `<div class="say">Of everyone who <b>sees</b> SOMBA content, about <b>${Math.round(overall)}%</b> like, comment, share, or save it — measured against <b>reach</b>, not follower count.</div></div>`;
+    `<div><span class="er-badge ${b.c}">${b.t}</span><div class="say">${say}</div></div>`;
 
   // ---- interaction composition (one thin bar) + quality table ----
   const comp = [
@@ -975,8 +988,13 @@ function renderEngagement(d){
     {k:'Shares', v:tS, col:'#FFC72C'},
     {k:'Saves', v:tV, col:'#35795a'}
   ];
+  // Only platforms that supplied a per-type split may describe the split. Once
+  // YouTube's tiny numbers clear the guard, its ~10 events must not be rendered
+  // as the composition of Instagram's 1,320 interactions.
+  const splitRows = rows.filter(r => r.hasSplit);
+  const splitShare = tInt ? splitRows.reduce((s,r) => s + r.inter, 0) / tInt : 0;
   const ct = tL+tC+tS+tV;
-  if(ct > 0){
+  if(ct > 0 && splitShare >= 0.5){
     const barHtml = comp.filter(c => c.v > 0).map(c => `<span style="width:${(c.v/ct*100).toFixed(1)}%;background:${c.col}"></span>`).join('');
     const legHtml = comp.map(c => `<div class="it"><span class="dot" style="background:${c.col}"></span>${c.k} <b>${Math.round(c.v/ct*100)}%</b></div>`).join('');
     const hi = Math.round((tS+tV)/ct*100);
@@ -986,9 +1004,13 @@ function renderEngagement(d){
   } else {
     // Without a per-type split every share would render as 0%, which reads as a
     // finding ("0% saves + shares") rather than as missing data. Say so instead.
+    const named = splitRows.map(r => (cfg[r.id]||{}).name || r.id).join(', ');
+    const why = named
+      ? escapeHtml(named) + ' is the only platform that supplied one, and it is too small a share of the total to describe it'
+      : 'no platform has supplied one yet';
     document.getElementById('er-composition').innerHTML =
-      `<div class="er-hint">The split between likes, comments, shares and saves isn't on Instagram's
-       summary screen, so it isn't shown here. The interaction total above is real.</div>`;
+      `<div class="er-hint">Not shown: the split between likes, comments, shares and saves isn't on
+       Instagram's summary screen, and ${why}. The interaction total above is real.</div>`;
   }
 
   const cell = (num) => {
