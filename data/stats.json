@@ -1267,45 +1267,47 @@
   },
   "engagement": {
     "period": "Last 30 days",
-    "updated": "2026-07-14",
-    "is_sample": true,
-    "note": "Per-platform totals from each channel's native analytics (IG Insights, TikTok Analytics, YouTube Studio, LinkedIn). Replace sample values — see ENGAGEMENT-DATA.md.",
+    "updated": "2026-08-25",
+    "is_sample": false,
+    "note": "Instagram and YouTube are real figures read from each platform's own analytics on 2026-08-25. TikTok and LinkedIn are NOT here yet — their sample numbers were removed rather than left to masquerade as real. Instagram's like/comment/share/save split was not on the Insights screen, so only the interaction total is recorded.",
     "platforms": {
       "instagram": {
-        "reach": 5200,
-        "posts": 12,
-        "likes": 260,
-        "comments": 30,
-        "shares": 28,
-        "saves": 70
-      },
-      "tiktok": {
-        "reach": 22000,
-        "posts": 9,
-        "likes": 1850,
-        "comments": 70,
-        "shares": 240,
-        "saves": 130
+        "reach": 11020,
+        "views": 19802,
+        "interactions": 1320,
+        "accounts_engaged": 634,
+        "profile_visits": 210,
+        "external_link_taps": 2,
+        "views_from_followers_pct": 13.7,
+        "views_from_non_followers_pct": 86.3,
+        "interactions_from_followers_pct": 42.3,
+        "views_by_format": {
+          "reels": 99.5,
+          "stories": 0.4,
+          "posts": 0.0
+        },
+        "period_days": 30,
+        "source": "instagram-insights-manual"
       },
       "youtube": {
-        "reach": 6200,
-        "posts": 5,
-        "likes": 210,
-        "comments": 24,
-        "shares": 18,
-        "saves": 0
-      },
-      "linkedin": {
-        "reach": 900,
-        "posts": 4,
-        "likes": 26,
-        "comments": 8,
-        "shares": 5,
-        "saves": 0
+        "reach": 1016,
+        "likes": -1,
+        "comments": 0,
+        "shares": 1,
+        "saves": 0,
+        "period_days": 28,
+        "source": "youtube-analytics-api",
+        "window": "2026-07-26..2026-08-22"
       }
-    }
+    },
+    "pending": [
+      "tiktok",
+      "linkedin",
+      "instagram interaction split",
+      "youtube likes/comments/shares"
+    ]
   },
-  "generated_at": "2026-08-25T19:31:13Z",
+  "generated_at": "2026-08-25T20:38:52Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). See ENGAGEMENT-DATA.md.",
@@ -1402,5 +1404,155 @@
         }
       }
     }
+  },
+  "posting_times": {
+    "platform": "instagram",
+    "metric": "followers online",
+    "as_of": "2026-08-25",
+    "source": "instagram-insights-manual",
+    "period_days": 30,
+    "hours": [
+      "12a",
+      "3a",
+      "6a",
+      "9a",
+      "12p",
+      "3p",
+      "6p",
+      "9p"
+    ],
+    "days": {
+      "Mon": [
+        133,
+        67,
+        219,
+        334,
+        363,
+        367,
+        382,
+        336
+      ],
+      "Tue": [
+        118,
+        67,
+        225,
+        338,
+        364,
+        356,
+        374,
+        329
+      ],
+      "Wed": [
+        126,
+        67,
+        229,
+        328,
+        363,
+        357,
+        373,
+        338
+      ],
+      "Thu": [
+        124,
+        66,
+        226,
+        333,
+        369,
+        358,
+        370,
+        336
+      ],
+      "Fri": [
+        130,
+        68,
+        225,
+        332,
+        364,
+        359,
+        368,
+        330
+      ],
+      "Sat": [
+        148,
+        63,
+        198,
+        344,
+        360,
+        359,
+        368,
+        333
+      ],
+      "Sun": [
+        156,
+        61,
+        175,
+        337,
+        371,
+        363,
+        371,
+        329
+      ]
+    }
+  },
+  "top_posts": {
+    "platform": "instagram",
+    "as_of": "2026-08-25",
+    "source": "instagram-insights-manual",
+    "period_days": 30,
+    "posts": [
+      {
+        "title": "Abroad Summer Flashbacks",
+        "date": "2026-08-13",
+        "views": 9800,
+        "interactions": 720,
+        "format": "reel"
+      },
+      {
+        "title": "Building That Resume",
+        "date": "2026-08-07",
+        "views": 1600,
+        "interactions": 37,
+        "format": "reel"
+      },
+      {
+        "title": "Fall 2022",
+        "date": "2026-08-11",
+        "views": 1400,
+        "interactions": 60,
+        "format": "reel"
+      },
+      {
+        "title": "Imperial Garden",
+        "date": "2026-08-08",
+        "views": 999,
+        "interactions": 35,
+        "format": "reel"
+      },
+      {
+        "title": "Eggs N' Things",
+        "date": "2026-08-10",
+        "views": 760,
+        "interactions": 31,
+        "format": "reel"
+      }
+    ]
+  },
+  "demographics_youtube": {
+    "age": [
+      {
+        "band": "13–17",
+        "pct": 100.0
+      }
+    ],
+    "gender": [
+      {
+        "label": "Men",
+        "pct": 100.0
+      }
+    ],
+    "estimated": false,
+    "as_of": "2026-08-25",
+    "source": "youtube-analytics-api",
+    "note": "Real YouTube viewer demographics, refreshed automatically."
   }
 }
