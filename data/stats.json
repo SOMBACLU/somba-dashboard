@@ -1347,7 +1347,7 @@
   "generated_at": "2026-08-26T19:17:51Z",
   "benchmarks": {
     "sector": "Higher education",
-    "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). See ENGAGEMENT-DATA.md.",
+    "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
     "overall": {
       "engagement_rate_reach": {
         "value": 3.0,
@@ -1409,26 +1409,7 @@
           "retrieved": "2026-08-18"
         }
       },
-      "linkedin": {
-        "engagement_rate": {
-          "value": 5.2,
-          "basis": "impressions",
-          "label": "LinkedIn average engagement rate by impressions (cross-industry)",
-          "source": "Socialinsider LinkedIn Benchmarks",
-          "source_url": "https://www.socialinsider.io/blog/linkedin-benchmarks/",
-          "data_period": "2024-25",
-          "retrieved": "2026-08-18"
-        },
-        "posts_per_week": {
-          "value": 2.5,
-          "basis": "per_week",
-          "label": "2-3 LinkedIn posts per week — the education-sector pace with highest engagement",
-          "source": "Hootsuite Social Media Benchmarks",
-          "source_url": "https://blog.hootsuite.com/social-media-benchmarks/",
-          "data_period": "Apr 2026",
-          "retrieved": "2026-08-18"
-        }
-      },
+      "linkedin": {},
       "youtube": {
         "engagement_rate": {
           "value": 4.62,
