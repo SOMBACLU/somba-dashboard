@@ -141,8 +141,33 @@
   .milestone b{color:var(--purple-mid)}
 
   /* ---- engagement (holistic) ---- */
-  .er-hero{position:relative;overflow:hidden;display:flex;align-items:center;gap:28px;flex-wrap:wrap;
-    background:linear-gradient(135deg,var(--purple),var(--purple-deep));color:#fff;border-radius:16px;padding:18px 24px}
+  .er-hero{position:relative;overflow:hidden;display:grid;
+    grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:20px 34px;
+    background:linear-gradient(135deg,var(--purple),var(--purple-deep));color:#fff;border-radius:16px;padding:26px 30px}
+  .er-hero .tick{display:flex;align-items:baseline;gap:10px;margin-top:4px}
+  /* tabular figures so the digits do not jitter while the value counts up */
+  .er-hero .big{font-variant-numeric:tabular-nums}
+  .er-hero .pct{font-family:"Newsreader",serif;font-size:26px;font-weight:600;color:var(--gold);opacity:.75}
+  .live{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;color:#cfc2e2}
+  .live i{width:7px;height:7px;border-radius:50%;background:#6ee7a8;display:inline-block;
+    box-shadow:0 0 0 0 rgba(110,231,168,.7)}
+  @media(prefers-reduced-motion:no-preference){
+    .live i{animation:livepulse 2.4s ease-out infinite}
+  }
+  @keyframes livepulse{
+    0%{box-shadow:0 0 0 0 rgba(110,231,168,.65)}
+    70%{box-shadow:0 0 0 7px rgba(110,231,168,0)}
+    100%{box-shadow:0 0 0 0 rgba(110,231,168,0)}
+  }
+  .er-delta{text-align:right;line-height:1.25}
+  .er-delta .d{font-family:"Newsreader",serif;font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+  .er-delta .d.up{color:#6ee7a8} .er-delta .d.down{color:#f6b0a0}
+  .er-delta .k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#cfc2e2;font-weight:700}
+  @media(max-width:760px){
+    .er-hero{grid-template-columns:minmax(0,1fr);gap:16px}
+    .er-delta{text-align:left}
+  }
   .er-hero::before{content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;
     background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1.4px);background-size:20px 20px}
   .er-hero>div{position:relative}
@@ -974,9 +999,19 @@ function renderEngagement(d){
     ? (arr => arr.slice(0,-1).join(', ') + ' and ' + arr[arr.length-1])(periods.sort((a,b)=>a-b))
       + ' days, depending on the platform'
     : (periods[0] || 30) + ' days';
+  const gap = overall - heroBench;
   document.getElementById('er-hero').innerHTML =
-    `<div><div class="lab">True engagement rate · by reach</div><div class="big">${overall.toFixed(1)}%</div></div>` +
-    `<div><span class="er-badge ${b.c}">${b.t}</span></div>`;
+    `<div>
+       <div class="lab">True engagement rate · by reach</div>
+       <div class="tick"><span class="big" id="er-tick">0.0</span><span class="pct">%</span></div>
+       <span class="live" style="margin-top:8px"><i></i>Live · updated ${escapeHtml(prettyDate(E.updated || ''))}</span>
+     </div>
+     <div class="er-delta">
+       <div class="d ${gap >= 0 ? 'up' : 'down'}">${gap >= 0 ? '▲' : '▼'} ${Math.abs(gap).toFixed(1)} pts</div>
+       <div class="k">vs ${heroBench}% sector</div>
+     </div>
+     <div><span class="er-badge ${b.c}">${b.t}</span></div>`;
+  tickTo(document.getElementById('er-tick'), overall, 1);
 
   // ---- benchmark meters (one row per platform) ----
   // Bar = SOMBA on its own scale; the gold line is the published benchmark, pinned at
@@ -1390,6 +1425,23 @@ function pbRender(){
 }
 
 // ---------- motion & nav ----------
+function tickTo(el, target, dp){
+  if(!el) return;
+  if(REDUCED){ el.textContent = target.toFixed(dp); return; }
+  const t0 = performance.now(), dur = 1150;
+  const tick = now => {
+    // clamp low as well as high: the rAF timestamp can predate t0, which made
+    // the cubic ease go negative and the ticker briefly show -0.8%
+    const p = Math.max(0, Math.min(1, (now - t0) / dur));
+    // ease-out with a small overshoot near the end, like a ticker settling
+    const e = 1 - Math.pow(1 - p, 3);
+    const wobble = p > .82 ? Math.sin((p - .82) / .18 * Math.PI) * target * .012 : 0;
+    el.textContent = (target * e + wobble).toFixed(dp);
+    if(p < 1) requestAnimationFrame(tick); else el.textContent = target.toFixed(dp);
+  };
+  requestAnimationFrame(tick);
+}
+
 function countUp(el, target){
   if(REDUCED || target <= 0){ el.textContent = FULL(target); return; }
   const t0 = performance.now(), dur = 900;
