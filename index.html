@@ -937,6 +937,7 @@ function renderEngagement(d){
 
   const rows = [];
   let tL=0, tC=0, tS=0, tV=0, tReach=0, tInt=0, tEngaged=0, engagedReach=0, haveEngaged=false;
+  const engagedOn = [];
   ['instagram','tiktok','youtube','linkedin'].forEach(id => {
     const e = P[id];
     if(!e || !e.reach) return;
@@ -958,7 +959,7 @@ function renderEngagement(d){
     tL+=likes; tC+=comments; tS+=shares; tV+=saves; tReach+=e.reach; tInt+=inter;
     // Only count reach from platforms that ALSO reported engaged accounts —
     // dividing Instagram's 634 by Instagram+YouTube reach would understate it.
-    if(e.accounts_engaged != null){ tEngaged += e.accounts_engaged; engagedReach += e.reach; haveEngaged = true; }
+    if(e.accounts_engaged != null){ tEngaged += e.accounts_engaged; engagedReach += e.reach; engagedOn.push(id); haveEngaged = true; }
   });
   if(!rows.length || !tReach) return;
   const overall = tInt / tReach * 100;
@@ -984,7 +985,8 @@ function renderEngagement(d){
     : (periods[0] || 30) + ' days';
   const say = peopleRate != null
     ? `That's <b>${overall.toFixed(1)} interactions for every 100 accounts</b> we reached.
-       The people behind them: <b>${peopleRate.toFixed(1)}%</b> of the accounts we reached on Instagram
+       The people behind them: <b>${peopleRate.toFixed(1)}%</b> of the accounts we reached on
+       ${escapeHtml(engagedOn.map(id => (cfg[id]||{}).name || id).join(' and '))}
        (${FULL(tEngaged)} of ${FULL(engagedReach)}) did at least one thing — the rest scrolled past.
        ${mixed ? `Covers ${periodTxt}.` : ''}`
     : `That's <b>${overall.toFixed(1)} interactions for every 100 accounts</b> reached —
