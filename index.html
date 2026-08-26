@@ -460,16 +460,6 @@
           <div class="chart-title" id="er-pace-title" style="margin-top:26px">Posting pace · vs sector</div>
           <div class="meters" id="er-pace"></div>
         </div>
-        <div class="grid2" style="margin-top:24px">
-          <div>
-            <div class="chart-title">What we earn, and how it lands</div>
-            <div id="er-composition"></div>
-          </div>
-          <div>
-            <div class="chart-title">Signal quality</div>
-            <div id="er-quality"></div>
-          </div>
-        </div>
         <p class="er-foot" id="er-foot"></p>
         <details class="bench-src hidden" id="bench-src">
           <summary>Benchmark sources</summary>
@@ -981,67 +971,15 @@ function renderEngagement(d){
   const periods = [...new Set(rows.map(r => r.e.period_days).filter(Boolean))];
   const mixed = periods.length > 1;
   const periodTxt = mixed
-    ? periods.sort((a,b)=>a-b).join(' and ') + ' days depending on the platform'
+    ? (arr => arr.slice(0,-1).join(', ') + ' and ' + arr[arr.length-1])(periods.sort((a,b)=>a-b))
+      + ' days, depending on the platform'
     : (periods[0] || 30) + ' days';
   const say = peopleRate != null
-    ? `That's <b>${overall.toFixed(1)} interactions for every 100 accounts</b> we reached.
-       The people behind them: <b>${peopleRate.toFixed(1)}%</b> of the accounts we reached on
-       ${escapeHtml(engagedOn.map(id => (cfg[id]||{}).name || id).join(' and '))}
-       (${FULL(tEngaged)} of ${FULL(engagedReach)}) did at least one thing — the rest scrolled past.
-       ${mixed ? `Covers ${periodTxt}.` : ''}`
-    : `That's <b>${overall.toFixed(1)} interactions for every 100 accounts</b> reached —
-       measured against <b>reach</b>, not follower count. One account can interact more
-       than once, so this is not the share of people who engaged.`;
+    ? `<b>${peopleRate.toFixed(1)}%</b> of the accounts we reached did something.`
+    : `${overall.toFixed(1)} interactions per 100 accounts reached.`;
   document.getElementById('er-hero').innerHTML =
     `<div><div class="lab">True engagement rate · by reach</div><div class="big">${overall.toFixed(1)}%</div></div>` +
     `<div><span class="er-badge ${b.c}">${b.t}</span><div class="say">${say}</div></div>`;
-
-  // ---- interaction composition (one thin bar) + quality table ----
-  const comp = [
-    {k:'Likes', v:tL, col:'#7a5aa6'},
-    {k:'Comments', v:tC, col:'#c4a5e0'},
-    {k:'Shares', v:tS, col:'#FFC72C'},
-    {k:'Saves', v:tV, col:'#35795a'}
-  ];
-  // Only platforms that supplied a per-type split may describe the split. Once
-  // YouTube's tiny numbers clear the guard, its ~10 events must not be rendered
-  // as the composition of Instagram's 1,320 interactions.
-  const splitRows = rows.filter(r => r.hasSplit);
-  const splitShare = tInt ? splitRows.reduce((s,r) => s + r.inter, 0) / tInt : 0;
-  const ct = tL+tC+tS+tV;
-  if(ct > 0 && splitShare >= 0.5){
-    const barHtml = comp.filter(c => c.v > 0).map(c => `<span style="width:${(c.v/ct*100).toFixed(1)}%;background:${c.col}"></span>`).join('');
-    const legHtml = comp.map(c => `<div class="it"><span class="dot" style="background:${c.col}"></span>${c.k} <b>${Math.round(c.v/ct*100)}%</b></div>`).join('');
-    const hi = Math.round((tS+tV)/ct*100);
-    document.getElementById('er-composition').innerHTML =
-      `<div class="er-cbar">${barHtml}</div><div class="er-clegend">${legHtml}</div>` +
-      `<div class="er-hint"><b>${hi}% saves + shares</b> — the high-intent signals algorithms reward most.</div>`;
-  } else {
-    // Without a per-type split every share would render as 0%, which reads as a
-    // finding ("0% saves + shares") rather than as missing data. Say so instead.
-    const named = splitRows.map(r => (cfg[r.id]||{}).name || r.id).join(', ');
-    const why = named
-      ? escapeHtml(named) + ' is the only platform that supplied one, and it is too small a share of the total to describe it'
-      : 'no platform has supplied one yet';
-    document.getElementById('er-composition').innerHTML =
-      `<div class="er-hint">Not shown: the split between likes, comments, shares and saves isn't on
-       Instagram's summary screen, and ${why}. The interaction total above is real.</div>`;
-  }
-
-  const cell = (num) => {
-    const v = num == null ? null : num;
-    return v ? v.toFixed(1) + '%' : '—';
-  };
-  document.getElementById('er-quality').innerHTML = `<table class="qtable">
-    <tr><th>Platform</th><th>Save</th><th>Share</th><th>Comment</th><th>Reach/post</th></tr>
-    ${rows.map(r => `<tr>
-      <td><span class="picon" style="color:${(cfg[r.id] && cfg[r.id].color) || '#5d4380'}">${ICONS[r.id]||''}</span>${ER_META[r.id].name}</td>
-      <td>${cell(100*(r.e.saves||0)/r.e.reach)}</td>
-      <td>${cell(100*(r.e.shares||0)/r.e.reach)}</td>
-      <td>${cell(100*(r.e.comments||0)/r.e.reach)}</td>
-      <td>${r.e.posts ? FMT(Math.round(r.e.reach/r.e.posts)) : '—'}</td>
-    </tr>`).join('')}
-  </table><div class="chart-cap">Rates are the share of everyone reached who did each thing.</div>`;
 
   // ---- benchmark meters (one row per platform) ----
   // Bar = SOMBA on its own scale; the gold line is the published benchmark, pinned at
@@ -1081,11 +1019,7 @@ function renderEngagement(d){
   // ---- methodology footnote ----
   const hasBenchBlock = !!(d.benchmarks && d.benchmarks.platforms);
   document.getElementById('er-foot').innerHTML =
-    `Engagement rate = interactions ÷ reach, over ${periodTxt}. ` +
-    (hasBenchBlock
-      ? '<b>Gold line</b> = a published sector benchmark measured the same way — every number is cited under Benchmark sources. '
-      : '') +
-    (E.updated ? ('Updated ' + E.updated + '.') : '');
+    `Measured against reach over ${periodTxt}. Gold line = sector benchmark.`;
 
   show('sec-engage');
 }
