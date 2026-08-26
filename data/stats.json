@@ -986,10 +986,41 @@
           "last_ok": "2026-08-25"
         }
       }
+    },
+    {
+      "date": "2026-08-26",
+      "platforms": {
+        "instagram": {
+          "followers": 747,
+          "following": 285,
+          "posts": 525,
+          "source": "scrape",
+          "last_ok": "2026-08-26"
+        },
+        "tiktok": {
+          "followers": 156,
+          "likes": 14300,
+          "videos": 453,
+          "source": "scrape",
+          "last_ok": "2026-08-26"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 422894,
+          "source": "scrape",
+          "last_ok": "2026-08-26"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape",
+          "last_ok": "2026-08-26"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-25",
+    "fetched": "2026-08-26",
     "source": "youtube-rss",
     "videos": [
       {
@@ -1163,14 +1194,14 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-08-25",
+    "fetched": "2026-08-26",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
         "title": "Thank you sharks for taking my business opportunity #college #business #sharktank",
-        "views": 65898,
+        "views": 65899,
         "kind": "short",
         "likes": 333,
         "published": "2024-03-31"
@@ -1305,7 +1336,7 @@
       "youtube likes/comments/shares"
     ]
   },
-  "generated_at": "2026-08-25T20:38:52Z",
+  "generated_at": "2026-08-26T00:10:14Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). See ENGAGEMENT-DATA.md.",
