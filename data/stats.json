@@ -1007,7 +1007,7 @@
         "youtube": {
           "followers": 245,
           "videos": 222,
-          "views": 422906,
+          "views": 422933,
           "source": "scrape",
           "last_ok": "2026-08-26"
         },
@@ -1318,15 +1318,23 @@
           "posts": 0.0
         },
         "period_days": 30,
-        "source": "instagram-insights-manual"
+        "source": "instagram-insights-manual",
+        "posts": 13,
+        "posts_source": "derived-from-snapshots"
       },
       "youtube": {
-        "reach": 1032,
-        "watch_time_hours": 3.1,
-        "subscribers_gained": 1,
-        "period_days": 28,
-        "source": "youtube-studio-manual",
-        "note": "Views only, read from YouTube Studio on 2026-08-25. The Analytics API is now connected but reports just 1 interaction across 1,016 views this window — too little to state a rate, so none is shown. It will fill in by itself once there is enough activity to measure."
+        "reach": 2861,
+        "likes": 23,
+        "comments": 0,
+        "shares": 8,
+        "saves": 0,
+        "period_days": 90,
+        "source": "youtube-analytics-api",
+        "window": "2026-05-26..2026-08-23",
+        "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
+        "updated": "2026-08-26",
+        "posts": 0,
+        "posts_source": "derived-from-snapshots"
       }
     },
     "pending": [
@@ -1336,7 +1344,7 @@
       "youtube likes/comments/shares"
     ]
   },
-  "generated_at": "2026-08-26T18:37:01Z",
+  "generated_at": "2026-08-26T19:17:51Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). See ENGAGEMENT-DATA.md.",
