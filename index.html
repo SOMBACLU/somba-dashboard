@@ -455,9 +455,9 @@
         <p class="note">Not how big the audience is — how much the content actually moves people.</p>
         <div class="er-hero" id="er-hero"></div>
         <div style="margin-top:20px">
-          <div class="chart-title">Engagement · vs published sector benchmark</div>
+          <div class="chart-title">Engagement</div>
           <div class="meters" id="er-meters"></div>
-          <div class="chart-title" id="er-pace-title" style="margin-top:26px">Posting pace · vs sector</div>
+          <div class="chart-title" id="er-pace-title" style="margin-top:26px">Posting pace</div>
           <div class="meters" id="er-pace"></div>
         </div>
         <p class="er-foot" id="er-foot"></p>
@@ -974,12 +974,9 @@ function renderEngagement(d){
     ? (arr => arr.slice(0,-1).join(', ') + ' and ' + arr[arr.length-1])(periods.sort((a,b)=>a-b))
       + ' days, depending on the platform'
     : (periods[0] || 30) + ' days';
-  const say = peopleRate != null
-    ? `<b>${peopleRate.toFixed(1)}%</b> of the accounts we reached did something.`
-    : `${overall.toFixed(1)} interactions per 100 accounts reached.`;
   document.getElementById('er-hero').innerHTML =
     `<div><div class="lab">True engagement rate · by reach</div><div class="big">${overall.toFixed(1)}%</div></div>` +
-    `<div><span class="er-badge ${b.c}">${b.t}</span><div class="say">${say}</div></div>`;
+    `<div><span class="er-badge ${b.c}">${b.t}</span></div>`;
 
   // ---- benchmark meters (one row per platform) ----
   // Bar = SOMBA on its own scale; the gold line is the published benchmark, pinned at
@@ -1008,18 +1005,23 @@ function renderEngagement(d){
     return meterRow(r.id, false, (perFollower ? r.erFollower : r.er).toFixed(1), '%', r.bm, r.matched, basis);
   }).join('');
   const paceRows = rows.map(r => {
+    if(r.e.posts == null) return '';          // unknown is different from zero
     const bm = bench(d, r.id, 'posts_per_week');
-    if(!bm || !r.e.posts) return '';
     const pw = r.e.posts / ((r.e.period_days || ER_PERIOD_DAYS)/7);
-    return meterRow(r.id, true, pw.toFixed(1), '/wk', bm, pw, '');
+    return meterRow(r.id, true, pw.toFixed(1), '/wk', bm, bm ? pw : null, '');
   }).filter(Boolean);
   document.getElementById('er-pace').innerHTML = paceRows.join('');
   if(!paceRows.length) document.getElementById('er-pace-title').classList.add('hidden');
 
   // ---- methodology footnote ----
   const hasBenchBlock = !!(d.benchmarks && d.benchmarks.platforms);
+  // Name the window per platform rather than lumping them together — they
+  // genuinely differ, and "28, 30 and 90 days" told the reader nothing useful.
+  const windows = rows
+    .map(r => `${escapeHtml((cfg[r.id]||{}).name || r.id)}: past ${r.e.period_days || ER_PERIOD_DAYS} days`)
+    .join(' · ');
   document.getElementById('er-foot').innerHTML =
-    `Measured against reach over ${periodTxt}. Gold line = sector benchmark.`;
+    `${windows}. Gold line = sector benchmark.`;
 
   show('sec-engage');
 }
