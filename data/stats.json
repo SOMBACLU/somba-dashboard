@@ -1000,7 +1000,7 @@
         "tiktok": {
           "followers": 156,
           "likes": 14300,
-          "videos": 453,
+          "videos": 454,
           "source": "scrape",
           "last_ok": "2026-08-26"
         },
@@ -1336,7 +1336,7 @@
       "youtube likes/comments/shares"
     ]
   },
-  "generated_at": "2026-08-26T00:10:14Z",
+  "generated_at": "2026-08-26T03:27:26Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). See ENGAGEMENT-DATA.md.",
