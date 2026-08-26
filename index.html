@@ -220,6 +220,7 @@
      links on a phone, instead of the row stretching the whole page wide */
   .topnav .links{display:flex;gap:var(--sp-1);margin-left:auto;min-width:0;overflow-x:auto;scrollbar-width:none}
   .topnav .links::-webkit-scrollbar{display:none}
+  .topnav .links a.cur{background:var(--brand-purple-soft);color:var(--brand-purple);font-weight:var(--fw-semibold)}
   .topnav .links a{padding:var(--sp-2) var(--sp-3);border-radius:var(--r-full);font-size:var(--fs-200);font-weight:600;
     color:var(--muted);text-decoration:none;white-space:nowrap;transition:color .2s,background .2s}
   .topnav .links a:hover{color:var(--purple);background:var(--purple-soft)}
@@ -288,6 +289,7 @@
   /* minmax(0,…) not 1fr: a plain 1fr track won't shrink below its content, so one long
      unbreakable string (a video title) pushes the column past the card and widens the page */
   .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--sp-5)}
+  .chart-box.tall{height:260px}
   .chart-box{position:relative;height:170px}
   .chart-box.short{height:150px}
   .chart-title{font-size:var(--fs-100);letter-spacing:var(--tracking-caps);text-transform:uppercase;
@@ -376,11 +378,24 @@
   .hm .hh{font-size:var(--fs-100);color:var(--label);text-align:center;font-weight:600;padding-bottom:var(--sp-1)}
   .hm .dl{font-size:var(--fs-200);color:var(--muted);font-weight:700;padding-right:var(--sp-2);text-align:right;
     display:flex;align-items:center;justify-content:flex-end}
-  .hm .c{aspect-ratio:1.9/1;border-radius:var(--r-xs);display:flex;align-items:center;justify-content:center;
-    font-size:var(--fs-100);font-weight:700;color:#fff;min-height:24px}
+  .hm .c{aspect-ratio:3.1/1;cursor:default;transition:transform var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease);border-radius:var(--r-xs);display:flex;align-items:center;justify-content:center;
+    font-size:var(--fs-100);font-weight:700;color:#fff;min-height:18px}
   .hm .c.peak{outline:2px solid var(--gold-deep);outline-offset:1px}
+  .hm .c:hover{transform:scale(1.14);box-shadow:var(--elev-2);z-index:1;position:relative}
+  .hm-read{margin-left:auto;color:var(--text-secondary);min-height:1em}
+  .hm-read b{color:var(--text-primary)}
   .hm .c.none{background:repeating-linear-gradient(45deg,#f2eef7,#f2eef7 4px,#e8e1f0 4px,#e8e1f0 8px);
     color:var(--label);font-weight:600}
+  /* segmented control — shows one pane at a time instead of stacking every
+     list side by side, which is where most of the page's word count sat */
+  .seg{display:inline-flex;gap:var(--sp-1);padding:var(--sp-1);margin-bottom:var(--sp-4);
+    background:var(--surface-inset);border-radius:var(--r-full)}
+  .seg-b{appearance:none;border:0;cursor:pointer;font:inherit;font-size:var(--fs-200);
+    font-weight:var(--fw-semibold);color:var(--text-tertiary);background:transparent;
+    padding:var(--sp-1) var(--sp-4);border-radius:var(--r-full);
+    transition:background var(--dur) var(--ease),color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+  .seg-b:hover{color:var(--text-primary)}
+  .seg-b.on{background:var(--surface-raised);color:var(--text-primary);box-shadow:var(--elev-1)}
   .hm-key{display:flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-2);font-size:var(--fs-200);color:var(--label)}
   .hm-key .sw{width:52px;height:9px;border-radius:var(--r-xs);
     background:linear-gradient(90deg,#efeaf6,#7a5aa6)}
@@ -600,7 +615,7 @@
         <h2 class="serif">Growth</h2>
         <div class="statgrid" id="pace-tiles"></div>
         <p class="milestone" id="milestone"></p>
-        <div class="grid2 trend-grid" id="trendgrid"></div>
+        <div class="trend-grid" id="trendgrid"></div>
       </section>
     </div>
 
@@ -641,16 +656,12 @@
       <section id="sec-videos" class="hidden">
         <h2 class="serif">Content</h2>
         
-        <div class="grid2">
-          <div>
-            <div class="chart-title">Latest uploads</div>
-            <div id="vidlist"></div>
-          </div>
-          <div>
-            <div class="chart-title" id="topvidnote">All-time greats</div>
-            <div id="topvidlist"></div>
-          </div>
+        <div class="seg" role="tablist" aria-label="Video list">
+          <button class="seg-b on" role="tab" aria-selected="true" data-pane="vidlist">Latest</button>
+          <button class="seg-b" role="tab" aria-selected="false" data-pane="topvidlist">All-time</button>
         </div>
+        <div id="vidlist" class="pane"></div>
+        <div id="topvidlist" class="pane hidden"></div>
       </section>
     </div>
 
@@ -842,6 +853,7 @@ function render(d){
   try{ renderMix(platforms, snaps); }catch(e){ console.error('renderMix failed', e); }
   try{ renderDemographics(d); }catch(e){ console.error('renderDemographics failed', e); }
   try{ initPlaybook(d); }catch(e){ console.error('initPlaybook failed', e); }
+  initSegs();
   initMotion();
   initNav();
 }
@@ -891,7 +903,7 @@ function miniLine(id, pts, opt){
   opt = opt || {};
   const data = pts.filter(p => p.val != null);
   if(data.length < 2) return false;
-  new Chart(id, {
+  const chart = new Chart(id, {
     type:'line',
     data:{labels: data.map(p => shortDate(p.date)),
       datasets:[{data: data.map(p => p.val), borderColor:'#5d4380',
@@ -903,7 +915,7 @@ function miniLine(id, pts, opt){
       scales:{x:{grid:{display:false}, ticks:{autoSkip:true, maxTicksLimit:5, maxRotation:0}},
         y:{beginAtZero:!!opt.yZero, grid:{color:'#efe9f6'}, ticks:{precision:0, maxTicksLimit:4, callback:v=>FMT(v)}}}}
   });
-  return true;
+  return chart;
 }
 
 // ---------- reach & output trends (needs history) ----------
@@ -937,12 +949,6 @@ function renderTrends(platforms, snaps, d){
     return out;
   };
 
-  add('t-yt-views', 'YouTube views gained / week', '',
-      weekly(series(snaps, 'youtube', 'views')));
-
-  add('t-tt-likes', 'TikTok likes gained / week', '',
-      weekly(series(snaps, 'tiktok', 'likes')));
-
   const output = snaps.map(s => {
     const yv = (s.platforms.youtube||{}).videos,
           tv = (s.platforms.tiktok||{}).videos,
@@ -950,11 +956,48 @@ function renderTrends(platforms, snaps, d){
     const known = [yv, tv, ig].some(v => v != null);
     return {date:s.date, val: known ? [yv, tv, ig].reduce((a,b) => a + (b||0), 0) : null};
   });
-  add('t-output', 'Posts published / week', '', weekly(output));
-
   const totals = snaps.map(s => ({date:s.date,
     val: platforms.reduce((a,p) => a + (((s.platforms[p.id]||{}).followers) || 0), 0)}));
-  add('t-followers', 'Followers gained / week', '', weekly(totals));
+
+  // One chart, four metrics. Four near-identical frames stacked in a grid was
+  // three-quarters redundant furniture; the reader compares by switching, not
+  // by scanning four small axes at once.
+  const METRICS = [
+    {key:'followers', label:'Followers',  pts: weekly(totals)},
+    {key:'output',    label:'Posts',      pts: weekly(output)},
+    {key:'ytviews',   label:'YT views',   pts: weekly(series(snaps, 'youtube', 'views'))},
+    {key:'ttlikes',   label:'TikTok likes', pts: weekly(series(snaps, 'tiktok', 'likes'))},
+  ].filter(m => has(m.pts));
+  if(!METRICS.length) return;
+
+  grid.insertAdjacentHTML('beforeend',
+    `<div class="seg" role="tablist" aria-label="Growth metric">` +
+    METRICS.map((m,i) => `<button class="seg-b${i?'':' on'}" role="tab" data-metric="${m.key}"
+       aria-selected="${i?'false':'true'}">${m.label}</button>`).join('') +
+    `</div><div class="chart-box tall"><canvas id="t-main"></canvas></div>` +
+    `<p class="chart-cap" id="t-cap"></p>`);
+
+  let chart = null;
+  const draw = key => {
+    const m = METRICS.find(x => x.key === key) || METRICS[0];
+    if(chart) chart.destroy();
+    chart = miniLine('t-main', m.pts);
+    const vals = m.pts.map(p => p.val).filter(v => v != null);
+    const avg = vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : 0;
+    document.getElementById('t-cap').innerHTML =
+      `Change per week · averaging <b>${avg >= 0 ? '+' : ''}${FULL(Math.round(avg))}</b>`;
+    drew = true;
+  };
+  draw(METRICS[0].key);
+  grid.querySelector('.seg').addEventListener('click', e => {
+    const btn = e.target.closest('.seg-b');
+    if(!btn) return;
+    grid.querySelectorAll('.seg-b').forEach(b => {
+      const on = b === btn;
+      b.classList.toggle('on', on); b.setAttribute('aria-selected', on);
+    });
+    draw(btn.dataset.metric);
+  });
 
   if(drew) show('sec-growth');
 }
@@ -1271,19 +1314,29 @@ function renderTiming(d){
     // the wrong hour, and a null would render as a confident "0".
     const cells = pt.hours.map((hourLabel, i) => {
       const v = pt.days[day][i];
+      // No number in the cell. 56 cells x 3 digits was 168 characters of type
+      // doing what colour already does; the exact value is one hover away.
       if(typeof v !== 'number' || !isFinite(v)){
-        return `<div class="c none" title="${escapeHtml(day)} ${escapeHtml(hourLabel)} — no reading">·</div>`;
+        return `<div class="c none" data-lab="${escapeHtml(day)} ${escapeHtml(hourLabel)}" data-v="no reading"></div>`;
       }
       const isPeak = day === best.day && hourLabel === best.hour;
-      const t = (v - lo) / span;
-      return `<div class="c${isPeak ? ' peak' : ''}" style="background:${shade(v)};color:${t > 0.55 ? '#fff' : '#3a2d4a'}"
-                   title="${escapeHtml(day)} ${escapeHtml(hourLabel)} — ${FULL(v)} followers online">${FULL(v)}</div>`;
+      return `<div class="c${isPeak ? ' peak' : ''}" style="background:${shade(v)}"
+                   data-lab="${escapeHtml(day)} ${escapeHtml(hourLabel)}"
+                   data-v="${FULL(v)} online"></div>`;
     }).join('');
     return `<div class="dl">${escapeHtml(day)}</div>` + cells;
   }).join('');
   document.getElementById('heatmap').innerHTML = `<div class="hm">${head}${body}</div>` +
-    `<div class="hm-key"><span>fewer online</span><span class="sw"></span><span>more online</span>
-     </div>`;
+    `<div class="hm-key"><span>fewer</span><span class="sw"></span><span>more</span>
+       <span class="hm-read" id="hm-read"></span></div>`;
+
+  // hover readout — replaces the numbers that used to sit in every cell
+  const read = document.getElementById('hm-read');
+  document.getElementById('heatmap').addEventListener('pointerover', e => {
+    const c = e.target.closest('.c');
+    if(c) read.innerHTML = `<b>${c.dataset.lab}</b> · ${c.dataset.v}`;
+  });
+  document.getElementById('heatmap').addEventListener('pointerleave', () => { read.textContent = ''; });
 
   document.getElementById('timenote').innerHTML =
     `Followers online. <b>Busiest: ${best.day} ${best.hour}.</b>`;
@@ -1541,6 +1594,22 @@ function countUp(el, target){
   requestAnimationFrame(tick);
 }
 
+// Scrollspy: mark which section the reader is currently in. Orientation on a
+// long page, and it adds no ink of its own.
+(function(){
+  const links = [...document.querySelectorAll('.topnav .links a')];
+  const targets = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if(!targets.length) return;
+  const mark = id => links.forEach(a =>
+    a.classList.toggle('cur', a.getAttribute('href') === '#' + id));
+  const io = new IntersectionObserver(entries => {
+    const vis = entries.filter(e => e.isIntersecting)
+                       .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if(vis) mark(vis.target.id);
+  }, {rootMargin:'-96px 0px -55% 0px', threshold:[0, .25, .6]});
+  targets.forEach(t => io.observe(t));
+})();
+
 // Toggle the nav's elevation once the page has moved off the top.
 (function(){
   const nav = document.querySelector('.topnav');
@@ -1549,6 +1618,23 @@ function countUp(el, target){
   addEventListener('scroll', sync, {passive:true});
   sync();
 })();
+
+// One handler for every segmented control: swap which pane is visible.
+function initSegs(){
+  document.querySelectorAll('.seg').forEach(seg => {
+    seg.addEventListener('click', e => {
+      const btn = e.target.closest('.seg-b');
+      if(!btn) return;
+      seg.querySelectorAll('.seg-b').forEach(b => {
+        const on = b === btn;
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-selected', on);
+        const pane = document.getElementById(b.dataset.pane);
+        if(pane) pane.classList.toggle('hidden', !on);
+      });
+    });
+  });
+}
 
 function initMotion(){
   if(REDUCED) return;
