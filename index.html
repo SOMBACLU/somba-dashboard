@@ -296,7 +296,7 @@
   .trend-grid{margin-top:var(--sp-5)}
 
   /* ---- stat tiles ---- */
-  .statgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--sp-3)}
+  .statgrid{display:grid;align-items:start;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--sp-3)}
   .stile{border:1px solid var(--border-default);border-radius:var(--r-md);
     padding:var(--sp-3) var(--sp-4);background:var(--surface-sunken)}
   .stile .n{font-family:"Newsreader",serif;font-size:var(--fs-600);font-weight:600;letter-spacing:var(--tracking-tight)}
@@ -1015,12 +1015,11 @@ function renderPace(platforms, snaps, d){
   if(v){
     tiles.push({ n: (wk >= 0 ? '+' : '') + wk.toFixed(1) + '%/wk',
       k: 'TikTok growth vs. education sector',
-      c: `<div class="minitrack"><span class="fill" style="width:${fillPct(wk, gBm)}%;background:${tt.p.color || '#00B4C5'}"></span>` +
-         `<span class="bmark" style="left:${BM_POS}%" title="${benchTitle(gBm)}"><i>${bmTick(gBm)}</i></span></div>` +
-         `<span class="vd ${v.cls}">${VD_SHORT[v.cls]}</span>` });
+      c: `<span class="vd ${v.cls}" title="${benchTitle(gBm)}">${VD_SHORT[v.cls]} vs ${bmTick(gBm)}</span>` });
   }
   document.getElementById('pace-tiles').innerHTML = tiles.map(t =>
-    `<div class="stile"><div class="n">${t.n}</div><div class="k">${t.k}</div><div class="c">${t.c}</div></div>`).join('');
+    `<div class="stile"><div class="n">${t.n}</div><div class="k">${t.k}</div>${
+       t.c ? `<div class="c">${t.c}</div>` : ''}</div>`).join('');
 
   // milestone projection: biggest platform with a sane, positive trajectory
   let ms = '';
@@ -1284,12 +1283,10 @@ function renderTiming(d){
   }).join('');
   document.getElementById('heatmap').innerHTML = `<div class="hm">${head}${body}</div>` +
     `<div class="hm-key"><span>fewer online</span><span class="sw"></span><span>more online</span>
-     <span style="margin-left:auto">Gold outline = the single busiest slot</span></div>`;
+     </div>`;
 
   document.getElementById('timenote').innerHTML =
-    `How many Instagram followers are on the app, by day and time — it peaks at ` +
-    `${FULL(best.v)} and bottoms out around ${FULL(Math.min(...all))}. ` +
-    `<b>Busiest: ${best.day} around ${best.hour}.</b>`;
+    `Followers online. <b>Busiest: ${best.day} ${best.hour}.</b>`;
   show('sec-timing');
 }
 
@@ -1315,8 +1312,7 @@ function renderTopPosts(d){
 
   const sharePct = totalViews ? Math.round(top.views / totalViews * 100) : 0;
   document.getElementById('postnote').innerHTML =
-    `The ${posts.length} best-performing posts of the last ${tp.period_days || 30} days. ` +
-    `<b>“${escapeHtml(top.title)}” alone took ${sharePct}% of the views in this list.</b>`;
+    `Last ${tp.period_days || 30} days. <b>Top post took ${sharePct}% of these views.</b>`;
   show('sec-posts');
 }
 
