@@ -1007,7 +1007,7 @@
         "youtube": {
           "followers": 245,
           "videos": 222,
-          "views": 422906,
+          "views": 422894,
           "source": "scrape",
           "last_ok": "2026-08-26"
         },
@@ -1034,7 +1034,7 @@
         "id": "mtbnjLbYoKI",
         "title": "POV: Class of 2027 #classof2027 #senior #junior #realitycheck #collegehumor #studentlife",
         "published": "2026-05-01",
-        "views": 1969,
+        "views": 1970,
         "likes": 10
       },
       {
@@ -1111,7 +1111,7 @@
         "id": "8LtABSHhRJQ",
         "title": "Shut up MOM! #funny #fyp #viral",
         "published": "2026-04-09",
-        "views": 2661,
+        "views": 2662,
         "likes": 36
       },
       {
@@ -1336,7 +1336,7 @@
       "youtube likes/comments/shares"
     ]
   },
-  "generated_at": "2026-08-26T05:52:02Z",
+  "generated_at": "2026-08-26T07:11:05Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). See ENGAGEMENT-DATA.md.",
