@@ -119,11 +119,19 @@ fi
 # --- Step 2: save the change (only if there is one) --------------------------
 git add data/stats.json
 if git diff --staged --quiet; then
-  say "No numbers changed this time — nothing to send. Done."
-  exit 0
+  # Nothing new — but an earlier run may have committed and failed to push.
+  # Without this the stranded commit would sit here forever, because the push
+  # is only ever reached when the numbers changed.
+  if git rev-parse --verify --quiet origin/main >/dev/null 2>&1 &&
+     [[ "$(git rev-list --count origin/main..HEAD 2>/dev/null || echo 0)" != "0" ]]; then
+    say "No new numbers, but an earlier update never published — retrying that."
+  else
+    say "No numbers changed this time — nothing to send. Done."
+    exit 0
+  fi
 fi
 
-git commit -q -m "Auto stats update (Mac) $(date -u +'%F %H:%M UTC')" || {
+git commit -q -o data/stats.json -m "Auto stats update (Mac) $(date -u +'%F %H:%M UTC')" || {
   say "Could not save the change. Leaving everything as it is."
   exit 0
 }

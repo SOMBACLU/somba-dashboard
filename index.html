@@ -209,6 +209,8 @@
   .hm .c{aspect-ratio:1.9/1;border-radius:5px;display:flex;align-items:center;justify-content:center;
     font-size:10.5px;font-weight:700;color:#fff;min-height:24px}
   .hm .c.peak{outline:2px solid var(--gold-deep);outline-offset:1px}
+  .hm .c.none{background:repeating-linear-gradient(45deg,#f2eef7,#f2eef7 4px,#e8e1f0 4px,#e8e1f0 8px);
+    color:var(--label);font-weight:600}
   .hm-key{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:11.5px;color:var(--label)}
   .hm-key .sw{width:52px;height:9px;border-radius:5px;
     background:linear-gradient(90deg,#efeaf6,#7a5aa6)}
@@ -1161,15 +1163,23 @@ function renderTiming(d){
     const l = 94 - t * 52;                     // light lilac -> deep purple
     return `hsl(268 34% ${l}%)`;
   };
-  const head = '<div class="hh"></div>' + pt.hours.map(h => `<div class="hh">${h}</div>`).join('');
-  const body = days.map(day =>
-    `<div class="dl">${day}</div>` + pt.days[day].map((v, i) => {
-      const isPeak = day === best.day && pt.hours[i] === best.hour;
+  const head = '<div class="hh"></div>' + pt.hours.map(h => `<div class="hh">${escapeHtml(h)}</div>`).join('');
+  const body = days.map(day => {
+    // Always emit exactly one cell per hour column, whatever the data holds —
+    // a short or ragged day array would otherwise shift every later cell into
+    // the wrong hour, and a null would render as a confident "0".
+    const cells = pt.hours.map((hourLabel, i) => {
+      const v = pt.days[day][i];
+      if(typeof v !== 'number' || !isFinite(v)){
+        return `<div class="c none" title="${escapeHtml(day)} ${escapeHtml(hourLabel)} — no reading">·</div>`;
+      }
+      const isPeak = day === best.day && hourLabel === best.hour;
       const t = (v - lo) / span;
-      return `<div class="c${isPeak ? ' peak' : ''}" style="background:${shade(v)};color:${t > 0.55 ? '#fff' : '#4a3a5e'}"
-                   title="${day} ${pt.hours[i]} — ${FULL(v)} followers online">${FULL(v)}</div>`;
-    }).join('')
-  ).join('');
+      return `<div class="c${isPeak ? ' peak' : ''}" style="background:${shade(v)};color:${t > 0.55 ? '#fff' : '#3a2d4a'}"
+                   title="${escapeHtml(day)} ${escapeHtml(hourLabel)} — ${FULL(v)} followers online">${FULL(v)}</div>`;
+    }).join('');
+    return `<div class="dl">${escapeHtml(day)}</div>` + cells;
+  }).join('');
   document.getElementById('heatmap').innerHTML = `<div class="hm">${head}${body}</div>` +
     `<div class="hm-key"><span>fewer online</span><span class="sw"></span><span>more online</span>
      <span style="margin-left:auto">Gold outline = the single busiest slot</span></div>`;
@@ -1178,10 +1188,25 @@ function renderTiming(d){
     `How many Instagram followers are on the app, by day and time — it peaks at ` +
     `${FULL(best.v)} and bottoms out around ${FULL(Math.min(...all))}. ` +
     `<b>Busiest: ${best.day} around ${best.hour}.</b>`;
+  // Derive the "highest/lowest slot" claim rather than hardcoding it — a
+  // hardcoded finding silently goes false the next time the data is refreshed.
+  const winsAt = pt.hours.map((_, i) =>
+    days.filter(day => {
+      const row = pt.days[day].filter(v => typeof v === 'number');
+      return row.length && pt.days[day][i] === Math.max(...row);
+    }).length);
+  const lowAt = pt.hours.map((_, i) =>
+    days.filter(day => {
+      const row = pt.days[day].filter(v => typeof v === 'number');
+      return row.length && pt.days[day][i] === Math.min(...row);
+    }).length);
+  const topHour = pt.hours[winsAt.indexOf(Math.max(...winsAt))];
+  const deadHour = pt.hours[lowAt.indexOf(Math.max(...lowAt))];
   document.getElementById('timefoot').innerHTML =
     `Post shortly <b>before</b> a peak, not during it — the algorithm needs a little time to circulate a
-     new post. Evenings (6p) run highest almost every day; 3a is the dead zone every day.
-     Instagram only reports this for ${escapeHtml(pt.platform || 'instagram')}. Read ${prettyDate(pt.as_of)}.`;
+     new post. ${escapeHtml(topHour)} is the busiest slot on ${Math.max(...winsAt)} of ${days.length} days;
+     ${escapeHtml(deadHour)} is the quietest on ${Math.max(...lowAt)} of ${days.length}.
+     Instagram reports this for followers only, and hand-entered on ${prettyDate(pt.as_of)}.`;
   show('sec-timing');
 }
 

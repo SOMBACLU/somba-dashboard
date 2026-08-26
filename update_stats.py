@@ -643,14 +643,19 @@ def update_private_analytics(data):
     try:
         eng = fetch_youtube_engagement(token, start, end)
         block = data.setdefault("engagement", {})
+        eng["updated"] = utc_today().isoformat()
         block.setdefault("platforms", {})["youtube"] = eng
-        block["updated"] = utc_today().isoformat()
+        # Deliberately NOT stamping block["updated"] — that renders as "Updated
+        # <date>" for the whole Engagement section, and a YouTube-only refresh
+        # would vouch for hand-entered Instagram numbers that never changed.
         print("ok (%s views, %s likes)" % ("{:,}".format(eng["reach"]),
                                            "{:,}".format(eng["likes"])))
     except Exception as e:
         print("engagement unavailable (%s)" % e)
 
     try:
+        # Held in a separate key: YouTube is a minority of the audience, so this
+        # must never overwrite the cross-platform demographics block.
         data["demographics_youtube"] = fetch_youtube_demographics(token, start, end)
         print("  YouTube demographics... ok")
     except Exception as e:
@@ -719,9 +724,17 @@ def load_data():
 
 
 def save_data(data):
-    with open(DATA_FILE, "w") as f:
+    """Write via a temp file and rename, so a killed run cannot leave a
+    half-written stats.json behind for the next job to commit and publish."""
+    tmp = DATA_FILE + ".tmp"
+    with open(tmp, "w") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
         f.write("\n")
+        f.flush()
+        os.fsync(f.fileno())
+    with open(tmp) as f:          # cheap self-check before it goes live
+        json.load(f)
+    os.replace(tmp, DATA_FILE)
 
 
 def previous_snapshot(data, today):
@@ -974,6 +987,16 @@ def health_check():
         # A platform with no automatic reader, or one we deliberately skip in
         # the cloud, is not "blocked" — alarming on it would never clear.
         if not ci_can_read(p):
+            # Exempt from the "reader is blocked" alarm, but NOT from noticing
+            # that it has stopped refreshing altogether. This platform depends
+            # on the Mac scheduler; if that stops, nothing else would ever say so.
+            if p.get("reads") == "local-only":
+                gone = days_since_ok(data, p["id"], today)
+                if gone is not None and gone >= 4:
+                    problems.append(("%s-not-refreshing" % p["id"],
+                                     "%s has not refreshed for %d days — it only updates from the "
+                                     "Mac, so the scheduled updater there is probably not running"
+                                     % (p["name"], gone)))
             continue
         stale = days_since_ok(data, p["id"], today)
         if stale is None:
