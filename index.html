@@ -166,7 +166,7 @@
   }
   *{box-sizing:border-box}
   b,strong{font-weight:var(--fw-semibold)}
-  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  html{font-size:15px;scroll-behavior:smooth;scroll-padding-top:84px}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
     line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -259,7 +259,7 @@
     font-weight:700;color:#a798bd;margin-top:var(--sp-2)}
 
   /* ---- platform cards ---- */
-  .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-4);margin:var(--sp-5) 0 0}
+  .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-5);margin:var(--sp-5) 0 0}
   .pcard{background:var(--surface-raised);border-radius:var(--r-lg);
     padding:var(--sp-4) var(--sp-5) var(--sp-3);box-shadow:var(--elev-1);transition:transform .2s,box-shadow .2s}
   .pcard:hover{transform:translateY(-2px);box-shadow:var(--elev-2)}
@@ -285,15 +285,16 @@
 
   /* ---- sections ---- */
   section{background:var(--surface-raised);border-radius:var(--r-lg);
-    padding:var(--sp-5) var(--sp-6);box-shadow:var(--elev-1);margin-top:var(--sp-5)}
+    padding:var(--sp-6) var(--sp-7);box-shadow:var(--elev-1);margin-top:var(--sp-6)}
   .kicker{font-size:var(--fs-100);letter-spacing:var(--tracking-caps);text-transform:uppercase;
     color:var(--gold-deep);font-weight:700;margin:0 0 var(--sp-1)}
   section h2{font-family:"Newsreader",serif;font-weight:600;font-size:var(--fs-600);
     letter-spacing:var(--tracking-tight);margin:0 0 var(--sp-1)}
+  section h2{margin-bottom:var(--sp-2)}
   section .note{font-size:var(--fs-200);color:var(--muted);margin:0 0 var(--sp-4)}
   /* minmax(0,…) not 1fr: a plain 1fr track won't shrink below its content, so one long
      unbreakable string (a video title) pushes the column past the card and widens the page */
-  .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--sp-5)}
+  .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--sp-6)}
   .chart-box.tall{height:260px}
   .chart-box{position:relative;height:170px}
   .chart-box.short{height:150px}
@@ -451,7 +452,7 @@
   .mixrow .pc{width:52px;text-align:right;font-weight:700;color:var(--purple-mid);font-variant-numeric:tabular-nums}
 
   /* ---- demographics ---- */
-  .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp-5)}
+  .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp-7)}
   .splitbar{display:flex;height:16px;border-radius:var(--r-sm);overflow:hidden;margin:var(--sp-2) 0 var(--sp-3)}
   .splitbar span{height:100%}
   .glegend{display:flex;align-items:center;gap:var(--sp-2);font-size:var(--fs-300);padding:var(--sp-1) 0}
@@ -718,7 +719,7 @@
   <footer>
     <div><span class="fmono">S</span></div>
     Cal Lutheran School of Management · <b>SOMBA</b> Brand Ambassador Program<br>
-    <span style="font-size:var(--fs-200)">Updates automatically every hour</span>
+    <span style="font-size:var(--fs-200)">Updates automatically every hour · <span id="gen"></span></span>
   </footer>
 </div>
 
@@ -783,6 +784,12 @@ function render(d){
   }
   document.getElementById('report').classList.remove('hidden');
   const latestSnap = snaps[snaps.length-1];
+  // Prefer the exact generated_at clock; older data files carry only a date.
+  const gen = document.getElementById('gen');
+  if(gen) gen.textContent = 'last updated ' + (d.generated_at
+    ? new Date(d.generated_at).toLocaleString('en-US',
+        {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'})
+    : prettyDate(latestSnap.date));
 
   // --- hero total: latest vs previous snapshot, summed over platforms ---
   let total = 0, prevTotal = 0, havePrev = false;
