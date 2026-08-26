@@ -1299,7 +1299,7 @@
   "engagement": {
     "period": "Last 30 days",
     "updated": "2026-08-25",
-    "is_sample": false,
+    "is_sample": true,
     "note": "Instagram and YouTube are real figures read from each platform's own analytics on 2026-08-25. TikTok and LinkedIn are NOT here yet — their sample numbers were removed rather than left to masquerade as real. Instagram's like/comment/share/save split was not on the Insights screen, so only the interaction total is recorded.",
     "platforms": {
       "instagram": {
@@ -1322,6 +1322,19 @@
         "posts": 13,
         "posts_source": "derived-from-snapshots"
       },
+      "tiktok": {
+        "reach": 22400,
+        "views": 22400,
+        "likes": 1850,
+        "comments": 70,
+        "shares": 240,
+        "saves": 130,
+        "accounts_engaged": 1490,
+        "period_days": 28,
+        "source": "sample-for-presentation",
+        "posts": 9,
+        "posts_source": "derived-from-snapshots"
+      },
       "youtube": {
         "reach": 2861,
         "likes": 23,
@@ -1342,9 +1355,13 @@
       "linkedin",
       "instagram interaction split",
       "youtube likes/comments/shares"
-    ]
+    ],
+    "sample_platforms": [
+      "tiktok"
+    ],
+    "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-08-26T19:17:51Z",
+  "generated_at": "2026-08-26T19:36:42Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
