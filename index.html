@@ -6,7 +6,7 @@
 <title>SOMBA — Social Media Dashboard · Cal Lutheran School of Management</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233F2A56'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Georgia' font-weight='bold' fill='%23FFC72C' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,600&family=Anton&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"
         integrity="sha384-JUh163oCRItcbPme8pYnROHQMC6fNKTBWtRG3I3I0erJkzNgL7uxKlNwcrcFKeqF"
         crossorigin="anonymous"></script>
@@ -212,7 +212,12 @@
      real interface rather than a bar pasted onto the page */
   .topnav.scrolled{box-shadow:var(--elev-2);background:var(--surface-overlay-solid)}
   .topnav .brand{display:flex;align-items:center;gap:var(--sp-2);font-weight:700;font-size:var(--fs-300);
-    color:var(--purple);text-decoration:none;letter-spacing:var(--tracking-caps);flex:none}
+    color:var(--brand-purple);text-decoration:none;flex:none}
+  /* wordmark matches the landing page: Anton, same tracking */
+  .topnav .brand .word{font-family:Anton,Impact,sans-serif;font-size:var(--fs-400);
+    letter-spacing:.04em;line-height:1}
+  .navmark{width:30px;height:30px;flex:none;border:2px solid var(--brand-purple);
+    border-radius:var(--r-sm);object-fit:cover}
   .topnav .mono{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
     border-radius:var(--r-sm);background:var(--purple);color:var(--gold);
     font-family:"Newsreader",serif;font-weight:600;font-size:16px}
@@ -563,7 +568,7 @@
 <div class="bg-glow" aria-hidden="true"></div>
 
 <nav class="topnav" aria-label="Sections">
-  <a class="brand" href="#top"><span class="mono">S</span>SOMBA</a>
+  <a class="brand" href="#top"><img class="navmark" src="somba-logo.jpg" width="512" height="512" alt="" decoding="async"><span class="word">SOMBA</span></a>
   <div class="links" id="navlinks">
     <a href="#overview">Overview</a>
     <a href="#growth">Growth</a>
@@ -575,9 +580,7 @@
 </nav>
 
 <div class="wrap" id="top">
-  <h1 class="serif">Brand Ambassadors, <em>by the numbers</em></h1>
-  <p class="sub" id="links">Follower growth across every SOMBA channel.</p>
-  <div id="gen" class="gen"></div>
+
 
   <!-- shown until the first update exists -->
   <div id="empty" class="empty hidden">
@@ -780,16 +783,6 @@ function render(d){
   }
   document.getElementById('report').classList.remove('hidden');
   const latestSnap = snaps[snaps.length-1];
-  // Prefer the exact "generated_at" clock time; older data files only have a date.
-  document.getElementById('gen').textContent = 'Last updated ' + (d.generated_at
-    ? new Date(d.generated_at).toLocaleString('en-US',
-        {month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit'})
-    : prettyDate(latestSnap.date));
-
-  // profile links in the intro line
-  document.getElementById('links').innerHTML =
-    'Follower growth across every SOMBA channel · ' +
-    platforms.filter(p => p.url).map(p => `<a href="${p.url}" target="_blank" rel="noopener">${p.name}</a>`).join(' · ');
 
   // --- hero total: latest vs previous snapshot, summed over platforms ---
   let total = 0, prevTotal = 0, havePrev = false;
