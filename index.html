@@ -936,7 +936,7 @@ function renderEngagement(d){
   const cfg = {}; ((d.config && d.config.platforms) || []).forEach(p => cfg[p.id] = p);
 
   const rows = [];
-  let tL=0, tC=0, tS=0, tV=0, tReach=0, tInt=0, tEngaged=0, haveEngaged=false;
+  let tL=0, tC=0, tS=0, tV=0, tReach=0, tInt=0, tEngaged=0, engagedReach=0, haveEngaged=false;
   ['instagram','tiktok','youtube','linkedin'].forEach(id => {
     const e = P[id];
     if(!e || !e.reach) return;
@@ -956,7 +956,9 @@ function renderEngagement(d){
     const matched = bm ? (REACH_BASES.has(bm.basis) ? er : bm.basis==='followers' ? erFollower : null) : null;
     rows.push({id, e, inter, er, erFollower, bm, matched, hasSplit});
     tL+=likes; tC+=comments; tS+=shares; tV+=saves; tReach+=e.reach; tInt+=inter;
-    if(e.accounts_engaged != null){ tEngaged += e.accounts_engaged; haveEngaged = true; }
+    // Only count reach from platforms that ALSO reported engaged accounts —
+    // dividing Instagram's 634 by Instagram+YouTube reach would understate it.
+    if(e.accounts_engaged != null){ tEngaged += e.accounts_engaged; engagedReach += e.reach; haveEngaged = true; }
   });
   if(!rows.length || !tReach) return;
   const overall = tInt / tReach * 100;
@@ -971,11 +973,20 @@ function renderEngagement(d){
   // of PEOPLE who did anything is accounts_engaged / reach, and it is roughly
   // half as large — saying "12% of people" when one reel absorbed 720 of 1,320
   // interactions would overstate it by more than 2x.
-  const peopleRate = (haveEngaged && tReach) ? tEngaged / tReach * 100 : null;
+  const peopleRate = (haveEngaged && engagedReach) ? tEngaged / engagedReach * 100 : null;
+  // Platforms can report over different windows (Instagram 30 days; YouTube
+  // widens to 90 when a month holds too little activity). Blending them into
+  // one headline is only honest if the page says the periods differ.
+  const periods = [...new Set(rows.map(r => r.e.period_days).filter(Boolean))];
+  const mixed = periods.length > 1;
+  const periodTxt = mixed
+    ? periods.sort((a,b)=>a-b).join(' and ') + ' days depending on the platform'
+    : (periods[0] || 30) + ' days';
   const say = peopleRate != null
     ? `That's <b>${overall.toFixed(1)} interactions for every 100 accounts</b> we reached.
-       The people behind them: <b>${peopleRate.toFixed(1)}%</b> of everyone reached
-       (${FULL(tEngaged)} accounts) did at least one thing — the rest scrolled past.`
+       The people behind them: <b>${peopleRate.toFixed(1)}%</b> of the accounts we reached on Instagram
+       (${FULL(tEngaged)} of ${FULL(engagedReach)}) did at least one thing — the rest scrolled past.
+       ${mixed ? `Covers ${periodTxt}.` : ''}`
     : `That's <b>${overall.toFixed(1)} interactions for every 100 accounts</b> reached —
        measured against <b>reach</b>, not follower count. One account can interact more
        than once, so this is not the share of people who engaged.`;
@@ -1059,7 +1070,7 @@ function renderEngagement(d){
   const paceRows = rows.map(r => {
     const bm = bench(d, r.id, 'posts_per_week');
     if(!bm || !r.e.posts) return '';
-    const pw = r.e.posts / (ER_PERIOD_DAYS/7);
+    const pw = r.e.posts / ((r.e.period_days || ER_PERIOD_DAYS)/7);
     return meterRow(r.id, true, pw.toFixed(1), '/wk', bm, pw, '');
   }).filter(Boolean);
   document.getElementById('er-pace').innerHTML = paceRows.join('');
@@ -1068,7 +1079,7 @@ function renderEngagement(d){
   // ---- methodology footnote ----
   const hasBenchBlock = !!(d.benchmarks && d.benchmarks.platforms);
   document.getElementById('er-foot').innerHTML =
-    `Engagement rate = (likes + comments + shares + saves) ÷ ${(E.period||'recent').toLowerCase()} reach. ` +
+    `Engagement rate = interactions ÷ reach, over ${periodTxt}. ` +
     (hasBenchBlock
       ? '<b>Gold line</b> = a published sector benchmark measured the same way — every number is cited under Benchmark sources. '
       : '') +

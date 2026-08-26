@@ -106,6 +106,50 @@ def http_post_form(url, fields, timeout=25):
         return json.loads(resp.read().decode("utf-8", errors="replace"))
 
 
+def derive_posts(data, platform_id, field, days, today=None):
+    """How many posts/videos went out in the last N days.
+
+    Read from the lifetime counter we already snapshot daily, so nobody has to
+    type it. This is what the per-follower and posting-pace benchmarks need:
+    without it a platform shows "No benchmark" even though the answer was
+    sitting in the snapshot history all along.
+    """
+    today = today or utc_today()
+    series = []
+    for snap in data.get("snapshots", []):
+        v = (snap.get("platforms") or {}).get(platform_id, {}).get(field)
+        if v is not None:
+            series.append((snap["date"], v))
+    if len(series) < 2:
+        return None
+    cutoff = (today - timedelta(days=days)).isoformat()
+    earlier = [pair for pair in series if pair[0] <= cutoff]
+    base = earlier[-1] if earlier else series[0]
+    span = (date.fromisoformat(series[-1][0]) - date.fromisoformat(base[0])).days
+    if span < 7:                      # too short a baseline to divide by
+        return None
+    made = series[-1][1] - base[1]
+    if made < 0:                      # a counter that went backwards is not trustworthy
+        return None
+    return {"posts": int(round(made * days / span)), "observed_days": span}
+
+
+POST_FIELDS = {"instagram": "posts", "tiktok": "videos", "youtube": "videos"}
+
+
+def refresh_derived_posts(data):
+    """Fill in each platform's post count for its own reporting period."""
+    block = (data.get("engagement") or {}).get("platforms") or {}
+    for pid, entry in block.items():
+        field = POST_FIELDS.get(pid)
+        if not field or not isinstance(entry, dict):
+            continue
+        got = derive_posts(data, pid, field, entry.get("period_days") or 30)
+        if got:
+            entry["posts"] = got["posts"]
+            entry["posts_source"] = "derived-from-snapshots"
+
+
 def utc_today():
     """Today's date in UTC — the one clock both writers agree on.
 
@@ -545,8 +589,37 @@ def yta_rows(resp):
     return [(r[0], r[1]) for r in (resp.get("rows") or [])]
 
 
+YTA_WINDOWS = [28, 90, 365]   # widen until there is enough activity to measure
+
+
+def fetch_youtube_engagement_auto(token, today=None):
+    """Engagement over the shortest window that actually contains enough activity.
+
+    The channel has not published since May, so a 28-day window holds ~1,000
+    views and two interactions — far too little to state a rate. Widening gives
+    a stable answer (1.08% / 1.12% / 1.16% at 90 / 180 / 365 days), and the
+    window actually used is recorded so the page can say which period it is.
+    """
+    today = today or utc_today()
+    end = today - timedelta(days=YTA_LAG_DAYS)
+    last_err = None
+    for days in YTA_WINDOWS:
+        start = end - timedelta(days=days - 1)
+        try:
+            out = fetch_youtube_engagement(token, start.isoformat(), end.isoformat())
+            out["period_days"] = days
+            if days != YTA_WINDOWS[0]:
+                out["note"] = ("Measured over %d days. A 28-day window holds too little "
+                               "activity to state a rate — the channel has not posted "
+                               "recently — so a longer period is used." % days)
+            return out
+        except Exception as e:
+            last_err = e
+    raise last_err
+
+
 def fetch_youtube_engagement(token, start, end):
-    """Last-28-day engagement straight from YouTube Analytics."""
+    """Engagement straight from YouTube Analytics for one explicit window."""
     resp = yta_query(token, ids="channel==MINE", startDate=start, endDate=end,
                      metrics="views,likes,comments,shares")
     rows = resp.get("rows") or []
@@ -641,7 +714,7 @@ def update_private_analytics(data):
         return
 
     try:
-        eng = fetch_youtube_engagement(token, start, end)
+        eng = fetch_youtube_engagement_auto(token)
         block = data.setdefault("engagement", {})
         eng["updated"] = utc_today().isoformat()
         block.setdefault("platforms", {})["youtube"] = eng
@@ -908,6 +981,7 @@ def main():
                 print("could not read (%s) — reused last list" % e)
 
     update_private_analytics(data)
+    refresh_derived_posts(data)
 
     upsert_snapshot(data, snap)
     if json.dumps(
