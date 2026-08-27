@@ -1017,10 +1017,42 @@
           "last_ok": "2026-08-26"
         }
       }
+    },
+    {
+      "date": "2026-08-27",
+      "platforms": {
+        "instagram": {
+          "followers": 748,
+          "following": 285,
+          "posts": 526,
+          "last_ok": "2026-08-26",
+          "source": "carried",
+          "carried_from": "2026-08-26"
+        },
+        "tiktok": {
+          "followers": 157,
+          "likes": 14300,
+          "videos": 454,
+          "source": "scrape",
+          "last_ok": "2026-08-27"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 422936,
+          "source": "scrape",
+          "last_ok": "2026-08-27"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape",
+          "last_ok": "2026-08-27"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-26",
+    "fetched": "2026-08-27",
     "source": "youtube-rss",
     "videos": [
       {
@@ -1034,7 +1066,7 @@
         "id": "mtbnjLbYoKI",
         "title": "POV: Class of 2027 #classof2027 #senior #junior #realitycheck #collegehumor #studentlife",
         "published": "2026-05-01",
-        "views": 1970,
+        "views": 1973,
         "likes": 10
       },
       {
@@ -1194,7 +1226,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-08-26",
+    "fetched": "2026-08-27",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
@@ -1211,8 +1243,8 @@
         "title": "Dog in da College House! #dog #college #house #ytshorts #explore",
         "views": 26009,
         "kind": "short",
-        "likes": 92,
-        "published": "2025-11-01"
+        "likes": 91,
+        "published": "2025-11-02"
       },
       {
         "id": "CS6dNGU9Evc",
@@ -1225,7 +1257,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23117,
+        "views": 23135,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -1236,7 +1268,7 @@
         "views": 22772,
         "kind": "short",
         "likes": 71,
-        "published": "2026-03-31"
+        "published": "2026-04-01"
       },
       {
         "id": "-iPsWtoqSjQ",
@@ -1251,7 +1283,7 @@
         "title": "Spending time with family during Thanksgiving has us like…”We’re sisters!” #college #weresisters",
         "views": 13763,
         "kind": "short",
-        "likes": 458,
+        "likes": 457,
         "published": "2023-12-01"
       },
       {
@@ -1259,15 +1291,15 @@
         "title": "When the Dean is reading brain rot words #brainrot",
         "views": 10143,
         "kind": "short",
-        "likes": 200,
-        "published": "2025-03-19"
+        "likes": 199,
+        "published": "2025-03-20"
       },
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7653,
+        "views": 7658,
         "kind": "short",
-        "likes": 58,
+        "likes": 59,
         "published": "2026-04-01"
       },
       {
@@ -1276,7 +1308,7 @@
         "views": 7376,
         "kind": "short",
         "likes": 28,
-        "published": "2025-10-27"
+        "published": "2025-10-28"
       },
       {
         "id": "zArZjKlR8lI",
@@ -1361,7 +1393,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-08-26T23:40:05Z",
+  "generated_at": "2026-08-27T09:55:05Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
