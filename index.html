@@ -44,6 +44,27 @@
     --gap-inline:var(--sp-2); --gap-stack:var(--sp-3);
     --gap-grid:var(--sp-4); --gap-grid-lg:var(--sp-5); --gap-grid-sm:var(--sp-3);
 
+    /* ── ROW — the list primitive's contract ─────────────────────────
+       Two fixed line boxes plus a padding decide every row height on the
+       page. Replaces four column-gaps, four paddings, three lead widths,
+       two track heights and a stray 1px. */
+    --row-line:1.375rem;        /* 20.6px — clears --fs-400, the value */
+    --row-subline:1rem;         /* 15px   — clears --fs-200, every sub-label */
+    --row-pad-y:var(--sp-2); --row-pad-x:var(--sp-3);
+    --row-content-h:calc(var(--row-line) + var(--row-subline));
+    --row-h:calc(var(--row-content-h) + var(--row-pad-y) * 2);
+    --row-gap:var(--sp-3);
+    --row-lead-w:1.5rem;        /* rank digit / 15px icon / 10px dot */
+    --row-val-w:11rem;
+    --row-name-w:13rem;         /* meter rows: every bar starts at one x */
+    --row-track-w:5rem;         /* a lead-less meter: the bar, not the label, is fixed */
+    --row-tail-w:7rem;
+    --row-track-h:12px;         /* one bar height — .slim is deleted */
+
+    /* ── CHART — two heights, no third ─────────────────────────────── */
+    --chart-h:16rem;            /* 240px — full-width */
+    --chart-h-sm:12rem;         /* 180px — a 3-up column, and the donut */
+
     /* ── RADIUS — inner radius is always one step below its container ──── */
     --r-xs:4px; --r-sm:8px; --r-md:12px; --r-lg:16px; --r-full:999px;
 
@@ -87,8 +108,9 @@
     --border-onDark-strong:rgb(255 255 255 / .28);
 
     /* ── STATUS — resolve on light AND dark via the .on-dark scope ───────── */
-    --status-pos:#1f7a52; --status-pos-bg:#e3f2ea;
-    --status-neg:#a83c28; --status-neg-bg:#fbeae6;
+    --status-pos-ink:#1f7a52; --status-neg-ink:#a83c28;   /* ink for a light chip; never remapped */
+    --status-pos:var(--status-pos-ink); --status-pos-bg:#e3f2ea;
+    --status-neg:var(--status-neg-ink); --status-neg-bg:#fbeae6;
     --status-neutral-bg:#eee9f4;
     --status-pos-onDark:#67dfa2; --status-neg-onDark:#f8ab99;
     --status-pos-glow:rgb(103 223 162 / .65);
@@ -270,7 +292,7 @@
     overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .pcard .name a{color:inherit;text-decoration:none;transition:color .2s}
   .pcard .name a:hover{color:var(--purple-mid)}
-  .pcard .row{display:flex;align-items:baseline;gap:var(--sp-3);flex-wrap:wrap}
+  .pcard-row{display:flex;align-items:baseline;gap:var(--sp-3);flex-wrap:wrap}
   .pcard .v{font-family:"Newsreader",serif;font-size:var(--fs-700);font-weight:600;letter-spacing:var(--tracking-tight);margin-top:var(--sp-1)}
   .pcard .v small{font-size:var(--fs-300);color:var(--muted);font-weight:var(--fw-body);margin-left:var(--sp-2);font-family:"Instrument Sans",sans-serif}
   .pcard .spark{margin-top:var(--sp-2)}
@@ -295,21 +317,33 @@
   /* minmax(0,…) not 1fr: a plain 1fr track won't shrink below its content, so one long
      unbreakable string (a video title) pushes the column past the card and widens the page */
   .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--sp-6)}
-  .chart-box.tall{height:260px}
-  .chart-box{position:relative;height:170px}
-  .chart-box.short{height:150px}
+  .chart-box{position:relative;height:var(--chart-h-sm)}
+  .chart-box.full{height:var(--chart-h)}
   .chart-title{font-size:var(--fs-100);letter-spacing:var(--tracking-caps);text-transform:uppercase;
     color:var(--label);font-weight:700;margin:0 0 var(--sp-2)}
   .chart-cap{font-size:var(--fs-200);color:var(--label);margin:var(--sp-2) 0 0}
   .trend-grid{margin-top:var(--sp-5)}
 
   /* ---- stat tiles ---- */
-  .statgrid{display:grid;align-items:start;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--sp-3)}
-  .stile{border:1px solid var(--border-default);border-radius:var(--r-md);
+  /* auto-fit, not a fixed 4: the tile count varies with the data, and a fixed
+     track count leaves an empty column. stretch (not start) is what makes
+     siblings share a height. */
+  .statgrid{display:grid;align-items:stretch;gap:var(--sp-3);
+    grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))}
+  /* three fixed rows — value / label / status — with the status row taking the
+     slack and sitting on the floor, so every chip lands on one shared line. */
+  .stile{display:grid;grid-template-rows:auto auto 1fr;
+    border:1px solid var(--border-default);border-radius:var(--r-md);
     padding:var(--sp-3) var(--sp-4);background:var(--surface-sunken)}
-  .stile .n{font-family:"Newsreader",serif;font-size:var(--fs-600);font-weight:600;letter-spacing:var(--tracking-tight)}
-  .stile .k{font-size:var(--fs-100);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--label);font-weight:700;margin-top:var(--sp-1)}
-  .stile .c{font-size:var(--fs-200);color:var(--muted);margin-top:var(--sp-1);line-height:1.45}
+  .stile .n{font-family:"Newsreader",serif;font-size:var(--fs-600);font-weight:600;
+    letter-spacing:var(--tracking-tight);line-height:1.15}
+  /* two label lines are RESERVED whether used or not: a label that wraps must
+     never change a neighbour's height. */
+  .stile .k{font-size:var(--fs-100);letter-spacing:var(--tracking-caps);text-transform:uppercase;
+    color:var(--label);font-weight:700;margin-top:var(--sp-1);
+    line-height:1.35;min-height:calc(1.35em * 2)}
+  .stile .c{display:flex;align-items:flex-end;font-size:var(--fs-200);color:var(--muted);
+    margin-top:var(--sp-2);line-height:1.45;align-self:end;min-height:var(--sp-6)}
   .milestone{font-family:"Newsreader",serif;font-size:var(--fs-400);margin:var(--sp-3) 0 0;line-height:1.4}
   .milestone b{color:var(--purple-mid)}
 
@@ -347,33 +381,89 @@
   .er-hero .say{font-size:var(--fs-200);color:#e8e0f3;max-width:520px;line-height:1.5;margin-top:var(--sp-2)}
   .er-hero .say b{color:#fff}
   .er-badge{display:inline-flex;align-items:center;gap:var(--sp-2);border-radius:var(--r-full);padding:var(--sp-2) var(--sp-3);font-size:var(--fs-200);font-weight:700}
-  .er-badge.above{background:var(--gold);color:var(--purple-deep)}
-  .er-badge.at{background:rgba(255,255,255,.18);color:#fff}
-  .er-badge.below{background:#f6d7cf;color:#7c2d1a}
+  .er-badge.above{background:var(--status-pos-bg);color:var(--status-pos-ink)}
+  .er-badge.at{background:var(--status-neutral-bg);color:var(--purple-deep)}
+  .er-badge.below{background:var(--status-neg-bg);color:var(--status-neg-ink)}
   /* benchmark meters: bar = SOMBA on its own scale, gold line = the published
      benchmark pinned at the same spot in every row, so past-the-line = above */
-  .meters{display:flex;flex-direction:column;gap:var(--sp-4)}
-  .mrow{display:grid;grid-template-columns:150px 62px 1fr 108px;gap:var(--sp-3);align-items:center}
-  .mrow .who{display:flex;align-items:center;gap:var(--sp-2);font-weight:700;font-size:var(--fs-200);min-width:0}
-  .mrow .who .picon svg{width:15px;height:15px}
-  .mrow .who .basis{display:block;font-size:var(--fs-100);color:var(--label);font-weight:600;letter-spacing:var(--tracking-caps)}
-  .mrow .val{font-family:"Newsreader",serif;font-size:var(--fs-500);font-weight:600;text-align:right;line-height:1}
-  .mrow .val small{font-size:var(--fs-100);color:var(--muted);font-family:"Instrument Sans",sans-serif;font-weight:600}
-  .mtrack{position:relative;height:12px;border-radius:var(--r-xs);background:var(--surface-inset)}
+  /* ══ ROW — the one list primitive ═══════════════════════════════════
+     Every list here is the same shape: [lead] [label+sub] [value+sub],
+     optionally [track] and [chip]. Six implementations — four gaps, four
+     paddings, three display models — collapse into this. Height comes
+     from two FIXED line boxes, never from content, so a row with a
+     sub-label and one without are identical. New list? Call rowHTML(). */
+  .rowlist{margin-inline:calc(-1 * var(--row-pad-x))}
+  .rowlist > .row:first-child{border-top-color:transparent}
+  .row{position:relative;display:grid;
+    grid-template-columns:var(--row-lead-w) minmax(0,1fr) var(--row-val-w);
+    align-items:center;column-gap:var(--row-gap);
+    padding:var(--row-pad-y) var(--row-pad-x);min-height:var(--row-h);
+    border-top:1px solid var(--border-subtle);
+    border-radius:var(--r-sm);   /* on EVERY row, so a highlight adds none */
+    transition:background var(--dur) var(--ease)}
+  .row-lead{display:flex;align-items:center;justify-content:center;
+    font-family:"Newsreader",serif;font-size:var(--fs-300);
+    color:var(--text-quaternary);font-variant-numeric:tabular-nums;
+    line-height:var(--row-line)}
+  .row-lead .picon svg{width:15px;height:15px}
+  .row-lead .dot{width:10px;height:10px;border-radius:50%;flex:none}
+  /* fixed-height flex column: an empty sub leaves the primary line
+     CENTRED rather than pinned high, and the height never moves */
+  .row-main,.row-val{display:flex;flex-direction:column;justify-content:center;
+    height:var(--row-content-h);min-width:0}
+  .row-main{align-items:flex-start}
+  .row-val{align-items:flex-end;text-align:right;font-variant-numeric:tabular-nums}
+  .row-t,.row-v{display:block;max-width:100%;height:var(--row-line);
+    line-height:var(--row-line);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .row-sub,.row-vsub{display:block;max-width:100%;height:var(--row-subline);
+    line-height:var(--row-subline);font-size:var(--fs-200);color:var(--text-tertiary);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .row-t{font-size:var(--fs-300);font-weight:var(--fw-semibold);color:var(--text-primary)}
+  .row-t a{color:inherit;text-decoration:none;transition:color var(--dur) var(--ease)}
+  .row-t a:hover{color:var(--brand-purple-mid)}
+  .row-v{font-family:"Newsreader",serif;font-size:var(--fs-400);font-weight:var(--fw-semibold)}
+  .row-v small{font-family:"Instrument Sans",sans-serif;font-size:var(--fs-200);
+    font-weight:var(--fw-semibold);color:var(--text-tertiary)}
+  /* ---- the ONLY sanctioned modifiers ---- */
+  .row--nolead{grid-template-columns:minmax(0,1fr) var(--row-val-w)}
+  .row--link:hover{background:var(--brand-purple-soft)}
+  .row--meter{--row-val-w:5rem;
+    grid-template-columns:var(--row-lead-w) var(--row-name-w) var(--row-val-w)
+      minmax(0,1fr) var(--row-tail-w)}
+  .row--meter.row--nolead{grid-template-columns:minmax(0,1fr) var(--row-val-w) var(--row-track-w)}
+  /* the bar sits on line 1, the gold tick hangs into line 2 — which is why
+     a meter row is exactly --row-h like every other row */
+  .row-track{display:grid;grid-template-rows:var(--row-line) var(--row-subline);
+    align-items:center;height:var(--row-content-h)}
+  .row-tail{justify-self:start}
+  #mix-legend,#genderlegend{--row-val-w:4.5rem}
+  #loclist{--row-val-w:3.25rem;--row-track-w:3.25rem}
+  @media (max-width:560px){
+    .row--meter{--row-tail-w:auto;
+      grid-template-columns:var(--row-lead-w) minmax(0,1fr) var(--row-val-w) var(--row-tail-w)}
+    .row--meter.row--nolead{grid-template-columns:minmax(0,1fr) var(--row-val-w)}
+    .row--meter .row-track{display:none}
+  }
+  /* ---- "top item": background and colour ONLY. Never padding, radius,
+     border or height — .prow.best changing padding AND radius is the exact
+     bug this pass exists to kill. The rail is absolute, so it costs no layout. */
+  .row.is-top{background:var(--brand-gold-soft)}
+  .row.is-top::before{content:"";position:absolute;left:0;
+    top:var(--sp-3);bottom:var(--sp-3);width:3px;
+    border-radius:var(--r-full);background:var(--brand-gold)}
+
+  .mtrack{position:relative;height:var(--row-track-h);border-radius:var(--r-xs);background:var(--surface-inset)}
   .mtrack .fill{position:absolute;left:0;top:0;bottom:0;border-radius:var(--r-xs);min-width:6px}
   /* not .empty — that's the full-width "no data" state card further down */
   .mtrack.nobm{background:transparent;border:1.5px dashed var(--border)}
   .bmark{position:absolute;top:-5px;bottom:-5px;width:2.5px;border-radius:var(--r-xs);background:var(--gold-deep)}
   .bmark i{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:var(--sp-1);
     font-style:normal;font-size:var(--fs-100);font-weight:700;color:var(--gold-deep);white-space:nowrap}
-  .mrow.slim .mtrack{height:9px}
-  .mrow.slim .val{font-size:var(--fs-400)}
-  .mrow .vd{justify-self:start}
   .vd{display:inline-flex;align-items:center;gap:var(--sp-2);border-radius:var(--r-full);padding:var(--sp-1) var(--sp-2);
     font-size:var(--fs-200);font-weight:700;white-space:nowrap}
-  .vd.above{background:#e9f4ee;color:var(--green)}
-  .vd.at{background:#ece5f5;color:var(--purple-mid)}
-  .vd.below{background:#faefec;color:var(--red)}
+  .vd.above{background:var(--status-pos-bg);color:var(--status-pos-ink)}
+  .vd.at{background:var(--status-neutral-bg);color:var(--purple-mid)}
+  .vd.below{background:var(--status-neg-bg);color:var(--status-neg-ink)}
   .vd.none{background:#f0edf4;color:var(--label);font-weight:600}
   .stile .minitrack{position:relative;height:8px;border-radius:var(--r-xs);background:var(--purple-soft);
     margin:var(--sp-2) 0 var(--sp-4);max-width:230px}
@@ -406,64 +496,28 @@
   .hm-key .sw{width:52px;height:9px;border-radius:var(--r-xs);
     background:linear-gradient(90deg,#efeaf6,#7a5aa6)}
   /* --- top posts --- */
-  .prow{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:var(--sp-3);align-items:center;
-    padding:var(--sp-2) 0;border-top:1px solid var(--border)}
-  .prow:first-child{border-top:0}
-  .prow .rank{font-size:var(--fs-200);color:var(--label);font-weight:700;text-align:center}
-  .prow .t{font-weight:700;font-size:var(--fs-300);line-height:1.35}
-  .prow .m{font-size:var(--fs-200);color:var(--muted);margin-top:var(--sp-1)}
-  .prow .v{text-align:right;white-space:nowrap}
-  .prow .v b{font-family:"Newsreader",serif;font-size:var(--fs-400);font-weight:600}
-  .prow .v small{display:block;font-size:var(--fs-200);color:var(--muted)}
-  .prow.best{background:var(--gold-soft);border-radius:var(--r-sm);padding:var(--sp-2) var(--sp-3);border-top:0;color:var(--ink)}
   .er-foot{font-size:var(--fs-200);color:var(--label);margin:var(--sp-5) 0 0;line-height:1.5}
   .er-foot b{color:var(--gold-deep)}
   .bench-src{font-size:var(--fs-200);color:var(--label);margin-top:var(--sp-3)}
   .bench-src summary{cursor:pointer;font-weight:700}
-  .bench-src .row{margin-top:var(--sp-2);line-height:1.5}
+  .bench-src .src-row{margin-top:var(--sp-2);line-height:1.5}
   .bench-src a{color:var(--purple-mid)}
   .bench-src b{color:var(--muted)}
 
   /* ---- recent videos ---- */
-  .vidrow{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:var(--sp-2);align-items:center;
-    padding:var(--sp-2) var(--sp-2);border-bottom:1px solid var(--border);border-radius:var(--r-sm);transition:background .2s}
-  .vidrow:last-child{border-bottom:0}
-  .vidrow:hover{background:var(--purple-soft)}
-  .vidrow.top{background:var(--gold-soft)}
-  .vidrow .rank{font-family:"Newsreader",serif;font-size:var(--fs-300);color:var(--label);text-align:center}
-  .vidrow .t{font-size:var(--fs-200);font-weight:600;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .vidrow .t a{color:var(--ink);text-decoration:none;transition:color .2s}
-  .vidrow .t a:hover{color:var(--purple-mid)}
-  .vidrow .meta{font-size:var(--fs-200);color:var(--muted);margin-top:1px}
-  .vidrow .v{text-align:right;font-variant-numeric:tabular-nums}
-  .vidrow .v b{font-size:var(--fs-200)}
-  .vidrow .v small{display:block;font-size:var(--fs-100);color:var(--muted)}
 
   /* ---- audience mix ---- */
-  .donut-wrap{position:relative;height:190px;margin-bottom:var(--sp-3)}
+  .mt-2{margin-top:var(--sp-2)} .mt-3{margin-top:var(--sp-3)}
+  .mt-4{margin-top:var(--sp-4)} .mt-5{margin-top:var(--sp-5)}
+  .donut-wrap{position:relative;height:var(--chart-h-sm);margin-bottom:var(--sp-3)}
   .donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
   .donut-center .n{font-family:"Newsreader",serif;font-size:var(--fs-600);font-weight:600}
   .donut-center .k{font-size:var(--fs-100);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--label);font-weight:700}
-  .mixrow{display:flex;align-items:center;gap:var(--sp-2);padding:var(--sp-2) 0;border-bottom:1px solid var(--border);font-size:var(--fs-200)}
-  .mixrow:last-child{border-bottom:0}
-  .mixrow .picon svg{width:13px;height:13px}
-  .mixrow .nm{font-weight:600;flex:1}
-  .mixrow .ct{color:var(--muted);font-variant-numeric:tabular-nums}
-  .mixrow .pc{width:52px;text-align:right;font-weight:700;color:var(--purple-mid);font-variant-numeric:tabular-nums}
 
   /* ---- demographics ---- */
   .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp-7)}
   .splitbar{display:flex;height:16px;border-radius:var(--r-sm);overflow:hidden;margin:var(--sp-2) 0 var(--sp-3)}
   .splitbar span{height:100%}
-  .glegend{display:flex;align-items:center;gap:var(--sp-2);font-size:var(--fs-300);padding:var(--sp-1) 0}
-  .glegend .dot{width:10px;height:10px;border-radius:50%;flex:none}
-  .glegend .p{margin-left:auto;font-weight:700;color:var(--purple-mid)}
-  .locrow{padding:var(--sp-2) 0}
-  .locrow .toprow{display:flex;justify-content:space-between;font-size:var(--fs-300);margin-bottom:var(--sp-1)}
-  .locrow .toprow b{font-weight:600}
-  .locrow .toprow span{color:var(--muted);font-weight:700}
-  .locrow .track{height:9px;background:var(--purple-soft);border-radius:var(--r-xs);overflow:hidden}
-  .locrow .fill{height:100%;background:linear-gradient(90deg,var(--purple-mid),var(--purple));border-radius:var(--r-xs)}
 
   /* ---- playbook ---- */
   .pbd summary{display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap;cursor:pointer;list-style:none}
@@ -556,9 +610,8 @@
 
   @media(max-width:760px){
     .cards{grid-template-columns:minmax(0,1fr)} .grid2{grid-template-columns:minmax(0,1fr)}
-    .statgrid{grid-template-columns:repeat(2,minmax(0,1fr))} .grid3{grid-template-columns:minmax(0,1fr)}
+    .grid3{grid-template-columns:minmax(0,1fr)}
     .todo{grid-template-columns:minmax(0,1fr)}
-    .mrow{grid-template-columns:104px 50px 1fr} .mrow .vd{grid-column:1/-1;justify-self:end;margin-top:var(--sp-1)}
     .hero{padding:var(--sp-5) var(--sp-4) var(--sp-4)}
     section{padding:var(--sp-5) var(--sp-4)}
     .topnav{top:10px}
@@ -574,7 +627,7 @@
     <a href="#overview">Overview</a>
     <a href="#growth">Growth</a>
     <a href="#engagement">Engagement</a>
-    <a href="#content">Content</a>
+    <a href="#content">Videos</a>
     <a href="#audience">Audience</a>
     <a href="#playbook">Playbook</a>
   </div>
@@ -589,7 +642,7 @@
     <h2 class="serif">No numbers yet</h2>
     <p>Run the update script once on the program Mac and this page fills in:</p>
     <p><code>python3 update_stats.py</code></p>
-    <p style="margin-top:14px">First time? The <b>README</b> walks through setup in plain English.</p>
+    <p class="mt-3">First time? The <b>README</b> walks through setup in plain English.</p>
   </div>
 
   <div id="report" class="hidden">
@@ -628,11 +681,11 @@
         <h2 class="serif">Engagement</h2>
         
         <div class="on-dark er-hero" id="er-hero"></div>
-        <div style="margin-top:20px">
-          <div class="chart-title">Engagement</div>
-          <div class="meters" id="er-meters"></div>
-          <div class="chart-title" id="er-pace-title" style="margin-top:26px">Posting pace</div>
-          <div class="meters" id="er-pace"></div>
+        <div class="mt-4">
+          <div class="chart-title">Rate vs. sector benchmark</div>
+          <div class="rowlist" id="er-meters"></div>
+          <div class="chart-title mt-5" id="er-pace-title">Posting pace</div>
+          <div class="rowlist" id="er-pace"></div>
         </div>
         <p class="er-foot" id="er-foot"></p>
         <details class="bench-src hidden" id="bench-src">
@@ -646,26 +699,24 @@
       <section id="sec-posts" class="hidden">
         <h2 class="serif">Top Instagram posts</h2>
         <p class="note" id="postnote"></p>
-        <div id="postlist"></div>
-        <p class="er-foot" id="postfoot"></p>
+        <div id="postlist" class="rowlist"></div>
       </section>
 
       <section id="sec-timing" class="hidden">
         <h2 class="serif">Best time to post</h2>
         <p class="note" id="timenote"></p>
         <div id="heatmap"></div>
-        <p class="er-foot" id="timefoot"></p>
       </section>
 
       <section id="sec-videos" class="hidden">
-        <h2 class="serif">Content</h2>
+        <h2 class="serif">YouTube videos</h2>
         
         <div class="seg" role="tablist" aria-label="Video list">
-          <button class="seg-b on" role="tab" aria-selected="true" data-pane="vidlist">Latest</button>
-          <button class="seg-b" role="tab" aria-selected="false" data-pane="topvidlist">All-time</button>
+          <button class="seg-b on" role="tab" aria-selected="true" data-pane="vidlist">Latest uploads</button>
+          <button class="seg-b" role="tab" aria-selected="false" data-pane="topvidlist">Most viewed</button>
         </div>
-        <div id="vidlist" class="pane"></div>
-        <div id="topvidlist" class="pane hidden"></div>
+        <div id="vidlist" class="pane rowlist"></div>
+        <div id="topvidlist" class="pane rowlist hidden"></div>
       </section>
     </div>
 
@@ -676,19 +727,18 @@
         <div class="grid3">
           <div>
             <div class="donut-wrap"><canvas id="c-mix"></canvas><div class="donut-center" id="mix-center"></div></div>
-            <div id="mix-legend"></div>
+            <div id="mix-legend" class="rowlist"></div>
           </div>
           <div>
             <div class="chart-title">Age</div>
-            <div class="chart-box short"><canvas id="c-age"></canvas></div>
-            <div class="chart-title" style="margin-top:16px">Gender</div>
+            <div class="chart-box"><canvas id="c-age"></canvas></div>
+            <div class="chart-title mt-3">Gender</div>
             <div class="splitbar" id="genderbar"></div>
-            <div id="genderlegend"></div>
+            <div id="genderlegend" class="rowlist"></div>
           </div>
           <div>
             <div class="chart-title">Top locations</div>
-            <div id="loclist"></div>
-            <p class="milestone" id="mix-takeaway"></p>
+            <div id="loclist" class="rowlist"></div>
           </div>
         </div>
       </section>
@@ -767,6 +817,25 @@ function latestAndPrev(snaps, pid){
   return {latest: pts[pts.length-1] || null, prev: pts[pts.length-2] || null};
 }
 
+// ── THE row renderer. Every list on this page goes through this.
+// .row-sub and .row-vsub are emitted even when empty: that reserves the
+// second line, which is what makes every row the same height.
+function rowHTML(o){
+  const cls = ['row', o.mod || '', o.top ? 'is-top' : ''].filter(Boolean).join(' ');
+  const nolead = (o.mod || '').includes('row--nolead');
+  return `<div class="${cls}">` +
+    (nolead ? '' : `<span class="row-lead">${o.lead ?? ''}</span>`) +
+    `<span class="row-main">` +
+      `<span class="row-t"${o.titleAttr ? ` title="${o.titleAttr}"` : ''}>${o.title ?? ''}</span>` +
+      `<span class="row-sub">${o.sub ?? ''}</span></span>` +
+    `<span class="row-val">` +
+      `<span class="row-v">${o.value ?? ''}${o.unit ? `<small>${o.unit}</small>` : ''}</span>` +
+      `<span class="row-vsub">${o.vsub ?? ''}</span></span>` +
+    (o.track ? `<span class="row-track">${o.track}</span>` : '') +
+    (o.tail  ? `<span class="row-tail">${o.tail}</span>`  : '') +
+  `</div>`;
+}
+
 function deltaPill(latest, prev){
   if(!latest || !prev) return '';
   const d = latest.val - prev.val;
@@ -826,7 +895,7 @@ function render(d){
     return `<div class="pcard">
       <div class="head"><span class="picon" style="color:${p.color}">${ICONS[p.id]||''}</span>
         <span class="name"><a href="${p.url||'#'}" target="_blank" rel="noopener">${p.name}${p.handle ? ' · '+p.handle : ''}</a></span></div>
-      <div class="row">
+      <div class="pcard-row">
         <div class="v">${followers==null ? '—' : FULL(followers)}<small>followers</small></div>
         ${followers==null ? '' : deltaPill(latest, prev)} ${stale}
       </div>
@@ -974,7 +1043,7 @@ function renderTrends(platforms, snaps, d){
     `<div class="seg" role="tablist" aria-label="Growth metric">` +
     METRICS.map((m,i) => `<button class="seg-b${i?'':' on'}" role="tab" data-metric="${m.key}"
        aria-selected="${i?'false':'true'}">${m.label}</button>`).join('') +
-    `</div><div class="chart-box tall"><canvas id="t-main"></canvas></div>` +
+    `</div><div class="chart-box full"><canvas id="t-main"></canvas></div>` +
     `<p class="chart-cap" id="t-cap"></p>`);
 
   let chart = null;
@@ -1022,6 +1091,19 @@ function weeksBetween(a,b){
   return Math.max(1, Math.abs(new Date(b+'T12:00:00') - new Date(a+'T12:00:00')) / (7*86400000));
 }
 
+// Change over the last `days`, measured from the earliest snapshot still inside
+// the window — so a platform with only 9 days of history reports its 9 days
+// rather than silently reporting nothing.
+function changeOver(snaps, pid, days){
+  const pts = series(snaps, pid).filter(p => p.val != null);
+  if(pts.length < 2) return null;
+  const last = pts[pts.length-1];
+  const cutoff = new Date(last.date + 'T12:00:00') - days*86400000;
+  const inWin = pts.filter(p => new Date(p.date + 'T12:00:00') >= cutoff);
+  const first = inWin.length >= 2 ? inWin[0] : pts[pts.length-2];
+  return {delta: last.val - first.val, from: first.date, to: last.date};
+}
+
 function weeklyRate(snaps, pid){
   const pts = series(snaps, pid).filter(p => p.val != null);
   if(pts.length < 2) return null;
@@ -1036,17 +1118,23 @@ const MILESTONES = [50,100,250,500,1000,2500,5000,10000,25000,50000,100000,25000
 function renderPace(platforms, snaps, d){
   const rates = platforms.map(p => ({p, r: weeklyRate(snaps, p.id)})).filter(x => x.r);
   if(!rates.length) return;
-  const totalRate = rates.reduce((s,x) => s + x.r.perWeek, 0);
+  const PACE_WIN = 30;
+  const won = rates.map(x => changeOver(snaps, x.p.id, PACE_WIN)).filter(Boolean);
+  const total30 = won.reduce((s,c) => s + c.delta, 0);
+  // per-week over the SAME window, from each platform's real span
+  const perWk30 = won.reduce((s,c) => s + c.delta / weeksBetween(c.from, c.to), 0);
+  const sign = (n,dp) => (n >= 0 ? '+' : '\u2212') + Math.abs(n).toFixed(dp || 0);
   const tiles = [{
-    n: (totalRate >= 0 ? '+' : '') + Math.round(totalRate) + ' / wk',
-    k: 'Total audience growth', c: ''
+    n: sign(Math.round(total30)),
+    k: 'Audience growth',
+    c: `Past ${PACE_WIN} days · ${sign(perWk30, 1)}/wk`
   }];
   // ignore tiny accounts (a 2→3 follower week is 50% "growth" but no story)
   const fastest = rates.filter(x => x.r.current >= 50 && x.r.perWeek > 0)
     .sort((a,b) => b.r.perWeek/b.r.current - a.r.perWeek/a.r.current)[0];
   if(fastest) tiles.push({
-    n: fastest.p.name, k: 'Fastest-growing platform',
-    c: ''
+    n: fastest.p.name, k: 'Fastest platform',
+    c: `+${(100*fastest.r.perWeek/fastest.r.current).toFixed(1)}% a week`
   });
   // growth vs published education-sector pace (same weekly basis)
   const gBm = d && bench(d, 'tiktok', 'follower_growth_weekly_pct');
@@ -1057,12 +1145,12 @@ function renderPace(platforms, snaps, d){
   const v = gBm && tt ? benchVerdict(wk, gBm) : null;
   if(v){
     tiles.push({ n: (wk >= 0 ? '+' : '') + wk.toFixed(1) + '%/wk',
-      k: 'TikTok growth vs. education sector',
+      k: 'TikTok vs. sector',
       c: `<span class="vd ${v.cls}" title="${benchTitle(gBm)}">${VD_SHORT[v.cls]} vs ${bmTick(gBm)}</span>` });
   }
   document.getElementById('pace-tiles').innerHTML = tiles.map(t =>
-    `<div class="stile"><div class="n">${t.n}</div><div class="k">${t.k}</div>${
-       t.c ? `<div class="c">${t.c}</div>` : ''}</div>`).join('');
+    `<div class="stile"><div class="n">${t.n}</div><div class="k">${t.k}</div>` +
+    `<div class="c">${t.c || ''}</div></div>`).join('');
 
   // milestone projection: biggest platform with a sane, positive trajectory
   let ms = '';
@@ -1078,6 +1166,9 @@ function renderPace(platforms, snaps, d){
     ms = `At this pace, ${x.p.name} passes <b>${FULL(target)} followers</b> by ~${when}.`;
     break;
   }
+  const msEl = document.getElementById('milestone');
+  msEl.innerHTML = ms;
+  msEl.classList.toggle('hidden', !ms);
   show('sec-growth');
 }
 
@@ -1110,6 +1201,8 @@ function benchVerdict(rate, bm){
 // The gold line sits at BM_POS% of every track, so "past the line" always reads as above,
 // whatever the numbers are. The bar is the SOMBA rate scaled to that same anchor.
 const BM_POS = 45;
+// The ONE vocabulary for "is this good?". Every verdict on the page — hero badge,
+// meter rows, growth tiles — renders from here, so the words and arrows never drift.
 const VD_SHORT = {above:'▲ Above', at:'● On par', below:'▼ Below'};
 const fillPct = (rate, bm) => Math.max(0, Math.min(98, rate / bm.value * BM_POS)).toFixed(1);
 // the tick carries the gist; the exact published figure is in the tooltip and the sources list
@@ -1155,41 +1248,41 @@ function renderEngagement(d){
   const overall = tInt / tReach * 100;
 
   // ---- headline True ER ----
-  const heroBench = (benchOverall(d,'engagement_rate_reach')||{}).value || ER_TYPICAL;
-  const b = overall >= heroBench*1.6 ? {c:'above', t:'Above typical'}
-          : overall >= heroBench*0.7 ? {c:'at', t:'On par'}
-          : {c:'below', t:'Below typical'};
+  const heroBm = benchOverall(d,'engagement_rate_reach') || {value: ER_TYPICAL};
+  const heroBench = heroBm.value;
+  const b = benchVerdict(overall, heroBm) || {cls:'at', t:'On par'};
   const gap = overall - heroBench;
   document.getElementById('er-hero').innerHTML =
     `<div>
        <div class="lab">True engagement rate · by reach</div>
        <div class="tick"><span class="big" id="er-tick">0.0</span><span class="pct">%</span></div>
-       <span class="live" style="margin-top:8px"><i></i>Live · updated ${escapeHtml(prettyDate(E.updated || ''))}</span>
+       <span class="live mt-2"><i></i>Live · updated ${escapeHtml(prettyDate(E.updated || ''))}</span>
      </div>
      <div class="er-delta">
        <div class="d ${gap >= 0 ? 'up' : 'down'}">${gap >= 0 ? '▲' : '▼'} ${Math.abs(gap).toFixed(1)} pts</div>
        <div class="k">vs ${heroBench}% sector</div>
      </div>
-     <div><span class="er-badge ${b.c}">${b.t}</span></div>`;
+     <div><span class="er-badge ${b.cls}">${VD_SHORT[b.cls]}</span></div>`;
   tickTo(document.getElementById('er-tick'), overall, 1);
 
   // ---- benchmark meters (one row per platform) ----
   // Bar = SOMBA on its own scale; the gold line is the published benchmark, pinned at
   // BM_POS% of the track in every row so past-the-line always means above benchmark.
   // A benchmark is only drawn against the SOMBA rate measured on its own basis.
-  const meterRow = (id, slim, value, unit, bm, matched, basis) => {
+  const meterRow = (id, value, unit, bm, matched, sub) => {
     const col = (cfg[id] && cfg[id].color) || '#5d4380';
     const v = benchVerdict(matched, bm);
-    const track = v
-      ? `<span class="mtrack"><span class="fill" style="width:${fillPct(matched, bm)}%;background:${col}"></span>` +
-        `<span class="bmark" style="left:${BM_POS}%" title="${benchTitle(bm)}"><i>${bmTick(bm)}</i></span></span>`
-      : `<span class="mtrack nobm" title="No published benchmark measured the same way"></span>`;
-    return `<div class="mrow${slim ? ' slim' : ''}">` +
-      `<span class="who"><span class="picon" style="color:${col}">${ICONS[id]||''}</span>` +
-      `<span>${ER_META[id].name}${basis ? `<span class="basis">${basis}</span>` : ''}</span></span>` +
-      `<span class="val">${value}<small>${unit}</small></span>` + track +
-      (v ? `<span class="vd ${v.cls}">${VD_SHORT[v.cls]}</span>` : `<span class="vd none">No benchmark</span>`) +
-      `</div>`;
+    return rowHTML({
+      mod:'row--meter',
+      lead:`<span class="picon" style="color:${col}">${ICONS[id]||''}</span>`,
+      title:ER_META[id].name, sub, value, unit,
+      track: v
+        ? `<span class="mtrack"><span class="fill" style="width:${fillPct(matched, bm)}%;background:${col}"></span>`
+          + `<span class="bmark" style="left:${BM_POS}%" title="${benchTitle(bm)}"><i>${bmTick(bm)}</i></span></span>`
+        : `<span class="mtrack nobm" title="No published benchmark measured the same way"></span>`,
+      tail: v ? `<span class="vd ${v.cls}">${VD_SHORT[v.cls]}</span>`
+              : `<span class="vd none">No benchmark</span>`
+    });
   };
   document.getElementById('er-meters').innerHTML = rows.map(r => {
     // show whichever rate the benchmark is measured against, so the bar and the line agree
@@ -1197,26 +1290,23 @@ function renderEngagement(d){
     const basis = perFollower ? BASIS_LABEL.followers
                 : (r.bm && REACH_BASES.has(r.bm.basis)) ? (BASIS_LABEL[r.bm.basis] || r.bm.basis)
                 : 'by ' + (ER_META[r.id].word === 'reached' ? 'reach' : ER_META[r.id].word);
-    return meterRow(r.id, false, (perFollower ? r.erFollower : r.er).toFixed(1), '%', r.bm, r.matched, basis);
+    const win = r.e.period_days || ER_PERIOD_DAYS;
+    return meterRow(r.id, (perFollower ? r.erFollower : r.er).toFixed(1), '%',
+                    r.bm, r.matched, `${basis} · past ${win} days`);
   }).join('');
   const paceRows = rows.map(r => {
     if(r.e.posts == null) return '';          // unknown is different from zero
     const bm = bench(d, r.id, 'posts_per_week');
     const pw = r.e.posts / ((r.e.period_days || ER_PERIOD_DAYS)/7);
-    return meterRow(r.id, true, pw.toFixed(1), '/wk', bm, bm ? pw : null, '');
+    return meterRow(r.id, pw.toFixed(1), '/wk', bm, bm ? pw : null, `past ${r.e.period_days || ER_PERIOD_DAYS} days`);
   }).filter(Boolean);
   document.getElementById('er-pace').innerHTML = paceRows.join('');
   if(!paceRows.length) document.getElementById('er-pace-title').classList.add('hidden');
 
   // ---- methodology footnote ----
   const hasBenchBlock = !!(d.benchmarks && d.benchmarks.platforms);
-  // Name the window per platform rather than lumping them together — they
-  // genuinely differ, and "28, 30 and 90 days" told the reader nothing useful.
-  const windows = rows
-    .map(r => `${escapeHtml((cfg[r.id]||{}).name || r.id)}: past ${r.e.period_days || ER_PERIOD_DAYS} days`)
-    .join(' · ');
-  document.getElementById('er-foot').innerHTML =
-    `${windows}. Gold line = sector benchmark.`;
+  // Each row now carries its own window, so the footnote only has to explain the line.
+  document.getElementById('er-foot').innerHTML = 'Gold line = sector benchmark.';
 
   show('sec-engage');
 }
@@ -1236,7 +1326,7 @@ function renderBenchmarkSources(d){
     const src = bm.source_url && String(bm.source_url).startsWith('https://')
       ? `<a href="${escapeHtml(bm.source_url)}" target="_blank" rel="noopener">${escapeHtml(bm.source||bm.source_url)}</a>`
       : escapeHtml(bm.source||'');
-    rowsH.push(`<div class="row"><b>${escapeHtml(scope)}</b> · ${escapeHtml(KEY_LABEL[key]||key)}${basis}: ` +
+    rowsH.push(`<div class="src-row"><b>${escapeHtml(scope)}</b> · ${escapeHtml(KEY_LABEL[key]||key)}${basis}: ` +
       `${bm.value}${unit}${bm.label ? ' — ' + escapeHtml(bm.label) : ''} — ${src}` +
       (bm.data_period ? ` · data ${escapeHtml(bm.data_period)}` : '') +
       (bm.retrieved ? ` · retrieved ${escapeHtml(bm.retrieved)}` : '') + `</div>`);
@@ -1252,17 +1342,15 @@ function renderBenchmarkSources(d){
 }
 
 // ---------- recent content ----------
-function vidRows(vids){
-  return vids.map((v,i) => `
-    <div class="vidrow${i === 0 ? ' top' : ''}">
-      <div class="rank">${i+1}</div>
-      <div>
-        <div class="t"><a href="https://www.youtube.com/watch?v=${encodeURIComponent(v.id)}" target="_blank" rel="noopener">${escapeHtml(v.title)}</a></div>
-        <div class="meta">${v.published ? ageOf(v.published) : (v.kind === 'video' ? 'video' : 'Short')}</div>
-      </div>
-      <div class="v"><b>${v.views == null ? '—' : FULL(v.views)}</b>
-        <small>views${v.likes != null ? ' · ' + FULL(v.likes) + ' likes' : ''}</small></div>
-    </div>`).join('');
+function vidRows(vids, ranked){
+  return vids.map((v,i) => rowHTML({
+    mod:'row--link', top:ranked && i === 0, lead:i+1,
+    title:`<a href="https://www.youtube.com/watch?v=${encodeURIComponent(v.id)}" target="_blank" rel="noopener">${escapeHtml(v.title)}</a>`,
+    titleAttr:escapeHtml(v.title),
+    sub:v.published ? ageOf(v.published) : (v.kind === 'video' ? 'video' : 'Short'),
+    value:v.views == null ? '—' : FULL(v.views),
+    vsub:`views${v.likes != null ? ` · ${FULL(v.likes)} like${v.likes === 1 ? '' : 's'}` : ''}`
+  })).join('');
 }
 
 function renderVideos(d){
@@ -1270,7 +1358,7 @@ function renderVideos(d){
   if(!rv || !rv.videos || !rv.videos.length) return;
   // Newest first — this list is labeled "Latest uploads", so date is the sort.
   const vids = rv.videos.slice().sort((a,b) => String(b.published ?? '').localeCompare(String(a.published ?? ''))).slice(0,5);
-  document.getElementById('vidlist').innerHTML = vidRows(vids);
+  document.getElementById('vidlist').innerHTML = vidRows(vids, false);   // date order
   show('sec-videos');
 }
 
@@ -1279,7 +1367,7 @@ function renderTopVideos(d){
   const tv = d.top_videos;
   if(!tv || !tv.videos || !tv.videos.length) return;
   const vids = tv.videos.slice().sort((a,b) => (b.views ?? -1) - (a.views ?? -1)).slice(0,5);
-  document.getElementById('topvidlist').innerHTML = vidRows(vids);
+  document.getElementById('topvidlist').innerHTML = vidRows(vids, true);  // performance order
   show('sec-videos');
 }
 
@@ -1353,14 +1441,14 @@ function renderTopPosts(d){
 
   document.getElementById('postlist').innerHTML = posts.map((p,i) => {
     const er = (p.views && p.interactions != null) ? (p.interactions / p.views * 100) : null;
-    return `<div class="prow${i === 0 ? ' best' : ''}">
-      <div class="rank">${i+1}</div>
-      <div><div class="t">${escapeHtml(p.title)}</div>
-        <div class="m">${p.date ? prettyDate(p.date) : ''}${p.format ? ' · ' + escapeHtml(p.format) : ''}${
-          er != null ? ' · ' + er.toFixed(1) + '% engaged' : ''}</div></div>
-      <div class="v"><b>${FULL(p.views)}</b><small>views${
-        p.interactions != null ? ' · ' + FULL(p.interactions) + ' interactions' : ''}</small></div>
-    </div>`;
+    return rowHTML({
+      top:i === 0, lead:i+1,
+      title:escapeHtml(p.title), titleAttr:escapeHtml(p.title),
+      sub:`${p.date ? prettyDate(p.date) : ''}${p.format ? ' · ' + escapeHtml(p.format) : ''}${
+        er != null ? ' · ' + er.toFixed(1) + '% engaged' : ''}`,
+      value:FULL(p.views),
+      vsub:`views${p.interactions != null ? ' · ' + FULL(p.interactions) + ' interactions' : ''}`
+    });
   }).join('');
 
   const sharePct = totalViews ? Math.round(top.views / totalViews * 100) : 0;
@@ -1389,9 +1477,11 @@ function renderMix(platforms, snaps){
   document.getElementById('mix-center').innerHTML =
     `<div class="n">${FULL(total)}</div><div class="k">followers</div>`;
   document.getElementById('mix-legend').innerHTML = rows.map(r =>
-    `<div class="mixrow"><span class="picon" style="color:${r.p.color}">${ICONS[r.p.id]||''}</span>
-     <span class="nm">${r.p.name}</span><span class="ct">${FULL(r.val)}</span>
-     <span class="pc">${Math.round(100*r.val/total)}%</span></div>`).join('');
+    rowHTML({
+      lead:`<span class="picon" style="color:${r.p.color}">${ICONS[r.p.id]||''}</span>`,
+      title:r.p.name,
+      value:Math.round(100*r.val/total) + '%', vsub:FULL(r.val)
+    })).join('');
   const top = rows[0];
   show('sec-mix');
 }
@@ -1424,16 +1514,18 @@ function renderDemographics(d){
     document.getElementById('genderbar').innerHTML = dm.gender.map((g,i) =>
       `<span style="width:${g.pct}%;background:${gcolors[i%3]}"></span>`).join('');
     document.getElementById('genderlegend').innerHTML = dm.gender.map((g,i) =>
-      `<div class="glegend"><span class="dot" style="background:${gcolors[i%3]}"></span>
-       ${escapeHtml(g.label)}<span class="p">${g.pct}%</span></div>`).join('');
+      rowHTML({
+        lead:`<span class="dot" style="background:${gcolors[i%3]}"></span>`,
+        title:escapeHtml(g.label), value:g.pct + '%'
+      })).join('');
   }
   if(dm.locations && dm.locations.length){
     const maxLoc = Math.max(...dm.locations.map(l => l.pct));
-    document.getElementById('loclist').innerHTML = dm.locations.map(l => `
-      <div class="locrow">
-        <div class="toprow"><b>${escapeHtml(l.name)}</b><span>${l.pct}%</span></div>
-        <div class="track"><div class="fill" style="width:${(100*l.pct/maxLoc).toFixed(0)}%"></div></div>
-      </div>`).join('');
+    document.getElementById('loclist').innerHTML = dm.locations.map(l => rowHTML({
+      mod:'row--meter row--nolead',
+      title:escapeHtml(l.name), value:l.pct + '%',
+      track:`<span class="mtrack"><span class="fill" style="width:${(100*l.pct/maxLoc).toFixed(0)}%;background:linear-gradient(90deg,var(--brand-purple-mid),var(--brand-purple))"></span></span>`
+    })).join('');
   }
   show('sec-mix');
 }
