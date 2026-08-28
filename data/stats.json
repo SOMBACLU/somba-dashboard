@@ -1049,10 +1049,41 @@
           "last_ok": "2026-08-27"
         }
       }
+    },
+    {
+      "date": "2026-08-28",
+      "platforms": {
+        "instagram": {
+          "followers": 749,
+          "following": 285,
+          "posts": 526,
+          "source": "scrape",
+          "last_ok": "2026-08-28"
+        },
+        "tiktok": {
+          "followers": 157,
+          "likes": 14300,
+          "videos": 454,
+          "source": "scrape",
+          "last_ok": "2026-08-28"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 422954,
+          "source": "scrape",
+          "last_ok": "2026-08-28"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape",
+          "last_ok": "2026-08-28"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-27",
+    "fetched": "2026-08-28",
     "source": "youtube-rss",
     "videos": [
       {
@@ -1226,7 +1257,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-08-27",
+    "fetched": "2026-08-28",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
@@ -1244,7 +1275,7 @@
         "views": 26009,
         "kind": "short",
         "likes": 91,
-        "published": "2025-11-02"
+        "published": "2025-11-01"
       },
       {
         "id": "CS6dNGU9Evc",
@@ -1257,7 +1288,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23135,
+        "views": 23136,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -1268,7 +1299,7 @@
         "views": 22772,
         "kind": "short",
         "likes": 71,
-        "published": "2026-04-01"
+        "published": "2026-03-31"
       },
       {
         "id": "-iPsWtoqSjQ",
@@ -1292,12 +1323,12 @@
         "views": 10143,
         "kind": "short",
         "likes": 199,
-        "published": "2025-03-20"
+        "published": "2025-03-19"
       },
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7658,
+        "views": 7659,
         "kind": "short",
         "likes": 59,
         "published": "2026-04-01"
@@ -1308,7 +1339,7 @@
         "views": 7376,
         "kind": "short",
         "likes": 28,
-        "published": "2025-10-28"
+        "published": "2025-10-27"
       },
       {
         "id": "zArZjKlR8lI",
@@ -1364,20 +1395,20 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 9,
+        "posts": 10,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
-        "reach": 2861,
-        "likes": 23,
+        "reach": 2887,
+        "likes": 25,
         "comments": 0,
         "shares": 8,
         "saves": 0,
         "period_days": 90,
         "source": "youtube-analytics-api",
-        "window": "2026-05-26..2026-08-23",
+        "window": "2026-05-28..2026-08-25",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
-        "updated": "2026-08-26",
+        "updated": "2026-08-28",
         "posts": 0,
         "posts_source": "derived-from-snapshots"
       }
@@ -1393,7 +1424,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-08-27T20:33:25Z",
+  "generated_at": "2026-08-28T00:31:02Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
