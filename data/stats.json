@@ -1080,10 +1080,41 @@
           "last_ok": "2026-08-28"
         }
       }
+    },
+    {
+      "date": "2026-08-29",
+      "platforms": {
+        "instagram": {
+          "followers": 750,
+          "following": 285,
+          "posts": 527,
+          "source": "scrape",
+          "last_ok": "2026-08-29"
+        },
+        "tiktok": {
+          "followers": 156,
+          "likes": 14300,
+          "videos": 455,
+          "source": "scrape",
+          "last_ok": "2026-08-29"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 422978,
+          "source": "scrape",
+          "last_ok": "2026-08-29"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape",
+          "last_ok": "2026-08-29"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-28",
+    "fetched": "2026-08-29",
     "source": "youtube-rss",
     "videos": [
       {
@@ -1257,7 +1288,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-08-28",
+    "fetched": "2026-08-29",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
@@ -1288,7 +1319,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23136,
+        "views": 23143,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -1328,15 +1359,15 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7659,
+        "views": 7661,
         "kind": "short",
-        "likes": 59,
+        "likes": 60,
         "published": "2026-04-01"
       },
       {
         "id": "2XzUKmCBwTY",
         "title": "POV: You're trying to hang on during midterms #college #studentlife #midterms #ytshorts #explore",
-        "views": 7376,
+        "views": 7378,
         "kind": "short",
         "likes": 28,
         "published": "2025-10-27"
@@ -1399,16 +1430,16 @@
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
-        "reach": 2887,
-        "likes": 25,
+        "reach": 2861,
+        "likes": 23,
         "comments": 0,
         "shares": 8,
         "saves": 0,
         "period_days": 90,
         "source": "youtube-analytics-api",
-        "window": "2026-05-28..2026-08-25",
+        "window": "2026-05-29..2026-08-26",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
-        "updated": "2026-08-28",
+        "updated": "2026-08-29",
         "posts": 0,
         "posts_source": "derived-from-snapshots"
       }
@@ -1424,7 +1455,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-08-28T22:46:44Z",
+  "generated_at": "2026-08-29T00:28:20Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
