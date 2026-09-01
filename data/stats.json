@@ -1173,10 +1173,41 @@
           "last_ok": "2026-08-31"
         }
       }
+    },
+    {
+      "date": "2026-09-01",
+      "platforms": {
+        "instagram": {
+          "followers": 750,
+          "following": 285,
+          "posts": 527,
+          "source": "scrape",
+          "last_ok": "2026-09-01"
+        },
+        "tiktok": {
+          "followers": 156,
+          "likes": 14400,
+          "videos": 455,
+          "source": "scrape",
+          "last_ok": "2026-09-01"
+        },
+        "youtube": {
+          "followers": 245,
+          "videos": 222,
+          "views": 423078,
+          "source": "scrape",
+          "last_ok": "2026-09-01"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape",
+          "last_ok": "2026-09-01"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-08-31",
+    "fetched": "2026-09-01",
     "source": "youtube-rss",
     "videos": [
       {
@@ -1350,7 +1381,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-08-31",
+    "fetched": "2026-09-01",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
@@ -1381,7 +1412,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23156,
+        "views": 23159,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -1421,7 +1452,7 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7664,
+        "views": 7666,
         "kind": "short",
         "likes": 60,
         "published": "2026-04-01"
@@ -1492,16 +1523,16 @@
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
-        "reach": 2823,
+        "reach": 2843,
         "likes": 22,
         "comments": 0,
         "shares": 8,
         "saves": 0,
         "period_days": 90,
         "source": "youtube-analytics-api",
-        "window": "2026-05-31..2026-08-28",
+        "window": "2026-06-01..2026-08-29",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
-        "updated": "2026-08-31",
+        "updated": "2026-09-01",
         "posts": 0,
         "posts_source": "derived-from-snapshots"
       }
@@ -1517,7 +1548,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-08-31T19:49:30Z",
+  "generated_at": "2026-09-01T00:26:38Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
