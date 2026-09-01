@@ -1178,7 +1178,7 @@
       "date": "2026-09-01",
       "platforms": {
         "instagram": {
-          "followers": 750,
+          "followers": 751,
           "following": 285,
           "posts": 527,
           "source": "scrape",
@@ -1548,7 +1548,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-09-01T08:00:14Z",
+  "generated_at": "2026-09-01T19:55:55Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
