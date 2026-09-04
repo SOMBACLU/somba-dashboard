@@ -1,0 +1,26 @@
+# What NOT to publish to the website.
+#
+# Vercel serves every file it receives, so without this list the scraper,
+# the project notes and the Mac helper scripts would all be fetchable as web
+# pages. None of them hold secrets — they are already public on GitHub — but
+# the website only needs the page, its numbers and the logo.
+#
+# The site itself is: index.html, privacy.html, data/, somba-logo.jpg
+
+# The scraper and its tests
+*.py
+__pycache__/
+
+# Mac-side helpers — meaningless on a web server
+*.command
+*.plist
+scripts/
+
+# Notes and docs
+*.md
+.github/
+
+# Local-only files that are not part of the dashboard
+roles.html
+logs/
+.playwright-mcp/
