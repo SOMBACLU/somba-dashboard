@@ -110,6 +110,74 @@ A platform showing a "reused" note for several days means its page stopped
 letting the automation read it. Ask Claude Code to update that platform's
 reader — it's a small fix in `update_stats.py`.
 
+## Connecting the deeper numbers (reach, interactions, audience)
+
+Follower counts are public, so they collect themselves. Reach, interactions and
+audience splits are private, so the dashboard has to prove it is you. There are
+two separate things to set up, and they fail in different ways.
+
+### YouTube — a permission slip that keeps expiring
+
+Run `python3 youtube_auth.py`, click Allow, done.
+
+**But it will die again in 7 days unless you change one setting.** Google gives
+apps in "Testing" mode a permission slip that self-destructs after a week. Ours
+is in Testing, which is why YouTube's numbers quietly stopped on 1 September.
+
+To stop it happening every week:
+
+1. Go to <https://console.cloud.google.com/apis/credentials/consent>
+2. Find **Publishing status**, currently "Testing"
+3. Click **Publish app**
+
+It stays a private app — "published" here only means the permission slip stops
+expiring. Do this once and YouTube looks after itself.
+
+### Instagram and TikTok — a cookie, copied from your browser
+
+These have no permission-slip system, so the dashboard borrows the *cookie* your
+browser already holds. A cookie is the wristband a site gives you after you log
+in. **You never put a password in a file.**
+
+To fetch one, in the Chrome profile signed into the account:
+
+1. Open instagram.com (or tiktok.com) while logged in
+2. Press **F12** to open developer tools
+3. Click the **Application** tab → **Cookies** in the left sidebar → the site
+4. Find the row named `sessionid` and copy its **Value**
+
+Then add it to `.secrets.local` in this folder — the file is already set up to be
+ignored by git, so these lines never leave your Mac:
+
+```
+export IG_SESSIONID="paste the instagram sessionid here"
+export IG_DS_USER_ID="paste the ds_user_id value here"
+export IG_CSRFTOKEN="paste the csrftoken value here"
+export TT_SESSIONID="paste the tiktok sessionid here"
+```
+
+**Two things to know.** These numbers only refresh when your Mac runs the
+updater, because Instagram refuses connections from GitHub's servers no matter
+what cookie you send. And a cookie eventually expires — when it does, the run
+prints *"the cookie has expired, paste a fresh one"* and leaves every existing
+number untouched. Nothing breaks; it just stops getting newer.
+
+### When a reader stops working
+
+Instagram and TikTok rename these internal addresses without warning, so the
+updater tries several and writes down what happened. Look in
+`data/stats.json` under `_endpoint_log`:
+
+```json
+"instagram.insights": {
+  "used": "insights/account_summary",
+  "tried": ["account_organic_insights: HTTP 404"]
+}
+```
+
+`used` is the address that answered. If `used` is `null`, every address failed
+and the list says why — that is the note to hand to Claude Code.
+
 ## Files in this folder
 
 | File | What it is |
@@ -117,5 +185,7 @@ reader — it's a small fix in `update_stats.py`.
 | `index.html` | The dashboard page people see |
 | `data/stats.json` | The numbers — one snapshot per day lives here |
 | `update_stats.py` | The scraper that collects the numbers |
+| `internal_sources.py` | The cookie-based readers for Instagram and TikTok |
+| `youtube_auth.py` | Run once to give YouTube permission |
 | `.github/workflows/update-stats.yml` | The hourly automation |
 | `weekly-update.command` | Optional double-click "refresh now" button |

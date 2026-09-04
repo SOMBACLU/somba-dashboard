@@ -22,6 +22,12 @@ import urllib.parse
 import urllib.request
 from datetime import date, datetime, timedelta, timezone
 
+try:
+    import internal_sources
+except Exception as _e:            # pragma: no cover - defensive
+    internal_sources = None
+    print("(internal_sources unavailable: %s)" % _e)
+
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(REPO_DIR, "data", "stats.json")
 
@@ -246,7 +252,11 @@ def fetch_tiktok(p):
     idx = html.find('"uniqueId":"%s"' % username)
     region = html[idx : idx + 3000] if idx != -1 else html
     out = {}
-    for key, name in (("followerCount", "followers"), ("heartCount", "likes"), ("videoCount", "videos")):
+    # friendCount is TikTok's name for accounts that follow us back. All five
+    # keys sit within ~2.1kB of the uniqueId anchor, well inside the window.
+    for key, name in (("followerCount", "followers"), ("followingCount", "following"),
+                      ("heartCount", "likes"), ("videoCount", "videos"),
+                      ("friendCount", "mutuals")):
         m = re.search(r'"%s":(\d+)' % key, region) or re.search(r'"%s":(\d+)' % key, html)
         if m:
             out[name] = int(m.group(1))
@@ -555,6 +565,7 @@ AGE_BAND = {"age13-17": "13–17", "age18-24": "18–24", "age25-34": "25–34",
 AGE_ORDER = ["13–17", "18–24", "25–34", "35–44", "45+"]
 GENDER_LABEL = {"female": "Women", "male": "Men",
                 "user_specified": "Other / undisclosed"}
+WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 
 def google_access_token():
@@ -570,12 +581,17 @@ def google_access_token():
     return data["access_token"]
 
 
-def yta_window(today=None):
-    """The most recent 28 days YouTube has finished counting."""
+def yta_window_days(days, today=None):
+    """(start, end) for the most recent `days` YouTube has finished counting."""
     today = today or utc_today()
     end = today - timedelta(days=YTA_LAG_DAYS)
-    start = end - timedelta(days=YTA_WINDOW_DAYS - 1)
+    start = end - timedelta(days=days - 1)
     return start.isoformat(), end.isoformat()
+
+
+def yta_window(today=None):
+    """The most recent 28 days YouTube has finished counting."""
+    return yta_window_days(YTA_WINDOW_DAYS, today)
 
 
 def yta_query(token, **params):
@@ -684,18 +700,121 @@ def fetch_youtube_demographics(token, start, end):
     # publishing it would be worse than showing nothing.
     if not ages and not genders:
         raise RuntimeError("YouTube Analytics returned no demographics")
-    if len(ages) < 3 or len(genders) < 2 or max(ages.values(), default=0) >= 95:
+    # A single bucket at 100% is a sample of roughly one person. That stays
+    # refused — publishing it would be worse than showing nothing.
+    top = max(ages.values(), default=0)
+    if top >= 95:
         raise RuntimeError(
-            "demographics too thin to trust (%d age bands, %d genders, top band %.0f%%) — "
-            "YouTube Studio suppresses this report at these sample sizes and so do we"
-            % (len(ages), len(genders), max(ages.values(), default=0)))
+            "demographics too thin to trust (top band %.0f%%) — that is a sample of "
+            "about one person" % top)
+    # Everything between "one person" and "a full spread" used to be refused too,
+    # which is why this block has never published anything. A thin-but-plural
+    # split is worth showing as long as the page says it is thin: a real shape
+    # from few viewers beats a placeholder from none.
+    thin = len(ages) < 3 or len(genders) < 2
     return {
         "age": [{"band": b, "pct": ages[b]} for b in AGE_ORDER if b in ages],
         "gender": genders,
         "estimated": False,
+        "confidence": "low" if thin else "normal",
         "as_of": utc_today().isoformat(),
         "source": "youtube-analytics-api",
-        "note": "Real YouTube viewer demographics, refreshed automatically.",
+        "note": ("Real YouTube viewer demographics, but from a small number of "
+                 "signed-in viewers — treat the shape as indicative, not exact."
+                 if thin else
+                 "Real YouTube viewer demographics, refreshed automatically."),
+    }
+
+
+def fetch_youtube_audience_split(token, start, end):
+    """Views from subscribers vs everyone else.
+
+    The dashboard already shows this split for Instagram, under the keys
+    views_from_followers_pct / views_from_non_followers_pct. YouTube answers the
+    same question through the subscribedStatus dimension, so it reuses the same
+    key names and renders through the same code.
+    """
+    rows = yta_rows(yta_query(
+        token, ids="channel==MINE", startDate=start, endDate=end,
+        metrics="views", dimensions="subscribedStatus"))
+    by = {k: int(v or 0) for k, v in rows}
+    total = sum(by.values())
+    if total <= 0:
+        raise RuntimeError("no views in the window, so there is no split to state")
+    subbed = by.get("SUBSCRIBED", 0)
+    return {
+        "views_from_followers_pct": round(subbed * 100.0 / total, 1),
+        "views_from_non_followers_pct": round((total - subbed) * 100.0 / total, 1),
+    }
+
+
+def fetch_youtube_locations(token, start, end):
+    """Where the views come from, at the finest level YouTube names in words.
+
+    Deliberately not the `city` dimension: it returns Google geo-target criterion
+    IDs ("1027744"), not names, and turning those into words needs a 100k-row
+    lookup table we would have to ship and keep current. country and province
+    both come back as readable ISO codes, so they need no table at all.
+    """
+    countries = [(c, int(v or 0)) for c, v in yta_rows(yta_query(
+        token, ids="channel==MINE", startDate=start, endDate=end,
+        metrics="views", dimensions="country", sort="-views", maxResults=10))]
+    total = sum(v for _, v in countries)
+    if total <= 0:
+        raise RuntimeError("no views in the window, so there is nowhere to report")
+
+    # When one country holds nearly everything, a country list is a single bar
+    # and says nothing. Drop to state level, which is where the interesting
+    # variation actually lives for a Thousand Oaks channel.
+    level, rows = "country", countries
+    top_code, top_views = countries[0]
+    if top_code == "US" and top_views * 100.0 / total >= 70:
+        provinces = [(c, int(v or 0)) for c, v in yta_rows(yta_query(
+            token, ids="channel==MINE", startDate=start, endDate=end,
+            metrics="views", dimensions="province", filters="country==US",
+            sort="-views", maxResults=10))]
+        if provinces:
+            level, rows, total = "province", provinces, sum(v for _, v in provinces)
+
+    return {
+        "level": level,
+        "locations": [{"name": c, "pct": round(v * 100.0 / total, 1)}
+                      for c, v in rows[:5] if v > 0],
+        "as_of": utc_today().isoformat(),
+        "source": "youtube-analytics-api",
+        "window": "%s..%s" % (start, end),
+    }
+
+
+def fetch_youtube_view_days(token, start, end):
+    """Which weekday the channel is actually watched on.
+
+    This measures when people watch, not when to publish — the same thing the
+    Instagram block measures, so it is labelled the same way. Calling it "best
+    time to post" would be inventing a causal claim the data does not make.
+    """
+    rows = yta_rows(yta_query(
+        token, ids="channel==MINE", startDate=start, endDate=end,
+        metrics="views", dimensions="day"))
+    if not rows:
+        raise RuntimeError("YouTube Analytics returned no daily rows")
+    by_day = {d: 0 for d in WEEKDAYS}
+    for date_str, views in rows:
+        try:
+            wd = WEEKDAYS[date.fromisoformat(date_str).weekday()]
+        except ValueError:
+            continue
+        by_day[wd] += int(views or 0)
+    total = sum(by_day.values())
+    if total <= 0:
+        raise RuntimeError("no views in the window, so no day stands out")
+    return {
+        "platform": "youtube",
+        "metric": "views by weekday",
+        "days": {d: round(by_day[d] * 100.0 / total, 1) for d in WEEKDAYS},
+        "as_of": utc_today().isoformat(),
+        "source": "youtube-analytics-api",
+        "window": "%s..%s" % (start, end),
     }
 
 
@@ -713,8 +832,10 @@ def update_private_analytics(data):
         print("::warning::YouTube Analytics sign-in failed (%s)" % e)
         return
 
+    window_days = YTA_WINDOW_DAYS
     try:
         eng = fetch_youtube_engagement_auto(token)
+        window_days = eng.get("period_days") or YTA_WINDOW_DAYS
         block = data.setdefault("engagement", {})
         eng["updated"] = utc_today().isoformat()
         block.setdefault("platforms", {})["youtube"] = eng
@@ -726,13 +847,168 @@ def update_private_analytics(data):
     except Exception as e:
         print("engagement unavailable (%s)" % e)
 
+    # Every report below describes the same period as the engagement rate above.
+    # Left to widen independently they would each settle on a different window,
+    # and the page would show four YouTube figures measuring four different
+    # spans while appearing to describe one.
+    start, end = yta_window_days(window_days)
+
+    try:
+        # Merged into the engagement block under the same key names Instagram
+        # uses, so one renderer draws the split for both platforms.
+        split = fetch_youtube_audience_split(token, start, end)
+        data.setdefault("engagement", {}).setdefault("platforms", {}) \
+            .setdefault("youtube", {}).update(split)
+        print("  YouTube subscriber split... ok (%.0f%% from subscribers)"
+              % split["views_from_followers_pct"])
+    except Exception as e:
+        print("  YouTube subscriber split... unavailable (%s)" % e)
+
     try:
         # Held in a separate key: YouTube is a minority of the audience, so this
         # must never overwrite the cross-platform demographics block.
         data["demographics_youtube"] = fetch_youtube_demographics(token, start, end)
-        print("  YouTube demographics... ok")
+        conf = data["demographics_youtube"].get("confidence")
+        print("  YouTube demographics... ok%s" % (" (low confidence)" if conf == "low" else ""))
     except Exception as e:
         print("  YouTube demographics... unavailable (%s)" % e)
+
+    try:
+        loc = fetch_youtube_locations(token, start, end)
+        blk = data.setdefault("demographics_youtube", {})
+        blk["locations"] = loc["locations"]
+        blk["locations_level"] = loc["level"]
+        print("  YouTube locations... ok (%d by %s)" % (len(loc["locations"]), loc["level"]))
+    except Exception as e:
+        print("  YouTube locations... unavailable (%s)" % e)
+
+    try:
+        data["posting_times_youtube"] = fetch_youtube_view_days(token, start, end)
+        print("  YouTube viewing days... ok")
+    except Exception as e:
+        print("  YouTube viewing days... unavailable (%s)" % e)
+
+
+def _iso_from_epoch(ts):
+    if not ts:
+        return None
+    return datetime.fromtimestamp(int(ts), tz=timezone.utc).date().isoformat()
+
+
+def update_internal_sources(data):
+    """Read Instagram and TikTok's own internal endpoints. Never raises.
+
+    Skipped in CI on purpose: Instagram blocks GitHub's runners by IP address,
+    and a cookie cannot argue with an IP block. This only runs from the Mac.
+    """
+    if internal_sources is None:
+        return
+    if IN_CI:
+        print("  Internal endpoints... skipped in CI (Instagram blocks these IPs)")
+        return
+    if not (internal_sources.have_instagram() or internal_sources.have_tiktok()):
+        return
+
+    log = {}
+    today = utc_today().isoformat()
+    eng = data.setdefault("engagement", {}).setdefault("platforms", {})
+
+    # ---- Instagram -------------------------------------------------------
+    if internal_sources.have_instagram():
+        sys.stdout.write("  Instagram internal... ")
+        sys.stdout.flush()
+        got = []
+
+        core = internal_sources.fetch_instagram_core("somambassadors", log)
+        if core and core.get("recent_posts"):
+            posts = [{
+                "title": p["title"],
+                "date": _iso_from_epoch(p["published"]),
+                "format": p["format"],
+                "views": p["views"],
+                "interactions": (p["likes"] or 0) + (p["comments"] or 0),
+            } for p in core["recent_posts"]]
+            # Sorted by performance, because the page marks row one with the gold
+            # "best" rail. On a date-sorted list that rail would be a lie.
+            posts.sort(key=lambda x: x["interactions"], reverse=True)
+            data["top_posts"] = {
+                "platform": "instagram", "as_of": today, "source": "instagram-internal",
+                "period_days": 30, "posts": posts[:5],
+            }
+            got.append("%d posts" % len(posts))
+
+        ins = internal_sources.fetch_instagram_insights("somambassadors", log)
+        if ins:
+            blk = eng.setdefault("instagram", {})
+            for src, dst in (("reach", "reach"), ("views", "views"),
+                             ("interactions", "interactions"),
+                             ("accounts_engaged", "accounts_engaged"),
+                             ("profile_visits", "profile_visits"),
+                             ("link_taps", "external_link_taps")):
+                if src in ins:
+                    blk[dst] = ins[src]
+            blk["source"] = "instagram-internal"
+            blk["updated"] = today
+            got.append("%d insight figures" % len(ins))
+
+        aud = internal_sources.fetch_instagram_audience("somambassadors", log)
+        if aud and any(aud.values()):
+            dem = data.setdefault("demographics", {})
+            if aud.get("age"):
+                dem["age"] = [{"band": b, "pct": round(p, 1)}
+                              for b, p in sorted(aud["age"].items())]
+            if aud.get("gender"):
+                dem["gender"] = [{"label": g, "pct": round(p, 1)}
+                                 for g, p in sorted(aud["gender"].items())]
+            if aud.get("city"):
+                top = sorted(aud["city"].items(), key=lambda kv: kv[1], reverse=True)[:5]
+                dem["locations"] = [{"name": c, "pct": round(p, 1)} for c, p in top]
+            dem["estimated"] = False
+            dem["as_of"] = today
+            dem["source"] = "instagram-internal"
+            dem["note"] = "Real Instagram audience splits, refreshed automatically."
+            got.append("audience splits")
+
+        print(", ".join(got) if got else "nothing readable (see the endpoint log)")
+
+    # ---- TikTok ----------------------------------------------------------
+    if internal_sources.have_tiktok():
+        sys.stdout.write("  TikTok internal... ")
+        sys.stdout.flush()
+        got = []
+
+        ov = internal_sources.fetch_tiktok_overview(log)
+        if ov:
+            # Replaces the sample block outright. Real and illustrative numbers
+            # must never sit side by side in one platform's figures.
+            blk = {k: v for k, v in ov.items() if k != "followers"}
+            blk.update({"period_days": 28, "source": "tiktok-internal", "updated": today})
+            if "views" in blk:
+                blk.setdefault("reach", blk["views"])
+            eng["tiktok"] = blk
+            samples = data["engagement"].get("sample_platforms") or []
+            data["engagement"]["sample_platforms"] = [s for s in samples if s != "tiktok"]
+            got.append("%d figures (sample retired)" % len(ov))
+
+        vids = internal_sources.fetch_tiktok_videos(log)
+        if vids:
+            data["top_videos_tiktok"] = {
+                "fetched": today, "source": "tiktok-internal",
+                "videos": sorted(vids, key=lambda v: v.get("views") or 0, reverse=True)[:12],
+            }
+            got.append("%d videos" % len(vids))
+
+        fol = internal_sources.fetch_tiktok_followers(log)
+        if fol:
+            data["demographics_tiktok"] = dict(fol, as_of=today, source="tiktok-internal")
+            got.append("follower splits")
+
+        print(", ".join(got) if got else "nothing readable (see the endpoint log)")
+
+    # A guessed address is only cheap to maintain if its failures are written
+    # down. This is the note that says which candidate answered.
+    if log:
+        data["_endpoint_log"] = {"checked": today, "results": log}
 
 
 FETCHERS = {
@@ -981,6 +1257,7 @@ def main():
                 print("could not read (%s) — reused last list" % e)
 
     update_private_analytics(data)
+    update_internal_sources(data)
     refresh_derived_posts(data)
 
     upsert_snapshot(data, snap)

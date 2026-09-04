@@ -303,7 +303,8 @@
   .pill.flat{background:#f0edf4;color:var(--muted)}
   .pill.stale{background:var(--gold-soft);color:var(--gold-deep)}
   .pill.stale.old{background:#faefec;color:var(--red)}
-  .pcard .extras{font-size:var(--fs-300);color:var(--muted);margin-top:var(--sp-2)}
+  .pcard .extras{font-size:var(--fs-300);color:var(--muted);margin-top:var(--sp-2);
+    line-height:1.45;min-height:calc(1.45em * 2)}
 
   /* ---- sections ---- */
   section{background:var(--surface-raised);border-radius:var(--r-lg);
@@ -781,7 +782,7 @@ Chart.defaults.color = '#6e6680';
 Chart.defaults.font.size = 13;
 Chart.defaults.animation = false;   // static report — draw fully, instantly
 
-const EXTRA_LABELS = {posts:'posts', following:'following', likes:'likes', videos:'videos', views:'views'};
+const EXTRA_LABELS = {posts:'posts', following:'following', likes:'likes', videos:'videos', views:'views', mutuals:'mutual follows'};
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Brand marks (Simple Icons paths, 24x24)
@@ -899,7 +900,7 @@ function render(d){
         <div class="v">${followers==null ? '—' : FULL(followers)}<small>followers</small></div>
         ${followers==null ? '' : deltaPill(latest, prev)} ${stale}
       </div>
-      ${extras ? `<div class="extras">${extras}</div>` : ''}
+      <div class="extras">${extras}</div>
       ${snaps.length >= 2 ? `<div class="spark">${sparkSVG(series(snaps, p.id).map(pt => pt.val), p.color, {fill:true})}</div>` : ''}
     </div>`;
   }).join('');
