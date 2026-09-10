@@ -1464,10 +1464,43 @@
           "last_ok": "2026-09-09"
         }
       }
+    },
+    {
+      "date": "2026-09-10",
+      "platforms": {
+        "instagram": {
+          "followers": 774,
+          "following": 285,
+          "posts": 532,
+          "source": "scrape",
+          "last_ok": "2026-09-10"
+        },
+        "tiktok": {
+          "followers": 156,
+          "following": 39,
+          "likes": 14500,
+          "videos": 458,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-09-10"
+        },
+        "youtube": {
+          "followers": 247,
+          "videos": 222,
+          "views": 423299,
+          "source": "scrape",
+          "last_ok": "2026-09-10"
+        },
+        "linkedin": {
+          "followers": 3,
+          "source": "scrape",
+          "last_ok": "2026-09-10"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-09-09",
+    "fetched": "2026-09-10",
     "source": "youtube-rss",
     "videos": [
       {
@@ -1481,7 +1514,7 @@
         "id": "mtbnjLbYoKI",
         "title": "POV: Class of 2027 #classof2027 #senior #junior #realitycheck #collegehumor #studentlife",
         "published": "2026-05-01",
-        "views": 1989,
+        "views": 1992,
         "likes": 10
       },
       {
@@ -1537,7 +1570,7 @@
         "id": "tmzuQeGtxyE",
         "title": "Preparing for FBLA... #fbla #fyp #funny #trending #students #academics",
         "published": "2026-04-12",
-        "views": 2958,
+        "views": 2960,
         "likes": 44
       },
       {
@@ -1641,7 +1674,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-09-09",
+    "fetched": "2026-09-10",
     "source": "youtube-innertube",
     "total_scanned": 221,
     "videos": [
@@ -1659,7 +1692,7 @@
         "views": 26009,
         "kind": "short",
         "likes": 91,
-        "published": "2025-11-02"
+        "published": "2025-11-01"
       },
       {
         "id": "CS6dNGU9Evc",
@@ -1672,7 +1705,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23185,
+        "views": 23186,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -1683,7 +1716,7 @@
         "views": 22772,
         "kind": "short",
         "likes": 71,
-        "published": "2026-04-01"
+        "published": "2026-03-31"
       },
       {
         "id": "-iPsWtoqSjQ",
@@ -1707,12 +1740,12 @@
         "views": 10146,
         "kind": "short",
         "likes": 199,
-        "published": "2025-03-20"
+        "published": "2025-03-19"
       },
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7702,
+        "views": 7704,
         "kind": "short",
         "likes": 59,
         "published": "2026-04-01"
@@ -1723,7 +1756,7 @@
         "views": 7379,
         "kind": "short",
         "likes": 28,
-        "published": "2025-10-28"
+        "published": "2025-10-27"
       },
       {
         "id": "zArZjKlR8lI",
@@ -1766,7 +1799,7 @@
         },
         "period_days": 30,
         "source": "instagram-insights-manual",
-        "posts": 16,
+        "posts": 13,
         "posts_source": "derived-from-snapshots"
       },
       "tiktok": {
@@ -1808,7 +1841,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-09-09T23:27:16Z",
+  "generated_at": "2026-09-10T00:26:30Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
