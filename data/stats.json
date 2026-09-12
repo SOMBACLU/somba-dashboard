@@ -1553,7 +1553,7 @@
         "youtube": {
           "followers": 247,
           "videos": 224,
-          "views": 423421,
+          "views": 423398,
           "source": "scrape",
           "last_ok": "2026-09-12"
         },
@@ -1570,11 +1570,18 @@
     "source": "youtube-rss",
     "videos": [
       {
+        "id": "d0xQoJ_4tmc",
+        "title": "Cal Lu Students vs Heat Wave🔥#socal #collegestudent #heatwave #studentlife #CalLutheran",
+        "published": "2026-09-12",
+        "views": 857,
+        "likes": 20
+      },
+      {
         "id": "rlPD3gAKHb0",
         "title": "Cal Lu sleepover starts now 💜💛  #dorm #fallsemester #movein #CalLutheran",
         "published": "2026-09-11",
-        "views": 115,
-        "likes": 3
+        "views": 782,
+        "likes": 22
       },
       {
         "id": "qK-rEkv98jc",
@@ -1643,7 +1650,7 @@
         "id": "tmzuQeGtxyE",
         "title": "Preparing for FBLA... #fbla #fyp #funny #trending #students #academics",
         "published": "2026-04-12",
-        "views": 2971,
+        "views": 2975,
         "likes": 44
       },
       {
@@ -1666,13 +1673,6 @@
         "published": "2026-04-09",
         "views": 2662,
         "likes": 36
-      },
-      {
-        "id": "uF77XP-tP-c",
-        "title": "Idk why the teacher hates me #fyp #fbla #sectionals #clu #studentlife #classclown #school #viral",
-        "published": "2026-04-08",
-        "views": 1585,
-        "likes": 33
       }
     ]
   },
@@ -1907,7 +1907,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-09-12T06:23:02Z",
+  "generated_at": "2026-09-12T07:06:51Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
