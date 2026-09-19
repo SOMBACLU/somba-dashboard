@@ -1761,6 +1761,39 @@
           "last_ok": "2026-09-18"
         }
       }
+    },
+    {
+      "date": "2026-09-19",
+      "platforms": {
+        "instagram": {
+          "followers": 784,
+          "following": 284,
+          "posts": 535,
+          "source": "scrape",
+          "last_ok": "2026-09-19"
+        },
+        "tiktok": {
+          "followers": 157,
+          "following": 39,
+          "likes": 14600,
+          "videos": 461,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-09-19"
+        },
+        "youtube": {
+          "followers": 249,
+          "videos": 226,
+          "views": 427910,
+          "source": "scrape",
+          "last_ok": "2026-09-19"
+        },
+        "linkedin": {
+          "followers": 4,
+          "source": "scrape",
+          "last_ok": "2026-09-19"
+        }
+      }
     }
   ],
   "recent_videos": {
@@ -1938,7 +1971,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-09-18",
+    "fetched": "2026-09-19",
     "source": "youtube-innertube",
     "total_scanned": 225,
     "videos": [
@@ -1953,7 +1986,7 @@
       {
         "id": "hMJM7bv4bGM",
         "title": "Dog in da College House! #dog #college #house #ytshorts #explore",
-        "views": 26009,
+        "views": 26010,
         "kind": "short",
         "likes": 91,
         "published": "2025-11-01"
@@ -1969,9 +2002,9 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23205,
+        "views": 23211,
         "kind": "short",
-        "likes": 446,
+        "likes": 447,
         "published": "2025-03-23"
       },
       {
@@ -1985,7 +2018,7 @@
       {
         "id": "-iPsWtoqSjQ",
         "title": "Sigma Boy #sigmaboy",
-        "views": 14528,
+        "views": 14529,
         "kind": "short",
         "likes": 124,
         "published": "2025-03-22"
@@ -1995,13 +2028,13 @@
         "title": "Spending time with family during Thanksgiving has us like…”We’re sisters!” #college #weresisters",
         "views": 13763,
         "kind": "short",
-        "likes": 457,
+        "likes": 456,
         "published": "2023-12-01"
       },
       {
         "id": "fH3i3zeNbqk",
         "title": "When the Dean is reading brain rot words #brainrot",
-        "views": 10146,
+        "views": 10148,
         "kind": "short",
         "likes": 199,
         "published": "2025-03-19"
@@ -2009,7 +2042,7 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7721,
+        "views": 7726,
         "kind": "short",
         "likes": 59,
         "published": "2026-04-01"
@@ -2017,7 +2050,7 @@
       {
         "id": "2XzUKmCBwTY",
         "title": "POV: You're trying to hang on during midterms #college #studentlife #midterms #ytshorts #explore",
-        "views": 7380,
+        "views": 7382,
         "kind": "short",
         "likes": 28,
         "published": "2025-10-27"
@@ -2105,7 +2138,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-09-18T14:29:29Z",
+  "generated_at": "2026-09-19T00:04:52Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
