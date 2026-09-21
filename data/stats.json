@@ -1827,10 +1827,44 @@
           "last_ok": "2026-09-20"
         }
       }
+    },
+    {
+      "date": "2026-09-21",
+      "platforms": {
+        "instagram": {
+          "followers": 783,
+          "following": 284,
+          "posts": 536,
+          "last_ok": "2026-09-20",
+          "source": "carried",
+          "carried_from": "2026-09-20"
+        },
+        "tiktok": {
+          "followers": 157,
+          "following": 39,
+          "likes": 14700,
+          "videos": 462,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-09-21"
+        },
+        "youtube": {
+          "followers": 248,
+          "videos": 226,
+          "views": 427996,
+          "source": "scrape",
+          "last_ok": "2026-09-21"
+        },
+        "linkedin": {
+          "followers": 4,
+          "source": "scrape",
+          "last_ok": "2026-09-21"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-09-20",
+    "fetched": "2026-09-21",
     "source": "youtube-rss",
     "videos": [
       {
@@ -2004,7 +2038,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-09-20",
+    "fetched": "2026-09-21",
     "source": "youtube-innertube",
     "total_scanned": 225,
     "videos": [
@@ -2022,7 +2056,7 @@
         "views": 26013,
         "kind": "short",
         "likes": 91,
-        "published": "2025-11-01"
+        "published": "2025-11-02"
       },
       {
         "id": "CS6dNGU9Evc",
@@ -2046,14 +2080,14 @@
         "views": 22772,
         "kind": "short",
         "likes": 71,
-        "published": "2026-03-31"
+        "published": "2026-04-01"
       },
       {
         "id": "-iPsWtoqSjQ",
         "title": "Sigma Boy #sigmaboy",
         "views": 14529,
         "kind": "short",
-        "likes": 124,
+        "likes": 125,
         "published": "2025-03-22"
       },
       {
@@ -2070,14 +2104,14 @@
         "views": 10148,
         "kind": "short",
         "likes": 199,
-        "published": "2025-03-19"
+        "published": "2025-03-20"
       },
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7731,
+        "views": 7735,
         "kind": "short",
-        "likes": 59,
+        "likes": 60,
         "published": "2026-04-01"
       },
       {
@@ -2086,12 +2120,12 @@
         "views": 7382,
         "kind": "short",
         "likes": 28,
-        "published": "2025-10-27"
+        "published": "2025-10-28"
       },
       {
         "id": "zArZjKlR8lI",
         "title": "We’re students finals week struggles #college #relatable #shorts #werestudents #weresisters",
-        "views": 7325,
+        "views": 7327,
         "kind": "short",
         "likes": 232,
         "published": "2023-12-10"
@@ -2129,7 +2163,7 @@
         },
         "period_days": 30,
         "source": "instagram-insights-manual",
-        "posts": 14,
+        "posts": 13,
         "posts_source": "derived-from-snapshots"
       },
       "tiktok": {
@@ -2171,7 +2205,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-09-20T23:26:42Z",
+  "generated_at": "2026-09-21T00:37:15Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
