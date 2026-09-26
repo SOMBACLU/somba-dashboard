@@ -1992,10 +1992,43 @@
           "last_ok": "2026-09-25"
         }
       }
+    },
+    {
+      "date": "2026-09-26",
+      "platforms": {
+        "instagram": {
+          "followers": 784,
+          "following": 284,
+          "posts": 538,
+          "source": "scrape",
+          "last_ok": "2026-09-26"
+        },
+        "tiktok": {
+          "followers": 159,
+          "following": 39,
+          "likes": 14700,
+          "videos": 464,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-09-26"
+        },
+        "youtube": {
+          "followers": 249,
+          "videos": 229,
+          "views": 430386,
+          "source": "scrape",
+          "last_ok": "2026-09-26"
+        },
+        "linkedin": {
+          "followers": 5,
+          "source": "scrape",
+          "last_ok": "2026-09-26"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-09-25",
+    "fetched": "2026-09-26",
     "source": "youtube-rss",
     "videos": [
       {
@@ -2169,7 +2202,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-09-25",
+    "fetched": "2026-09-26",
     "source": "youtube-innertube",
     "total_scanned": 228,
     "videos": [
@@ -2200,7 +2233,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23225,
+        "views": 23238,
         "kind": "short",
         "likes": 446,
         "published": "2025-03-23"
@@ -2336,7 +2369,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-09-25T23:26:57Z",
+  "generated_at": "2026-09-26T00:26:01Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
