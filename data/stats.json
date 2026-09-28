@@ -2058,10 +2058,43 @@
           "last_ok": "2026-09-27"
         }
       }
+    },
+    {
+      "date": "2026-09-28",
+      "platforms": {
+        "instagram": {
+          "followers": 785,
+          "following": 284,
+          "posts": 538,
+          "source": "scrape",
+          "last_ok": "2026-09-28"
+        },
+        "tiktok": {
+          "followers": 160,
+          "following": 39,
+          "likes": 14700,
+          "videos": 464,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-09-28"
+        },
+        "youtube": {
+          "followers": 249,
+          "videos": 229,
+          "views": 430585,
+          "source": "scrape",
+          "last_ok": "2026-09-28"
+        },
+        "linkedin": {
+          "followers": 5,
+          "source": "scrape",
+          "last_ok": "2026-09-28"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-09-27",
+    "fetched": "2026-09-28",
     "source": "youtube-rss",
     "videos": [
       {
@@ -2235,7 +2268,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-09-27",
+    "fetched": "2026-09-28",
     "source": "youtube-innertube",
     "total_scanned": 228,
     "videos": [
@@ -2306,7 +2339,7 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7742,
+        "views": 7745,
         "kind": "short",
         "likes": 60,
         "published": "2026-04-01"
@@ -2402,7 +2435,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-09-27T23:37:10Z",
+  "generated_at": "2026-09-28T00:07:44Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
