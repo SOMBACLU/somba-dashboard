@@ -2270,8 +2270,8 @@
         "tiktok": {
           "followers": 159,
           "following": 39,
-          "likes": 14800,
-          "videos": 467,
+          "likes": 14400,
+          "videos": 454,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-10-04"
@@ -2299,21 +2299,21 @@
         "id": "G2nWpqNRrKM",
         "title": "It's 11:59🚨📢 GET UP OUT OF IT 🚨📢🫠 #canvas #CalLutheran #assignment #turnitin",
         "published": "2026-10-03",
-        "views": 1176,
+        "views": 1188,
         "likes": 40
       },
       {
         "id": "hGYfLenFkAA",
         "title": "Fall Season is FINALLY here at Cal Lu! 🍂🍁🎃☕ #CalLutheran #fall #pumpkinspiceseason #nfl",
         "published": "2026-10-02",
-        "views": 1251,
+        "views": 1253,
         "likes": 18
       },
       {
         "id": "YfYoZPbnKrs",
         "title": "What's in my bag? College Athlete Edition 💦⚽ #CalLutheran #sports #collegesports",
         "published": "2026-10-01",
-        "views": 1480,
+        "views": 1485,
         "likes": 23
       },
       {
@@ -2327,7 +2327,7 @@
         "id": "P5KVTKpkIRI",
         "title": "5 Things worth the money: Cal Lu Soccer #studentathlete #CalLutheran #soccer #athlete #sports",
         "published": "2026-09-24",
-        "views": 1282,
+        "views": 1280,
         "likes": 20
       },
       {
@@ -2633,7 +2633,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-04T00:17:31Z",
+  "generated_at": "2026-10-04T01:17:52Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
