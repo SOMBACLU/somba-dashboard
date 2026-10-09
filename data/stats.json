@@ -2421,10 +2421,43 @@
           "last_ok": "2026-10-08"
         }
       }
+    },
+    {
+      "date": "2026-10-09",
+      "platforms": {
+        "instagram": {
+          "followers": 784,
+          "following": 284,
+          "posts": 541,
+          "source": "scrape",
+          "last_ok": "2026-10-09"
+        },
+        "tiktok": {
+          "followers": 160,
+          "following": 39,
+          "likes": 14500,
+          "videos": 454,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-10-09"
+        },
+        "youtube": {
+          "followers": 253,
+          "videos": 235,
+          "views": 437462,
+          "source": "scrape",
+          "last_ok": "2026-10-09"
+        },
+        "linkedin": {
+          "followers": 11,
+          "source": "scrape",
+          "last_ok": "2026-10-09"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-10-08",
+    "fetched": "2026-10-09",
     "source": "youtube-rss",
     "videos": [
       {
@@ -2438,8 +2471,8 @@
         "id": "aBhWIOiLrik",
         "title": "Productivity is still productivity 🥣 #CalLutheran #cinnamoroll #Canvas #collegelife",
         "published": "2026-10-07",
-        "views": 1237,
-        "likes": 44
+        "views": 1238,
+        "likes": 45
       },
       {
         "id": "G2nWpqNRrKM",
@@ -2598,9 +2631,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-10-08",
+    "fetched": "2026-10-09",
     "source": "youtube-innertube",
-    "total_scanned": 233,
+    "total_scanned": 235,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -2621,7 +2654,7 @@
       {
         "id": "CS6dNGU9Evc",
         "title": "When my friend makes a jokes #businessstudent #businessmajor #businesscasual #college #student",
-        "views": 25926,
+        "views": 25927,
         "kind": "short",
         "likes": 356,
         "published": "2026-04-03"
@@ -2629,7 +2662,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23259,
+        "views": 23266,
         "kind": "short",
         "likes": 447,
         "published": "2025-03-23"
@@ -2637,7 +2670,7 @@
       {
         "id": "UD45ksQvtmc",
         "title": "99.99% accuracy #fyp #pizza #ytshorts",
-        "views": 22772,
+        "views": 22773,
         "kind": "short",
         "likes": 71,
         "published": "2026-03-31"
@@ -2669,7 +2702,7 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7775,
+        "views": 7782,
         "kind": "short",
         "likes": 60,
         "published": "2026-04-01"
@@ -2723,7 +2756,7 @@
         },
         "period_days": 30,
         "source": "instagram-insights-manual",
-        "posts": 10,
+        "posts": 9,
         "posts_source": "derived-from-snapshots"
       },
       "tiktok": {
@@ -2765,7 +2798,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-08T23:50:39Z",
+  "generated_at": "2026-10-09T01:11:02Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
