@@ -2476,8 +2476,8 @@
           "last_ok": "2026-10-10"
         },
         "youtube": {
-          "followers": 253,
-          "videos": 236,
+          "followers": 254,
+          "videos": 237,
           "views": 438559,
           "source": "scrape",
           "last_ok": "2026-10-10"
@@ -2491,29 +2491,36 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-10-09",
+    "fetched": "2026-10-10",
     "source": "youtube-rss",
     "videos": [
+      {
+        "id": "2iAyx01lWBU",
+        "title": "Cal Lu's first message from - A 🤔#prettylittleliars #CalLutheran #studytime #collegestudent",
+        "published": "2026-10-10",
+        "views": 1106,
+        "likes": 12
+      },
       {
         "id": "TD1nrftB2so",
         "title": "Pathways and Possibilities ✨ #CalLutheran #career #possibilities #motivation",
         "published": "2026-10-09",
-        "views": 14,
+        "views": 15,
         "likes": 0
       },
       {
         "id": "fuTgaGtIwsA",
         "title": "🏌️‍♀️Game Day Necessities 🏅⚽🏃‍♂️🤽‍♀️🏐 #collegesports #CalLutheran #checklist",
         "published": "2026-10-08",
-        "views": 1214,
+        "views": 1217,
         "likes": 6
       },
       {
         "id": "aBhWIOiLrik",
         "title": "Productivity is still productivity 🥣 #CalLutheran #cinnamoroll #Canvas #collegelife",
         "published": "2026-10-07",
-        "views": 1300,
-        "likes": 48
+        "views": 1316,
+        "likes": 49
       },
       {
         "id": "G2nWpqNRrKM",
@@ -2591,13 +2598,6 @@
         "published": "2026-09-11",
         "views": 1863,
         "likes": 54
-      },
-      {
-        "id": "qK-rEkv98jc",
-        "title": "Last Event Energy #trackandfield #track #teammates #teamwork #athletes #teamenergy #relays #fyp",
-        "published": "2026-05-07",
-        "views": 612,
-        "likes": 9
       }
     ]
   },
@@ -2832,7 +2832,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-10T01:46:42Z",
+  "generated_at": "2026-10-10T08:34:00Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
