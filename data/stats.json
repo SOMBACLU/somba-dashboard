@@ -2462,9 +2462,8 @@
           "followers": 784,
           "following": 284,
           "posts": 541,
-          "last_ok": "2026-10-09",
-          "source": "carried",
-          "carried_from": "2026-10-09"
+          "source": "scrape",
+          "last_ok": "2026-10-10"
         },
         "tiktok": {
           "followers": 160,
@@ -2478,7 +2477,7 @@
         "youtube": {
           "followers": 254,
           "videos": 237,
-          "views": 438688,
+          "views": 438818,
           "source": "scrape",
           "last_ok": "2026-10-10"
         },
@@ -2498,7 +2497,7 @@
         "id": "2iAyx01lWBU",
         "title": "Cal Lu's first message from - A 🤔#prettylittleliars #CalLutheran #studytime #collegestudent",
         "published": "2026-10-10",
-        "views": 1142,
+        "views": 1147,
         "likes": 12
       },
       {
@@ -2519,8 +2518,8 @@
         "id": "aBhWIOiLrik",
         "title": "Productivity is still productivity 🥣 #CalLutheran #cinnamoroll #Canvas #collegelife",
         "published": "2026-10-07",
-        "views": 1368,
-        "likes": 52
+        "views": 1369,
+        "likes": 53
       },
       {
         "id": "G2nWpqNRrKM",
@@ -2832,7 +2831,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-10T20:06:36Z",
+  "generated_at": "2026-10-10T20:53:45Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
