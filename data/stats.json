@@ -2478,7 +2478,7 @@
         "youtube": {
           "followers": 254,
           "videos": 237,
-          "views": 438559,
+          "views": 438688,
           "source": "scrape",
           "last_ok": "2026-10-10"
         },
@@ -2498,7 +2498,7 @@
         "id": "2iAyx01lWBU",
         "title": "Cal Lu's first message from - A 🤔#prettylittleliars #CalLutheran #studytime #collegestudent",
         "published": "2026-10-10",
-        "views": 1106,
+        "views": 1129,
         "likes": 12
       },
       {
@@ -2519,8 +2519,8 @@
         "id": "aBhWIOiLrik",
         "title": "Productivity is still productivity 🥣 #CalLutheran #cinnamoroll #Canvas #collegelife",
         "published": "2026-10-07",
-        "views": 1316,
-        "likes": 49
+        "views": 1349,
+        "likes": 51
       },
       {
         "id": "G2nWpqNRrKM",
@@ -2817,7 +2817,7 @@
         "window": "2026-06-01..2026-08-29",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
         "updated": "2026-09-01",
-        "posts": 14,
+        "posts": 15,
         "posts_source": "derived-from-snapshots"
       }
     },
@@ -2832,7 +2832,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-10T08:34:00Z",
+  "generated_at": "2026-10-10T15:24:44Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
