@@ -2511,7 +2511,7 @@
         "youtube": {
           "followers": 254,
           "videos": 237,
-          "views": 438818,
+          "views": 438831,
           "source": "scrape",
           "last_ok": "2026-10-11"
         },
@@ -2524,49 +2524,49 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-10-10",
+    "fetched": "2026-10-11",
     "source": "youtube-rss",
     "videos": [
       {
         "id": "2iAyx01lWBU",
         "title": "Cal Lu's first message from - A 🤔#prettylittleliars #CalLutheran #studytime #collegestudent",
         "published": "2026-10-10",
-        "views": 1149,
+        "views": 1165,
         "likes": 12
       },
       {
         "id": "TD1nrftB2so",
         "title": "Pathways and Possibilities ✨ #CalLutheran #career #possibilities #motivation",
         "published": "2026-10-09",
-        "views": 15,
+        "views": 21,
         "likes": 0
       },
       {
         "id": "fuTgaGtIwsA",
         "title": "🏌️‍♀️Game Day Necessities 🏅⚽🏃‍♂️🤽‍♀️🏐 #collegesports #CalLutheran #checklist",
         "published": "2026-10-08",
-        "views": 1217,
+        "views": 1219,
         "likes": 6
       },
       {
         "id": "aBhWIOiLrik",
         "title": "Productivity is still productivity 🥣 #CalLutheran #cinnamoroll #Canvas #collegelife",
         "published": "2026-10-07",
-        "views": 1372,
-        "likes": 54
+        "views": 1389,
+        "likes": 56
       },
       {
         "id": "G2nWpqNRrKM",
         "title": "It's 11:59🚨📢 GET UP OUT OF IT 🚨📢🫠 #canvas #CalLutheran #assignment #turnitin",
         "published": "2026-10-03",
-        "views": 1213,
+        "views": 1214,
         "likes": 40
       },
       {
         "id": "hGYfLenFkAA",
         "title": "Fall Season is FINALLY here at Cal Lu! 🍂🍁🎃☕ #CalLutheran #fall #pumpkinspiceseason #nfl",
         "published": "2026-10-02",
-        "views": 1264,
+        "views": 1265,
         "likes": 18
       },
       {
@@ -2629,7 +2629,7 @@
         "id": "rlPD3gAKHb0",
         "title": "Cal Lu sleepover starts now 💜💛  #dorm #fallsemester #movein #CalLutheran",
         "published": "2026-09-11",
-        "views": 1863,
+        "views": 1864,
         "likes": 54
       }
     ]
@@ -2865,7 +2865,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-11T05:54:02Z",
+  "generated_at": "2026-10-11T12:57:30Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
