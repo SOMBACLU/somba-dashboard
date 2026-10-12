@@ -2520,6 +2520,40 @@
           "last_ok": "2026-10-11"
         }
       }
+    },
+    {
+      "date": "2026-10-12",
+      "platforms": {
+        "instagram": {
+          "followers": 785,
+          "following": 284,
+          "posts": 541,
+          "last_ok": "2026-10-11",
+          "source": "carried",
+          "carried_from": "2026-10-11"
+        },
+        "tiktok": {
+          "followers": 159,
+          "following": 39,
+          "likes": 14900,
+          "videos": 467,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-10-12"
+        },
+        "youtube": {
+          "followers": 254,
+          "videos": 237,
+          "views": 440094,
+          "source": "scrape",
+          "last_ok": "2026-10-12"
+        },
+        "linkedin": {
+          "followers": 11,
+          "source": "scrape",
+          "last_ok": "2026-10-12"
+        }
+      }
     }
   ],
   "recent_videos": {
@@ -2697,7 +2731,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-10-11",
+    "fetched": "2026-10-12",
     "source": "youtube-innertube",
     "total_scanned": 236,
     "videos": [
@@ -2728,7 +2762,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23271,
+        "views": 23273,
         "kind": "short",
         "likes": 447,
         "published": "2025-03-23"
@@ -2822,7 +2856,7 @@
         },
         "period_days": 30,
         "source": "instagram-insights-manual",
-        "posts": 8,
+        "posts": 7,
         "posts_source": "derived-from-snapshots"
       },
       "tiktok": {
@@ -2864,7 +2898,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-11T22:02:11Z",
+  "generated_at": "2026-10-12T01:22:29Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
