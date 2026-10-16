@@ -2652,17 +2652,50 @@
           "last_ok": "2026-10-15"
         }
       }
+    },
+    {
+      "date": "2026-10-16",
+      "platforms": {
+        "instagram": {
+          "followers": 785,
+          "following": 284,
+          "posts": 542,
+          "source": "scrape",
+          "last_ok": "2026-10-16"
+        },
+        "tiktok": {
+          "followers": 159,
+          "following": 39,
+          "likes": 14900,
+          "videos": 467,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-10-16"
+        },
+        "youtube": {
+          "followers": 254,
+          "videos": 239,
+          "views": 440247,
+          "source": "scrape",
+          "last_ok": "2026-10-16"
+        },
+        "linkedin": {
+          "followers": 12,
+          "source": "scrape",
+          "last_ok": "2026-10-16"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-10-15",
+    "fetched": "2026-10-16",
     "source": "youtube-rss",
     "videos": [
       {
         "id": "2PJDE3tuu6Q",
         "title": "Kingsmen Soccer Pregame essentials ⚽🥅👑 #CalLutheran #pregame #soccer #gameday",
         "published": "2026-10-15",
-        "views": 1150,
+        "views": 1159,
         "likes": 21
       },
       {
@@ -2829,9 +2862,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-10-15",
+    "fetched": "2026-10-16",
     "source": "youtube-innertube",
-    "total_scanned": 237,
+    "total_scanned": 238,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -2860,7 +2893,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23280,
+        "views": 23286,
         "kind": "short",
         "likes": 447,
         "published": "2025-03-23"
@@ -2900,7 +2933,7 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7798,
+        "views": 7800,
         "kind": "short",
         "likes": 60,
         "published": "2026-04-01"
@@ -2908,7 +2941,7 @@
       {
         "id": "2XzUKmCBwTY",
         "title": "POV: You're trying to hang on during midterms #college #studentlife #midterms #ytshorts #explore",
-        "views": 7383,
+        "views": 7384,
         "kind": "short",
         "likes": 28,
         "published": "2025-10-27"
@@ -2916,7 +2949,7 @@
       {
         "id": "zArZjKlR8lI",
         "title": "We’re students finals week struggles #college #relatable #shorts #werestudents #weresisters",
-        "views": 7330,
+        "views": 7331,
         "kind": "short",
         "likes": 232,
         "published": "2023-12-10"
@@ -2996,7 +3029,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-15T23:45:20Z",
+  "generated_at": "2026-10-16T00:16:01Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
