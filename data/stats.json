@@ -2831,15 +2831,15 @@
         "tiktok": {
           "followers": 159,
           "following": 39,
-          "likes": 14900,
-          "videos": 469,
+          "likes": 15000,
+          "videos": 471,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-10-21"
         },
         "youtube": {
           "followers": 253,
-          "videos": 240,
+          "videos": 241,
           "views": 442946,
           "source": "scrape",
           "last_ok": "2026-10-21"
@@ -2857,10 +2857,17 @@
     "source": "youtube-rss",
     "videos": [
       {
+        "id": "r1Zu39s1rZA",
+        "title": "Nothing beats homecoming at CLU 🫶 #homecomingweek #collegelife #CalLutheran",
+        "published": "2026-10-21",
+        "views": 89,
+        "likes": 2
+      },
+      {
         "id": "nNwGaWJIUhU",
         "title": "Cal Lu ROCKS! 🪨📢💜💛 #CalLutheran #hike #freshman #1962",
         "published": "2026-10-16",
-        "views": 1295,
+        "views": 1296,
         "likes": 10
       },
       {
@@ -2902,7 +2909,7 @@
         "id": "aBhWIOiLrik",
         "title": "Productivity is still productivity 🥣 #CalLutheran #cinnamoroll #Canvas #collegelife",
         "published": "2026-10-07",
-        "views": 1390,
+        "views": 1391,
         "likes": 56
       },
       {
@@ -2923,8 +2930,8 @@
         "id": "YfYoZPbnKrs",
         "title": "What's in my bag? College Athlete Edition 💦⚽ #CalLutheran #sports #collegesports",
         "published": "2026-10-01",
-        "views": 1505,
-        "likes": 23
+        "views": 1506,
+        "likes": 24
       },
       {
         "id": "utEVNfRzXBs",
@@ -2937,7 +2944,7 @@
         "id": "P5KVTKpkIRI",
         "title": "5 Things worth the money: Cal Lu Soccer #studentathlete #CalLutheran #soccer #athlete #sports",
         "published": "2026-09-24",
-        "views": 1286,
+        "views": 1287,
         "likes": 20
       },
       {
@@ -2953,13 +2960,6 @@
         "published": "2026-09-21",
         "views": 903,
         "likes": 4
-      },
-      {
-        "id": "5dID2NYU4fQ",
-        "title": "NFL watch party at Cal Lu anyone? 🏈💜💛 #football #nfl #studentathlete #CalLutheran #sports",
-        "published": "2026-09-17",
-        "views": 10,
-        "likes": 0
       }
     ]
   },
@@ -3194,7 +3194,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-21T00:04:48Z",
+  "generated_at": "2026-10-21T07:43:32Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
