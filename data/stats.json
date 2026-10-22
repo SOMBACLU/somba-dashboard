@@ -2850,6 +2850,39 @@
           "last_ok": "2026-10-21"
         }
       }
+    },
+    {
+      "date": "2026-10-22",
+      "platforms": {
+        "instagram": {
+          "followers": 787,
+          "following": 284,
+          "posts": 546,
+          "source": "scrape",
+          "last_ok": "2026-10-22"
+        },
+        "tiktok": {
+          "followers": 159,
+          "following": 39,
+          "likes": 15000,
+          "videos": 471,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-10-22"
+        },
+        "youtube": {
+          "followers": 253,
+          "videos": 241,
+          "views": 442987,
+          "source": "scrape",
+          "last_ok": "2026-10-22"
+        },
+        "linkedin": {
+          "followers": 12,
+          "source": "scrape",
+          "last_ok": "2026-10-22"
+        }
+      }
     }
   ],
   "recent_videos": {
@@ -3027,9 +3060,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-10-21",
+    "fetched": "2026-10-22",
     "source": "youtube-innertube",
-    "total_scanned": 239,
+    "total_scanned": 240,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -3060,7 +3093,7 @@
         "title": "Friggin packet yo #frigginpacketyo",
         "views": 23294,
         "kind": "short",
-        "likes": 447,
+        "likes": 446,
         "published": "2025-03-23"
       },
       {
@@ -3090,7 +3123,7 @@
       {
         "id": "fH3i3zeNbqk",
         "title": "When the Dean is reading brain rot words #brainrot",
-        "views": 10150,
+        "views": 10151,
         "kind": "short",
         "likes": 199,
         "published": "2025-03-19"
@@ -3098,7 +3131,7 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7809,
+        "views": 7811,
         "kind": "short",
         "likes": 60,
         "published": "2026-04-01"
@@ -3106,7 +3139,7 @@
       {
         "id": "2XzUKmCBwTY",
         "title": "POV: You're trying to hang on during midterms #college #studentlife #midterms #ytshorts #explore",
-        "views": 7384,
+        "views": 7385,
         "kind": "short",
         "likes": 28,
         "published": "2025-10-27"
@@ -3165,7 +3198,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 8,
+        "posts": 7,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -3194,7 +3227,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-21T20:38:10Z",
+  "generated_at": "2026-10-22T00:26:02Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
