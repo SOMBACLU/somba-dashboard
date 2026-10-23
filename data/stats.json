@@ -2895,7 +2895,7 @@
           "last_ok": "2026-10-23"
         },
         "tiktok": {
-          "followers": 159,
+          "followers": 160,
           "following": 39,
           "likes": 15000,
           "videos": 473,
@@ -2919,113 +2919,113 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-10-22",
+    "fetched": "2026-10-23",
     "source": "youtube-rss",
     "videos": [
+      {
+        "id": "XPI0xZVESYk",
+        "title": "Let's build our community #CalLutheran 💜💛✨ #college #school #community",
+        "published": "2026-10-23",
+        "views": 261,
+        "likes": 1
+      },
       {
         "id": "tZBc-uYIGW8",
         "title": "A little look back at Homecoming week at CLU 📣💜💛#homecoming #CalLutheran #cheer #sports",
         "published": "2026-10-22",
-        "views": 1017,
+        "views": 1032,
         "likes": 19
       },
       {
         "id": "r1Zu39s1rZA",
         "title": "Nothing beats homecoming at CLU 🫶 #homecomingweek #collegelife #CalLutheran",
         "published": "2026-10-21",
-        "views": 169,
+        "views": 179,
         "likes": 2
       },
       {
         "id": "nNwGaWJIUhU",
         "title": "Cal Lu ROCKS! 🪨📢💜💛 #CalLutheran #hike #freshman #1962",
         "published": "2026-10-16",
-        "views": 1296,
+        "views": 1299,
         "likes": 10
       },
       {
         "id": "2PJDE3tuu6Q",
         "title": "Kingsmen Soccer Pregame essentials ⚽🥅👑 #CalLutheran #pregame #soccer #gameday",
         "published": "2026-10-15",
-        "views": 1261,
+        "views": 1267,
         "likes": 21
       },
       {
         "id": "fUI6CF449Rs",
         "title": "Study session AND break 💃🪩🎶 #Neo #midterms #CalLutheran #study",
         "published": "2026-10-14",
-        "views": 5,
+        "views": 6,
         "likes": 0
       },
       {
         "id": "2iAyx01lWBU",
         "title": "Cal Lu's first message from - A 🤔#prettylittleliars #CalLutheran #studytime #collegestudent",
         "published": "2026-10-10",
-        "views": 1205,
+        "views": 1208,
         "likes": 14
       },
       {
         "id": "TD1nrftB2so",
         "title": "Pathways and Possibilities ✨ #CalLutheran #career #possibilities #motivation",
         "published": "2026-10-09",
-        "views": 33,
+        "views": 35,
         "likes": 0
       },
       {
         "id": "fuTgaGtIwsA",
         "title": "🏌️‍♀️Game Day Necessities 🏅⚽🏃‍♂️🤽‍♀️🏐 #collegesports #CalLutheran #checklist",
         "published": "2026-10-08",
-        "views": 1217,
+        "views": 1219,
         "likes": 6
       },
       {
         "id": "aBhWIOiLrik",
         "title": "Productivity is still productivity 🥣 #CalLutheran #cinnamoroll #Canvas #collegelife",
         "published": "2026-10-07",
-        "views": 1391,
+        "views": 1392,
         "likes": 56
       },
       {
         "id": "G2nWpqNRrKM",
         "title": "It's 11:59🚨📢 GET UP OUT OF IT 🚨📢🫠 #canvas #CalLutheran #assignment #turnitin",
         "published": "2026-10-03",
-        "views": 1217,
+        "views": 1218,
         "likes": 40
       },
       {
         "id": "hGYfLenFkAA",
         "title": "Fall Season is FINALLY here at Cal Lu! 🍂🍁🎃☕ #CalLutheran #fall #pumpkinspiceseason #nfl",
         "published": "2026-10-02",
-        "views": 1265,
+        "views": 1266,
         "likes": 17
       },
       {
         "id": "YfYoZPbnKrs",
         "title": "What's in my bag? College Athlete Edition 💦⚽ #CalLutheran #sports #collegesports",
         "published": "2026-10-01",
-        "views": 1507,
+        "views": 1513,
         "likes": 24
       },
       {
         "id": "utEVNfRzXBs",
         "title": "POV: Your on-campus coworker is taking a brain break 🧠🥱 #CalLutheran #oncampus #coworker #brainbreak",
         "published": "2026-09-30",
-        "views": 1225,
+        "views": 1226,
         "likes": 37
       },
       {
         "id": "P5KVTKpkIRI",
         "title": "5 Things worth the money: Cal Lu Soccer #studentathlete #CalLutheran #soccer #athlete #sports",
         "published": "2026-09-24",
-        "views": 1288,
+        "views": 1289,
         "likes": 20
-      },
-      {
-        "id": "5JNVcXrbqrA",
-        "title": "POV: When rainy days weren't on Cal Lu's welcome pamphlet #CollegeLife #rainyday #CalLutheran #cali",
-        "published": "2026-09-23",
-        "views": 263,
-        "likes": 4
       }
     ]
   },
@@ -3260,7 +3260,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-23T02:47:34Z",
+  "generated_at": "2026-10-23T07:36:23Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
