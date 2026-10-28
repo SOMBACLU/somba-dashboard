@@ -3048,6 +3048,39 @@
           "last_ok": "2026-10-27"
         }
       }
+    },
+    {
+      "date": "2026-10-28",
+      "platforms": {
+        "instagram": {
+          "followers": 789,
+          "following": 284,
+          "posts": 549,
+          "source": "scrape",
+          "last_ok": "2026-10-28"
+        },
+        "tiktok": {
+          "followers": 160,
+          "following": 39,
+          "likes": 15000,
+          "videos": 474,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-10-28"
+        },
+        "youtube": {
+          "followers": 255,
+          "videos": 244,
+          "views": 445419,
+          "source": "scrape",
+          "last_ok": "2026-10-28"
+        },
+        "linkedin": {
+          "followers": 12,
+          "source": "scrape",
+          "last_ok": "2026-10-28"
+        }
+      }
     }
   ],
   "recent_videos": {
@@ -3225,14 +3258,14 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-10-27",
+    "fetched": "2026-10-28",
     "source": "youtube-innertube",
     "total_scanned": 243,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
         "title": "Thank you sharks for taking my business opportunity #college #business #sharktank",
-        "views": 65899,
+        "views": 65901,
         "kind": "short",
         "likes": 332,
         "published": "2024-03-31"
@@ -3243,7 +3276,7 @@
         "views": 26015,
         "kind": "short",
         "likes": 90,
-        "published": "2025-11-02"
+        "published": "2025-11-01"
       },
       {
         "id": "CS6dNGU9Evc",
@@ -3258,7 +3291,7 @@
         "title": "Friggin packet yo #frigginpacketyo",
         "views": 23305,
         "kind": "short",
-        "likes": 446,
+        "likes": 445,
         "published": "2025-03-23"
       },
       {
@@ -3267,7 +3300,7 @@
         "views": 22773,
         "kind": "short",
         "likes": 71,
-        "published": "2026-04-01"
+        "published": "2026-03-31"
       },
       {
         "id": "-iPsWtoqSjQ",
@@ -3282,7 +3315,7 @@
         "title": "Spending time with family during Thanksgiving has us like…”We’re sisters!” #college #weresisters",
         "views": 13763,
         "kind": "short",
-        "likes": 456,
+        "likes": 455,
         "published": "2023-12-01"
       },
       {
@@ -3291,12 +3324,12 @@
         "views": 10151,
         "kind": "short",
         "likes": 199,
-        "published": "2025-03-20"
+        "published": "2025-03-19"
       },
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7837,
+        "views": 7843,
         "kind": "short",
         "likes": 61,
         "published": "2026-04-01"
@@ -3307,7 +3340,7 @@
         "views": 7387,
         "kind": "short",
         "likes": 28,
-        "published": "2025-10-28"
+        "published": "2025-10-27"
       },
       {
         "id": "zArZjKlR8lI",
@@ -3392,7 +3425,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-27T22:42:17Z",
+  "generated_at": "2026-10-28T00:26:15Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
