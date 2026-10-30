@@ -3157,15 +3157,15 @@
         "id": "Q9e-fFDquzc",
         "title": "Who's ready for Fall Break? 🍁🍂 #fallbreak #CalLutheran #college #collegelife",
         "published": "2026-10-30",
-        "views": 1943,
+        "views": 1967,
         "likes": 19
       },
       {
         "id": "oFQSyR2Ts0o",
         "title": "Cheer Recap 2026 📣 🎉#HOCO #CalLutheran #cheerleader #homecoming",
         "published": "2026-10-29",
-        "views": 872,
-        "likes": 13
+        "views": 887,
+        "likes": 15
       },
       {
         "id": "Wf8H-IYEvkc",
@@ -3491,7 +3491,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-30T16:39:52Z",
+  "generated_at": "2026-10-30T17:09:58Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
