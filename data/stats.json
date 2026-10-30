@@ -3114,6 +3114,39 @@
           "last_ok": "2026-10-29"
         }
       }
+    },
+    {
+      "date": "2026-10-30",
+      "platforms": {
+        "instagram": {
+          "followers": 789,
+          "following": 284,
+          "posts": 550,
+          "source": "scrape",
+          "last_ok": "2026-10-30"
+        },
+        "tiktok": {
+          "followers": 161,
+          "following": 39,
+          "likes": 15100,
+          "videos": 475,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-10-30"
+        },
+        "youtube": {
+          "followers": 256,
+          "videos": 246,
+          "views": 445521,
+          "source": "scrape",
+          "last_ok": "2026-10-30"
+        },
+        "linkedin": {
+          "followers": 12,
+          "source": "scrape",
+          "last_ok": "2026-10-30"
+        }
+      }
     }
   ],
   "recent_videos": {
@@ -3291,9 +3324,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-10-29",
+    "fetched": "2026-10-30",
     "source": "youtube-innertube",
-    "total_scanned": 244,
+    "total_scanned": 245,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -3306,10 +3339,10 @@
       {
         "id": "hMJM7bv4bGM",
         "title": "Dog in da College House! #dog #college #house #ytshorts #explore",
-        "views": 26015,
+        "views": 26017,
         "kind": "short",
         "likes": 90,
-        "published": "2025-11-02"
+        "published": "2025-11-01"
       },
       {
         "id": "CS6dNGU9Evc",
@@ -3322,7 +3355,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23305,
+        "views": 23310,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -3333,7 +3366,7 @@
         "views": 22773,
         "kind": "short",
         "likes": 71,
-        "published": "2026-04-01"
+        "published": "2026-03-31"
       },
       {
         "id": "-iPsWtoqSjQ",
@@ -3357,12 +3390,12 @@
         "views": 10151,
         "kind": "short",
         "likes": 199,
-        "published": "2025-03-20"
+        "published": "2025-03-19"
       },
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7843,
+        "views": 7847,
         "kind": "short",
         "likes": 61,
         "published": "2026-04-01"
@@ -3373,7 +3406,7 @@
         "views": 7387,
         "kind": "short",
         "likes": 28,
-        "published": "2025-10-28"
+        "published": "2025-10-27"
       },
       {
         "id": "zArZjKlR8lI",
@@ -3458,7 +3491,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-29T22:13:55Z",
+  "generated_at": "2026-10-30T00:12:40Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
