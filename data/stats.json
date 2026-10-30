@@ -3150,15 +3150,22 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-10-29",
+    "fetched": "2026-10-30",
     "source": "youtube-rss",
     "videos": [
+      {
+        "id": "Q9e-fFDquzc",
+        "title": "Who's ready for Fall Break? 🍁🍂 #fallbreak #CalLutheran #college #collegelife",
+        "published": "2026-10-30",
+        "views": 1257,
+        "likes": 16
+      },
       {
         "id": "oFQSyR2Ts0o",
         "title": "Cheer Recap 2026 📣 🎉#HOCO #CalLutheran #cheerleader #homecoming",
         "published": "2026-10-29",
-        "views": 417,
-        "likes": 9
+        "views": 705,
+        "likes": 11
       },
       {
         "id": "Wf8H-IYEvkc",
@@ -3185,14 +3192,14 @@
         "id": "tZBc-uYIGW8",
         "title": "A little look back at Homecoming week at CLU 📣💜💛#homecoming #CalLutheran #cheer #sports",
         "published": "2026-10-22",
-        "views": 1434,
+        "views": 1437,
         "likes": 21
       },
       {
         "id": "r1Zu39s1rZA",
         "title": "Nothing beats homecoming at CLU 🫶 #homecomingweek #collegelife #CalLutheran",
         "published": "2026-10-21",
-        "views": 182,
+        "views": 184,
         "likes": 2
       },
       {
@@ -3250,13 +3257,6 @@
         "published": "2026-10-03",
         "views": 1219,
         "likes": 40
-      },
-      {
-        "id": "hGYfLenFkAA",
-        "title": "Fall Season is FINALLY here at Cal Lu! 🍂🍁🎃☕ #CalLutheran #fall #pumpkinspiceseason #nfl",
-        "published": "2026-10-02",
-        "views": 1267,
-        "likes": 17
       }
     ]
   },
@@ -3491,7 +3491,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-30T05:31:29Z",
+  "generated_at": "2026-10-30T07:13:14Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
