@@ -3121,7 +3121,7 @@
         "instagram": {
           "followers": 789,
           "following": 284,
-          "posts": 550,
+          "posts": 551,
           "source": "scrape",
           "last_ok": "2026-10-30"
         },
@@ -3129,13 +3129,13 @@
           "followers": 161,
           "following": 39,
           "likes": 15100,
-          "videos": 475,
+          "videos": 476,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-10-30"
         },
         "youtube": {
-          "followers": 256,
+          "followers": 257,
           "videos": 247,
           "views": 445521,
           "source": "scrape",
@@ -3476,7 +3476,7 @@
         "window": "2026-06-01..2026-08-29",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
         "updated": "2026-09-01",
-        "posts": 24,
+        "posts": 25,
         "posts_source": "derived-from-snapshots"
       }
     },
@@ -3491,7 +3491,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-30T02:28:53Z",
+  "generated_at": "2026-10-30T05:01:23Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
