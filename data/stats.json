@@ -3147,24 +3147,57 @@
           "last_ok": "2026-10-30"
         }
       }
+    },
+    {
+      "date": "2026-10-31",
+      "platforms": {
+        "instagram": {
+          "followers": 790,
+          "following": 284,
+          "posts": 551,
+          "source": "scrape",
+          "last_ok": "2026-10-31"
+        },
+        "tiktok": {
+          "followers": 161,
+          "following": 39,
+          "likes": 15100,
+          "videos": 476,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-10-31"
+        },
+        "youtube": {
+          "followers": 257,
+          "videos": 247,
+          "views": 446389,
+          "source": "scrape",
+          "last_ok": "2026-10-31"
+        },
+        "linkedin": {
+          "followers": 12,
+          "source": "scrape",
+          "last_ok": "2026-10-31"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-10-30",
+    "fetched": "2026-10-31",
     "source": "youtube-rss",
     "videos": [
       {
         "id": "Q9e-fFDquzc",
         "title": "Who's ready for Fall Break? 🍁🍂 #fallbreak #CalLutheran #college #collegelife",
         "published": "2026-10-30",
-        "views": 2025,
+        "views": 2363,
         "likes": 20
       },
       {
         "id": "oFQSyR2Ts0o",
         "title": "Cheer Recap 2026 📣 🎉#HOCO #CalLutheran #cheerleader #homecoming",
         "published": "2026-10-29",
-        "views": 887,
+        "views": 971,
         "likes": 15
       },
       {
@@ -3324,9 +3357,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-10-30",
+    "fetched": "2026-10-31",
     "source": "youtube-innertube",
-    "total_scanned": 245,
+    "total_scanned": 246,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -3355,7 +3388,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23310,
+        "views": 23315,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -3449,7 +3482,7 @@
         },
         "period_days": 30,
         "source": "instagram-insights-manual",
-        "posts": 12,
+        "posts": 11,
         "posts_source": "derived-from-snapshots"
       },
       "tiktok": {
@@ -3462,7 +3495,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 10,
+        "posts": 9,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -3491,7 +3524,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-30T23:51:51Z",
+  "generated_at": "2026-10-31T00:06:30Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
