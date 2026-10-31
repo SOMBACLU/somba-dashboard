@@ -3187,18 +3187,25 @@
     "source": "youtube-rss",
     "videos": [
       {
+        "id": "3CccRI6BABg",
+        "title": "Gossip Girl here… 👀AMA has made its way to NYC! #CalLutheran #AMA #NYC #GossipGirl #Halloween",
+        "published": "2026-10-31",
+        "views": 58,
+        "likes": 0
+      },
+      {
         "id": "Q9e-fFDquzc",
         "title": "Who's ready for Fall Break? 🍁🍂 #fallbreak #CalLutheran #college #collegelife",
         "published": "2026-10-30",
-        "views": 2363,
-        "likes": 20
+        "views": 2430,
+        "likes": 21
       },
       {
         "id": "oFQSyR2Ts0o",
         "title": "Cheer Recap 2026 📣 🎉#HOCO #CalLutheran #cheerleader #homecoming",
         "published": "2026-10-29",
-        "views": 971,
-        "likes": 15
+        "views": 1065,
+        "likes": 16
       },
       {
         "id": "Wf8H-IYEvkc",
@@ -3260,7 +3267,7 @@
         "id": "2iAyx01lWBU",
         "title": "Cal Lu's first message from - A 🤔#prettylittleliars #CalLutheran #studytime #collegestudent",
         "published": "2026-10-10",
-        "views": 1210,
+        "views": 1211,
         "likes": 14
       },
       {
@@ -3283,13 +3290,6 @@
         "published": "2026-10-07",
         "views": 1394,
         "likes": 56
-      },
-      {
-        "id": "G2nWpqNRrKM",
-        "title": "It's 11:59🚨📢 GET UP OUT OF IT 🚨📢🫠 #canvas #CalLutheran #assignment #turnitin",
-        "published": "2026-10-03",
-        "views": 1219,
-        "likes": 40
       }
     ]
   },
@@ -3524,7 +3524,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-31T04:52:09Z",
+  "generated_at": "2026-10-31T12:40:35Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
