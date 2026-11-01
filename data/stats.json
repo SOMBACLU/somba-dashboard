@@ -3180,17 +3180,51 @@
           "last_ok": "2026-10-31"
         }
       }
+    },
+    {
+      "date": "2026-11-01",
+      "platforms": {
+        "instagram": {
+          "followers": 790,
+          "following": 284,
+          "posts": 551,
+          "last_ok": "2026-10-31",
+          "source": "carried",
+          "carried_from": "2026-10-31"
+        },
+        "tiktok": {
+          "followers": 161,
+          "following": 39,
+          "likes": 15100,
+          "videos": 476,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-01"
+        },
+        "youtube": {
+          "followers": 258,
+          "videos": 248,
+          "views": 449129,
+          "source": "scrape",
+          "last_ok": "2026-11-01"
+        },
+        "linkedin": {
+          "followers": 12,
+          "source": "scrape",
+          "last_ok": "2026-11-01"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-10-31",
+    "fetched": "2026-11-01",
     "source": "youtube-rss",
     "videos": [
       {
         "id": "3CccRI6BABg",
         "title": "Gossip Girl here… 👀AMA has made its way to NYC! #CalLutheran #AMA #NYC #GossipGirl #Halloween",
         "published": "2026-10-31",
-        "views": 65,
+        "views": 66,
         "likes": 0
       },
       {
@@ -3357,9 +3391,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-10-31",
+    "fetched": "2026-11-01",
     "source": "youtube-innertube",
-    "total_scanned": 246,
+    "total_scanned": 247,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -3375,7 +3409,7 @@
         "views": 26017,
         "kind": "short",
         "likes": 90,
-        "published": "2025-11-01"
+        "published": "2025-11-02"
       },
       {
         "id": "CS6dNGU9Evc",
@@ -3388,7 +3422,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23315,
+        "views": 23316,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -3399,7 +3433,7 @@
         "views": 22773,
         "kind": "short",
         "likes": 71,
-        "published": "2026-03-31"
+        "published": "2026-04-01"
       },
       {
         "id": "-iPsWtoqSjQ",
@@ -3423,12 +3457,12 @@
         "views": 10151,
         "kind": "short",
         "likes": 199,
-        "published": "2025-03-19"
+        "published": "2025-03-20"
       },
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7847,
+        "views": 7849,
         "kind": "short",
         "likes": 61,
         "published": "2026-04-01"
@@ -3439,7 +3473,7 @@
         "views": 7387,
         "kind": "short",
         "likes": 28,
-        "published": "2025-10-27"
+        "published": "2025-10-28"
       },
       {
         "id": "zArZjKlR8lI",
@@ -3524,7 +3558,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-10-31T21:40:23Z",
+  "generated_at": "2026-11-01T01:15:52Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
