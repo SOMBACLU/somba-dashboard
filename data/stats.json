@@ -3247,6 +3247,40 @@
           "last_ok": "2026-11-02"
         }
       }
+    },
+    {
+      "date": "2026-11-03",
+      "platforms": {
+        "instagram": {
+          "followers": 791,
+          "following": 284,
+          "posts": 551,
+          "last_ok": "2026-11-02",
+          "source": "carried",
+          "carried_from": "2026-11-02"
+        },
+        "tiktok": {
+          "followers": 161,
+          "following": 39,
+          "likes": 15100,
+          "videos": 477,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-03"
+        },
+        "youtube": {
+          "followers": 258,
+          "videos": 249,
+          "views": 449478,
+          "source": "scrape",
+          "last_ok": "2026-11-03"
+        },
+        "linkedin": {
+          "followers": 12,
+          "source": "scrape",
+          "last_ok": "2026-11-03"
+        }
+      }
     }
   ],
   "recent_videos": {
@@ -3424,7 +3458,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-11-02",
+    "fetched": "2026-11-03",
     "source": "youtube-innertube",
     "total_scanned": 248,
     "videos": [
@@ -3455,7 +3489,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23320,
+        "views": 23324,
         "kind": "short",
         "likes": 446,
         "published": "2025-03-23"
@@ -3495,7 +3529,7 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7850,
+        "views": 7852,
         "kind": "short",
         "likes": 61,
         "published": "2026-04-01"
@@ -3591,7 +3625,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-02T23:24:28Z",
+  "generated_at": "2026-11-03T06:54:48Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
