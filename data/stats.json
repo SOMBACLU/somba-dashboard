@@ -3254,10 +3254,9 @@
         "instagram": {
           "followers": 791,
           "following": 284,
-          "posts": 551,
-          "last_ok": "2026-11-02",
-          "source": "carried",
-          "carried_from": "2026-11-02"
+          "posts": 552,
+          "source": "scrape",
+          "last_ok": "2026-11-03"
         },
         "tiktok": {
           "followers": 161,
@@ -3284,14 +3283,14 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-02",
+    "fetched": "2026-11-03",
     "source": "youtube-rss",
     "videos": [
       {
         "id": "YlLc-fy7l4U",
         "title": "Cal Lu's new favorite coffee spot is Honey Cup Coffee!🍯☕ #CalLutheran #coffee #local #venturacounty",
         "published": "2026-11-01",
-        "views": 136,
+        "views": 152,
         "likes": 0
       },
       {
@@ -3305,14 +3304,14 @@
         "id": "Q9e-fFDquzc",
         "title": "Who's ready for Fall Break? 🍁🍂 #fallbreak #CalLutheran #college #collegelife",
         "published": "2026-10-30",
-        "views": 2485,
+        "views": 2492,
         "likes": 21
       },
       {
         "id": "oFQSyR2Ts0o",
         "title": "Cheer Recap 2026 📣 🎉#HOCO #CalLutheran #cheerleader #homecoming",
         "published": "2026-10-29",
-        "views": 1071,
+        "views": 1072,
         "likes": 16
       },
       {
@@ -3596,7 +3595,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 9,
+        "posts": 10,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -3625,7 +3624,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-03T06:54:48Z",
+  "generated_at": "2026-11-03T09:08:47Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
