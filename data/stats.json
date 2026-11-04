@@ -3293,18 +3293,18 @@
           "carried_from": "2026-11-03"
         },
         "tiktok": {
-          "followers": 161,
+          "followers": 160,
           "following": 39,
           "likes": 15100,
-          "videos": 477,
+          "videos": 478,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-04"
         },
         "youtube": {
           "followers": 258,
-          "videos": 249,
-          "views": 449506,
+          "videos": 251,
+          "views": 449569,
           "source": "scrape",
           "last_ok": "2026-11-04"
         },
@@ -3317,9 +3317,23 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-03",
+    "fetched": "2026-11-04",
     "source": "youtube-rss",
     "videos": [
+      {
+        "id": "Sdcnk9VfoFU",
+        "title": "Guessing Halloween costumes around campus! 👀🎃 #CalLutheran #Halloween #Costumes #CampusLife",
+        "published": "2026-11-04",
+        "views": 267,
+        "likes": 6
+      },
+      {
+        "id": "P86OYuJY-T0",
+        "title": "Connecting students with opportunities! #CalLutheran #careerdevelopment #futureleaders",
+        "published": "2026-11-04",
+        "views": 118,
+        "likes": 1
+      },
       {
         "id": "YlLc-fy7l4U",
         "title": "Cal Lu's new favorite coffee spot is Honey Cup Coffee!🍯☕ #CalLutheran #coffee #local #venturacounty",
@@ -3410,20 +3424,6 @@
         "published": "2026-10-10",
         "views": 1211,
         "likes": 14
-      },
-      {
-        "id": "TD1nrftB2so",
-        "title": "Pathways and Possibilities ✨ #CalLutheran #career #possibilities #motivation",
-        "published": "2026-10-09",
-        "views": 36,
-        "likes": 0
-      },
-      {
-        "id": "fuTgaGtIwsA",
-        "title": "🏌️‍♀️Game Day Necessities 🏅⚽🏃‍♂️🤽‍♀️🏐 #collegesports #CalLutheran #checklist",
-        "published": "2026-10-08",
-        "views": 1220,
-        "likes": 6
       }
     ]
   },
@@ -3658,7 +3658,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-04T01:26:41Z",
+  "generated_at": "2026-11-04T09:22:49Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
