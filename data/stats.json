@@ -3319,18 +3319,17 @@
       "date": "2026-11-05",
       "platforms": {
         "instagram": {
-          "followers": 791,
+          "followers": 789,
           "following": 284,
-          "posts": 552,
-          "last_ok": "2026-11-03",
-          "source": "carried",
-          "carried_from": "2026-11-03"
+          "posts": 554,
+          "source": "scrape",
+          "last_ok": "2026-11-05"
         },
         "tiktok": {
           "followers": 160,
           "following": 39,
-          "likes": 15100,
-          "videos": 479,
+          "likes": 14700,
+          "videos": 466,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-05"
@@ -3338,7 +3337,7 @@
         "youtube": {
           "followers": 258,
           "videos": 252,
-          "views": 450042,
+          "views": 450058,
           "source": "scrape",
           "last_ok": "2026-11-05"
         },
@@ -3677,7 +3676,7 @@
         "window": "2026-06-01..2026-08-29",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
         "updated": "2026-09-01",
-        "posts": 29,
+        "posts": 30,
         "posts_source": "derived-from-snapshots"
       }
     },
@@ -3692,7 +3691,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-05T06:55:35Z",
+  "generated_at": "2026-11-05T07:26:30Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
