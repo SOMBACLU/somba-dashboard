@@ -3350,21 +3350,28 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-04",
+    "fetched": "2026-11-05",
     "source": "youtube-rss",
     "videos": [
+      {
+        "id": "XyZbTBKqd6g",
+        "title": "What's the #Gatorade flavor today?⚡ #CalLutheran #athlete #sports",
+        "published": "2026-11-05",
+        "views": 692,
+        "likes": 7
+      },
       {
         "id": "Sdcnk9VfoFU",
         "title": "Guessing Halloween costumes around campus! 👀🎃 #CalLutheran #Halloween #Costumes #CampusLife",
         "published": "2026-11-04",
-        "views": 343,
+        "views": 370,
         "likes": 6
       },
       {
         "id": "P86OYuJY-T0",
         "title": "Connecting students with opportunities! #CalLutheran #careerdevelopment #futureleaders",
         "published": "2026-11-04",
-        "views": 122,
+        "views": 124,
         "likes": 1
       },
       {
@@ -3385,7 +3392,7 @@
         "id": "Q9e-fFDquzc",
         "title": "Who's ready for Fall Break? 🍁🍂 #fallbreak #CalLutheran #college #collegelife",
         "published": "2026-10-30",
-        "views": 2492,
+        "views": 2494,
         "likes": 21
       },
       {
@@ -3406,7 +3413,7 @@
         "id": "73qn76nztpE",
         "title": "We're always taking applications for the School of Management 📜🖊️#CalLutheran #degree #collegelife",
         "published": "2026-10-24",
-        "views": 175,
+        "views": 176,
         "likes": 1
       },
       {
@@ -3450,13 +3457,6 @@
         "published": "2026-10-14",
         "views": 10,
         "likes": 0
-      },
-      {
-        "id": "2iAyx01lWBU",
-        "title": "Cal Lu's first message from - A 🤔#prettylittleliars #CalLutheran #studytime #collegestudent",
-        "published": "2026-10-10",
-        "views": 1211,
-        "likes": 14
       }
     ]
   },
@@ -3649,7 +3649,7 @@
         },
         "period_days": 30,
         "source": "instagram-insights-manual",
-        "posts": 11,
+        "posts": 13,
         "posts_source": "derived-from-snapshots"
       },
       "tiktok": {
@@ -3662,7 +3662,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 25,
+        "posts": 12,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -3691,7 +3691,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-05T07:26:30Z",
+  "generated_at": "2026-11-05T09:30:35Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
