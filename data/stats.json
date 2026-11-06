@@ -3362,7 +3362,7 @@
           "followers": 161,
           "following": 39,
           "likes": 15100,
-          "videos": 479,
+          "videos": 480,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-06"
@@ -3370,7 +3370,7 @@
         "youtube": {
           "followers": 258,
           "videos": 252,
-          "views": 450116,
+          "views": 451055,
           "source": "scrape",
           "last_ok": "2026-11-06"
         },
@@ -3390,14 +3390,14 @@
         "id": "XyZbTBKqd6g",
         "title": "What's the #Gatorade flavor today?⚡ #CalLutheran #athlete #sports",
         "published": "2026-11-05",
-        "views": 846,
+        "views": 884,
         "likes": 7
       },
       {
         "id": "Sdcnk9VfoFU",
         "title": "Guessing Halloween costumes around campus! 👀🎃 #CalLutheran #Halloween #Costumes #CampusLife",
         "published": "2026-11-04",
-        "views": 463,
+        "views": 527,
         "likes": 9
       },
       {
@@ -3425,8 +3425,8 @@
         "id": "Q9e-fFDquzc",
         "title": "Who's ready for Fall Break? 🍁🍂 #fallbreak #CalLutheran #college #collegelife",
         "published": "2026-10-30",
-        "views": 2494,
-        "likes": 21
+        "views": 2495,
+        "likes": 20
       },
       {
         "id": "oFQSyR2Ts0o",
@@ -3724,7 +3724,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-06T02:31:14Z",
+  "generated_at": "2026-11-06T10:59:59Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
