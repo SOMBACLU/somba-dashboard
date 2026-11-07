@@ -3394,8 +3394,8 @@
         "tiktok": {
           "followers": 162,
           "following": 39,
-          "likes": 14700,
-          "videos": 467,
+          "likes": 15100,
+          "videos": 481,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-07"
@@ -3416,35 +3416,42 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-06",
+    "fetched": "2026-11-07",
     "source": "youtube-rss",
     "videos": [
+      {
+        "id": "qHoCttsqSD4",
+        "title": "Show your work guys😭🔢 #math #homework #CalLutheran",
+        "published": "2026-11-07",
+        "views": 849,
+        "likes": 17
+      },
       {
         "id": "XyZbTBKqd6g",
         "title": "What's the #Gatorade flavor today?⚡ #CalLutheran #athlete #sports",
         "published": "2026-11-05",
-        "views": 902,
-        "likes": 7
+        "views": 938,
+        "likes": 8
       },
       {
         "id": "Sdcnk9VfoFU",
         "title": "Guessing Halloween costumes around campus! 👀🎃 #CalLutheran #Halloween #Costumes #CampusLife",
         "published": "2026-11-04",
-        "views": 527,
+        "views": 530,
         "likes": 10
       },
       {
         "id": "P86OYuJY-T0",
         "title": "Connecting students with opportunities! #CalLutheran #careerdevelopment #futureleaders",
         "published": "2026-11-04",
-        "views": 134,
+        "views": 140,
         "likes": 1
       },
       {
         "id": "YlLc-fy7l4U",
         "title": "Cal Lu's new favorite coffee spot is Honey Cup Coffee!🍯☕ #CalLutheran #coffee #local #venturacounty",
         "published": "2026-11-01",
-        "views": 153,
+        "views": 154,
         "likes": 0
       },
       {
@@ -3458,14 +3465,14 @@
         "id": "Q9e-fFDquzc",
         "title": "Who's ready for Fall Break? 🍁🍂 #fallbreak #CalLutheran #college #collegelife",
         "published": "2026-10-30",
-        "views": 2495,
+        "views": 2496,
         "likes": 20
       },
       {
         "id": "oFQSyR2Ts0o",
         "title": "Cheer Recap 2026 📣 🎉#HOCO #CalLutheran #cheerleader #homecoming",
         "published": "2026-10-29",
-        "views": 1072,
+        "views": 1073,
         "likes": 16
       },
       {
@@ -3493,7 +3500,7 @@
         "id": "tZBc-uYIGW8",
         "title": "A little look back at Homecoming week at CLU 📣💜💛#homecoming #CalLutheran #cheer #sports",
         "published": "2026-10-22",
-        "views": 1438,
+        "views": 1439,
         "likes": 21
       },
       {
@@ -3514,15 +3521,8 @@
         "id": "2PJDE3tuu6Q",
         "title": "Kingsmen Soccer Pregame essentials ⚽🥅👑 #CalLutheran #pregame #soccer #gameday",
         "published": "2026-10-15",
-        "views": 1279,
+        "views": 1280,
         "likes": 23
-      },
-      {
-        "id": "fUI6CF449Rs",
-        "title": "Study session AND break 💃🪩🎶 #Neo #midterms #CalLutheran #study",
-        "published": "2026-10-14",
-        "views": 10,
-        "likes": 0
       }
     ]
   },
@@ -3728,7 +3728,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 13,
+        "posts": 0,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -3742,7 +3742,7 @@
         "window": "2026-06-01..2026-08-29",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
         "updated": "2026-09-01",
-        "posts": 30,
+        "posts": 31,
         "posts_source": "derived-from-snapshots"
       }
     },
@@ -3757,7 +3757,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-07T03:42:25Z",
+  "generated_at": "2026-11-07T10:20:01Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
