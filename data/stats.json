@@ -3380,6 +3380,39 @@
           "last_ok": "2026-11-06"
         }
       }
+    },
+    {
+      "date": "2026-11-07",
+      "platforms": {
+        "instagram": {
+          "followers": 792,
+          "following": 284,
+          "posts": 555,
+          "source": "scrape",
+          "last_ok": "2026-11-07"
+        },
+        "tiktok": {
+          "followers": 162,
+          "following": 39,
+          "likes": 14700,
+          "videos": 467,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-07"
+        },
+        "youtube": {
+          "followers": 258,
+          "videos": 252,
+          "views": 451180,
+          "source": "scrape",
+          "last_ok": "2026-11-07"
+        },
+        "linkedin": {
+          "followers": 12,
+          "source": "scrape",
+          "last_ok": "2026-11-07"
+        }
+      }
     }
   ],
   "recent_videos": {
@@ -3557,7 +3590,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-11-06",
+    "fetched": "2026-11-07",
     "source": "youtube-innertube",
     "total_scanned": 252,
     "videos": [
@@ -3588,9 +3621,9 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23325,
+        "views": 23326,
         "kind": "short",
-        "likes": 446,
+        "likes": 445,
         "published": "2025-03-23"
       },
       {
@@ -3628,7 +3661,7 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7858,
+        "views": 7859,
         "kind": "short",
         "likes": 61,
         "published": "2026-04-01"
@@ -3652,9 +3685,9 @@
       {
         "id": "WCof1cj2xeo",
         "title": "That's my man!!! #fyp #basketball #funny #fbla #myman",
-        "views": 6288,
+        "views": 6290,
         "kind": "short",
-        "likes": 27,
+        "likes": 28,
         "published": "2026-04-05"
       }
     ]
@@ -3695,7 +3728,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 0,
+        "posts": 13,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -3724,7 +3757,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-06T23:13:35Z",
+  "generated_at": "2026-11-07T00:04:19Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
