@@ -3427,14 +3427,14 @@
         "tiktok": {
           "followers": 162,
           "following": 39,
-          "likes": 15100,
-          "videos": 481,
+          "likes": 14700,
+          "videos": 468,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-08"
         },
         "youtube": {
-          "followers": 260,
+          "followers": 259,
           "videos": 254,
           "views": 452351,
           "source": "scrape",
@@ -3449,28 +3449,35 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-07",
+    "fetched": "2026-11-08",
     "source": "youtube-rss",
     "videos": [
+      {
+        "id": "eEZjFR0irU0",
+        "title": "Check out Cal Lu's Student Union 🧑🏼‍🎓🚌📚 #CalLutheran #commuterlife  #students #studentunion",
+        "published": "2026-11-08",
+        "views": 787,
+        "likes": 14
+      },
       {
         "id": "qHoCttsqSD4",
         "title": "Show your work guys😭🔢 #math #homework #CalLutheran",
         "published": "2026-11-07",
-        "views": 1072,
-        "likes": 17
+        "views": 1316,
+        "likes": 19
       },
       {
         "id": "XyZbTBKqd6g",
         "title": "What's the #Gatorade flavor today?⚡ #CalLutheran #athlete #sports",
         "published": "2026-11-05",
-        "views": 938,
+        "views": 934,
         "likes": 8
       },
       {
         "id": "Sdcnk9VfoFU",
         "title": "Guessing Halloween costumes around campus! 👀🎃 #CalLutheran #Halloween #Costumes #CampusLife",
         "published": "2026-11-04",
-        "views": 530,
+        "views": 529,
         "likes": 10
       },
       {
@@ -3498,7 +3505,7 @@
         "id": "Q9e-fFDquzc",
         "title": "Who's ready for Fall Break? 🍁🍂 #fallbreak #CalLutheran #college #collegelife",
         "published": "2026-10-30",
-        "views": 2496,
+        "views": 2499,
         "likes": 20
       },
       {
@@ -3519,7 +3526,7 @@
         "id": "73qn76nztpE",
         "title": "We're always taking applications for the School of Management 📜🖊️#CalLutheran #degree #collegelife",
         "published": "2026-10-24",
-        "views": 176,
+        "views": 177,
         "likes": 1
       },
       {
@@ -3540,7 +3547,7 @@
         "id": "r1Zu39s1rZA",
         "title": "Nothing beats homecoming at CLU 🫶 #homecomingweek #collegelife #CalLutheran",
         "published": "2026-10-21",
-        "views": 184,
+        "views": 186,
         "likes": 2
       },
       {
@@ -3549,13 +3556,6 @@
         "published": "2026-10-16",
         "views": 1301,
         "likes": 10
-      },
-      {
-        "id": "2PJDE3tuu6Q",
-        "title": "Kingsmen Soccer Pregame essentials ⚽🥅👑 #CalLutheran #pregame #soccer #gameday",
-        "published": "2026-10-15",
-        "views": 1280,
-        "likes": 23
       }
     ]
   },
@@ -3761,7 +3761,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 1,
+        "posts": 14,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -3790,7 +3790,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-08T07:26:17Z",
+  "generated_at": "2026-11-08T09:45:24Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
