@@ -3519,15 +3519,15 @@
         "instagram": {
           "followers": 793,
           "following": 284,
-          "posts": 557,
+          "posts": 558,
           "source": "scrape",
           "last_ok": "2026-11-11"
         },
         "tiktok": {
           "followers": 161,
           "following": 39,
-          "likes": 15100,
-          "videos": 482,
+          "likes": 14800,
+          "videos": 469,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-11"
@@ -3535,7 +3535,7 @@
         "youtube": {
           "followers": 258,
           "videos": 254,
-          "views": 453784,
+          "views": 453795,
           "source": "scrape",
           "last_ok": "2026-11-11"
         },
@@ -3552,24 +3552,31 @@
     "source": "youtube-rss",
     "videos": [
       {
+        "id": "URvuBDA7l_c",
+        "title": "Well, well, well… looks like AMA is making headlines in NYC. 🗽👀   #CalLutheran #NYC #GossipGirl",
+        "published": "2026-11-11",
+        "views": 244,
+        "likes": 1
+      },
+      {
         "id": "eEZjFR0irU0",
         "title": "Check out Cal Lu's Student Union 🧑🏼‍🎓🚌📚 #CalLutheran #commuterlife  #students #studentunion",
         "published": "2026-11-08",
-        "views": 1075,
+        "views": 1082,
         "likes": 16
       },
       {
         "id": "qHoCttsqSD4",
         "title": "Show your work guys😭🔢 #math #homework #CalLutheran",
         "published": "2026-11-07",
-        "views": 1335,
-        "likes": 19
+        "views": 1336,
+        "likes": 20
       },
       {
         "id": "XyZbTBKqd6g",
         "title": "What's the #Gatorade flavor today?⚡ #CalLutheran #athlete #sports",
         "published": "2026-11-05",
-        "views": 935,
+        "views": 936,
         "likes": 8
       },
       {
@@ -3583,7 +3590,7 @@
         "id": "P86OYuJY-T0",
         "title": "Connecting students with opportunities! #CalLutheran #careerdevelopment #futureleaders",
         "published": "2026-11-04",
-        "views": 143,
+        "views": 146,
         "likes": 1
       },
       {
@@ -3625,36 +3632,29 @@
         "id": "XPI0xZVESYk",
         "title": "Let's build our community #CalLutheran 💜💛✨ #college #school #community",
         "published": "2026-10-23",
-        "views": 388,
+        "views": 389,
         "likes": 3
       },
       {
         "id": "tZBc-uYIGW8",
         "title": "A little look back at Homecoming week at CLU 📣💜💛#homecoming #CalLutheran #cheer #sports",
         "published": "2026-10-22",
-        "views": 1439,
+        "views": 1440,
         "likes": 20
       },
       {
         "id": "r1Zu39s1rZA",
         "title": "Nothing beats homecoming at CLU 🫶 #homecomingweek #collegelife #CalLutheran",
         "published": "2026-10-21",
-        "views": 186,
+        "views": 187,
         "likes": 2
       },
       {
         "id": "nNwGaWJIUhU",
         "title": "Cal Lu ROCKS! 🪨📢💜💛 #CalLutheran #hike #freshman #1962",
         "published": "2026-10-16",
-        "views": 1301,
+        "views": 1302,
         "likes": 11
-      },
-      {
-        "id": "2PJDE3tuu6Q",
-        "title": "Kingsmen Soccer Pregame essentials ⚽🥅👑 #CalLutheran #pregame #soccer #gameday",
-        "published": "2026-10-15",
-        "views": 1280,
-        "likes": 23
       }
     ]
   },
@@ -3860,7 +3860,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 2,
+        "posts": 15,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -3889,7 +3889,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-11T06:34:36Z",
+  "generated_at": "2026-11-11T10:26:19Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
