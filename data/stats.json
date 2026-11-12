@@ -3545,10 +3545,43 @@
           "last_ok": "2026-11-11"
         }
       }
+    },
+    {
+      "date": "2026-11-12",
+      "platforms": {
+        "instagram": {
+          "followers": 795,
+          "following": 284,
+          "posts": 558,
+          "source": "scrape",
+          "last_ok": "2026-11-12"
+        },
+        "tiktok": {
+          "followers": 161,
+          "following": 39,
+          "likes": 14800,
+          "videos": 469,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-12"
+        },
+        "youtube": {
+          "followers": 258,
+          "videos": 254,
+          "views": 453754,
+          "source": "scrape",
+          "last_ok": "2026-11-12"
+        },
+        "linkedin": {
+          "followers": 13,
+          "source": "scrape",
+          "last_ok": "2026-11-12"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-11",
+    "fetched": "2026-11-12",
     "source": "youtube-rss",
     "videos": [
       {
@@ -3722,9 +3755,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-11-11",
+    "fetched": "2026-11-12",
     "source": "youtube-innertube",
-    "total_scanned": 253,
+    "total_scanned": 254,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -3889,7 +3922,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-11T23:24:12Z",
+  "generated_at": "2026-11-12T00:24:43Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
