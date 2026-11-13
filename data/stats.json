@@ -3592,8 +3592,8 @@
         "tiktok": {
           "followers": 161,
           "following": 39,
-          "likes": 14800,
-          "videos": 469,
+          "likes": 15100,
+          "videos": 482,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-13"
@@ -3601,7 +3601,7 @@
         "youtube": {
           "followers": 259,
           "videos": 256,
-          "views": 454214,
+          "views": 455424,
           "source": "scrape",
           "last_ok": "2026-11-13"
         },
@@ -3618,6 +3618,13 @@
     "source": "youtube-rss",
     "videos": [
       {
+        "id": "NUp6vNMvj1Y",
+        "title": "Have you visited our new GAMING CENTER?? 🎮👾#CalLutheran #gameplay #gaming #games",
+        "published": "2026-11-13",
+        "views": 37,
+        "likes": 1
+      },
+      {
         "id": "HOls9OUxjEM",
         "title": "LAFC Gameday Vlog 📹 #LAFC #sportsmanagement #soccer #CalLutheran ⚽🥅",
         "published": "2026-11-12",
@@ -3628,8 +3635,8 @@
         "id": "URvuBDA7l_c",
         "title": "Well, well, well… looks like AMA is making headlines in NYC. 🗽👀   #CalLutheran #NYC #GossipGirl",
         "published": "2026-11-11",
-        "views": 408,
-        "likes": 2
+        "views": 413,
+        "likes": 1
       },
       {
         "id": "eEZjFR0irU0",
@@ -3656,7 +3663,7 @@
         "id": "Sdcnk9VfoFU",
         "title": "Guessing Halloween costumes around campus! 👀🎃 #CalLutheran #Halloween #Costumes #CampusLife",
         "published": "2026-11-04",
-        "views": 531,
+        "views": 532,
         "likes": 10
       },
       {
@@ -3714,13 +3721,6 @@
         "published": "2026-10-22",
         "views": 1441,
         "likes": 20
-      },
-      {
-        "id": "r1Zu39s1rZA",
-        "title": "Nothing beats homecoming at CLU 🫶 #homecomingweek #collegelife #CalLutheran",
-        "published": "2026-10-21",
-        "views": 188,
-        "likes": 2
       }
     ]
   },
@@ -3955,7 +3955,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-13T04:13:05Z",
+  "generated_at": "2026-11-13T09:37:41Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
