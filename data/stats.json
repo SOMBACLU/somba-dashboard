@@ -3578,10 +3578,43 @@
           "last_ok": "2026-11-12"
         }
       }
+    },
+    {
+      "date": "2026-11-13",
+      "platforms": {
+        "instagram": {
+          "followers": 794,
+          "following": 284,
+          "posts": 558,
+          "source": "scrape",
+          "last_ok": "2026-11-13"
+        },
+        "tiktok": {
+          "followers": 161,
+          "following": 39,
+          "likes": 14800,
+          "videos": 469,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-13"
+        },
+        "youtube": {
+          "followers": 259,
+          "videos": 255,
+          "views": 454214,
+          "source": "scrape",
+          "last_ok": "2026-11-13"
+        },
+        "linkedin": {
+          "followers": 13,
+          "source": "scrape",
+          "last_ok": "2026-11-13"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-12",
+    "fetched": "2026-11-13",
     "source": "youtube-rss",
     "videos": [
       {
@@ -3755,9 +3788,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-11-12",
+    "fetched": "2026-11-13",
     "source": "youtube-innertube",
-    "total_scanned": 254,
+    "total_scanned": 255,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -3786,7 +3819,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23328,
+        "views": 23333,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -3810,7 +3843,7 @@
       {
         "id": "HF8-oqSGewQ",
         "title": "Spending time with family during Thanksgiving has us like…”We’re sisters!” #college #weresisters",
-        "views": 13765,
+        "views": 13766,
         "kind": "short",
         "likes": 455,
         "published": "2023-12-01"
@@ -3880,7 +3913,7 @@
         },
         "period_days": 30,
         "source": "instagram-insights-manual",
-        "posts": 16,
+        "posts": 17,
         "posts_source": "derived-from-snapshots"
       },
       "tiktok": {
@@ -3922,7 +3955,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-12T23:15:28Z",
+  "generated_at": "2026-11-13T00:16:01Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
