@@ -3632,7 +3632,7 @@
           "last_ok": "2026-11-14"
         },
         "youtube": {
-          "followers": 259,
+          "followers": 261,
           "videos": 257,
           "views": 455510,
           "source": "scrape",
@@ -3647,14 +3647,21 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-13",
+    "fetched": "2026-11-14",
     "source": "youtube-rss",
     "videos": [
+      {
+        "id": "IQT5EhBCsSo",
+        "title": "Holiday menu hits different🎄☕️#CalLutheran #Collegelife  #HolidayMenu #Starbucks #Coffee",
+        "published": "2026-11-14",
+        "views": 1604,
+        "likes": 29
+      },
       {
         "id": "NUp6vNMvj1Y",
         "title": "Have you visited our new GAMING CENTER?? 🎮👾#CalLutheran #gameplay #gaming #games",
         "published": "2026-11-13",
-        "views": 48,
+        "views": 57,
         "likes": 1
       },
       {
@@ -3668,92 +3675,85 @@
         "id": "URvuBDA7l_c",
         "title": "Well, well, well… looks like AMA is making headlines in NYC. 🗽👀   #CalLutheran #NYC #GossipGirl",
         "published": "2026-11-11",
-        "views": 413,
+        "views": 410,
         "likes": 1
       },
       {
         "id": "eEZjFR0irU0",
         "title": "Check out Cal Lu's Student Union 🧑🏼‍🎓🚌📚 #CalLutheran #commuterlife  #students #studentunion",
         "published": "2026-11-08",
-        "views": 1108,
+        "views": 1112,
         "likes": 16
       },
       {
         "id": "qHoCttsqSD4",
         "title": "Show your work guys😭🔢 #math #homework #CalLutheran",
         "published": "2026-11-07",
-        "views": 1338,
+        "views": 1339,
         "likes": 20
       },
       {
         "id": "XyZbTBKqd6g",
         "title": "What's the #Gatorade flavor today?⚡ #CalLutheran #athlete #sports",
         "published": "2026-11-05",
-        "views": 938,
+        "views": 939,
         "likes": 8
       },
       {
         "id": "Sdcnk9VfoFU",
         "title": "Guessing Halloween costumes around campus! 👀🎃 #CalLutheran #Halloween #Costumes #CampusLife",
         "published": "2026-11-04",
-        "views": 532,
+        "views": 533,
         "likes": 10
       },
       {
         "id": "P86OYuJY-T0",
         "title": "Connecting students with opportunities! #CalLutheran #careerdevelopment #futureleaders",
         "published": "2026-11-04",
-        "views": 147,
+        "views": 149,
         "likes": 1
       },
       {
         "id": "YlLc-fy7l4U",
         "title": "Cal Lu's new favorite coffee spot is Honey Cup Coffee!🍯☕ #CalLutheran #coffee #local #venturacounty",
         "published": "2026-11-01",
-        "views": 157,
+        "views": 159,
         "likes": 0
       },
       {
         "id": "Q9e-fFDquzc",
         "title": "Who's ready for Fall Break? 🍁🍂 #fallbreak #CalLutheran #college #collegelife",
         "published": "2026-10-30",
-        "views": 2502,
+        "views": 2506,
         "likes": 20
       },
       {
         "id": "oFQSyR2Ts0o",
         "title": "Cheer Recap 2026 📣 🎉#HOCO #CalLutheran #cheerleader #homecoming",
         "published": "2026-10-29",
-        "views": 1077,
+        "views": 1079,
         "likes": 16
       },
       {
         "id": "Wf8H-IYEvkc",
         "title": "Recap: Career Connections Such valuable advice! ✅  #studentlife #recruiting #CalLutheran",
         "published": "2026-10-28",
-        "views": 16,
+        "views": 17,
         "likes": 0
       },
       {
         "id": "73qn76nztpE",
         "title": "We're always taking applications for the School of Management 📜🖊️#CalLutheran #degree #collegelife",
         "published": "2026-10-24",
-        "views": 178,
+        "views": 179,
         "likes": 1
       },
       {
         "id": "XPI0xZVESYk",
         "title": "Let's build our community #CalLutheran 💜💛✨ #college #school #community",
         "published": "2026-10-23",
-        "views": 390,
+        "views": 391,
         "likes": 3
-      },
-      {
-        "id": "tZBc-uYIGW8",
-        "title": "A little look back at Homecoming week at CLU 📣💜💛#homecoming #CalLutheran #cheer #sports",
-        "published": "2026-10-22",
-        "views": 1441,
-        "likes": 20
       }
     ]
   },
@@ -3959,7 +3959,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 1,
+        "posts": 14,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -3988,7 +3988,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-14T06:33:12Z",
+  "generated_at": "2026-11-14T14:13:05Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
