@@ -3618,15 +3618,15 @@
         "instagram": {
           "followers": 795,
           "following": 284,
-          "posts": 560,
+          "posts": 561,
           "source": "scrape",
           "last_ok": "2026-11-14"
         },
         "tiktok": {
           "followers": 161,
           "following": 39,
-          "likes": 15100,
-          "videos": 482,
+          "likes": 14800,
+          "videos": 469,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-14"
@@ -3634,7 +3634,7 @@
         "youtube": {
           "followers": 261,
           "videos": 257,
-          "views": 455510,
+          "views": 457050,
           "source": "scrape",
           "last_ok": "2026-11-14"
         },
@@ -3654,7 +3654,7 @@
         "id": "IQT5EhBCsSo",
         "title": "Holiday menu hits different🎄☕️#CalLutheran #Collegelife  #HolidayMenu #Starbucks #Coffee",
         "published": "2026-11-14",
-        "views": 1731,
+        "views": 1742,
         "likes": 28
       },
       {
@@ -3959,7 +3959,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 1,
+        "posts": 14,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -3988,7 +3988,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-14T19:14:58Z",
+  "generated_at": "2026-11-14T20:55:38Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
