@@ -3667,7 +3667,7 @@
         "youtube": {
           "followers": 261,
           "videos": 258,
-          "views": 457050,
+          "views": 457339,
           "source": "scrape",
           "last_ok": "2026-11-15"
         },
@@ -3680,49 +3680,56 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-14",
+    "fetched": "2026-11-15",
     "source": "youtube-rss",
     "videos": [
+      {
+        "id": "6gDkWIhfUes",
+        "title": "Honey Cup Coffee ☕🍯🍂 #coffee #local #localbusiness #CalLutheran",
+        "published": "2026-11-15",
+        "views": 100,
+        "likes": 4
+      },
       {
         "id": "IQT5EhBCsSo",
         "title": "Holiday menu hits different🎄☕️#CalLutheran #Collegelife  #HolidayMenu #Starbucks #Coffee",
         "published": "2026-11-14",
-        "views": 1742,
-        "likes": 28
+        "views": 1757,
+        "likes": 29
       },
       {
         "id": "NUp6vNMvj1Y",
         "title": "Have you visited our new GAMING CENTER?? 🎮👾#CalLutheran #gameplay #gaming #games",
         "published": "2026-11-13",
-        "views": 66,
+        "views": 74,
         "likes": 1
       },
       {
         "id": "HOls9OUxjEM",
         "title": "LAFC Gameday Vlog 📹 #LAFC #sportsmanagement #soccer #CalLutheran ⚽🥅",
         "published": "2026-11-12",
-        "views": 1186,
+        "views": 1113,
         "likes": 10
       },
       {
         "id": "URvuBDA7l_c",
         "title": "Well, well, well… looks like AMA is making headlines in NYC. 🗽👀   #CalLutheran #NYC #GossipGirl",
         "published": "2026-11-11",
-        "views": 410,
+        "views": 409,
         "likes": 1
       },
       {
         "id": "eEZjFR0irU0",
         "title": "Check out Cal Lu's Student Union 🧑🏼‍🎓🚌📚 #CalLutheran #commuterlife  #students #studentunion",
         "published": "2026-11-08",
-        "views": 1112,
+        "views": 1111,
         "likes": 16
       },
       {
         "id": "qHoCttsqSD4",
         "title": "Show your work guys😭🔢 #math #homework #CalLutheran",
         "published": "2026-11-07",
-        "views": 1339,
+        "views": 1340,
         "likes": 20
       },
       {
@@ -3757,7 +3764,7 @@
         "id": "Q9e-fFDquzc",
         "title": "Who's ready for Fall Break? 🍁🍂 #fallbreak #CalLutheran #college #collegelife",
         "published": "2026-10-30",
-        "views": 2506,
+        "views": 2507,
         "likes": 20
       },
       {
@@ -3780,13 +3787,6 @@
         "published": "2026-10-24",
         "views": 179,
         "likes": 1
-      },
-      {
-        "id": "XPI0xZVESYk",
-        "title": "Let's build our community #CalLutheran 💜💛✨ #college #school #community",
-        "published": "2026-10-23",
-        "views": 391,
-        "likes": 3
       }
     ]
   },
@@ -4021,7 +4021,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-15T07:41:56Z",
+  "generated_at": "2026-11-15T09:59:12Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
