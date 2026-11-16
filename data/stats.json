@@ -3699,7 +3699,7 @@
         },
         "youtube": {
           "followers": 263,
-          "videos": 259,
+          "videos": 258,
           "views": 458486,
           "source": "scrape",
           "last_ok": "2026-11-16"
@@ -3727,7 +3727,7 @@
         "id": "6gDkWIhfUes",
         "title": "Honey Cup Coffee ☕🍯🍂 #coffee #local #localbusiness #CalLutheran",
         "published": "2026-11-15",
-        "views": 211,
+        "views": 207,
         "likes": 5
       },
       {
@@ -3757,13 +3757,6 @@
         "published": "2026-11-11",
         "views": 409,
         "likes": 1
-      },
-      {
-        "id": "eEZjFR0irU0",
-        "title": "Check out Cal Lu's Student Union 🧑🏼‍🎓🚌📚 #CalLutheran #commuterlife  #students #studentunion",
-        "published": "2026-11-08",
-        "views": 1111,
-        "likes": 16
       },
       {
         "id": "qHoCttsqSD4",
@@ -3820,6 +3813,13 @@
         "published": "2026-10-28",
         "views": 17,
         "likes": 0
+      },
+      {
+        "id": "73qn76nztpE",
+        "title": "We're always taking applications for the School of Management 📜🖊️#CalLutheran #degree #collegelife",
+        "published": "2026-10-24",
+        "views": 179,
+        "likes": 1
       }
     ]
   },
@@ -4025,7 +4025,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 16,
+        "posts": 3,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4054,7 +4054,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-16T22:39:47Z",
+  "generated_at": "2026-11-16T23:09:53Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
