@@ -3677,6 +3677,40 @@
           "last_ok": "2026-11-15"
         }
       }
+    },
+    {
+      "date": "2026-11-16",
+      "platforms": {
+        "instagram": {
+          "followers": 797,
+          "following": 284,
+          "posts": 563,
+          "last_ok": "2026-11-15",
+          "source": "carried",
+          "carried_from": "2026-11-15"
+        },
+        "tiktok": {
+          "followers": 162,
+          "following": 39,
+          "likes": 15200,
+          "videos": 483,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-16"
+        },
+        "youtube": {
+          "followers": 261,
+          "videos": 258,
+          "views": 457303,
+          "source": "scrape",
+          "last_ok": "2026-11-16"
+        },
+        "linkedin": {
+          "followers": 13,
+          "source": "scrape",
+          "last_ok": "2026-11-16"
+        }
+      }
     }
   ],
   "recent_videos": {
@@ -3854,7 +3888,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-11-15",
+    "fetched": "2026-11-16",
     "source": "youtube-innertube",
     "total_scanned": 257,
     "videos": [
@@ -3872,7 +3906,7 @@
         "views": 26026,
         "kind": "short",
         "likes": 90,
-        "published": "2025-11-01"
+        "published": "2025-11-02"
       },
       {
         "id": "CS6dNGU9Evc",
@@ -3896,7 +3930,7 @@
         "views": 22775,
         "kind": "short",
         "likes": 71,
-        "published": "2026-03-31"
+        "published": "2026-04-01"
       },
       {
         "id": "-iPsWtoqSjQ",
@@ -3920,7 +3954,7 @@
         "views": 10153,
         "kind": "short",
         "likes": 199,
-        "published": "2025-03-19"
+        "published": "2025-03-20"
       },
       {
         "id": "8eKBn5whDy8",
@@ -3936,7 +3970,7 @@
         "views": 7391,
         "kind": "short",
         "likes": 28,
-        "published": "2025-10-27"
+        "published": "2025-10-28"
       },
       {
         "id": "zArZjKlR8lI",
@@ -3992,7 +4026,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 15,
+        "posts": 2,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4021,7 +4055,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-15T23:34:07Z",
+  "generated_at": "2026-11-16T02:47:56Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
