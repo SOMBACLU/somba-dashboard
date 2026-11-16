@@ -3684,7 +3684,7 @@
         "instagram": {
           "followers": 797,
           "following": 284,
-          "posts": 563,
+          "posts": 564,
           "source": "scrape",
           "last_ok": "2026-11-16"
         },
@@ -3692,15 +3692,15 @@
           "followers": 162,
           "following": 39,
           "likes": 14800,
-          "videos": 470,
+          "videos": 471,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-16"
         },
         "youtube": {
-          "followers": 261,
-          "videos": 258,
-          "views": 457303,
+          "followers": 263,
+          "videos": 259,
+          "views": 457472,
           "source": "scrape",
           "last_ok": "2026-11-16"
         },
@@ -3713,28 +3713,35 @@
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-15",
+    "fetched": "2026-11-16",
     "source": "youtube-rss",
     "videos": [
+      {
+        "id": "cmLGGBn3_gs",
+        "title": "A fall evening in my post-grad era 🎓 #CalLutheran #graduate #alumni",
+        "published": "2026-11-16",
+        "views": 840,
+        "likes": 4
+      },
       {
         "id": "6gDkWIhfUes",
         "title": "Honey Cup Coffee ☕🍯🍂 #coffee #local #localbusiness #CalLutheran",
         "published": "2026-11-15",
-        "views": 141,
+        "views": 162,
         "likes": 4
       },
       {
         "id": "IQT5EhBCsSo",
         "title": "Holiday menu hits different🎄☕️#CalLutheran #Collegelife  #HolidayMenu #Starbucks #Coffee",
         "published": "2026-11-14",
-        "views": 1769,
-        "likes": 29
+        "views": 1776,
+        "likes": 30
       },
       {
         "id": "NUp6vNMvj1Y",
         "title": "Have you visited our new GAMING CENTER?? 🎮👾#CalLutheran #gameplay #gaming #games",
         "published": "2026-11-13",
-        "views": 77,
+        "views": 78,
         "likes": 1
       },
       {
@@ -3776,7 +3783,7 @@
         "id": "Sdcnk9VfoFU",
         "title": "Guessing Halloween costumes around campus! 👀🎃 #CalLutheran #Halloween #Costumes #CampusLife",
         "published": "2026-11-04",
-        "views": 533,
+        "views": 535,
         "likes": 10
       },
       {
@@ -3813,13 +3820,6 @@
         "published": "2026-10-28",
         "views": 17,
         "likes": 0
-      },
-      {
-        "id": "73qn76nztpE",
-        "title": "We're always taking applications for the School of Management 📜🖊️#CalLutheran #degree #collegelife",
-        "published": "2026-10-24",
-        "views": 179,
-        "likes": 1
       }
     ]
   },
@@ -4025,7 +4025,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 15,
+        "posts": 2,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4054,7 +4054,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-16T02:51:39Z",
+  "generated_at": "2026-11-16T08:50:24Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
