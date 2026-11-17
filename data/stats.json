@@ -3710,17 +3710,50 @@
           "last_ok": "2026-11-16"
         }
       }
+    },
+    {
+      "date": "2026-11-17",
+      "platforms": {
+        "instagram": {
+          "followers": 798,
+          "following": 284,
+          "posts": 564,
+          "source": "scrape",
+          "last_ok": "2026-11-17"
+        },
+        "tiktok": {
+          "followers": 162,
+          "following": 39,
+          "likes": 14800,
+          "videos": 471,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-17"
+        },
+        "youtube": {
+          "followers": 263,
+          "videos": 258,
+          "views": 458486,
+          "source": "scrape",
+          "last_ok": "2026-11-17"
+        },
+        "linkedin": {
+          "followers": 13,
+          "source": "scrape",
+          "last_ok": "2026-11-17"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-16",
+    "fetched": "2026-11-17",
     "source": "youtube-rss",
     "videos": [
       {
         "id": "cmLGGBn3_gs",
         "title": "A fall evening in my post-grad era 🎓 #CalLutheran #graduate #alumni",
         "published": "2026-11-16",
-        "views": 957,
+        "views": 958,
         "likes": 4
       },
       {
@@ -3887,14 +3920,14 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-11-16",
+    "fetched": "2026-11-17",
     "source": "youtube-innertube",
-    "total_scanned": 257,
+    "total_scanned": 258,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
         "title": "Thank you sharks for taking my business opportunity #college #business #sharktank",
-        "views": 65908,
+        "views": 65909,
         "kind": "short",
         "likes": 332,
         "published": "2024-03-31"
@@ -3902,15 +3935,15 @@
       {
         "id": "hMJM7bv4bGM",
         "title": "Dog in da College House! #dog #college #house #ytshorts #explore",
-        "views": 26026,
+        "views": 26028,
         "kind": "short",
         "likes": 90,
-        "published": "2025-11-02"
+        "published": "2025-11-01"
       },
       {
         "id": "CS6dNGU9Evc",
         "title": "When my friend makes a jokes #businessstudent #businessmajor #businesscasual #college #student",
-        "views": 25930,
+        "views": 25932,
         "kind": "short",
         "likes": 356,
         "published": "2026-04-03"
@@ -3918,7 +3951,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23336,
+        "views": 23338,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -3926,15 +3959,15 @@
       {
         "id": "UD45ksQvtmc",
         "title": "99.99% accuracy #fyp #pizza #ytshorts",
-        "views": 22775,
+        "views": 22777,
         "kind": "short",
         "likes": 71,
-        "published": "2026-04-01"
+        "published": "2026-03-31"
       },
       {
         "id": "-iPsWtoqSjQ",
         "title": "Sigma Boy #sigmaboy",
-        "views": 14531,
+        "views": 14533,
         "kind": "short",
         "likes": 124,
         "published": "2025-03-22"
@@ -3942,7 +3975,7 @@
       {
         "id": "HF8-oqSGewQ",
         "title": "Spending time with family during Thanksgiving has us like…”We’re sisters!” #college #weresisters",
-        "views": 13766,
+        "views": 13767,
         "kind": "short",
         "likes": 455,
         "published": "2023-12-01"
@@ -3953,12 +3986,12 @@
         "views": 10153,
         "kind": "short",
         "likes": 199,
-        "published": "2025-03-20"
+        "published": "2025-03-19"
       },
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7867,
+        "views": 7868,
         "kind": "short",
         "likes": 61,
         "published": "2026-04-01"
@@ -3969,7 +4002,7 @@
         "views": 7391,
         "kind": "short",
         "likes": 28,
-        "published": "2025-10-28"
+        "published": "2025-10-27"
       },
       {
         "id": "zArZjKlR8lI",
@@ -4012,7 +4045,7 @@
         },
         "period_days": 30,
         "source": "instagram-insights-manual",
-        "posts": 21,
+        "posts": 22,
         "posts_source": "derived-from-snapshots"
       },
       "tiktok": {
@@ -4025,7 +4058,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 3,
+        "posts": 2,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4054,7 +4087,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-16T23:39:59Z",
+  "generated_at": "2026-11-17T00:10:26Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
