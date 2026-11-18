@@ -3750,15 +3750,15 @@
         "instagram": {
           "followers": 796,
           "following": 284,
-          "posts": 565,
+          "posts": 566,
           "source": "scrape",
           "last_ok": "2026-11-18"
         },
         "tiktok": {
           "followers": 162,
           "following": 39,
-          "likes": 15200,
-          "videos": 486,
+          "likes": 14800,
+          "videos": 473,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-18"
@@ -3766,7 +3766,7 @@
         "youtube": {
           "followers": 264,
           "videos": 263,
-          "views": 459365,
+          "views": 459466,
           "source": "scrape",
           "last_ok": "2026-11-18"
         },
@@ -3793,42 +3793,42 @@
         "id": "USBza7VXBqo",
         "title": "#collegelife #funny #school #comedy #function #relateable",
         "published": "2026-11-17",
-        "views": 1278,
-        "likes": 23
+        "views": 1605,
+        "likes": 25
       },
       {
         "id": "inF6EazGR2A",
         "title": "Worked hard all semester for this moment#studentlife #studentmemes #finalsweek #callutheran",
         "published": "2026-11-17",
-        "views": 1208,
+        "views": 1224,
         "likes": 23
       },
       {
         "id": "X9ts37IFrd8",
         "title": "#clu, #college, #fyp, #schoollife #relatable",
         "published": "2026-11-17",
-        "views": 4,
+        "views": 6,
         "likes": 0
       },
       {
         "id": "qCv4vnsZKtM",
         "title": "Christmas Mode: Activated#winter, #christmasishere, #ChristmasDrinks",
         "published": "2026-11-17",
-        "views": 1885,
+        "views": 1892,
         "likes": 9
       },
       {
         "id": "cmLGGBn3_gs",
         "title": "A fall evening in my post-grad era 🎓 #CalLutheran #graduate #alumni",
         "published": "2026-11-16",
-        "views": 991,
+        "views": 998,
         "likes": 4
       },
       {
         "id": "6gDkWIhfUes",
         "title": "Honey Cup Coffee ☕🍯🍂 #coffee #local #localbusiness #CalLutheran",
         "published": "2026-11-15",
-        "views": 255,
+        "views": 246,
         "likes": 5
       },
       {
@@ -3849,7 +3849,7 @@
         "id": "HOls9OUxjEM",
         "title": "LAFC Gameday Vlog 📹 #LAFC #sportsmanagement #soccer #CalLutheran ⚽🥅",
         "published": "2026-11-12",
-        "views": 1119,
+        "views": 1121,
         "likes": 10
       },
       {
@@ -4091,7 +4091,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 1,
+        "posts": 15,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4105,7 +4105,7 @@
         "window": "2026-06-01..2026-08-29",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
         "updated": "2026-09-01",
-        "posts": 40,
+        "posts": 41,
         "posts_source": "derived-from-snapshots"
       }
     },
@@ -4120,7 +4120,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-18T04:28:16Z",
+  "generated_at": "2026-11-18T07:31:30Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
