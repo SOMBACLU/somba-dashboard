@@ -3757,15 +3757,15 @@
         "tiktok": {
           "followers": 162,
           "following": 39,
-          "likes": 14800,
-          "videos": 472,
+          "likes": 15200,
+          "videos": 486,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-18"
         },
         "youtube": {
           "followers": 264,
-          "videos": 262,
+          "videos": 263,
           "views": 459365,
           "source": "scrape",
           "last_ok": "2026-11-18"
@@ -3783,17 +3783,24 @@
     "source": "youtube-rss",
     "videos": [
       {
+        "id": "QzwMFoLG444",
+        "title": "Sending thoughts and prayers to all the Bio majors out there 🙏  #GuessThatMajor #CalLutheran",
+        "published": "2026-11-18",
+        "views": 39,
+        "likes": 1
+      },
+      {
         "id": "USBza7VXBqo",
         "title": "#collegelife #funny #school #comedy #function #relateable",
         "published": "2026-11-17",
-        "views": 1126,
-        "likes": 20
+        "views": 1278,
+        "likes": 23
       },
       {
         "id": "inF6EazGR2A",
         "title": "Worked hard all semester for this moment#studentlife #studentmemes #finalsweek #callutheran",
         "published": "2026-11-17",
-        "views": 1201,
+        "views": 1208,
         "likes": 23
       },
       {
@@ -3814,7 +3821,7 @@
         "id": "cmLGGBn3_gs",
         "title": "A fall evening in my post-grad era 🎓 #CalLutheran #graduate #alumni",
         "published": "2026-11-16",
-        "views": 990,
+        "views": 991,
         "likes": 4
       },
       {
@@ -3828,7 +3835,7 @@
         "id": "IQT5EhBCsSo",
         "title": "Holiday menu hits different🎄☕️#CalLutheran #Collegelife  #HolidayMenu #Starbucks #Coffee",
         "published": "2026-11-14",
-        "views": 1781,
+        "views": 1782,
         "likes": 30
       },
       {
@@ -3879,13 +3886,6 @@
         "published": "2026-11-04",
         "views": 153,
         "likes": 1
-      },
-      {
-        "id": "YlLc-fy7l4U",
-        "title": "Cal Lu's new favorite coffee spot is Honey Cup Coffee!🍯☕ #CalLutheran #coffee #local #venturacounty",
-        "published": "2026-11-01",
-        "views": 161,
-        "likes": 0
       }
     ]
   },
@@ -4120,7 +4120,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-18T01:22:58Z",
+  "generated_at": "2026-11-18T04:28:16Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
