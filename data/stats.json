@@ -3750,7 +3750,7 @@
         "instagram": {
           "followers": 797,
           "following": 284,
-          "posts": 566,
+          "posts": 567,
           "source": "scrape",
           "last_ok": "2026-11-18"
         },
@@ -3765,7 +3765,7 @@
         },
         "youtube": {
           "followers": 264,
-          "videos": 263,
+          "videos": 264,
           "views": 459466,
           "source": "scrape",
           "last_ok": "2026-11-18"
@@ -3782,6 +3782,13 @@
     "fetched": "2026-11-18",
     "source": "youtube-rss",
     "videos": [
+      {
+        "id": "vh_ePsnC_Jo",
+        "title": "what was his problem??#student #wifedat #fyp #collegelife",
+        "published": "2026-11-18",
+        "views": 144,
+        "likes": 5
+      },
       {
         "id": "QzwMFoLG444",
         "title": "Sending thoughts and prayers to all the Bio majors out there 🙏  #GuessThatMajor #CalLutheran",
@@ -3879,13 +3886,6 @@
         "published": "2026-11-04",
         "views": 540,
         "likes": 10
-      },
-      {
-        "id": "P86OYuJY-T0",
-        "title": "Connecting students with opportunities! #CalLutheran #careerdevelopment #futureleaders",
-        "published": "2026-11-04",
-        "views": 153,
-        "likes": 1
       }
     ]
   },
@@ -4120,7 +4120,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-18T19:43:00Z",
+  "generated_at": "2026-11-18T20:13:07Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
