@@ -3788,7 +3788,7 @@
           "last_ok": "2026-11-19"
         },
         "tiktok": {
-          "followers": 162,
+          "followers": 163,
           "following": 39,
           "likes": 14800,
           "videos": 474,
@@ -3819,42 +3819,42 @@
         "id": "BsY6kUgPHN0",
         "title": "Welcome to California Lutheran University Athletics #CalLutheran #sports #stadium #field",
         "published": "2026-11-19",
-        "views": 41,
+        "views": 73,
         "likes": 0
       },
       {
         "id": "AQAREH0cwbE",
         "title": "college with them 💜💛 #callutheran #college #trend #explorepage",
         "published": "2026-11-18",
-        "views": 2,
+        "views": 3,
         "likes": 0
       },
       {
         "id": "vh_ePsnC_Jo",
         "title": "what was his problem??#student #wifedat #fyp #collegelife",
         "published": "2026-11-18",
-        "views": 1858,
+        "views": 1944,
         "likes": 34
       },
       {
         "id": "QzwMFoLG444",
         "title": "Sending thoughts and prayers to all the Bio majors out there 🙏  #GuessThatMajor #CalLutheran",
         "published": "2026-11-18",
-        "views": 50,
+        "views": 52,
         "likes": 1
       },
       {
         "id": "USBza7VXBqo",
         "title": "#collegelife #funny #school #comedy #function #relateable",
         "published": "2026-11-17",
-        "views": 1801,
+        "views": 1873,
         "likes": 26
       },
       {
         "id": "inF6EazGR2A",
         "title": "Worked hard all semester for this moment#studentlife #studentmemes #finalsweek #callutheran",
         "published": "2026-11-17",
-        "views": 1268,
+        "views": 1270,
         "likes": 24
       },
       {
@@ -3868,14 +3868,14 @@
         "id": "qCv4vnsZKtM",
         "title": "Christmas Mode: Activated#winter, #christmasishere, #ChristmasDrinks",
         "published": "2026-11-17",
-        "views": 1915,
+        "views": 1921,
         "likes": 9
       },
       {
         "id": "cmLGGBn3_gs",
         "title": "A fall evening in my post-grad era 🎓 #CalLutheran #graduate #alumni",
         "published": "2026-11-16",
-        "views": 1002,
+        "views": 979,
         "likes": 4
       },
       {
@@ -3889,14 +3889,14 @@
         "id": "IQT5EhBCsSo",
         "title": "Holiday menu hits different🎄☕️#CalLutheran #Collegelife  #HolidayMenu #Starbucks #Coffee",
         "published": "2026-11-14",
-        "views": 1784,
+        "views": 1785,
         "likes": 30
       },
       {
         "id": "NUp6vNMvj1Y",
         "title": "Have you visited our new GAMING CENTER?? 🎮👾#CalLutheran #gameplay #gaming #games",
         "published": "2026-11-13",
-        "views": 79,
+        "views": 80,
         "likes": 1
       },
       {
@@ -4111,7 +4111,7 @@
         },
         "period_days": 30,
         "source": "instagram-insights-manual",
-        "posts": 23,
+        "posts": 24,
         "posts_source": "derived-from-snapshots"
       },
       "tiktok": {
@@ -4124,7 +4124,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 1,
+        "posts": 2,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4153,7 +4153,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-19T04:11:46Z",
+  "generated_at": "2026-11-19T12:05:30Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
