@@ -3776,25 +3776,58 @@
           "last_ok": "2026-11-18"
         }
       }
+    },
+    {
+      "date": "2026-11-19",
+      "platforms": {
+        "instagram": {
+          "followers": 797,
+          "following": 284,
+          "posts": 567,
+          "source": "scrape",
+          "last_ok": "2026-11-19"
+        },
+        "tiktok": {
+          "followers": 162,
+          "following": 39,
+          "likes": 14800,
+          "videos": 473,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-19"
+        },
+        "youtube": {
+          "followers": 264,
+          "videos": 265,
+          "views": 459466,
+          "source": "scrape",
+          "last_ok": "2026-11-19"
+        },
+        "linkedin": {
+          "followers": 13,
+          "source": "scrape",
+          "last_ok": "2026-11-19"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-18",
+    "fetched": "2026-11-19",
     "source": "youtube-rss",
     "videos": [
       {
         "id": "AQAREH0cwbE",
         "title": "college with them 💜💛 #callutheran #college #trend #explorepage",
         "published": "2026-11-18",
-        "views": 1,
+        "views": 2,
         "likes": 0
       },
       {
         "id": "vh_ePsnC_Jo",
         "title": "what was his problem??#student #wifedat #fyp #collegelife",
         "published": "2026-11-18",
-        "views": 1409,
-        "likes": 34
+        "views": 1482,
+        "likes": 32
       },
       {
         "id": "QzwMFoLG444",
@@ -3953,9 +3986,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-11-18",
+    "fetched": "2026-11-19",
     "source": "youtube-innertube",
-    "total_scanned": 262,
+    "total_scanned": 265,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -3992,7 +4025,7 @@
       {
         "id": "UD45ksQvtmc",
         "title": "99.99% accuracy #fyp #pizza #ytshorts",
-        "views": 22777,
+        "views": 22778,
         "kind": "short",
         "likes": 71,
         "published": "2026-03-31"
@@ -4091,7 +4124,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 2,
+        "posts": 1,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4120,7 +4153,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-18T23:43:51Z",
+  "generated_at": "2026-11-19T00:14:19Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
