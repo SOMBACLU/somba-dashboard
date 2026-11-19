@@ -3819,14 +3819,14 @@
         "id": "Mgg1qf2wpoI",
         "title": "Finals Lock In:  Gotta lock in for finals week😭#finalweek #clu #retable",
         "published": "2026-11-19",
-        "views": 854,
-        "likes": 22
+        "views": 927,
+        "likes": 15
       },
       {
         "id": "BsY6kUgPHN0",
         "title": "Welcome to California Lutheran University Athletics #CalLutheran #sports #stadium #field",
         "published": "2026-11-19",
-        "views": 77,
+        "views": 79,
         "likes": 0
       },
       {
@@ -3854,28 +3854,28 @@
         "id": "USBza7VXBqo",
         "title": "#collegelife #funny #school #comedy #function #relateable",
         "published": "2026-11-17",
-        "views": 1889,
+        "views": 1892,
         "likes": 26
       },
       {
         "id": "inF6EazGR2A",
         "title": "Worked hard all semester for this moment#studentlife #studentmemes #finalsweek #callutheran",
         "published": "2026-11-17",
-        "views": 1271,
+        "views": 1279,
         "likes": 24
       },
       {
         "id": "X9ts37IFrd8",
         "title": "#clu, #college, #fyp, #schoollife #relatable",
         "published": "2026-11-17",
-        "views": 11,
+        "views": 10,
         "likes": 0
       },
       {
         "id": "qCv4vnsZKtM",
         "title": "Christmas Mode: Activated#winter, #christmasishere, #ChristmasDrinks",
         "published": "2026-11-17",
-        "views": 1923,
+        "views": 1915,
         "likes": 9
       },
       {
@@ -4124,7 +4124,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 15,
+        "posts": 2,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4153,7 +4153,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-19T22:40:26Z",
+  "generated_at": "2026-11-19T23:10:33Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
