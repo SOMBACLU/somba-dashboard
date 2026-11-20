@@ -3809,53 +3809,87 @@
           "last_ok": "2026-11-19"
         }
       }
+    },
+    {
+      "date": "2026-11-20",
+      "platforms": {
+        "instagram": {
+          "followers": 798,
+          "following": 284,
+          "posts": 568,
+          "last_ok": "2026-11-19",
+          "source": "carried",
+          "carried_from": "2026-11-19"
+        },
+        "tiktok": {
+          "followers": 163,
+          "following": 39,
+          "likes": 15200,
+          "videos": 488,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-20"
+        },
+        "youtube": {
+          "followers": 265,
+          "videos": 267,
+          "views": 462580,
+          "source": "scrape",
+          "last_ok": "2026-11-20"
+        },
+        "linkedin": {
+          "followers": 13,
+          "source": "scrape",
+          "last_ok": "2026-11-20"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-19",
+    "fetched": "2026-11-20",
     "source": "youtube-rss",
     "videos": [
       {
         "id": "Mgg1qf2wpoI",
         "title": "Finals Lock In:  Gotta lock in for finals week😭#finalweek #clu #retable",
         "published": "2026-11-19",
-        "views": 927,
+        "views": 1177,
         "likes": 15
       },
       {
         "id": "BsY6kUgPHN0",
         "title": "Welcome to California Lutheran University Athletics #CalLutheran #sports #stadium #field",
         "published": "2026-11-19",
-        "views": 79,
+        "views": 82,
         "likes": 0
       },
       {
         "id": "AQAREH0cwbE",
         "title": "college with them 💜💛 #callutheran #college #trend #explorepage",
         "published": "2026-11-18",
-        "views": 3,
+        "views": 5,
         "likes": 0
       },
       {
         "id": "vh_ePsnC_Jo",
         "title": "what was his problem??#student #wifedat #fyp #collegelife",
         "published": "2026-11-18",
-        "views": 1945,
+        "views": 1948,
         "likes": 34
       },
       {
         "id": "QzwMFoLG444",
         "title": "Sending thoughts and prayers to all the Bio majors out there 🙏  #GuessThatMajor #CalLutheran",
         "published": "2026-11-18",
-        "views": 54,
+        "views": 55,
         "likes": 1
       },
       {
         "id": "USBza7VXBqo",
         "title": "#collegelife #funny #school #comedy #function #relateable",
         "published": "2026-11-17",
-        "views": 1892,
-        "likes": 26
+        "views": 1902,
+        "likes": 27
       },
       {
         "id": "inF6EazGR2A",
@@ -3868,14 +3902,14 @@
         "id": "X9ts37IFrd8",
         "title": "#clu, #college, #fyp, #schoollife #relatable",
         "published": "2026-11-17",
-        "views": 10,
+        "views": 11,
         "likes": 0
       },
       {
         "id": "qCv4vnsZKtM",
         "title": "Christmas Mode: Activated#winter, #christmasishere, #ChristmasDrinks",
         "published": "2026-11-17",
-        "views": 1915,
+        "views": 1925,
         "likes": 9
       },
       {
@@ -3903,7 +3937,7 @@
         "id": "NUp6vNMvj1Y",
         "title": "Have you visited our new GAMING CENTER?? 🎮👾#CalLutheran #gameplay #gaming #games",
         "published": "2026-11-13",
-        "views": 80,
+        "views": 84,
         "likes": 1
       },
       {
@@ -3986,9 +4020,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-11-19",
+    "fetched": "2026-11-20",
     "source": "youtube-innertube",
-    "total_scanned": 265,
+    "total_scanned": 266,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -4004,7 +4038,7 @@
         "views": 26028,
         "kind": "short",
         "likes": 90,
-        "published": "2025-11-01"
+        "published": "2025-11-02"
       },
       {
         "id": "CS6dNGU9Evc",
@@ -4028,7 +4062,7 @@
         "views": 22778,
         "kind": "short",
         "likes": 71,
-        "published": "2026-03-31"
+        "published": "2026-04-01"
       },
       {
         "id": "-iPsWtoqSjQ",
@@ -4052,7 +4086,7 @@
         "views": 10153,
         "kind": "short",
         "likes": 199,
-        "published": "2025-03-19"
+        "published": "2025-03-20"
       },
       {
         "id": "8eKBn5whDy8",
@@ -4068,7 +4102,7 @@
         "views": 7391,
         "kind": "short",
         "likes": 28,
-        "published": "2025-10-27"
+        "published": "2025-10-28"
       },
       {
         "id": "zArZjKlR8lI",
@@ -4111,7 +4145,7 @@
         },
         "period_days": 30,
         "source": "instagram-insights-manual",
-        "posts": 24,
+        "posts": 23,
         "posts_source": "derived-from-snapshots"
       },
       "tiktok": {
@@ -4124,7 +4158,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 2,
+        "posts": 1,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4138,7 +4172,7 @@
         "window": "2026-06-01..2026-08-29",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
         "updated": "2026-09-01",
-        "posts": 45,
+        "posts": 46,
         "posts_source": "derived-from-snapshots"
       }
     },
@@ -4153,7 +4187,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-19T23:10:33Z",
+  "generated_at": "2026-11-20T03:25:00Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
