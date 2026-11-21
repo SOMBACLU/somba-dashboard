@@ -3856,14 +3856,14 @@
         "tiktok": {
           "followers": 163,
           "following": 39,
-          "likes": 14900,
-          "videos": 476,
+          "likes": 15300,
+          "videos": 489,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-21"
         },
         "youtube": {
-          "followers": 265,
+          "followers": 264,
           "videos": 269,
           "views": 466477,
           "source": "scrape",
@@ -3885,14 +3885,14 @@
         "id": "HXpPospnhJg",
         "title": "The most important part to any successful SOMBA meeting🍪 #CalLutheran #meeting #chikfila",
         "published": "2026-11-21",
-        "views": 1144,
+        "views": 1147,
         "likes": 5
       },
       {
         "id": "JK4ixiA21xE",
         "title": "Cumulative exams should actually be illegal 😭💀S#CollegeHumor #CollegeLife #RelatableCollege #CLU",
         "published": "2026-11-20",
-        "views": 8,
+        "views": 9,
         "likes": 0
       },
       {
@@ -3906,7 +3906,7 @@
         "id": "BsY6kUgPHN0",
         "title": "Welcome to California Lutheran University Athletics #CalLutheran #sports #stadium #field",
         "published": "2026-11-19",
-        "views": 94,
+        "views": 95,
         "likes": 0
       },
       {
@@ -3934,56 +3934,56 @@
         "id": "USBza7VXBqo",
         "title": "#collegelife #funny #school #comedy #function #relateable",
         "published": "2026-11-17",
-        "views": 2141,
+        "views": 2153,
         "likes": 29
       },
       {
         "id": "inF6EazGR2A",
         "title": "Worked hard all semester for this moment#studentlife #studentmemes #finalsweek #callutheran",
         "published": "2026-11-17",
-        "views": 1301,
+        "views": 1303,
         "likes": 25
       },
       {
         "id": "X9ts37IFrd8",
         "title": "#clu, #college, #fyp, #schoollife #relatable",
         "published": "2026-11-17",
-        "views": 13,
+        "views": 14,
         "likes": 0
       },
       {
         "id": "qCv4vnsZKtM",
         "title": "Christmas Mode: Activated#winter, #christmasishere, #ChristmasDrinks",
         "published": "2026-11-17",
-        "views": 2043,
+        "views": 2045,
         "likes": 9
       },
       {
         "id": "cmLGGBn3_gs",
         "title": "A fall evening in my post-grad era 🎓 #CalLutheran #graduate #alumni",
         "published": "2026-11-16",
-        "views": 982,
+        "views": 983,
         "likes": 4
       },
       {
         "id": "6gDkWIhfUes",
         "title": "Honey Cup Coffee ☕🍯🍂 #coffee #local #localbusiness #CalLutheran",
         "published": "2026-11-15",
-        "views": 248,
+        "views": 249,
         "likes": 6
       },
       {
         "id": "IQT5EhBCsSo",
         "title": "Holiday menu hits different🎄☕️#CalLutheran #Collegelife  #HolidayMenu #Starbucks #Coffee",
         "published": "2026-11-14",
-        "views": 1787,
+        "views": 1789,
         "likes": 30
       },
       {
         "id": "NUp6vNMvj1Y",
         "title": "Have you visited our new GAMING CENTER?? 🎮👾#CalLutheran #gameplay #gaming #games",
         "published": "2026-11-13",
-        "views": 85,
+        "views": 86,
         "likes": 1
       }
     ]
@@ -4219,7 +4219,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-21T21:14:24Z",
+  "generated_at": "2026-11-21T23:24:30Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
