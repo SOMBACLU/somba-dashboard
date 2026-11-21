@@ -3842,10 +3842,44 @@
           "last_ok": "2026-11-20"
         }
       }
+    },
+    {
+      "date": "2026-11-21",
+      "platforms": {
+        "instagram": {
+          "followers": 797,
+          "following": 284,
+          "posts": 568,
+          "last_ok": "2026-11-20",
+          "source": "carried",
+          "carried_from": "2026-11-20"
+        },
+        "tiktok": {
+          "followers": 163,
+          "following": 39,
+          "likes": 15200,
+          "videos": 488,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-21"
+        },
+        "youtube": {
+          "followers": 265,
+          "videos": 268,
+          "views": 464927,
+          "source": "scrape",
+          "last_ok": "2026-11-21"
+        },
+        "linkedin": {
+          "followers": 13,
+          "source": "scrape",
+          "last_ok": "2026-11-21"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-20",
+    "fetched": "2026-11-21",
     "source": "youtube-rss",
     "videos": [
       {
@@ -3859,14 +3893,14 @@
         "id": "Mgg1qf2wpoI",
         "title": "Finals Lock In:  Gotta lock in for finals week😭#finalweek #clu #retable",
         "published": "2026-11-19",
-        "views": 1210,
+        "views": 1214,
         "likes": 15
       },
       {
         "id": "BsY6kUgPHN0",
         "title": "Welcome to California Lutheran University Athletics #CalLutheran #sports #stadium #field",
         "published": "2026-11-19",
-        "views": 94,
+        "views": 95,
         "likes": 0
       },
       {
@@ -3880,7 +3914,7 @@
         "id": "vh_ePsnC_Jo",
         "title": "what was his problem??#student #wifedat #fyp #collegelife",
         "published": "2026-11-18",
-        "views": 1947,
+        "views": 1948,
         "likes": 34
       },
       {
@@ -3894,8 +3928,8 @@
         "id": "USBza7VXBqo",
         "title": "#collegelife #funny #school #comedy #function #relateable",
         "published": "2026-11-17",
-        "views": 1975,
-        "likes": 30
+        "views": 2014,
+        "likes": 28
       },
       {
         "id": "inF6EazGR2A",
@@ -3915,7 +3949,7 @@
         "id": "qCv4vnsZKtM",
         "title": "Christmas Mode: Activated#winter, #christmasishere, #ChristmasDrinks",
         "published": "2026-11-17",
-        "views": 2010,
+        "views": 2013,
         "likes": 9
       },
       {
@@ -3950,7 +3984,7 @@
         "id": "HOls9OUxjEM",
         "title": "LAFC Gameday Vlog 📹 #LAFC #sportsmanagement #soccer #CalLutheran ⚽🥅",
         "published": "2026-11-12",
-        "views": 1125,
+        "views": 1126,
         "likes": 10
       }
     ]
@@ -4019,9 +4053,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-11-20",
+    "fetched": "2026-11-21",
     "source": "youtube-innertube",
-    "total_scanned": 266,
+    "total_scanned": 267,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -4050,7 +4084,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23338,
+        "views": 23340,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -4090,7 +4124,7 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7870,
+        "views": 7872,
         "kind": "short",
         "likes": 61,
         "published": "2026-04-01"
@@ -4157,7 +4191,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 2,
+        "posts": 1,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4171,7 +4205,7 @@
         "window": "2026-06-01..2026-08-29",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
         "updated": "2026-09-01",
-        "posts": 46,
+        "posts": 47,
         "posts_source": "derived-from-snapshots"
       }
     },
@@ -4186,7 +4220,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-20T23:42:28Z",
+  "generated_at": "2026-11-21T02:23:12Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
