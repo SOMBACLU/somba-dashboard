@@ -3856,8 +3856,8 @@
         "tiktok": {
           "followers": 163,
           "following": 39,
-          "likes": 15200,
-          "videos": 489,
+          "likes": 14900,
+          "videos": 476,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-21"
@@ -3865,7 +3865,7 @@
         "youtube": {
           "followers": 265,
           "videos": 269,
-          "views": 465049,
+          "views": 466477,
           "source": "scrape",
           "last_ok": "2026-11-21"
         },
@@ -3885,7 +3885,7 @@
         "id": "HXpPospnhJg",
         "title": "The most important part to any successful SOMBA meeting🍪 #CalLutheran #meeting #chikfila",
         "published": "2026-11-21",
-        "views": 1140,
+        "views": 1139,
         "likes": 5
       },
       {
@@ -3899,7 +3899,7 @@
         "id": "Mgg1qf2wpoI",
         "title": "Finals Lock In:  Gotta lock in for finals week😭#finalweek #clu #retable",
         "published": "2026-11-19",
-        "views": 1245,
+        "views": 1246,
         "likes": 15
       },
       {
@@ -3934,7 +3934,7 @@
         "id": "USBza7VXBqo",
         "title": "#collegelife #funny #school #comedy #function #relateable",
         "published": "2026-11-17",
-        "views": 2091,
+        "views": 2104,
         "likes": 28
       },
       {
@@ -3955,7 +3955,7 @@
         "id": "qCv4vnsZKtM",
         "title": "Christmas Mode: Activated#winter, #christmasishere, #ChristmasDrinks",
         "published": "2026-11-17",
-        "views": 2043,
+        "views": 2045,
         "likes": 9
       },
       {
@@ -4190,7 +4190,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 2,
+        "posts": 15,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4219,7 +4219,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-21T18:03:07Z",
+  "generated_at": "2026-11-21T18:25:09Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
