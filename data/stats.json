@@ -3898,7 +3898,7 @@
         "youtube": {
           "followers": 264,
           "videos": 269,
-          "views": 466477,
+          "views": 466602,
           "source": "scrape",
           "last_ok": "2026-11-22"
         },
@@ -3918,7 +3918,7 @@
         "id": "HXpPospnhJg",
         "title": "The most important part to any successful SOMBA meeting🍪 #CalLutheran #meeting #chikfila",
         "published": "2026-11-21",
-        "views": 1149,
+        "views": 1152,
         "likes": 5
       },
       {
@@ -3932,7 +3932,7 @@
         "id": "Mgg1qf2wpoI",
         "title": "Finals Lock In:  Gotta lock in for finals week😭#finalweek #clu #retable",
         "published": "2026-11-19",
-        "views": 1249,
+        "views": 1250,
         "likes": 15
       },
       {
@@ -3953,7 +3953,7 @@
         "id": "vh_ePsnC_Jo",
         "title": "what was his problem??#student #wifedat #fyp #collegelife",
         "published": "2026-11-18",
-        "views": 1953,
+        "views": 1955,
         "likes": 34
       },
       {
@@ -3967,7 +3967,7 @@
         "id": "USBza7VXBqo",
         "title": "#collegelife #funny #school #comedy #function #relateable",
         "published": "2026-11-17",
-        "views": 2158,
+        "views": 2161,
         "likes": 29
       },
       {
@@ -4223,7 +4223,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 2,
+        "posts": 16,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4252,7 +4252,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-22T06:57:46Z",
+  "generated_at": "2026-11-22T15:24:36Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
