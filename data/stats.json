@@ -3875,10 +3875,43 @@
           "last_ok": "2026-11-21"
         }
       }
+    },
+    {
+      "date": "2026-11-22",
+      "platforms": {
+        "instagram": {
+          "followers": 796,
+          "following": 284,
+          "posts": 569,
+          "source": "scrape",
+          "last_ok": "2026-11-22"
+        },
+        "tiktok": {
+          "followers": 163,
+          "following": 39,
+          "likes": 14900,
+          "videos": 476,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-22"
+        },
+        "youtube": {
+          "followers": 264,
+          "videos": 269,
+          "views": 466477,
+          "source": "scrape",
+          "last_ok": "2026-11-22"
+        },
+        "linkedin": {
+          "followers": 13,
+          "source": "scrape",
+          "last_ok": "2026-11-22"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-21",
+    "fetched": "2026-11-22",
     "source": "youtube-rss",
     "videos": [
       {
@@ -3934,7 +3967,7 @@
         "id": "USBza7VXBqo",
         "title": "#collegelife #funny #school #comedy #function #relateable",
         "published": "2026-11-17",
-        "views": 2153,
+        "views": 2158,
         "likes": 29
       },
       {
@@ -4052,9 +4085,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-11-21",
+    "fetched": "2026-11-22",
     "source": "youtube-innertube",
-    "total_scanned": 267,
+    "total_scanned": 269,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -4070,7 +4103,7 @@
         "views": 26028,
         "kind": "short",
         "likes": 90,
-        "published": "2025-11-02"
+        "published": "2025-11-01"
       },
       {
         "id": "CS6dNGU9Evc",
@@ -4083,7 +4116,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23340,
+        "views": 23341,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -4094,7 +4127,7 @@
         "views": 22778,
         "kind": "short",
         "likes": 71,
-        "published": "2026-04-01"
+        "published": "2026-03-31"
       },
       {
         "id": "-iPsWtoqSjQ",
@@ -4118,12 +4151,12 @@
         "views": 10153,
         "kind": "short",
         "likes": 199,
-        "published": "2025-03-20"
+        "published": "2025-03-19"
       },
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7872,
+        "views": 7873,
         "kind": "short",
         "likes": 61,
         "published": "2026-04-01"
@@ -4134,7 +4167,7 @@
         "views": 7391,
         "kind": "short",
         "likes": 28,
-        "published": "2025-10-28"
+        "published": "2025-10-27"
       },
       {
         "id": "zArZjKlR8lI",
@@ -4190,7 +4223,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 2,
+        "posts": 16,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4204,7 +4237,7 @@
         "window": "2026-06-01..2026-08-29",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
         "updated": "2026-09-01",
-        "posts": 47,
+        "posts": 48,
         "posts_source": "derived-from-snapshots"
       }
     },
@@ -4219,7 +4252,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-21T23:24:30Z",
+  "generated_at": "2026-11-22T00:06:10Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
