@@ -3922,16 +3922,16 @@
         "tiktok": {
           "followers": 163,
           "following": 39,
-          "likes": 15300,
-          "videos": 490,
+          "likes": 14900,
+          "videos": 477,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-23"
         },
         "youtube": {
           "followers": 264,
-          "videos": 269,
-          "views": 466630,
+          "videos": 268,
+          "views": 466662,
           "source": "scrape",
           "last_ok": "2026-11-23"
         },
@@ -3958,21 +3958,21 @@
         "id": "JK4ixiA21xE",
         "title": "Cumulative exams should actually be illegal 😭💀S#CollegeHumor #CollegeLife #RelatableCollege #CLU",
         "published": "2026-11-20",
-        "views": 13,
+        "views": 14,
         "likes": 0
       },
       {
         "id": "Mgg1qf2wpoI",
         "title": "Finals Lock In:  Gotta lock in for finals week😭#finalweek #clu #retable",
         "published": "2026-11-19",
-        "views": 1254,
+        "views": 1256,
         "likes": 15
       },
       {
         "id": "BsY6kUgPHN0",
         "title": "Welcome to California Lutheran University Athletics #CalLutheran #sports #stadium #field",
         "published": "2026-11-19",
-        "views": 96,
+        "views": 98,
         "likes": 0
       },
       {
@@ -4256,7 +4256,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 3,
+        "posts": 16,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4285,7 +4285,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-23T02:51:17Z",
+  "generated_at": "2026-11-23T08:01:40Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
