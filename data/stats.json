@@ -3908,10 +3908,43 @@
           "last_ok": "2026-11-22"
         }
       }
+    },
+    {
+      "date": "2026-11-23",
+      "platforms": {
+        "instagram": {
+          "followers": 797,
+          "following": 284,
+          "posts": 570,
+          "source": "scrape",
+          "last_ok": "2026-11-23"
+        },
+        "tiktok": {
+          "followers": 163,
+          "following": 39,
+          "likes": 14900,
+          "videos": 477,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-23"
+        },
+        "youtube": {
+          "followers": 265,
+          "videos": 269,
+          "views": 466630,
+          "source": "scrape",
+          "last_ok": "2026-11-23"
+        },
+        "linkedin": {
+          "followers": 13,
+          "source": "scrape",
+          "last_ok": "2026-11-23"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-22",
+    "fetched": "2026-11-23",
     "source": "youtube-rss",
     "videos": [
       {
@@ -4085,7 +4118,7 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-11-22",
+    "fetched": "2026-11-23",
     "source": "youtube-innertube",
     "total_scanned": 269,
     "videos": [
@@ -4156,7 +4189,7 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7873,
+        "views": 7876,
         "kind": "short",
         "likes": 61,
         "published": "2026-04-01"
@@ -4237,7 +4270,7 @@
         "window": "2026-06-01..2026-08-29",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
         "updated": "2026-09-01",
-        "posts": 47,
+        "posts": 48,
         "posts_source": "derived-from-snapshots"
       }
     },
@@ -4252,7 +4285,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-22T23:29:56Z",
+  "generated_at": "2026-11-23T00:00:28Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
