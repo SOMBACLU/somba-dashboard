@@ -3979,7 +3979,7 @@
       "date": "2026-11-25",
       "platforms": {
         "instagram": {
-          "followers": 796,
+          "followers": 803,
           "following": 284,
           "posts": 571,
           "source": "scrape",
@@ -4017,14 +4017,14 @@
         "id": "wjiQcR82Nyc",
         "title": "THE AUX | Live Music at Cal Lutheran",
         "published": "2026-11-25",
-        "views": 3,
+        "views": 4,
         "likes": 0
       },
       {
         "id": "HXpPospnhJg",
         "title": "The most important part to any successful SOMBA meeting🍪 #CalLutheran #meeting #chikfila",
         "published": "2026-11-21",
-        "views": 1155,
+        "views": 1158,
         "likes": 5
       },
       {
@@ -4045,7 +4045,7 @@
         "id": "BsY6kUgPHN0",
         "title": "Welcome to California Lutheran University Athletics #CalLutheran #sports #stadium #field",
         "published": "2026-11-19",
-        "views": 99,
+        "views": 100,
         "likes": 0
       },
       {
@@ -4094,7 +4094,7 @@
         "id": "qCv4vnsZKtM",
         "title": "Christmas Mode: Activated#winter, #christmasishere, #ChristmasDrinks",
         "published": "2026-11-17",
-        "views": 2047,
+        "views": 2048,
         "likes": 9
       },
       {
@@ -4351,7 +4351,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-25T07:44:19Z",
+  "generated_at": "2026-11-25T14:04:11Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
