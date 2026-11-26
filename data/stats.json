@@ -4007,10 +4007,43 @@
           "last_ok": "2026-11-25"
         }
       }
+    },
+    {
+      "date": "2026-11-26",
+      "platforms": {
+        "instagram": {
+          "followers": 803,
+          "following": 284,
+          "posts": 571,
+          "source": "scrape",
+          "last_ok": "2026-11-26"
+        },
+        "tiktok": {
+          "followers": 163,
+          "following": 39,
+          "likes": 15000,
+          "videos": 478,
+          "mutuals": 18,
+          "source": "scrape",
+          "last_ok": "2026-11-26"
+        },
+        "youtube": {
+          "followers": 264,
+          "videos": 270,
+          "views": 467933,
+          "source": "scrape",
+          "last_ok": "2026-11-26"
+        },
+        "linkedin": {
+          "followers": 13,
+          "source": "scrape",
+          "last_ok": "2026-11-26"
+        }
+      }
     }
   ],
   "recent_videos": {
-    "fetched": "2026-11-25",
+    "fetched": "2026-11-26",
     "source": "youtube-rss",
     "videos": [
       {
@@ -4184,9 +4217,9 @@
     ]
   },
   "top_videos": {
-    "fetched": "2026-11-25",
+    "fetched": "2026-11-26",
     "source": "youtube-innertube",
-    "total_scanned": 269,
+    "total_scanned": 270,
     "videos": [
       {
         "id": "NoQCO_MRzNY",
@@ -4215,7 +4248,7 @@
       {
         "id": "4-lk-xDXf_A",
         "title": "Friggin packet yo #frigginpacketyo",
-        "views": 23344,
+        "views": 23350,
         "kind": "short",
         "likes": 445,
         "published": "2025-03-23"
@@ -4239,7 +4272,7 @@
       {
         "id": "HF8-oqSGewQ",
         "title": "Spending time with family during Thanksgiving has us like…”We’re sisters!” #college #weresisters",
-        "views": 13767,
+        "views": 13768,
         "kind": "short",
         "likes": 455,
         "published": "2023-12-01"
@@ -4255,7 +4288,7 @@
       {
         "id": "8eKBn5whDy8",
         "title": "Mannequin challenge #2016 #mannequinchallenge #FBLA #ytshorts #fyp",
-        "views": 7879,
+        "views": 7881,
         "kind": "short",
         "likes": 61,
         "published": "2026-04-01"
@@ -4263,7 +4296,7 @@
       {
         "id": "2XzUKmCBwTY",
         "title": "POV: You're trying to hang on during midterms #college #studentlife #midterms #ytshorts #explore",
-        "views": 7391,
+        "views": 7393,
         "kind": "short",
         "likes": 28,
         "published": "2025-10-27"
@@ -4309,7 +4342,7 @@
         },
         "period_days": 30,
         "source": "instagram-insights-manual",
-        "posts": 22,
+        "posts": 23,
         "posts_source": "derived-from-snapshots"
       },
       "tiktok": {
@@ -4322,7 +4355,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 4,
+        "posts": 3,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4336,7 +4369,7 @@
         "window": "2026-06-01..2026-08-29",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
         "updated": "2026-09-01",
-        "posts": 48,
+        "posts": 49,
         "posts_source": "derived-from-snapshots"
       }
     },
@@ -4351,7 +4384,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-25T18:52:13Z",
+  "generated_at": "2026-11-26T00:19:38Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
