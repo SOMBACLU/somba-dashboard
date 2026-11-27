@@ -4047,24 +4047,23 @@
         "instagram": {
           "followers": 802,
           "following": 284,
-          "posts": 571,
-          "last_ok": "2026-11-26",
-          "source": "carried",
-          "carried_from": "2026-11-26"
+          "posts": 572,
+          "source": "scrape",
+          "last_ok": "2026-11-27"
         },
         "tiktok": {
           "followers": 163,
           "following": 39,
-          "likes": 15400,
-          "videos": 491,
+          "likes": 15000,
+          "videos": 478,
           "mutuals": 18,
           "source": "scrape",
           "last_ok": "2026-11-27"
         },
         "youtube": {
           "followers": 264,
-          "videos": 272,
-          "views": 469754,
+          "videos": 273,
+          "views": 469770,
           "source": "scrape",
           "last_ok": "2026-11-27"
         },
@@ -4081,11 +4080,18 @@
     "source": "youtube-rss",
     "videos": [
       {
+        "id": "k4xbZovsvUU",
+        "title": "A Night in the Life of a College Athlete",
+        "published": "2026-11-27",
+        "views": 959,
+        "likes": 7
+      },
+      {
         "id": "eOnumLS06zA",
         "title": "Couch always comfyyy",
         "published": "2026-11-26",
-        "views": 1851,
-        "likes": 69
+        "views": 2509,
+        "likes": 77
       },
       {
         "id": "yO6WzqCsLwE",
@@ -4177,13 +4183,6 @@
         "published": "2026-11-17",
         "views": 2049,
         "likes": 9
-      },
-      {
-        "id": "cmLGGBn3_gs",
-        "title": "A fall evening in my post-grad era 🎓 #CalLutheran #graduate #alumni",
-        "published": "2026-11-16",
-        "views": 986,
-        "likes": 4
       }
     ]
   },
@@ -4376,7 +4375,7 @@
         },
         "period_days": 30,
         "source": "instagram-insights-manual",
-        "posts": 23,
+        "posts": 22,
         "posts_source": "derived-from-snapshots"
       },
       "tiktok": {
@@ -4389,7 +4388,7 @@
         "accounts_engaged": 1490,
         "period_days": 28,
         "source": "sample-for-presentation",
-        "posts": 16,
+        "posts": 15,
         "posts_source": "derived-from-snapshots"
       },
       "youtube": {
@@ -4403,7 +4402,7 @@
         "window": "2026-06-01..2026-08-29",
         "note": "Measured over 90 days. A 28-day window holds too little activity to state a rate — the channel has not posted recently — so a longer period is used.",
         "updated": "2026-09-01",
-        "posts": 51,
+        "posts": 50,
         "posts_source": "derived-from-snapshots"
       }
     },
@@ -4418,7 +4417,7 @@
     ],
     "sample_note": "TikTok figures are illustrative placeholders pending real numbers from Creator tools > Analytics. Instagram and YouTube are measured."
   },
-  "generated_at": "2026-11-27T02:54:18Z",
+  "generated_at": "2026-11-27T06:28:40Z",
   "benchmarks": {
     "sector": "Higher education",
     "note": "Published sector benchmarks — the dashboard only compares each one to a SOMBA rate measured the same way (see 'basis'). To update: change value, source, source_url, data_period, retrieved. Nothing else. youtube uses SociaVault's Education & How-to median (no higher-ed-specific YouTube benchmark is published; swap it if a stronger source appears). LinkedIn is intentionally empty — the page has 3 followers, so a sector benchmark would be meaningless. See ENGAGEMENT-DATA.md.",
